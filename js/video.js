@@ -17,7 +17,8 @@
     var toggleBtn = document.querySelector('.video-section .audio-toggle');
     if (!video || !toggleBtn) return;
 
-    var isMuted = getConsent() === 'accepted' ? false : true;
+    // Always start muted; visitor chooses to turn sound on
+    var isMuted = true;
     var labelSpan = toggleBtn.querySelector('.audio-toggle__label');
     var iconContainer = toggleBtn.querySelector('.audio-toggle__icon');
 
@@ -41,13 +42,9 @@
         entries.forEach(function (entry) {
           isInViewport = entry.isIntersecting;
           if (entry.isIntersecting) {
-            if (getConsent() === 'accepted' && !isMuted) {
-              video.muted = false;
-              video.play().catch(function () {});
-            } else {
-              video.muted = true;
-              video.play().catch(function () {});
-            }
+            // Always play muted when visible; visitor can enable sound manually
+            video.muted = true;
+            video.play().catch(function () {});
           } else {
             video.pause();
           }
@@ -56,20 +53,6 @@
       { threshold: 0.25 }
     );
     observer.observe(video);
-
-    function tryAutoPlayAfterInteraction() {
-      if (getConsent() !== 'accepted' || !isInViewport) return;
-      isMuted = false;
-      video.muted = false;
-      updateUI();
-      video.play().catch(function () {});
-    }
-
-    if (getConsent() === 'accepted') {
-      window.addEventListener('click', tryAutoPlayAfterInteraction, { once: true });
-      window.addEventListener('keydown', tryAutoPlayAfterInteraction, { once: true });
-      window.addEventListener('touchstart', tryAutoPlayAfterInteraction, { once: true, passive: true });
-    }
 
     window.addEventListener('audio-consent-unlock', function () {
       if (getConsent() !== 'accepted' || !isInViewport) return;
@@ -100,8 +83,8 @@
 
     window.addEventListener('nawal-lang-change', function () { updateUI(); });
 
-    video.defaultMuted = isMuted;
-    video.muted = isMuted;
+    video.defaultMuted = true;
+    video.muted = true;
     video.load();
     video.play().catch(function () {});
     updateUI();
