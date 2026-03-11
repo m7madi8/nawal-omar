@@ -1,0 +1,27 @@
+---
+description: Nawal Yoga site — stack, i18n, Arabic/RTL, conventions
+alwaysApply: true
+---
+
+# Nawal Yoga Project
+
+## Stack
+- Static site: plain HTML, CSS (Tailwind-built style.css), vanilla JS. No framework or build step.
+- Pages: `index.html`, `retreat.html`, `nawal.html`, `workshops/al-tira.html`, `workshops/jiva.html`.
+
+## Language (i18n)
+- **EN / AR** via `js/i18n.js`. Stored in `localStorage` key `nawal-lang`.
+- All user-visible text must exist in `translations.en` and `translations.ar` in `js/i18n.js`.
+- In HTML: use `data-i18n="key"` for text content; `data-i18n-attr="attributeName:key"` for attributes (e.g. `aria-label`).
+- When adding new copy, add the same key to both `en` and `ar` in `i18n.js`.
+
+## Arabic & RTL
+- When `lang="ar"`, `dir="rtl"` is set on `<html>` by i18n. RTL styles live in `css/rtl.css`.
+- **Arabic fonts**: Headings = **Amiri**, Body = **Scheherazade New** (loaded from Google Fonts). Defined only for `[dir="rtl"]` in `rtl.css`.
+- Workshop names in Arabic: **الطيرة** (Al-Tira), **حيفا** (Jiva/Haifa), **ريتريت** (Retreat). Use these exact terms in Arabic translations.
+
+## Paths
+- Root pages use `css/`, `js/`, `public/`. Subpages under `workshops/` use `../css/`, `../js/`, `../public/` and `../index.html`, `../retreat.html` for links.
+
+## UI
+- Language switcher: `.lang-switcher` with `data-lang-set="en"` and `data-lang-set="ar"`. Include it and `js/i18n.js` on every page. RTL positioning for the switcher is in `rtl.css`.

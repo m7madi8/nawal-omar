@@ -9,9 +9,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <link rel="stylesheet" href="css/scroll-media.css">
 </head>
 <body class="antialiased">
+  <nav class="lang-switcher" aria-label="Language">
+    <button type="button" class="lang-btn" data-lang-set="en">
+      <span class="lang-toggle-text">
+        <span class="lang-toggle-text-en">En</span>
+        <span class="lang-toggle-text-ar">En</span>
+      </span>
+    </button>
+    <button type="button" class="lang-btn" data-lang-set="ar">
+      <span class="lang-toggle-text">
+        <span class="lang-toggle-text-en">Ar</span>
+        <span class="lang-toggle-text-ar">Ar</span>
+      </span>
+    </button>
+  </nav>
+
   <div id="app-root" class="min-h-screen min-w-0 bg-[var(--bg-body)] text-[var(--text-main)]">
     <div id="custom-cursor" class="pointer-events-none fixed left-0 top-0 z-[60] hidden md:block" style="display:none" aria-hidden="true">
       <div class="h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/70 bg-white/10 shadow-soft backdrop-blur-md transition-transform duration-200 will-change-transform"></div>
@@ -35,31 +53,31 @@
               <div class="hero-item hero-item-2 mb-5 flex items-center gap-4">
                 <span class="h-6 w-px shrink-0 bg-white/40" aria-hidden="true"></span>
                 <span class="h-px w-12 shrink-0 bg-white/40" aria-hidden="true"></span>
-                <p class="text-xs font-medium uppercase tracking-[0.4em] text-white/80">Yoga · Mindfulness · Retreat</p>
+                <p class="text-xs font-medium uppercase tracking-[0.4em] text-white/80" data-i18n="hero_tagline">Yoga · Mindfulness · Retreat</p>
               </div>
               <h1 class="hero-item hero-item-3 hero-headline mb-8 font-serif text-5xl font-light leading-[1.12] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
-                <span class="block">Change begins</span>
-                <span class="block mt-1 text-white/95">here</span>
+                <span class="block" data-i18n="hero_title1">Change begins</span>
+                <span class="block mt-1 text-white/95" data-i18n="hero_title2">here</span>
               </h1>
               <div class="hero-item hero-item-4 mb-8 h-px w-20 bg-white/30"></div>
-              <p class="hero-item hero-item-5 mb-12 max-w-md text-lg leading-relaxed text-white/85 md:text-xl">
+              <p class="hero-item hero-item-5 mb-12 max-w-md text-lg leading-relaxed text-white/85 md:text-xl" data-i18n="hero_subtitle">
                 Exceptional yoga with a certified instructor. Vinyasa, Yin, Hatha & meditation—in a calm studio or in nature.
               </p>
               <div class="hero-item hero-item-6 flex flex-wrap items-center gap-6">
                 <a href="#about" class="group inline-flex min-h-[54px] items-center justify-center rounded-sm bg-white px-10 text-[15px] font-medium tracking-wide text-[var(--color-secondary)] transition-all duration-300 hover:bg-[var(--color-primary)] hover:shadow-2xl">
-                  <span>Book your session</span>
+                  <span data-i18n="hero_cta_book">Book your session</span>
                   <span class="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </a>
                 <a href="#about" class="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-white">
                   <span class="h-px w-8 bg-white/50"></span>
-                  Discover more
+                  <span data-i18n="hero_cta_discover">Discover more</span>
                 </a>
               </div>
             </div>
           </div>
         </div>
         <div class="hero-bottom absolute bottom-0 left-0 right-0 z-10 flex items-end justify-end px-5 pb-8 sm:px-8 md:px-10 lg:px-16">
-          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-white/40">Private · group · retreats</p>
+          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-white/40" data-i18n="hero_bottom">Private · group · retreats</p>
         </div>
       </section>
 
@@ -68,9 +86,9 @@
           <div class="mx-auto max-w-6xl px-6 sm:px-10 md:px-14 lg:px-20">
             <div class="mb-10 text-center sm:mb-16">
               <header class="animate-content mb-8 flex min-w-0 flex-col gap-2 text-left sm:mb-10 sm:gap-3 md:gap-4">
-                <p class="text-[10px] tracking-[0.25em] text-[var(--text-soft)] uppercase sm:text-xs sm:tracking-[0.3em]">About Nawal</p>
-                <h2 class="max-w-2xl font-serif text-2xl tracking-tight text-[var(--text-main)] sm:text-3xl md:text-4xl">Yoga Instructor</h2>
-                <p class="max-w-2xl text-xs leading-relaxed text-[var(--text-soft)] sm:text-sm md:text-base">A journey of awareness, breath and movement</p>
+                <p class="text-[10px] tracking-[0.25em] text-[var(--text-soft)] uppercase sm:text-xs sm:tracking-[0.3em]" data-i18n="about_label">About Nawal</p>
+                <h2 class="max-w-2xl font-serif text-2xl tracking-tight text-[var(--text-main)] sm:text-3xl md:text-4xl" data-i18n="about_title">Yoga Instructor</h2>
+                <p class="max-w-2xl text-xs leading-relaxed text-[var(--text-soft)] sm:text-sm md:text-base" data-i18n="about_subtitle">A journey of awareness, breath and movement</p>
               </header>
             </div>
             <div class="grid min-w-0 gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
@@ -85,38 +103,38 @@
               </div>
               <div class="about-content order-1 space-y-8 lg:order-2">
                 <div class="animate-content space-y-4">
-                  <h3 class="text-xl font-serif text-[var(--text-main)] sm:text-2xl md:text-3xl">Nawal Omar</h3>
-                  <p class="text-sm font-medium text-[var(--accent-sage)] uppercase tracking-wider">Certified yoga instructor • Vinyasa, Yin, Hatha, meditation</p>
+                  <h3 class="text-xl font-serif text-[var(--text-main)] sm:text-2xl md:text-3xl" data-i18n="about_name">Nawal Omar</h3>
+                  <p class="text-sm font-medium text-[var(--accent-sage)] uppercase tracking-wider" data-i18n="about_cert">Certified yoga instructor • Vinyasa, Yin, Hatha, meditation</p>
                 </div>
                 <div class="animate-content space-y-4 text-sm leading-relaxed text-[var(--text-soft)] sm:text-base md:text-lg">
-                  <p class="about-text">Certified yoga instructor with over ten years of practice. Vinyasa, Yin, Hatha & meditation—for beginners and advanced. Reconnect with your body, breath, and inner calm in the studio or in nature.</p>
+                  <p class="about-text" data-i18n="about_bio">Certified yoga instructor with over ten years of practice. Vinyasa, Yin, Hatha & meditation—for beginners and advanced. Reconnect with your body, breath, and inner calm in the studio or in nature.</p>
                 </div>
                 <div class="animate-content space-y-3 border-t border-[var(--border-soft)] pt-6">
                   <div class="key-point flex items-start gap-4">
                     <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-sage)]/10 mt-0.5">
                       <div class="h-2 w-2 rounded-full bg-[var(--accent-sage)]"></div>
                     </div>
-                    <p class="text-sm text-[var(--text-soft)] md:text-base">Certified (RYT 200+) — private & group sessions</p>
+                    <p class="text-sm text-[var(--text-soft)] md:text-base" data-i18n="about_point1">Certified (RYT 200+) — private & group sessions</p>
                   </div>
                   <div class="key-point flex items-start gap-4">
                     <div class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-sage)]/10 mt-0.5">
                       <div class="h-2 w-2 rounded-full bg-[var(--accent-sage)]"></div>
                     </div>
-                    <p class="text-sm text-[var(--text-soft)] md:text-base">Workshops and retreats in nature</p>
+                    <p class="text-sm text-[var(--text-soft)] md:text-base" data-i18n="about_point2">Workshops and retreats in nature</p>
                   </div>
                 </div>
                 <div class="grid grid-cols-3 gap-4 border-t border-[var(--border-soft)] pt-6 sm:gap-6 sm:pt-8" id="about-stats">
                   <div class="stat-item text-center">
                     <p class="text-2xl font-serif text-[var(--text-main)] sm:text-3xl md:text-4xl"><span class="stat-number" data-to="500" data-suffix="+">0</span></p>
-                    <p class="mt-1 text-[10px] text-[var(--text-soft)] uppercase tracking-wider sm:text-xs">Trainees</p>
+                    <p class="mt-1 text-[10px] text-[var(--text-soft)] uppercase tracking-wider sm:text-xs" data-i18n="stat_trainees">Trainees</p>
                   </div>
                   <div class="stat-item text-center">
                     <p class="text-2xl font-serif text-[var(--text-main)] sm:text-3xl md:text-4xl"><span class="stat-number" data-to="10" data-suffix="+">0</span></p>
-                    <p class="mt-1 text-[10px] text-[var(--text-soft)] uppercase tracking-wider sm:text-xs">Years</p>
+                    <p class="mt-1 text-[10px] text-[var(--text-soft)] uppercase tracking-wider sm:text-xs" data-i18n="stat_years">Years</p>
                   </div>
                   <div class="stat-item text-center">
                     <p class="text-2xl font-serif text-[var(--text-main)] sm:text-3xl md:text-4xl"><span class="stat-number" data-to="4" data-suffix="">0</span></p>
-                    <p class="mt-1 text-[10px] text-[var(--text-soft)] uppercase tracking-wider sm:text-xs">Yoga styles</p>
+                    <p class="mt-1 text-[10px] text-[var(--text-soft)] uppercase tracking-wider sm:text-xs" data-i18n="stat_styles">Yoga styles</p>
                   </div>
                 </div>
               </div>
@@ -132,33 +150,33 @@
               <div class="video-side lg:order-1 lg:flex lg:flex-col lg:items-center">
                 <div class="video-column-content lg:w-full lg:max-w-[340px]">
                   <div class="animate-content mb-6 text-center sm:mb-8 lg:mb-6 lg:text-left">
-                    <p class="mb-2 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]">Practice & presence</p>
-                    <h2 class="font-serif text-2xl font-light text-[var(--color-text)] sm:text-3xl md:text-4xl">A moment of calm</h2>
+                    <p class="mb-2 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]" data-i18n="video_label">Practice & presence</p>
+                    <h2 class="font-serif text-2xl font-light text-[var(--color-text)] sm:text-3xl md:text-4xl" data-i18n="video_title">A moment of calm</h2>
                   </div>
                   <div class="video-frame group relative">
                     <div class="absolute -inset-px rounded-2xl bg-gradient-to-b from-[var(--color-primary)]/40 via-[var(--color-primary)]/20 to-[var(--color-primary)]/40 opacity-80 transition-opacity duration-300 group-hover:opacity-100"></div>
                     <div class="relative mx-auto max-w-[280px] overflow-hidden rounded-2xl bg-[var(--color-secondary)] shadow-xl ring-1 ring-black/5 sm:max-w-[320px] md:max-w-[360px] lg:max-w-full">
                       <div class="aspect-[9/16] w-full relative">
                         <video class="h-full w-full object-cover" src="public/media/nawal_aom.mp4" autoplay muted playsinline loop preload="auto">Your browser does not support the video tag.</video>
-                        <button type="button" class="audio-toggle absolute right-3 top-3 z-10 inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium text-white" aria-pressed="false" aria-label="Unmute video">
+                        <button type="button" class="audio-toggle absolute right-3 top-3 z-10 inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-medium text-white" aria-pressed="false" data-i18n-attr="aria-label:video_unmute" aria-label="Unmute video">
                           <span class="audio-toggle__icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9L16 15"/><path d="M16 9L22 15"/></svg>
                           </span>
-                          <span class="audio-toggle__label">Muted</span>
+                          <span class="audio-toggle__label" data-i18n="video_muted">Muted</span>
                         </button>
                       </div>
                       <div class="absolute inset-x-0 bottom-0 h-16 pointer-events-none rounded-b-2xl bg-gradient-to-t from-black/15 to-transparent"></div>
                     </div>
                   </div>
-                  <p class="mt-4 text-center text-sm text-[var(--color-secondary)] lg:text-left">Nawal Omar · Yoga & mindfulness</p>
+                  <p class="mt-4 text-center text-sm text-[var(--color-secondary)] lg:text-left" data-i18n="video_caption">Nawal Omar · Yoga & mindfulness</p>
                 </div>
               </div>
               <div class="story-side hidden lg:flex lg:order-2 lg:flex-col lg:justify-center lg:items-center lg:px-4">
                 <div class="animate-content w-full max-w-md text-center">
-                  <p class="mb-2 text-xs font-medium uppercase tracking-[0.3em] text-[var(--color-accent)]">My story</p>
-                  <h3 class="mb-3 font-serif text-xl font-medium text-[var(--color-text)]">Nawal Omar</h3>
-                  <p class="mb-4 text-sm leading-relaxed text-[var(--color-secondary)]">I'm a certified yoga instructor with over ten years of practice and teaching. What started as my personal search for calm and flexibility became a path to share yoga with others—Vinyasa, Yin, Hatha, and guided meditation.</p>
-                  <p class="text-sm leading-relaxed text-[var(--color-secondary)] sm:text-base">Whether in the studio or in nature, I design every session to help you reconnect with your body, breath, and inner stillness. I believe yoga is for everyone: gentle movement, mindful breath, and moments of silence that bring you back to yourself.</p>
+                  <p class="mb-2 text-xs font-medium uppercase tracking-[0.3em] text-[var(--color-accent)]" data-i18n="story_label">My story</p>
+                  <h3 class="mb-3 font-serif text-xl font-medium text-[var(--color-text)]" data-i18n="about_name">Nawal Omar</h3>
+                  <p class="mb-4 text-sm leading-relaxed text-[var(--color-secondary)]" data-i18n="story_text1">I'm a certified yoga instructor with over ten years of practice and teaching. What started as my personal search for calm and flexibility became a path to share yoga with others—Vinyasa, Yin, Hatha, and guided meditation.</p>
+                  <p class="text-sm leading-relaxed text-[var(--color-secondary)] sm:text-base" data-i18n="story_text2">Whether in the studio or in nature, I design every session to help you reconnect with your body, breath, and inner stillness. I believe yoga is for everyone: gentle movement, mindful breath, and moments of silence that bring you back to yourself.</p>
                 </div>
               </div>
             </div>
@@ -181,8 +199,8 @@
           <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
             <div class="mx-auto max-w-4xl">
               <div class="animate-content mb-12 text-center sm:mb-16">
-                <p class="mb-2 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-primary)]">Images & moments</p>
-                <h2 class="font-serif text-2xl font-light text-white sm:text-3xl md:text-4xl">Glimpses of practice & calm</h2>
+                <p class="mb-2 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-primary)]" data-i18n="moments_label">Images & moments</p>
+                <h2 class="font-serif text-2xl font-light text-white sm:text-3xl md:text-4xl" data-i18n="moments_title">Glimpses of practice & calm</h2>
               </div>
             </div>
             <div class="stack-area lg:px-16">
@@ -203,10 +221,10 @@
                   <div class="stack-card-inner"><img src="public/media/11.jpg" alt="Yoga retreat" class="stack-card-img" loading="lazy"></div>
                 </div>
               </div>
-              <button type="button" class="stack-btn stack-btn--prev" aria-label="Previous image">
+              <button type="button" class="stack-btn stack-btn--prev" data-i18n-attr="aria-label:gallery_prev" aria-label="Previous image">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
               </button>
-              <button type="button" class="stack-btn stack-btn--next" aria-label="Next image">
+              <button type="button" class="stack-btn stack-btn--next" data-i18n-attr="aria-label:gallery_next" aria-label="Next image">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
               </button>
             </div>
@@ -214,7 +232,7 @@
               <span class="swipe-icon" aria-hidden="true">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
               </span>
-              Swipe or drag to browse
+              <span data-i18n="gallery_swipe">Swipe or drag to browse</span>
             </p>
           </div>
         </div>
@@ -224,8 +242,8 @@
         <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
           <div class="mx-auto max-w-6xl px-6 sm:px-10 md:px-14 lg:px-20">
             <div class="animate-content mb-12 text-center sm:mb-16">
-              <p class="mb-2 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]">Workshops</p>
-              <h2 class="font-serif text-2xl font-light text-[var(--color-text)] sm:text-3xl md:text-4xl">Al-Tira · Jiva · Retreat</h2>
+              <p class="mb-2 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]" data-i18n="workshops_label">Workshops</p>
+              <h2 class="font-serif text-2xl font-light text-[var(--color-text)] sm:text-3xl md:text-4xl" data-i18n="workshops_heading">Al-Tira · Jiva · Retreat</h2>
             </div>
             <div class="grid gap-6 sm:gap-8 lg:grid-cols-3 lg:gap-8">
               <article class="workshop-card group">
@@ -236,11 +254,11 @@
                   <div class="workshop-card-body flex flex-col flex-1">
                     <div class="workshop-card-header">
                       <span class="workshop-card-tag">Al-Tira</span>
-                      <h3 class="workshop-card-title font-serif">Al-Tira Yoga</h3>
+                      <h3 class="workshop-card-title font-serif" data-i18n="al_tira_title">Al-Tira Yoga</h3>
                     </div>
-                    <p class="workshop-card-desc">Experience freedom in the air. Suspension-based practice for strength, flexibility and playfulness—suitable for all levels.</p>
+                    <p class="workshop-card-desc" data-i18n="al_tira_desc">Experience freedom in the air. Suspension-based practice for strength, flexibility and playfulness—suitable for all levels.</p>
                     <div class="workshop-card-footer">
-                      <a href="workshops/al-tira.html" class="workshop-card-cta">Discover more <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a>
+                      <a href="workshops/al-tira.html" class="workshop-card-cta"><span data-i18n="al_tira_cta">Discover more</span> <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a>
                     </div>
                   </div>
                 </div>
@@ -253,11 +271,11 @@
                   <div class="workshop-card-body flex flex-col flex-1">
                     <div class="workshop-card-header">
                       <span class="workshop-card-tag">Jiva Yoga</span>
-                      <h3 class="workshop-card-title font-serif">Jiva Yoga</h3>
+                      <h3 class="workshop-card-title font-serif" data-i18n="jiva_title">Jiva Yoga</h3>
                     </div>
-                    <p class="workshop-card-desc">Connect body, breath and mind. A holistic approach blending movement, meditation and mindfulness in a supportive space.</p>
+                    <p class="workshop-card-desc" data-i18n="jiva_desc">Connect body, breath and mind. A holistic approach blending movement, meditation and mindfulness in a supportive space.</p>
                     <div class="workshop-card-footer">
-                      <a href="workshops/jiva.html" class="workshop-card-cta">Learn more <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a>
+                      <a href="workshops/jiva.html" class="workshop-card-cta"><span data-i18n="jiva_cta">Learn more</span> <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a>
                     </div>
                   </div>
                 </div>
@@ -270,11 +288,11 @@
                   <div class="workshop-card-body flex flex-col flex-1">
                     <div class="workshop-card-header">
                       <span class="workshop-card-tag">Retreat</span>
-                      <h3 class="workshop-card-title font-serif">Retreat</h3>
+                      <h3 class="workshop-card-title font-serif" data-i18n="retreat_title">Retreat</h3>
                     </div>
-                    <p class="workshop-card-desc">Step away from the everyday. Multi-day yoga retreats in nature—deep practice, rest and connection with like-minded souls.</p>
+                    <p class="workshop-card-desc" data-i18n="retreat_desc">Step away from the everyday. Multi-day yoga retreats in nature—deep practice, rest and connection with like-minded souls.</p>
                     <div class="workshop-card-footer">
-                      <a href="retreat.html" class="workshop-card-cta">Explore retreats <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a>
+                      <a href="retreat.html" class="workshop-card-cta"><span data-i18n="retreat_cta">Explore retreats</span> <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span></a>
                     </div>
                   </div>
                 </div>
@@ -291,15 +309,15 @@
               <img src="public/media/Nawal_yoga_logo.png" alt="Nawal Omar Yoga" class="footer-logo h-20 w-auto max-w-[260px] object-contain sm:h-24 md:h-28">
             </a>
           </div>
-          <p class="animate-content text-center text-sm leading-relaxed text-[var(--color-secondary)] max-w-xs mx-auto pb-6 sm:pb-7">Where yoga meets calm and quality</p>
+          <p class="animate-content text-center text-sm leading-relaxed text-[var(--color-secondary)] max-w-xs mx-auto pb-6 sm:pb-7" data-i18n="footer_tagline">Where yoga meets calm and quality</p>
           <nav class="animate-content flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-sm pb-6 sm:pb-7 md:gap-x-8" aria-label="Quick links">
-            <a href="index.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">Home</a>
-            <a href="#about" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">About</a>
-            <a href="#video" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">Video</a>
-            <a href="#workshops" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">Workshops</a>
-            <a href="workshops/al-tira.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">Al-Tira Yoga</a>
-            <a href="workshops/jiva.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">Jiva Yoga</a>
-            <a href="retreat.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]">Retreat</a>
+            <a href="index.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_home">Home</a>
+            <a href="#about" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_about">About</a>
+            <a href="#video" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_video">Video</a>
+            <a href="#workshops" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_workshops">Workshops</a>
+            <a href="workshops/al-tira.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_al_tira">Al-Tira Yoga</a>
+            <a href="workshops/jiva.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_jiva">Jiva Yoga</a>
+            <a href="retreat.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_retreat">Retreat</a>
           </nav>
           <div class="animate-content flex items-center justify-center gap-3 pb-10 sm:pb-12 md:pb-14" aria-label="Social links">
             <a href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" class="footer-social flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-primary)]/20 hover:text-[var(--color-accent)]" aria-label="WhatsApp">
@@ -310,21 +328,22 @@
             </a>
           </div>
           <div class="border-t border-[var(--color-primary)]/20 py-4 text-center">
-            <p class="text-xs text-[var(--color-secondary)]">© <span id="current-year"></span> Nawal Omar. All rights reserved.</p>
+            <p class="text-xs text-[var(--color-secondary)]">© <span id="current-year"></span> Nawal Omar. <span data-i18n="copyright">All rights reserved.</span></p>
           </div>
         </div>
       </footer>
     </main>
 
     <div id="audio-consent-prompt" class="fixed inset-x-4 bottom-4 z-[80] mx-auto max-w-md rounded-2xl border border-[var(--color-primary)]/30 bg-white/95 p-4 shadow-xl backdrop-blur-md" role="dialog" aria-live="polite" aria-label="Audio permission" hidden>
-      <p class="text-sm font-medium text-[var(--color-secondary)]">Would you like to enable sound for videos on this device?</p>
+      <p class="text-sm font-medium text-[var(--color-secondary)]" data-i18n="audio_question">Would you like to enable sound for videos on this device?</p>
       <div class="mt-3 flex items-center justify-end gap-2">
-        <button type="button" data-audio-decline class="rounded-lg border border-[var(--color-primary)]/40 px-3 py-1.5 text-sm text-[var(--color-secondary)] transition hover:bg-[var(--color-primary)]/10">Later</button>
-        <button type="button" data-audio-accept class="rounded-lg bg-[var(--color-secondary)] px-3 py-1.5 text-sm text-white transition hover:bg-[var(--color-accent)]">Enable sound</button>
+        <button type="button" data-audio-decline class="rounded-lg border border-[var(--color-primary)]/40 px-3 py-1.5 text-sm text-[var(--color-secondary)] transition hover:bg-[var(--color-primary)]/10" data-i18n="audio_later">Later</button>
+        <button type="button" data-audio-accept class="rounded-lg bg-[var(--color-secondary)] px-3 py-1.5 text-sm text-white transition hover:bg-[var(--color-accent)]" data-i18n="audio_enable">Enable sound</button>
       </div>
     </div>
   </div>
 
+  <script src="js/i18n.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/count-up.js"></script>
   <script src="js/video.js"></script>

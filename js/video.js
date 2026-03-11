@@ -24,8 +24,10 @@
     function updateUI() {
       video.muted = isMuted;
       toggleBtn.setAttribute('aria-pressed', !isMuted);
-      toggleBtn.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
-      if (labelSpan) labelSpan.textContent = isMuted ? 'Muted' : 'Live audio';
+      var lang = window.nawalI18n ? window.nawalI18n.getLang() : 'en';
+      var t = window.nawalI18n ? function (k) { return window.nawalI18n.t(lang, k); } : function (k) { return k === 'video_muted' ? 'Muted' : k === 'video_unmute' ? 'Unmute video' : 'Live audio'; };
+      toggleBtn.setAttribute('aria-label', isMuted ? t('video_unmute') : t('video_live'));
+      if (labelSpan) labelSpan.textContent = isMuted ? t('video_muted') : t('video_live');
       if (iconContainer) {
         iconContainer.innerHTML = isMuted
           ? '<svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M22 9L16 15"/><path d="M16 9L22 15"/></svg>'
@@ -81,6 +83,8 @@
         updateUI();
       });
     });
+
+    window.addEventListener('nawal-lang-change', function () { updateUI(); });
 
     video.defaultMuted = true;
     video.muted = true;

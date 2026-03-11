@@ -1,0 +1,76 @@
+/* Custom UI helpers for Nawal site */
+
+/* Animated menu launcher: three bars morph into an X when menu is open */
+.menu-launcher-icon {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 14px;
+  height: 12px;
+}
+
+.menu-launcher-bar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  transform-origin: center;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease,
+    background-color 0.25s ease;
+}
+
+body[data-menu-open="true"] .menu-launcher-bar {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+body[data-menu-open="true"] .menu-launcher-bar.bar1 {
+  transform: translateY(4px) rotate(45deg);
+}
+
+body[data-menu-open="true"] .menu-launcher-bar.bar2 {
+  opacity: 0;
+}
+
+body[data-menu-open="true"] .menu-launcher-bar.bar3 {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Smooth reveal for images & video on scroll – yoga‑style, soft and calm */
+
+/* Initial state: slightly lower & smaller, softly hidden */
+.trainer-image-wrapper,
+.video-frame,
+.stack-card-inner,
+.workshop-card-image-wrap,
+.retreat-page .overflow-hidden img {
+  opacity: 0;
+  transform: translateY(22px) scale(.96);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+
+/* When the section is in view, gently float them in */
+.animate-section.in-view .trainer-image-wrapper,
+.animate-section.in-view .video-frame,
+.animate-section.in-view .stack-card-inner,
+.animate-section.in-view .workshop-card-image-wrap,
+.animate-section.in-view .overflow-hidden img {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-image-wrapper,
+  .video-frame,
+  .stack-card-inner,
+  .workshop-card-image-wrap,
+  .retreat-page .overflow-hidden img {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+

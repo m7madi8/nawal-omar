@@ -76,11 +76,59 @@
     });
   }
 
+  function initMenu() {
+    var toggle = document.getElementById('menu-toggle');
+    var panel = document.getElementById('menu-panel');
+    if (!toggle || !panel) return;
+
+    var sheet = panel.querySelector('div');
+    var closeBtn = panel.querySelector('[data-menu-close]');
+
+    function openMenu() {
+      panel.style.display = 'block';
+      panel.classList.remove('opacity-0');
+      panel.classList.add('opacity-100');
+      if (sheet) sheet.style.transform = 'translateX(0)';
+      document.body.dataset.menuOpen = 'true';
+    }
+
+    function closeMenu() {
+      panel.classList.add('opacity-0');
+      panel.classList.remove('opacity-100');
+      if (sheet) sheet.style.transform = '';
+      document.body.dataset.menuOpen = 'false';
+      window.setTimeout(function () {
+        if (document.body.dataset.menuOpen !== 'true') {
+          panel.style.display = 'none';
+        }
+      }, 300);
+    }
+
+    toggle.addEventListener('click', function () {
+      var isOpen = document.body.dataset.menuOpen === 'true';
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMenu);
+    }
+
+    panel.addEventListener('click', function (e) {
+      if (e.target === panel) closeMenu();
+    });
+
+    window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
+
   function init() {
     var yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
     initAudioConsent();
     initCursor();
+    initMenu();
   }
 
   if (document.readyState === 'loading') {

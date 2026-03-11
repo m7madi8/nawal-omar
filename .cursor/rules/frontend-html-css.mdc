@@ -1,0 +1,21 @@
+---
+description: HTML and CSS conventions for Nawal site
+globs: "**/*.html,**/*.css"
+alwaysApply: false
+---
+
+# HTML & CSS Conventions
+
+## HTML
+- Use semantic elements (`<main>`, `<section>`, `<nav>`, `<article>`, `<footer>`). Include `aria-label` where useful.
+- Every user-visible string that can switch language must have `data-i18n="key"` (or `data-i18n-attr="attr:key"`). Keys must exist in `js/i18n.js` for both `en` and `ar`.
+- Do not hardcode Arabic/English in HTML; use i18n keys so the active language is applied by `i18n.js`.
+- Subpages in `workshops/`: asset paths start with `../` (e.g. `../css/style.css`, `../js/i18n.js`).
+
+## CSS (rtl.css and overrides)
+- RTL-only rules must be scoped with `[dir="rtl"]` so they do not affect LTR.
+- Arabic typography: in `rtl.css`, `[dir="rtl"] body` uses Scheherazade New; headings (e.g. `h1`, `h2`, `.font-serif`, `.hero-headline`) use Amiri. Do not change these font families without updating the Google Fonts link and the rule description.
+- New RTL tweaks (margins, alignment, language switcher position) go in `css/rtl.css`, not in `style.css`.
+
+## Adding new pages
+- Include: same Google Fonts (Playfair, Inter, Amiri, Scheherazade New), `css/style.css`, `css/rtl.css`, `.lang-switcher` nav, and `<script src="…/js/i18n.js">` before other scripts. Use correct path depth (`../` when inside `workshops/`).
