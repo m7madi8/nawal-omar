@@ -17,7 +17,7 @@
     var toggleBtn = document.querySelector('.video-section .audio-toggle');
     if (!video || !toggleBtn) return;
 
-    var isMuted = true;
+    var isMuted = getConsent() === 'accepted' ? false : true;
     var labelSpan = toggleBtn.querySelector('.audio-toggle__label');
     var iconContainer = toggleBtn.querySelector('.audio-toggle__icon');
 
@@ -57,6 +57,20 @@
     );
     observer.observe(video);
 
+    function tryAutoPlayAfterInteraction() {
+      if (getConsent() !== 'accepted' || !isInViewport) return;
+      isMuted = false;
+      video.muted = false;
+      updateUI();
+      video.play().catch(function () {});
+    }
+
+    if (getConsent() === 'accepted') {
+      window.addEventListener('click', tryAutoPlayAfterInteraction, { once: true });
+      window.addEventListener('keydown', tryAutoPlayAfterInteraction, { once: true });
+      window.addEventListener('touchstart', tryAutoPlayAfterInteraction, { once: true, passive: true });
+    }
+
     window.addEventListener('audio-consent-unlock', function () {
       if (getConsent() !== 'accepted' || !isInViewport) return;
       isMuted = false;
@@ -86,8 +100,8 @@
 
     window.addEventListener('nawal-lang-change', function () { updateUI(); });
 
-    video.defaultMuted = true;
-    video.muted = true;
+    video.defaultMuted = isMuted;
+    video.muted = isMuted;
     video.load();
     video.play().catch(function () {});
     updateUI();
