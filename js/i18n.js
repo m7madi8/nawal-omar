@@ -106,7 +106,7 @@ Yoga and sound healing retreat with Nawal Omar in Zanzibar.`,
 • Daily breakfast and dinner to reduce logistical load.
 • Two Sound Healing sessions with a specialist who brings the equipment to both hotels.
 • A blend of the travel experience and a deep inner process led by Nawal.
-• The option to join with flight or without flight, depending on each participant's needs.
+• The option to join according to each participant's needs.
 
 What is included?
 • Round-trip direct flight ticket with Arkia
@@ -136,10 +136,8 @@ Located on the Kiwengwa beach, offering a more intimate boutique atmosphere. Wit
 Official link: https://mvuvizanzibar.com/
 
 Option	Final bank transfer price	Notes
-Triple room - with flight	3000$	Full package with flight.
-Double room - with flight	3300$	Full package with flight.
-Triple room - without flight	1800$	For those who book their flights themselves.
-Double room - without flight	2200$	For those who book their flights themselves.
+Triple room - with flight	3200$	Full package with flight.
+Double room - with flight	3500$	Full package with flight.
 
 Important notes about pricing and payment
 • The price is for payment via bank transfer.
@@ -389,7 +387,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 وجبتا فطور وعشاء يوميًا لتخفيف العبء اللوجستي عن المشاركات.
 جلستا Sound Healing مع مختصة تأتي بالمعدات إلى الفندقين.
 مزيج بين التجربة السياحية والمسار الداخلي العميق بقيادة نوال.
-إمكانية الانضمام مع الطيران أو بدون طيران بحسب حاجة كل مشاركة.
+إمكانية الانضمام بحسب حاجة كل مشاركة.
 
 ماذا تشمل الباقة؟
 • تذكرة طيران مباشر ذهابًا وإيابًا مع Arkia
@@ -419,10 +417,8 @@ Mvuvi Boutique Resort - Kiwengwa
 الرابط الرسمي: https://mvuvizanzibar.com/
 
 الخيار	السعر النهائي بالتحويل البنكي	ملاحظات
-غرفة ثلاثية - مع طيران	3000$	الباقة الكاملة مع الطيران.
-غرفة مزدوجة - مع طيران	3300$	الباقة الكاملة مع الطيران.
-غرفة ثلاثية - بدون طيران	1800$	لمن تحجز الطيران بنفسها.
-غرفة مزدوجة - بدون طيران	2200$	لمن تحجز الطيران بنفسها.
+غرفة ثلاثية - مع طيران	3200$	الباقة الكاملة مع الطيران.
+غرفة مزدوجة - مع طيران	3500$	الباقة الكاملة مع الطيران.
 
 ملاحظات مهمة بخصوص التسعير والدفع
 • السعر المذكور هو للدفع عبر تحويل بنكي.
