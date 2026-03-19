@@ -43,7 +43,12 @@
   position: absolute;
   inset: 0;
   /* Subtle overlay for readability (no “faded” background feel). */
-  background: radial-gradient(900px 650px at 50% 18%, rgba(245, 241, 235, 0.08), rgba(245, 241, 235, 0.34));
+  background: linear-gradient(
+    180deg,
+    rgba(62, 47, 43, 0.78) 0%,
+    rgba(62, 47, 43, 0.44) 42%,
+    rgba(62, 47, 43, 0.70) 100%
+  );
   pointer-events: none;
 }
 
@@ -58,8 +63,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.02);
-  filter: saturate(1.02) contrast(1.02) brightness(1.02);
+  transform: scale(1.06);
+  /* Hide video details so text remains calm & readable. */
+  filter: blur(0px) saturate(1) contrast(1.03) brightness(0.78);
   opacity: 1;
 }
 
@@ -112,6 +118,8 @@
 .rp-hero-title {
   font-family: "Playfair Display", Georgia, serif;
   letter-spacing: -0.02em;
+  font-weight: 800;
+  line-height: 1.08;
 }
 
 .rp-kicker {
@@ -119,7 +127,7 @@
   text-transform: uppercase;
   letter-spacing: 0.26em;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 750;
 }
 
 /* Match the warm white look for dynamic content blocks. */
@@ -129,29 +137,71 @@
   color: rgba(62, 47, 43, 0.80);
 }
 
-.rp-hero-back-link,
-.rp-hero-kicker,
-.rp-hero-title,
-.rp-hero-subtitle {
-  color: rgba(62, 47, 43, 0.92);
-}
-
-.rp-hero-back-link:hover {
-  color: rgba(62, 47, 43, 1);
+.rp-hero-back-link {
+  color: rgba(245, 241, 235, 0.92);
 }
 
 .rp-hero-kicker {
-  color: rgba(62, 47, 43, 0.78);
+  color: rgba(185, 137, 95, 0.96);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.rp-hero-back-link:hover {
+  color: rgba(255, 255, 255, 1);
 }
 
 .rp-hero-title {
-  color: rgba(62, 47, 43, 0.95);
+  color: rgba(245, 241, 235, 1);
+  text-shadow: 0 16px 52px rgba(0, 0, 0, 0.38);
+  font-weight: 580;
+  letter-spacing: -0.01em;
 }
 
 .rp-hero-subtitle {
   white-space: pre-line;
   line-height: 1.75;
-  color: rgba(62, 47, 43, 0.86);
+  color: rgba(245, 241, 235, 0.90);
+  text-shadow: 0 16px 52px rgba(0, 0, 0, 0.22);
+  font-weight: 500;
+}
+
+/* Glass container wrapper for hero content */
+.rp-hero-glass {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 24px;
+  padding: 1.75rem 1.5rem;
+  background: rgba(245, 241, 235, 0.10);
+  border: 1px solid rgba(185, 137, 95, 0.20);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+}
+
+.rp-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.35rem;
+  border-radius: 9999px;
+  background: rgba(245, 241, 235, 0.14);
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  color: rgba(245, 241, 235, 1);
+  text-decoration: none;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  transition: transform 280ms ease, background 280ms ease, border-color 280ms ease, opacity 280ms ease;
+  opacity: 0.98;
+}
+
+.rp-hero-cta:hover {
+  transform: translateY(-1px) scale(1.03);
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.32);
+  opacity: 1;
 }
 
 .rp-scroll-indicator {
@@ -164,7 +214,7 @@
   align-items: center;
   gap: 0.5rem;
   z-index: 3;
-  color: rgba(62, 47, 43, 0.78);
+  color: rgba(245, 241, 235, 0.82);
   font-size: 0.78rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -234,7 +284,11 @@
 
 /* Keep a subtle reveal effect, but do not hide text by default. */
 .retreat-premium-root .animate-section.in-view .retreat-section-body p,
-.retreat-premium-root .animate-section.in-view .retreat-section-body li {
+.retreat-premium-root .animate-section.in-view .retreat-section-body li,
+.retreat-premium-root .animate-section.in-view .retreat-section-body table th,
+.retreat-premium-root .animate-section.in-view .retreat-section-body table td,
+.retreat-premium-root .animate-section.in-view .retreat-day summary,
+.retreat-premium-root .animate-section.in-view .retreat-day-value p {
   animation: rpTextSoftIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -268,10 +322,6 @@
 
 /* Safety: ensure retreat content never becomes fully invisible. */
 .retreat-premium-root .animate-section {
-  opacity: 1 !important;
-}
-
-.retreat-premium-root .animate-content > * {
   opacity: 1 !important;
 }
 

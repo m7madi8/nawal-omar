@@ -47,6 +47,7 @@
             loop
             autoplay
             preload="auto"
+            poster="public/media/Zanzibar/zanzibarterminus-20260319-0001.jpg"
           >
             <source src="public/media/Zanzibar/video.mp4" type="video/mp4">
           </video>
@@ -58,10 +59,16 @@
             <span data-i18n="back">Back</span>
           </a>
 
-          <div class="animate-content rp-hero-center mx-auto text-center">
-            <p class="rp-kicker mb-3" data-i18n="retreat_page_label">Zanzibar Retreat with Nawal Omar</p>
-            <h1 class="rp-hero-title font-serif font-light text-3xl sm:text-4xl md:text-5xl" data-i18n="retreat_page_title">8 Days | 7 Nights</h1>
+          <div class="rp-hero-glass animate-content rp-hero-center mx-auto text-center">
+            <p class="rp-hero-kicker mb-3" data-i18n="retreat_page_label">Zanzibar Retreat with Nawal Omar</p>
+            <h1 class="rp-hero-title font-serif text-3xl sm:text-4xl md:text-5xl" data-i18n="retreat_page_title">8 Days | 7 Nights</h1>
             <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed rp-hero-subtitle retreat-pre" data-i18n="retreat_page_intro"></p>
+
+            <div class="mt-8">
+              <a href="#reserve" class="rp-hero-cta" data-i18n="retreat_cta_button">
+                Reserve Your Spot
+              </a>
+            </div>
           </div>
 
           <div class="rp-scroll-indicator" aria-hidden="true">
@@ -160,7 +167,7 @@
       <!-- FINAL CTA -->
       <section class="rp-section animate-section">
         <div class="rp-container">
-          <div class="rp-cta animate-content">
+          <div id="reserve" class="rp-cta animate-content">
             <div class="rp-paragraph">
               <h2 class="rp-h2 rp-heading" data-i18n="retreat_cta_title">Ready to begin your journey?</h2>
               <p data-i18n="retreat_cta_subtitle" style="margin-top:0.75rem;"></p>
@@ -732,6 +739,29 @@
     (function () {
       if (!window.gsap || !window.ScrollTrigger) return;
       gsap.registerPlugin(window.ScrollTrigger);
+
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Video: slightly slow for a more "healing" feel (without being noticeable).
+      var heroVideo = document.querySelector('.rp-hero-video');
+      if (heroVideo && !reduceMotion) {
+        try {
+          heroVideo.playbackRate = 0.92;
+        } catch (err) {}
+      }
+
+      // Premium entrance animation for hero content.
+      if (!reduceMotion) {
+        var glass = document.querySelector('.rp-hero-glass');
+        if (glass) {
+          var tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+          tl.fromTo(glass, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 1.1 })
+            .fromTo('.rp-hero-kicker', { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.8 }, '-=0.65')
+            .fromTo('.rp-hero-title', { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.9 }, '-=0.55')
+            .fromTo('.rp-hero-subtitle', { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.85 }, '-=0.6')
+            .fromTo('.rp-hero-cta', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.8 }, '-=0.55');
+        }
+      }
 
       // Very light parallax for hero background video.
       gsap.utils.toArray('.rp-hero-video').forEach(function (video) {
