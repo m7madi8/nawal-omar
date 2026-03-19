@@ -594,6 +594,49 @@
   background: rgba(255, 255, 255, 0.78);
 }
 
+/* Reserve form (CTA) */
+.rp-reserve-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.rp-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rp-form-label {
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: rgba(62, 47, 43, 0.95);
+}
+
+.rp-input,
+.rp-textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.8rem 0.95rem;
+  color: rgba(62, 47, 43, 0.95);
+  outline: none;
+}
+
+.rp-input:focus,
+.rp-textarea:focus {
+  border-color: rgba(185, 137, 95, 0.55);
+  box-shadow: 0 0 0 4px rgba(185, 137, 95, 0.15);
+}
+
+.rp-textarea {
+  resize: none;
+}
+
+.rp-form-flex {
+  min-width: 260px;
+}
+
 .rp-rich .retreat-bullets {
   padding-left: 1.1rem;
 }

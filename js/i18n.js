@@ -95,6 +95,10 @@ Yoga and sound healing retreat with Nawal Omar in Zanzibar.`,
       retreat_cta_subtitle: 'Step into calm, practice with presence, and return to yourself in Zanzibar.',
       retreat_cta_button: 'Reserve your spot',
       retreat_whatsapp_button: 'WhatsApp',
+      retreat_form_name_label: 'Name',
+      retreat_form_phone_label: 'Phone',
+      retreat_form_notes_label: 'Notes',
+      retreat_form_submit: 'Send to WhatsApp',
       retreat_share_title: 'Retreat Details',
       retreat_share1: `Why this retreat is different?
 • A balanced program between movement and rest, plus sea activities and nature.
@@ -374,6 +378,10 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_cta_subtitle: 'خطوة نحو هدوء عميق وممارسة حضور والعودة إلى ذاتك في زنجبار.',
       retreat_cta_button: 'احجزي مكانك',
       retreat_whatsapp_button: 'واتساب',
+      retreat_form_name_label: 'الاسم',
+      retreat_form_phone_label: 'رقم الهاتف',
+      retreat_form_notes_label: 'ملاحظات',
+      retreat_form_submit: 'إرسال إلى واتساب',
       retreat_share_title: 'لماذا هذا الريتريت مختلف؟',
       retreat_share1: `لماذا هذا الريتريت مختلف؟
 برنامج متوازن بين الحركة والراحة والأنشطة البحرية والطبيعة.

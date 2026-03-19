@@ -166,10 +166,52 @@
               <p data-i18n="retreat_cta_subtitle" style="margin-top:0.75rem;"></p>
             </div>
             <div class="mt-8 flex flex-col sm:flex-row items-stretch gap-3">
-              <a href="https://docs.google.com/forms/d/1UcSico2Q0DcMQQdb5wPlXKNLQulRSB7JoPHjpaO-MAg/viewform?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnWZUjcTV6SnnAKzPkKui7nYqfuNYsS99LpRZEV4LHjtvIPHqXSIMkmoLBprg_aem_xlpyJ5tKTtP3I2yN6llW7A&edit_requested=true" target="_blank" rel="noopener noreferrer" class="rp-btn">
-                <span data-i18n="retreat_cta_button">Reserve your spot</span>
-                <span aria-hidden="true">→</span>
-              </a>
+              <form id="retreat-reserve-form" class="rp-reserve-form rp-form-flex flex-1" autocomplete="on">
+                <div class="flex flex-col gap-3 sm:gap-2">
+                  <div class="rp-form-field">
+                    <label class="rp-form-label" for="reserve-name" data-i18n="retreat_form_name_label">Name</label>
+                    <input
+                      id="reserve-name"
+                      name="name"
+                      type="text"
+                      required
+                      class="rp-input"
+                      data-i18n-attr="aria-label:retreat_form_name_label"
+                    />
+                  </div>
+
+                  <div class="rp-form-field">
+                    <label class="rp-form-label" for="reserve-phone" data-i18n="retreat_form_phone_label">Phone</label>
+                    <input
+                      id="reserve-phone"
+                      name="phone"
+                      type="tel"
+                      inputmode="tel"
+                      required
+                      class="rp-input"
+                      data-i18n-attr="aria-label:retreat_form_phone_label"
+                    />
+                  </div>
+
+                  <div class="rp-form-field">
+                    <label class="rp-form-label" for="reserve-notes" data-i18n="retreat_form_notes_label">Notes</label>
+                    <textarea
+                      id="reserve-notes"
+                      name="notes"
+                      rows="2"
+                      class="rp-textarea"
+                      data-i18n-attr="aria-label:retreat_form_notes_label"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="mt-4 flex flex-col sm:flex-row gap-3 items-stretch">
+                  <button type="submit" class="rp-btn flex-1">
+                    <span data-i18n="retreat_form_submit">Send to WhatsApp</span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </form>
               <a href="https://wa.me/972522496366?text=Hi%20Nawal%2C%20I%20have%20a%20question%20about%20the%20Zanzibar%20Retreat." target="_blank" rel="noopener noreferrer" class="rp-btn-secondary">
                 <span data-i18n="retreat_whatsapp_button">WhatsApp</span>
                 <span aria-hidden="true">→</span>
@@ -220,6 +262,36 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById('retreat-reserve-form');
+      if (!form) return;
+
+      function getVal(id) {
+        var el = document.getElementById(id);
+        return el ? String(el.value || '').trim() : '';
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var name = getVal('reserve-name');
+        var phone = getVal('reserve-phone');
+        var notes = getVal('reserve-notes');
+
+        var message =
+          'Hi Nawal,%0A%0A' +
+          'I would like to reserve the Zanzibar Retreat.%0A' +
+          (name ? ('Name: ' + encodeURIComponent(name) + '%0A') : '') +
+          (phone ? ('Phone: ' + encodeURIComponent(phone) + '%0A') : '') +
+          (notes ? ('Notes: ' + encodeURIComponent(notes) + '%0A') : '') +
+          '%0AThank you.';
+
+        var url = 'https://wa.me/972522496366?text=' + message;
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    })();
+  </script>
 
   <script>
     (function () {
