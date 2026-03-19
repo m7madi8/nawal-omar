@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Wadi Rum Retreat | Nawal Omar</title>
-  <meta name="description" content="Wadi Rum Retreat with Nawal Omar: yoga, sound healing, mindfulness, and deep restoration in nature.">
+  <title>Retreat | Nawal Omar</title>
+  <meta name="description" content="Retreat with Nawal Omar: yoga, sound healing, mindfulness, and deep restoration in nature.">
   <link rel="icon" type="image/png" href="public/media/Nawal_yoga_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/rtl.css">
   <link rel="stylesheet" href="css/scroll-media.css">
+  <link rel="stylesheet" href="css/retreat-page.css">
+  <link rel="stylesheet" href="css/retreat-premium.css">
 </head>
 <body class="antialiased">
   <nav class="lang-switcher" aria-label="Language">
@@ -35,58 +37,166 @@
       <div class="h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/70 bg-white/10 shadow-soft backdrop-blur-md transition-transform duration-200 will-change-transform"></div>
     </div>
 
-    <main class="retreat-page min-w-0 bg-[var(--bg-body)]">
-      <section class="animate-section border-b border-[var(--color-primary)]/25 bg-[#faf8f5] pt-14 pb-14 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20">
-        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
-          <div class="mb-8 sm:mb-10">
-            <a href="index.html#workshops" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" aria-label="Back">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-              <span data-i18n="back">Back</span>
-            </a>
+    <main class="retreat-page min-w-0 bg-[var(--bg-body)] retreat-premium-root">
+      <section class="rp-hero animate-section">
+        <div class="rp-hero-media" aria-hidden="true">
+          <video
+            class="rp-hero-video"
+            muted
+            playsinline
+            loop
+            autoplay
+            preload="auto"
+          >
+            <source src="public/media/Zanzibar/video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="rp-hero-content">
+          <a href="index.html#workshops" class="rp-hero-back-link inline-flex items-center gap-2 text-sm font-medium transition-colors" aria-label="Back">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <span data-i18n="back">Back</span>
+          </a>
+
+          <div class="animate-content rp-hero-center mx-auto text-center">
+            <p class="rp-kicker mb-3" data-i18n="retreat_page_label">Zanzibar Retreat with Nawal Omar</p>
+            <h1 class="rp-hero-title font-serif font-light text-3xl sm:text-4xl md:text-5xl" data-i18n="retreat_page_title">8 Days | 7 Nights</h1>
+            <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed rp-hero-subtitle retreat-pre" data-i18n="retreat_page_intro"></p>
           </div>
-          <div class="animate-content mx-auto max-w-4xl text-center">
-            <p class="mb-3 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]" data-i18n="retreat_page_label">Wadi Rum Retreat</p>
-            <h1 class="font-serif text-3xl font-light text-[var(--color-secondary)] sm:text-4xl md:text-5xl" data-i18n="retreat_page_title">A path back to yourself</h1>
-            <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-soft)] sm:text-lg" data-i18n="retreat_page_intro">Wadi Rum Retreat is a path back. Back to your body, your breath, and the quiet part in you that may have been forgotten between pressure, responsibilities, and constant noise.</p>
+
+          <div class="rp-scroll-indicator" aria-hidden="true">
+            <span class="rp-scroll-dot"></span>
+            <span data-i18n="retreat_scroll_down">Scroll</span>
           </div>
         </div>
       </section>
 
-      <section class="animate-section py-12 sm:py-14 md:py-16">
-        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
-          <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-start">
-            <div class="overflow-hidden rounded-2xl border border-[var(--color-primary)]/25 bg-[var(--color-gray)]">
-              <img src="public/media/retreat.jpg" alt="Retreat by Nawal Omar" class="h-full w-full object-cover" loading="eager">
+      <!-- INTRO / EXPERIENCE -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="rp-split">
+            <div class="rp-media animate-content">
+              <div class="rp-zanzibar-gallery" aria-hidden="true">
+                <div class="rp-zanzibar-item rp-zi-a">
+                  <img id="zanzibar-tile-1" src="public/media/Zanzibar/zanzibarterminus-20260319-0001.jpg" alt="" loading="eager" fetchpriority="high" decoding="async">
+                </div>
+                <div class="rp-zanzibar-item rp-zi-b">
+                  <img id="zanzibar-tile-2" src="public/media/Zanzibar/zanzibarterminus-20260319-0004.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="rp-zanzibar-item rp-zi-c">
+                  <img id="zanzibar-tile-3" src="public/media/Zanzibar/zanzibarterminus-20260319-0007.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+                <div class="rp-zanzibar-item rp-zi-d">
+                  <img id="zanzibar-tile-4" src="public/media/Zanzibar/zanzibarterminus-20260319-0008.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+              </div>
             </div>
-            <div class="animate-content rounded-2xl border border-[var(--color-primary)]/25 bg-white p-6 sm:p-8">
-              <h2 class="font-serif text-2xl font-medium text-[var(--color-secondary)]" data-i18n="retreat_from">From an aware, safe, and real place</h2>
-              <p class="mt-5 text-sm leading-relaxed text-[var(--text-soft)] sm:text-base" data-i18n="retreat_bio1">I am Nawal Omar, a yoga teacher and a nurse, and I guide women through this kind of journey from an aware, safe, and authentic place — no big promises, just honest presence and a deeply felt experience.</p>
-              <p class="mt-4 text-sm leading-relaxed text-[var(--text-soft)] sm:text-base" data-i18n="retreat_bio2">The retreat will take place at <strong>SHARAZAD CAMP – Wadi Rum</strong>, with very comfortable 5-star glamping rooms, nourishing meals included, and a space where you can feel held — without needing to prove, perform, or stay "strong."</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="animate-section pb-14 sm:pb-16 md:pb-20">
-        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
-          <div class="animate-content mx-auto max-w-4xl rounded-2xl border border-[var(--color-primary)]/25 bg-[#faf8f5] p-6 sm:p-8">
-            <h3 class="font-serif text-xl font-medium text-[var(--color-secondary)] sm:text-2xl" data-i18n="retreat_share_title">What we will share during these days</h3>
-            <p class="mt-5 text-sm leading-relaxed text-[var(--text-soft)] sm:text-base" data-i18n="retreat_share1">During the retreat we will move, breathe, write, sit in silence, laugh, and even cry if tears arise. There will be yoga, sound healing, sharing circles, silence, and fire under the stars.</p>
-            <p class="mt-4 text-sm leading-relaxed text-[var(--text-soft)] sm:text-base" data-i18n="retreat_share2">Most importantly, there will be space for you — exactly as you are.</p>
-            <p class="mt-6 text-sm leading-relaxed text-[var(--text-soft)] sm:text-base" data-i18n="retreat_share3">After you fill out the form, we will contact you as soon as possible with all details, the full schedule, and pricing, and we can see together whether this path is right for you at this stage of your life.</p>
-            <div class="mt-8 flex flex-col items-center gap-3">
-              <p class="text-sm text-[var(--color-secondary)]" data-i18n="retreat_questions">For questions or inquiries:</p>
-              <div class="mt-1 flex flex-wrap items-center justify-center gap-3">
-                <a href="https://docs.google.com/forms/d/1UcSico2Q0DcMQQdb5wPlXKNLQulRSB7JoPHjpaO-MAg/viewform?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnWZUjcTV6SnnAKzPkKui7nYqfuNYsS99LpRZEV4LHjtvIPHqXSIMkmoLBprg_aem_xlpyJ5tKTtP3I2yN6llW7A&edit_requested=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full bg-[var(--color-secondary)] px-6 py-3 text-sm font-medium text-white transition hover:bg-[var(--color-accent)]"><span data-i18n="retreat_submit">Submit request</span> <span aria-hidden="true">→</span></a>
-                <a href="https://wa.me/972522496366?text=Hi%20Nawal%2C%20I%20have%20a%20question%20about%20the%20Wadi%20Rum%20Retreat." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-[var(--color-secondary)]/30 bg-white px-6 py-3 text-sm font-medium text-[var(--color-secondary)] transition hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]">WhatsApp <span aria-hidden="true">→</span></a>
+            <div class="animate-content">
+              <div class="rp-kicker" data-i18n="retreat_page_label">Zanzibar Retreat</div>
+              <h2 class="rp-h2 rp-heading" data-i18n="retreat_from">A journey designed to pause, breathe, and return to yourself</h2>
+              <div class="rp-paragraph">
+                <p data-i18n="retreat_bio1"></p>
+                <p data-i18n="retreat_bio2"></p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- WHAT YOU WILL EXPERIENCE -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="flex flex-col gap-6">
+            <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+              <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_why">Why this retreat is different?</h2>
+              <div id="retreat-diff" class="retreat-section-body text-sm leading-relaxed"></div>
+            </div>
+
+            <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+              <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_included">What is included?</h2>
+              <div id="retreat-included" class="retreat-section-body text-sm leading-relaxed"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DAILY JOURNEY -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+            <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_daily_journey">Daily journey</h2>
+            <div id="retreat-itinerary" class="retreat-itinerary retreat-section-body text-sm leading-relaxed"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCOMMODATION -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+            <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_accommodation">Accommodation & food</h2>
+            <div id="retreat-hotels" class="retreat-section-body text-sm leading-relaxed"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+            <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_pricing">Pricing</h2>
+            <div id="retreat-pricing" class="retreat-section-body text-sm leading-relaxed"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHO + CLOSING -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="rp-grid2">
+            <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+              <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_for_whom">Who is this retreat for?</h2>
+              <div id="retreat-for-whom" class="retreat-section-body text-sm leading-relaxed"></div>
+            </div>
+            <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+              <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_closing">Final message</h2>
+              <div id="retreat-closing" class="retreat-section-body text-sm leading-relaxed"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="rp-section animate-section">
+        <div class="rp-container">
+          <div class="rp-cta animate-content">
+            <div class="rp-paragraph">
+              <h2 class="rp-h2 rp-heading" data-i18n="retreat_cta_title">Ready to begin your journey?</h2>
+              <p data-i18n="retreat_cta_subtitle" style="margin-top:0.75rem;"></p>
+            </div>
+            <div class="mt-8 flex flex-col sm:flex-row items-stretch gap-3">
+              <a href="https://docs.google.com/forms/d/1UcSico2Q0DcMQQdb5wPlXKNLQulRSB7JoPHjpaO-MAg/viewform?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnWZUjcTV6SnnAKzPkKui7nYqfuNYsS99LpRZEV4LHjtvIPHqXSIMkmoLBprg_aem_xlpyJ5tKTtP3I2yN6llW7A&edit_requested=true" target="_blank" rel="noopener noreferrer" class="rp-btn">
+                <span data-i18n="retreat_cta_button">Reserve your spot</span>
+                <span aria-hidden="true">→</span>
+              </a>
+              <a href="https://wa.me/972522496366?text=Hi%20Nawal%2C%20I%20have%20a%20question%20about%20the%20Zanzibar%20Retreat." target="_blank" rel="noopener noreferrer" class="rp-btn-secondary">
+                <span data-i18n="retreat_whatsapp_button">WhatsApp</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Raw data blocks (filled by i18n.js, then split by JS) -->
+      <div class="hidden">
+        <div id="retreat-share1-raw" data-i18n="retreat_share1"></div>
+        <div id="retreat-share2-raw" data-i18n="retreat_share2"></div>
+        <div id="retreat-share3-raw" data-i18n="retreat_share3"></div>
+      </div>
     </main>
 
-    <footer class="footer-isla animate-section border-t border-[var(--color-primary)]/25 bg-[#faf8f5]">
+    <footer class="footer-isla animate-section border-t border-[var(--color-primary)]/20 bg-white">
       <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
         <div class="animate-content flex justify-center pt-10 pb-2 sm:pt-10 sm:pb-3 md:pt-12 md:pb-4">
           <a href="index.html" class="inline-block transition-opacity hover:opacity-90">
@@ -116,6 +226,565 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="js/app.js"></script>
+
+  <script>
+    (function () {
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function linkifyUrls(text) {
+        if (!text) return '';
+        var out = '';
+        var re = /(https?:\/\/[^\s]+)/g;
+        var last = 0;
+        var m;
+        while ((m = re.exec(text)) !== null) {
+          out += escapeHtml(text.slice(last, m.index));
+          var url = m[0];
+          out += '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="retreat-link underline hover:text-[var(--color-accent)]">' + escapeHtml(url) + '</a>';
+          last = m.index + url.length;
+        }
+        out += escapeHtml(text.slice(last));
+        return out.replace(/\n/g, '<br/>');
+      }
+
+      function toLines(text) {
+        return String(text || '')
+          .replace(/\r/g, '')
+          .split('\n')
+          .map(function (l) { return l.trimEnd(); });
+      }
+
+      function afterToken(text, startToken, endToken) {
+        if (!text) return '';
+        var startIdx = text.indexOf(startToken);
+        if (startIdx === -1) return '';
+        var from = startIdx + startToken.length;
+        if (!endToken) return text.slice(from).trim();
+        var endIdx = text.indexOf(endToken, from);
+        if (endIdx === -1) return text.slice(from).trim();
+        return text.slice(from, endIdx).trim();
+      }
+
+      function sliceFromTo(text, startToken, endToken) {
+        if (!text) return '';
+        var startIdx = text.indexOf(startToken);
+        if (startIdx === -1) return '';
+        var endIdx = endToken ? text.indexOf(endToken, startIdx) : -1;
+        if (!endToken || endIdx === -1) return text.slice(startIdx).trim();
+        return text.slice(startIdx, endIdx).trim();
+      }
+
+      function renderParagraphs(text) {
+        var lines = toLines(text).filter(function (l) { return l.trim() !== ''; });
+        if (!lines.length) return '';
+        // Keep it simple: treat each non-bullet line as its own paragraph if it's separated.
+        return lines.map(function (l) {
+          return '<p>' + escapeHtml(l.trim()) + '</p>';
+        }).join('');
+      }
+
+      function renderBullets(text) {
+        var lines = toLines(text);
+        var html = '<ul class="retreat-bullets">';
+        var i = 0;
+        while (i < lines.length) {
+          var line = lines[i] ? lines[i].trim() : '';
+          if (!line) { i++; continue; }
+
+          if (line.indexOf('•') === 0) {
+            var itemText = line.replace(/^•\s*/, '').trim();
+            i++;
+            var nested = [];
+            while (i < lines.length) {
+              var nestedLine = lines[i] ? lines[i].trim() : '';
+              if (!nestedLine) { i++; continue; }
+              if (nestedLine.indexOf('o') === 0 || nestedLine.indexOf('o\t') === 0 || nestedLine.indexOf('o ') === 0) {
+                nested.push(nestedLine.replace(/^o\s*/, '').trim());
+                i++;
+                continue;
+              }
+              if (nestedLine.indexOf('•') === 0) break;
+              // Continuation lines for current li (no nesting)
+              itemText += ' ' + nestedLine;
+              i++;
+            }
+            html += '<li>' + escapeHtml(itemText) + (nested.length ? '<ul class="retreat-nested-bullets">' + nested.map(function (x) { return '<li>' + escapeHtml(x) + '</li>'; }).join('') + '</ul>' : '') + '</li>';
+            continue;
+          }
+
+          // Non-bullet line => paragraph (wrap once)
+          html += '<li style="list-style:none; padding:0;">' + escapeHtml(line) + '</li>';
+          i++;
+        }
+        html += '</ul>';
+        return html;
+      }
+
+      function renderRich(text) {
+        if (!text) return '';
+        var lines = toLines(text);
+        var hasBullet = lines.some(function (l) { return l.trim().indexOf('•') === 0; });
+        if (hasBullet) {
+          // If there are bullets, render as bullets; otherwise just paragraphs.
+          return renderBullets(text);
+        }
+        return renderParagraphs(text);
+      }
+
+      function renderHotels(hotelsText, isAr) {
+        var lines = toLines(hotelsText).filter(function (l) { return l.trim() !== ''; });
+        if (!lines.length) return '';
+
+        var headings = [];
+        for (var i = 0; i < lines.length; i++) {
+          var l = lines[i];
+          if (l.indexOf(' - ') !== -1 && (l.indexOf('Hotel') !== -1 || l.indexOf('Resort') !== -1)) {
+            headings.push(i);
+          }
+        }
+        if (!headings.length) return linkifyUrls(hotelsText);
+
+        var blocks = [];
+        for (var h = 0; h < headings.length; h++) {
+          var start = headings[h];
+          var end = (h + 1 < headings.length) ? headings[h + 1] : lines.length;
+          blocks.push(lines.slice(start, end));
+        }
+
+        var html = '<div class="retreat-hotel-grid">';
+        blocks.forEach(function (b) {
+          var title = b[0] || '';
+          var url = '';
+          var descLines = [];
+          var mediaImg = 'public/media/Zanzibar/zanzibarterminus-20260319-0001.jpg';
+          var lowerTitle = String(title || '').toLowerCase();
+          if (lowerTitle.indexOf('nur') !== -1) mediaImg = 'public/media/Zanzibar/NUR Beach Hotel - Jambiani.jpg';
+          if (lowerTitle.indexOf('mvuvi') !== -1 || lowerTitle.indexOf('kiwengwa') !== -1) {
+            mediaImg = 'public/media/Zanzibar/Mvuvi Boutique Resort - Kiwengwa.jpg';
+          }
+          for (var i = 1; i < b.length; i++) {
+            var line = b[i].trim();
+            if (line.indexOf('الرابط الرسمي:') === 0) {
+              url = line.replace('الرابط الرسمي:', '').trim();
+            } else if (line.indexOf('Official link:') === 0) {
+              url = line.replace('Official link:', '').trim();
+            } else {
+              descLines.push(line);
+            }
+          }
+          var desc = descLines.filter(function (x) { return x.trim() !== ''; }).join('<br/>');
+          html += '<div class="retreat-hotel-card">';
+          html += '<div class="retreat-hotel-media" aria-hidden="true" style="background-image:url(\'' + escapeHtml(mediaImg) + '\')"></div>';
+          html += '<h3>' + escapeHtml(title) + '</h3>';
+          html += '<p>' + linkifyUrls(descLines.join('\n')) + '</p>';
+          if (url) {
+            html += '<p class="mt-3"><a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">' + (isAr ? 'الرابط الرسمي' : 'Official link') + '</a></p>';
+          }
+          html += '</div>';
+        });
+        html += '</div>';
+        return html;
+      }
+
+      function renderPricing(pricingText, isAr) {
+        var lines = toLines(pricingText).filter(function (l) { return l.trim() !== ''; });
+        if (!lines.length) return '';
+
+        var notesMarker = isAr ? 'ملاحظات مهمة بخصوص التسعير والدفع' : 'Important notes about pricing and payment';
+        var notesIdx = -1;
+        for (var i = 0; i < lines.length; i++) {
+          if (lines[i].indexOf(notesMarker) === 0) { notesIdx = i; break; }
+        }
+
+        var tableLines = notesIdx === -1 ? lines : lines.slice(0, notesIdx);
+        var notesLines = notesIdx === -1 ? [] : lines.slice(notesIdx + 1);
+
+        var headerMarker = isAr ? 'الخيار' : 'Option';
+        var headerLine = tableLines[0] && tableLines[0].indexOf(headerMarker) !== -1 ? tableLines[0] : '';
+        var headerCols = headerLine ? headerLine.split('\t') : [];
+        if (!headerCols.length || headerCols.length < 3) headerCols = isAr
+          ? ['الخيار', 'السعر النهائي بالتحويل البنكي', 'ملاحظات']
+          : ['Option', 'Final bank transfer price', 'Notes'];
+
+        var rows = [];
+        tableLines.slice(1).forEach(function (line) {
+          if (!line || line.trim() === '') return;
+          var t = line.trim();
+          if (isAr) {
+            if (t.indexOf('غرفة') !== 0) return;
+          } else {
+            if (t.toLowerCase().indexOf('room') === -1) return;
+          }
+          var cols = t.split('\t');
+          if (cols.length < 3) {
+            var m = t.match(/^(.*?)[\t ]+(\d+\$)[\t ]+(.*)$/);
+            if (m) cols = [m[1], m[2], m[3]];
+          }
+          if (cols.length >= 3) {
+            rows.push([cols[0], cols[1], cols.slice(2).join(' ')]);
+          }
+        });
+
+        var html = '<table class="retreat-table">';
+        html += '<thead><tr>' +
+          headerCols.slice(0, 3).map(function (h) { return '<th>' + escapeHtml(h.trim()) + '</th>'; }).join('') +
+          '</tr></thead>';
+        html += '<tbody>';
+        if (!rows.length) {
+          html += '<tr><td colspan="3">' + escapeHtml(pricingText) + '</td></tr>';
+        } else {
+          rows.forEach(function (r) {
+            html += '<tr>' +
+              '<td>' + escapeHtml(String(r[0] || '').trim()) + '</td>' +
+              '<td style="text-align:center;">' + escapeHtml(String(r[1] || '').trim()) + '</td>' +
+              '<td>' + escapeHtml(String(r[2] || '').trim()) + '</td>' +
+              '</tr>';
+          });
+        }
+        html += '</tbody></table>';
+
+        if (notesLines.length) {
+          var notesText = notesLines.join('\n').trim();
+          html += '<div style="margin-top:1rem;">' + renderBullets(notesText) + '</div>';
+        }
+        return html;
+      }
+
+      function renderItinerary(itinText, isAr) {
+        var lines = toLines(itinText);
+        var dayRe = isAr
+          ? /^(الاثنين|الثلاثاء|الأربعاء|الخميس|الجمعة|السبت|الأحد)\s+(\d{1,2}\/\d{1,2}\/\d{4})\s*-\s*(.+)$/
+          : /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2}\/\d{1,2}\/\d{4})\s*-\s*(.+)$/i;
+
+        var timeMarker = isAr ? 'الوقت / الفقرة' : 'Time / Details';
+        var valueMarker = isAr ? '✨ قيمة هذا اليوم' : '✨ Value of this day';
+        var linksMarker = isAr ? 'روابط مفيدة مرتبطة بهذا اليوم' : 'Useful links related to this day';
+        var linksLabel = isAr ? 'روابط:' : 'Links:';
+
+        function matchDay(line) {
+          var m = line.match(dayRe);
+          if (!m) return null;
+          return { weekday: m[1], date: m[2], title: m[3].trim() };
+        }
+
+        var days = [];
+        var i = 0;
+        while (i < lines.length) {
+          var line = (lines[i] || '').trim();
+          if (!line) { i++; continue; }
+          var day = matchDay(line);
+          if (!day) { i++; continue; }
+
+          i++;
+          var intro = [];
+          var schedule = [];
+          var value = [];
+          var links = [];
+          var mode = 'intro';
+          var seenTimeHeader = false;
+
+          while (i < lines.length) {
+            var cur = (lines[i] || '').trim();
+            if (!cur) { i++; continue; }
+
+            // Next day
+            if (matchDay(cur)) break;
+
+            if (cur.indexOf(timeMarker) === 0) {
+              mode = 'schedule';
+              seenTimeHeader = true;
+              i++;
+              continue;
+            }
+
+            if (cur.indexOf(valueMarker) === 0) {
+              mode = 'value';
+              i++;
+              continue;
+            }
+
+            if (cur.indexOf(linksMarker) === 0) {
+              mode = 'links';
+              // capture after colon if exists
+              var parts = cur.split(':');
+              if (parts.length > 1) {
+                links.push(parts.slice(1).join(':').trim());
+              } else {
+                links.push(cur);
+              }
+              i++;
+              continue;
+            }
+
+            if (mode === 'intro') intro.push(cur);
+            else if (mode === 'schedule') {
+              if (cur.indexOf('\t') !== -1) {
+                var cols = (lines[i] || '').split('\t');
+                var left = (cols[0] || '').trim();
+                var right = cols.slice(1).join('\t').trim();
+                schedule.push({ left: left, right: right });
+              } else {
+                schedule.push({ left: '', right: cur });
+              }
+              i++;
+              continue;
+            } else if (mode === 'value') value.push(cur);
+            else if (mode === 'links') {
+              links.push(cur);
+              i++;
+              continue;
+            }
+
+            i++;
+          }
+
+          days.push({
+            heading: day.weekday + ' ' + day.date + ' - ' + day.title,
+            intro: intro,
+            schedule: schedule,
+            value: value,
+            links: links
+          });
+        }
+
+        var html = '';
+        if (!days.length) {
+          return '<p class="retreat-pre" style="white-space: pre-line;">' + escapeHtml(itinText) + '</p>';
+        }
+
+        days.forEach(function (d, idx) {
+          var open = idx === 0 ? ' open' : '';
+          html += '<details class="retreat-day"' + open + '>';
+          html += '<summary>' + escapeHtml(d.heading) + '<span class="retreat-day-sub"></span></summary>';
+
+          if (d.intro.length) {
+            html += '<div style="margin-top:0.75rem;">' + d.intro.map(function (p) { return '<p>' + escapeHtml(p) + '</p>'; }).join('') + '</div>';
+          }
+
+          if (d.schedule.length) {
+            html += '<div class="retreat-schedule-grid">';
+            d.schedule.forEach(function (row) {
+              if (row.left) {
+                html += '<div class="retreat-schedule-time">' + escapeHtml(row.left) + '</div>';
+                html += '<div>' + escapeHtml(row.right) + '</div>';
+              } else {
+                html += '<div style="grid-column:1/-1; color:var(--text-soft);">' + escapeHtml(row.right) + '</div>';
+              }
+            });
+            html += '</div>';
+          }
+
+          if (d.value.length) {
+            html += '<div class="retreat-day-value">';
+            html += d.value.map(function (p) { return '<p style="margin:0.25rem 0;">' + escapeHtml(p) + '</p>'; }).join('');
+            if (d.links.length) {
+              html += '<p style="margin:0.75rem 0 0 0;"><span style="font-weight:600; color:var(--color-secondary);">' + linksLabel + '</span> ' + escapeHtml(d.links.join(', ')) + '</p>';
+            }
+            html += '</div>';
+          } else if (d.links.length) {
+            html += '<div class="retreat-day-value"><p style="margin:0;">' + linksLabel + ' ' + escapeHtml(d.links.join(', ')) + '</p></div>';
+          }
+
+          html += '</details>';
+        });
+
+        return html;
+      }
+
+      function fillRetreatSegments() {
+        var isAr = (document.documentElement.getAttribute('dir') === 'rtl');
+        var elDiff = document.getElementById('retreat-diff');
+        var elIncluded = document.getElementById('retreat-included');
+        var elHotels = document.getElementById('retreat-hotels');
+        var elPricing = document.getElementById('retreat-pricing');
+        var elItinerary = document.getElementById('retreat-itinerary');
+        var elForWhom = document.getElementById('retreat-for-whom');
+        var elClosing = document.getElementById('retreat-closing');
+
+        var raw1El = document.getElementById('retreat-share1-raw');
+        var raw2El = document.getElementById('retreat-share2-raw');
+        var raw3El = document.getElementById('retreat-share3-raw');
+
+        if (!raw1El || !raw2El || !raw3El) return;
+        var raw1 = raw1El.textContent || '';
+        var raw2 = raw2El.textContent || '';
+        var raw3 = raw3El.textContent || '';
+
+        var diff = afterToken(
+          raw1,
+          isAr ? 'لماذا هذا الريتريت مختلف؟' : 'Why this retreat is different?',
+          isAr ? 'ماذا تشمل الباقة؟' : 'What is included?'
+        );
+        var included = afterToken(
+          raw1,
+          isAr ? 'ماذا تشمل الباقة؟' : 'What is included?',
+          'NUR Beach Hotel'
+        );
+        var hotels = sliceFromTo(raw1, 'NUR Beach Hotel', isAr ? 'الخيار' : 'Option');
+        var pricing = sliceFromTo(raw1, isAr ? 'الخيار' : 'Option', '');
+
+        var itin = afterToken(raw2, isAr ? 'البرنامج اليومي النهائي' : 'Final daily itinerary', '');
+
+        var forWhom = afterToken(
+          raw3,
+          isAr ? 'لمن يناسب هذا الريتريت؟' : 'Who is this retreat for?',
+          isAr ? 'رسالة ختامية' : 'Final message'
+        );
+        var closing = afterToken(raw3, isAr ? 'رسالة ختامية' : 'Final message', '');
+
+        if (elDiff) elDiff.innerHTML = renderRich(diff);
+        if (elIncluded) elIncluded.innerHTML = renderBullets(included);
+        if (elHotels) elHotels.innerHTML = renderHotels(hotels, isAr);
+        if (elPricing) elPricing.innerHTML = renderPricing(pricing, isAr);
+        if (elItinerary) elItinerary.innerHTML = renderItinerary(itin, isAr);
+        if (elForWhom) elForWhom.innerHTML = renderBullets(forWhom);
+        if (elClosing) elClosing.innerHTML = renderParagraphs(closing);
+      }
+
+      function ensureAndFill() {
+        // i18n.js updates raw blocks on language switch; wait a tick.
+        setTimeout(fillRetreatSegments, 50);
+      }
+
+      window.addEventListener('nawal-lang-change', ensureAndFill);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureAndFill);
+      } else {
+        ensureAndFill();
+      }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.registerPlugin(window.ScrollTrigger);
+
+      // Very light parallax for hero background video.
+      gsap.utils.toArray('.rp-hero-video').forEach(function (video) {
+        gsap.to(video, {
+          yPercent: -3,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.rp-hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+
+      gsap.utils.toArray('.rp-media img').forEach(function (img) {
+        gsap.to(img, {
+          yPercent: -2,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top 80%',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+
+      // Smart Zanzibar intro collage: cycle through 20 images
+      // while keeping only 4 tiles visible (minimal impact on layout/UX).
+      (function () {
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var tile1 = document.getElementById('zanzibar-tile-1');
+        var tile2 = document.getElementById('zanzibar-tile-2');
+        var tile3 = document.getElementById('zanzibar-tile-3');
+        var tile4 = document.getElementById('zanzibar-tile-4');
+        var gallery = document.querySelector('.rp-zanzibar-gallery');
+        if (!tile1 || !tile2 || !tile3 || !tile4 || !gallery) return;
+
+        var tiles = [tile1, tile2, tile3, tile4];
+
+        var pics = [
+          'public/media/Zanzibar/zanzibarterminus-20260319-0001.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0002.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0003.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0004.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0005.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0006.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0007.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0008.jpg',
+          'public/media/Zanzibar/zanzibarterminus-20260319-0009.jpg',
+
+          'public/media/Zanzibar/pexels-hatice-baran-153179658-14252564.jpg',
+          'public/media/Zanzibar/pexels-taryn-elliott-5859002.jpg',
+          'public/media/Zanzibar/pexels-taryn-elliott-5859089.jpg',
+          'public/media/Zanzibar/pexels-tima-miroshnichenko-5928258.jpg',
+
+          'public/media/Zanzibar/images (25).jpeg',
+          'public/media/Zanzibar/images (29).jpeg',
+          'public/media/Zanzibar/images (23).jpeg',
+          'public/media/Zanzibar/images (36).jpeg',
+          'public/media/Zanzibar/images (33).jpeg',
+          'public/media/Zanzibar/images (27).jpeg',
+          'public/media/Zanzibar/images (32).jpeg'
+        ];
+
+        var index = 0;
+        var intervalId = null;
+
+        function preload(start) {
+          var count = Math.min(8, pics.length);
+          for (var i = 0; i < count; i++) {
+            var u = pics[(start + i) % pics.length];
+            var im = new Image();
+            im.src = u;
+          }
+        }
+
+        function setTiles(start) {
+          tiles.forEach(function (t) { t.style.opacity = '0'; });
+
+          window.setTimeout(function () {
+            for (var i = 0; i < tiles.length; i++) {
+              tiles[i].src = pics[(start + i) % pics.length];
+            }
+            tiles.forEach(function (t) { t.style.opacity = '1'; });
+          }, 220);
+
+          preload(start + 4);
+        }
+
+        setTiles(index);
+
+        if (reduceMotion) return;
+
+        function start() {
+          if (intervalId) return;
+          intervalId = window.setInterval(function () {
+            index = (index + 4) % pics.length;
+            setTiles(index);
+          }, 3000);
+        }
+
+        if ('IntersectionObserver' in window) {
+          var obs = new IntersectionObserver(function (entries) {
+            if (entries[0] && entries[0].isIntersecting) {
+              start();
+              obs.disconnect();
+            }
+          }, { threshold: 0.2 });
+          obs.observe(gallery);
+        } else {
+          start();
+        }
+      })();
+    })();
+  </script>
 </body>
 </html>

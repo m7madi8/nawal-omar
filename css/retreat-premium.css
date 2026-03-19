@@ -1,0 +1,741 @@
+/* Premium minimal styling for the Zanzibar retreat page */
+
+:root {
+  --rp-beige: #f5f1eb;
+  --rp-sand: #eae3d9;
+  --rp-olive: #6b7d6d;
+  --rp-brown: #3e2f2b;
+}
+
+.retreat-premium-root {
+  background: linear-gradient(180deg, #ffffff, rgba(245, 241, 235, 0.82));
+  color: var(--rp-brown);
+}
+
+.rp-container {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.rp-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.rp-reveal.is-inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rp-hero {
+  position: relative;
+  min-height: 100svh;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.rp-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Subtle overlay for readability (no “faded” background feel). */
+  background: radial-gradient(900px 650px at 50% 18%, rgba(245, 241, 235, 0.08), rgba(245, 241, 235, 0.34));
+  pointer-events: none;
+}
+
+.rp-hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.rp-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: saturate(1.02) contrast(1.02) brightness(1.02);
+  opacity: 1;
+}
+
+.rp-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  filter: saturate(1.02) contrast(1.02);
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+.rp-hero-bg.is-active {
+  opacity: 1;
+}
+
+.rp-hero-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 7.5rem 1.25rem 5rem;
+}
+
+.rp-hero-center {
+  width: 100%;
+  max-width: 720px;
+}
+
+.rp-hero-back-link {
+  position: absolute;
+  top: max(1.25rem, env(safe-area-inset-top));
+  left: 1.25rem;
+  right: auto;
+  z-index: 4;
+}
+
+[dir="rtl"] .rp-hero-back-link {
+  left: auto;
+  right: 1.25rem;
+}
+
+.rp-hero-title {
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.rp-kicker {
+  color: rgba(185, 137, 95, 0.92);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Match the warm white look for dynamic content blocks. */
+.retreat-premium-root .retreat-section-body,
+.retreat-premium-root #retreat-diff,
+.retreat-premium-root #retreat-included {
+  color: rgba(62, 47, 43, 0.80);
+}
+
+.rp-hero-back-link,
+.rp-hero-kicker,
+.rp-hero-title,
+.rp-hero-subtitle {
+  color: rgba(62, 47, 43, 0.92);
+}
+
+.rp-hero-back-link:hover {
+  color: rgba(62, 47, 43, 1);
+}
+
+.rp-hero-kicker {
+  color: rgba(62, 47, 43, 0.78);
+}
+
+.rp-hero-title {
+  color: rgba(62, 47, 43, 0.95);
+}
+
+.rp-hero-subtitle {
+  white-space: pre-line;
+  line-height: 1.75;
+  color: rgba(62, 47, 43, 0.86);
+}
+
+.rp-scroll-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 3;
+  color: rgba(62, 47, 43, 0.78);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.rp-scroll-indicator .rp-scroll-dot {
+  width: 26px;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid rgba(62, 47, 43, 0.20);
+  position: relative;
+  background: rgba(245, 241, 235, 0.55);
+}
+
+.rp-scroll-indicator .rp-scroll-dot::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(62, 47, 43, 0.92);
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: rpScroll 1.7s ease-in-out infinite;
+}
+
+/* Storytelling text: gentle blur -> clarity + underline reveal. */
+.retreat-premium-root .rp-heading {
+  position: relative;
+}
+
+.retreat-premium-root .rp-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.55rem;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(185, 137, 95, 0.95),
+    rgba(185, 137, 95, 0.0)
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[dir="rtl"] .retreat-premium-root .rp-heading::after {
+  transform-origin: right center;
+}
+
+.animate-section.in-view .retreat-premium-root .rp-heading::after,
+.retreat-premium-root .animate-section.in-view .rp-heading::after {
+  transform: scaleX(1);
+}
+
+/* Text moment: nested paragraphs + list items reveal softly. */
+.retreat-premium-root .retreat-section-body p,
+.retreat-premium-root .retreat-section-body li {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Keep a subtle reveal effect, but do not hide text by default. */
+.retreat-premium-root .animate-section.in-view .retreat-section-body p,
+.retreat-premium-root .animate-section.in-view .retreat-section-body li {
+  animation: rpTextSoftIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retreat-premium-root .retreat-section-body p,
+  .retreat-premium-root .retreat-section-body li {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .retreat-premium-root .rp-heading::after {
+    transition: none;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes rpTextSoftIn {
+  0% {
+    opacity: 0.001;
+    transform: translateY(8px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Safety: ensure retreat content never becomes fully invisible. */
+.retreat-premium-root .animate-section {
+  opacity: 1 !important;
+}
+
+.retreat-premium-root .animate-content > * {
+  opacity: 1 !important;
+}
+
+@keyframes rpScroll {
+  0% { transform: translateX(-50%) translateY(0); opacity: 0.85; }
+  60% { transform: translateX(-50%) translateY(13px); opacity: 0.35; }
+  100% { transform: translateX(-50%) translateY(0); opacity: 0.85; }
+}
+
+@media (max-width: 640px) {
+  .rp-hero-content {
+    padding: 6.25rem 1rem 4.25rem;
+  }
+
+  .rp-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Reduce inner padding on small screens to prevent any overflow. */
+  .rp-surface-tight {
+    padding: 1.35rem 1.15rem !important;
+  }
+
+  .rp-grid2 {
+    gap: 1rem;
+  }
+
+  .rp-scroll-indicator {
+    bottom: 1.35rem;
+    font-size: 0.72rem;
+    gap: 0.45rem;
+  }
+
+  .rp-scroll-indicator .rp-scroll-dot {
+    width: 22px;
+    height: 38px;
+  }
+}
+
+.rp-section {
+  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.rp-surface {
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 241, 235, 0.88));
+  border: 1px solid rgba(185, 137, 95, 0.18);
+  box-shadow: 0 12px 34px rgba(62, 47, 43, 0.045);
+}
+
+.rp-surface-tight {
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.90), rgba(245, 241, 235, 0.86));
+  border: 1px solid rgba(185, 137, 95, 0.18);
+}
+
+.rp-heading {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--rp-brown);
+  letter-spacing: -0.01em;
+}
+
+.rp-h2 {
+  font-size: clamp(1.35rem, 2.5vw, 1.95rem);
+  margin-bottom: 1.1rem;
+}
+
+.rp-paragraph {
+  line-height: 1.95;
+  color: rgba(62, 47, 43, 0.86);
+}
+
+.rp-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .rp-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rp-media {
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.rp-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+/* Zanzibar image collage (intro section) */
+.rp-zanzibar-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.9rem;
+  height: 100%;
+  min-height: 380px;
+}
+
+.rp-zanzibar-item {
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 14px 34px rgba(62, 47, 43, 0.06);
+}
+
+.rp-zanzibar-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  filter: saturate(1.02) contrast(1.02) brightness(1.01);
+  transition: opacity 900ms ease;
+}
+
+.rp-zi-a {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.rp-zi-b {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.rp-zi-c {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.rp-zi-d {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+@media (max-width: 900px) {
+  .rp-zanzibar-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    min-height: 320px;
+  }
+
+  .rp-zi-a {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .rp-zi-b {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .rp-zi-c {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  .rp-zi-d {
+    grid-row: 2;
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .rp-zanzibar-gallery {
+    min-height: 280px;
+    gap: 0.65rem;
+  }
+}
+
+.rp-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .rp-grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Timeline details styling */
+.retreat-itinerary .retreat-day {
+  border: 1px solid rgba(185, 137, 95, 0.18);
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 18px;
+  padding: 0.2rem 0.9rem;
+  margin-bottom: 0.85rem;
+}
+
+.retreat-itinerary .retreat-day summary {
+  padding: 1rem 0;
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 1rem;
+  color: var(--rp-brown);
+}
+
+.retreat-itinerary .retreat-day summary::-webkit-details-marker {
+  display: none;
+}
+
+.retreat-itinerary .retreat-day summary::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: rgba(107, 125, 109, 0.95);
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+}
+
+.retreat-itinerary .retreat-schedule-grid {
+  margin-top: 1rem;
+}
+
+.retreat-itinerary .retreat-day-value {
+  margin-top: 0.5rem;
+  border-top: 1px dashed rgba(62, 47, 43, 0.18);
+}
+
+/* Hotels and table — soften */
+.retreat-hotel-grid {
+  gap: 1.2rem;
+}
+
+.retreat-hotel-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(185, 137, 95, 0.20) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.retreat-hotel-media {
+  height: 142px;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.05) contrast(1.02);
+  margin: -1rem -1rem 1rem -1rem;
+  border-radius: 0;
+}
+
+.retreat-table {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(185, 137, 95, 0.22);
+}
+
+.retreat-table th {
+  background: rgba(185, 137, 95, 0.10);
+  color: rgba(62, 47, 43, 0.95);
+}
+
+.rp-cta {
+  border-radius: 30px;
+  padding: 3rem 1.25rem;
+  background: linear-gradient(135deg, rgba(185, 137, 95, 0.12), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(185, 137, 95, 0.20);
+}
+
+.rp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.25rem;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(189, 143, 100, 0.96), rgba(160, 112, 72, 0.92));
+  color: #fff;
+  text-decoration: none;
+  font-weight: 650;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 12px 26px rgba(185, 137, 95, 0.22);
+}
+
+.rp-btn:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(189, 143, 100, 1), rgba(160, 112, 72, 0.95));
+}
+
+.rp-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(185, 137, 95, 0.24);
+  color: rgba(62, 47, 43, 0.95);
+  text-decoration: none;
+  font-weight: 650;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 10px 22px rgba(185, 137, 95, 0.10);
+}
+
+.rp-btn-secondary:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.rp-rich .retreat-bullets {
+  padding-left: 1.1rem;
+}
+
+#retreat-included.rp-experience-list .retreat-bullets {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow-x: scroll;
+  padding: 0.25rem 0 0.75rem;
+  margin: 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+
+#retreat-included.rp-experience-list .retreat-bullets::-webkit-scrollbar {
+  height: 8px;
+}
+
+#retreat-included.rp-experience-list .retreat-bullets::-webkit-scrollbar-thumb {
+  background: rgba(62, 47, 43, 0.18);
+  border-radius: 9999px;
+}
+
+#retreat-included.rp-experience-list .retreat-bullets > li {
+  scroll-snap-align: start;
+  flex: 0 0 328px;
+  position: relative;
+  padding: 1rem 1.1rem 1.05rem 5.2rem !important;
+  border-radius: 18px;
+  border: 1px solid rgba(62, 47, 43, 0.12);
+  background: rgba(255, 255, 255, 0.94);
+  list-style: none !important;
+}
+
+#retreat-included.rp-experience-list .retreat-bullets > li::before {
+  content: "";
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 1.05rem;
+  top: 1.05rem;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.95;
+  background-image: url("../public/media/hero.jpg");
+}
+
+#retreat-included.rp-experience-list .retreat-bullets > li:nth-child(1)::before { background-image: url("../public/media/hero.jpg"); }
+#retreat-included.rp-experience-list .retreat-bullets > li:nth-child(2)::before { background-image: url("../public/media/1.jpg"); }
+#retreat-included.rp-experience-list .retreat-bullets > li:nth-child(3)::before { background-image: url("../public/media/4.jpg"); }
+#retreat-included.rp-experience-list .retreat-bullets > li:nth-child(4)::before { background-image: url("../public/media/5.jpg"); }
+#retreat-included.rp-experience-list .retreat-bullets > li:nth-child(5)::before { background-image: url("../public/media/6.jpg"); }
+
+#retreat-included.rp-experience-list .retreat-nested-bullets {
+  margin-top: 0.55rem;
+  padding-left: 1.1rem;
+}
+
+[dir="rtl"] #retreat-included.rp-experience-list .retreat-bullets > li {
+  padding: 1rem 1.1rem 1.05rem 1.1rem !important;
+  padding-right: 5.2rem !important;
+}
+
+[dir="rtl"] #retreat-included.rp-experience-list .retreat-bullets > li::before {
+  left: auto;
+  right: 1.05rem;
+}
+
+[dir="rtl"] .retreat-itinerary .retreat-day summary::before {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .retreat-itinerary .retreat-day summary {
+  padding-left: 0;
+  padding-right: 1.2rem;
+}
+
+@media (max-width: 640px) {
+  .rp-cta {
+    padding: 2.35rem 1.1rem;
+    border-radius: 26px;
+  }
+
+  .retreat-hotel-media {
+    height: 126px;
+    margin: -0.9rem -0.9rem 0.95rem -0.9rem;
+  }
+
+  #retreat-diff,
+  #retreat-included {
+    width: 100%;
+    max-width: 100%;
+    overflow-y: hidden;
+  }
+
+  /* Keep container safe; the actual horizontal scrollbar lives in the bullet row. */
+  #retreat-included {
+    overflow-x: hidden;
+  }
+
+  #retreat-diff {
+    overflow-x: auto;
+  }
+
+  /* Bullets can push content slightly on very small widths. */
+  #retreat-diff .retreat-bullets {
+    padding-left: 0.85rem;
+  }
+
+  #retreat-diff .retreat-nested-bullets {
+    padding-left: 0.8rem;
+  }
+
+  #retreat-diff .retreat-bullets li {
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  #retreat-diff .retreat-bullets,
+  #retreat-diff .retreat-nested-bullets {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  #retreat-included.rp-experience-list .retreat-bullets > li {
+    flex: 0 0 280px;
+    padding: 1rem 1.0rem 1.05rem 5.0rem !important;
+  }
+
+  #retreat-included.rp-experience-list .retreat-bullets > li::before {
+    width: 40px;
+    height: 40px;
+    left: 0.95rem;
+    top: 1.05rem;
+  }
+
+  #retreat-included.rp-experience-list .retreat-bullets {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: scroll;
+  }
+
+  [dir="rtl"] #retreat-included.rp-experience-list .retreat-bullets > li {
+    padding: 1rem 1.0rem 1.05rem 1.0rem !important;
+    padding-right: 5.0rem !important;
+  }
+}
+
