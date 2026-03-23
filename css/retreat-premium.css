@@ -1045,6 +1045,11 @@
   box-shadow: 0 10px 24px rgba(62, 47, 43, 0.08);
 }
 
+.dahab-itinerary {
+  display: grid;
+  gap: 1rem;
+}
+
 .dahab-page .dahab-day-card::before {
   background: linear-gradient(180deg, rgba(191, 148, 107, 0.95), rgba(191, 148, 107, 0.4));
 }
@@ -1421,6 +1426,10 @@
   .dahab-day-card {
     border-radius: 16px;
     padding: 0.95rem 0.9rem 1rem 1rem;
+  }
+
+  .dahab-itinerary {
+    gap: 1.15rem;
   }
 
   .dahab-day-list {
