@@ -769,7 +769,696 @@
   padding-right: 1.2rem;
 }
 
+/* Dahab itinerary cards */
+.dahab-itinerary {
+  position: relative;
+}
+
+.dahab-day-card {
+  position: relative;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fcfaf7 0%, #f8f4ee 100%);
+  padding: 1rem 1rem 1.05rem 1.15rem;
+  box-shadow: 0 12px 30px rgba(62, 47, 43, 0.06);
+  overflow: hidden;
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+
+.dahab-day-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(185, 137, 95, 0.42);
+  box-shadow: 0 18px 36px rgba(62, 47, 43, 0.12);
+}
+
+.dahab-day-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, rgba(185, 137, 95, 0.95), rgba(185, 137, 95, 0.38));
+}
+
+.dahab-day-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.75rem;
+}
+
+.dahab-day-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+  background: rgba(185, 137, 95, 0.1);
+  color: rgba(62, 47, 43, 0.86);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  padding: 0.42rem 0.66rem;
+}
+
+.dahab-day-meta {
+  margin-top: 0.55rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: rgba(62, 47, 43, 0.74);
+}
+
+.dahab-day-list li::marker {
+  color: rgba(185, 137, 95, 0.92);
+}
+
+[dir="rtl"] .dahab-day-card {
+  padding-left: 1rem;
+  padding-right: 1.15rem;
+}
+
+[dir="rtl"] .dahab-day-card::before {
+  left: auto;
+  right: 0;
+}
+
+/* Dahab includes premium panel */
+.dahab-includes-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 1.2rem;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+  background:
+    radial-gradient(circle at 16% 14%, rgba(185, 137, 95, 0.18) 0%, rgba(185, 137, 95, 0) 45%),
+    radial-gradient(circle at 86% 10%, rgba(255, 252, 246, 0.72) 0%, rgba(255, 252, 246, 0) 40%),
+    linear-gradient(160deg, #f6efe5 0%, #f2e7d8 52%, #ebdcc8 100%);
+  box-shadow: 0 20px 46px rgba(62, 47, 43, 0.16);
+  color: rgba(62, 47, 43, 0.95);
+  overflow: hidden;
+}
+
+.dahab-includes-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dahab-includes-top {
+  margin-bottom: 1rem;
+}
+
+.dahab-includes-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(156, 109, 70, 0.95);
+  margin-bottom: 0.5rem;
+}
+
+.dahab-includes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.dahab-includes-block {
+  border-radius: 16px;
+  padding: 0.95rem 0.95rem 1rem;
+  border: 1px solid rgba(221, 196, 154, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.5));
+}
+
+.dahab-includes-block-soft {
+  background: linear-gradient(180deg, rgba(185, 137, 95, 0.2), rgba(185, 137, 95, 0.1));
+}
+
+.dahab-includes-title {
+  margin: 0 0 0.58rem;
+  font-size: 0.93rem;
+  color: rgba(62, 47, 43, 0.95);
+  font-weight: 700;
+}
+
+.dahab-includes-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.dahab-includes-list li {
+  position: relative;
+  padding-inline-start: 1.2rem;
+  color: rgba(62, 47, 43, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dahab-includes-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.57rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #e8c790, #bb915d);
+  box-shadow: 0 0 0 3px rgba(232, 199, 144, 0.16);
+}
+
+.dahab-price-row {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  border-top: 1px solid rgba(156, 109, 70, 0.22);
+  padding-top: 0.95rem;
+}
+
+.dahab-price-label {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.82);
+}
+
+.dahab-price-value {
+  margin: 0.2rem 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.5rem, 2.9vw, 2rem);
+  font-weight: 700;
+  color: rgba(122, 82, 52, 1);
+  line-height: 1.15;
+}
+
+.dahab-price-note {
+  margin: 0.3rem 0 0;
+  font-size: 0.76rem;
+  color: rgba(100, 72, 52, 0.72);
+}
+
+.dahab-includes-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.82rem 1.25rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 700;
+  background: linear-gradient(180deg, #ba8c61 0%, #9e6f46 100%);
+  border: 1px solid rgba(145, 98, 60, 0.85);
+  box-shadow: 0 14px 30px rgba(100, 66, 41, 0.24);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.dahab-includes-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+/* Dahab page: unified creamy system */
+.retreat-premium-root.dahab-page {
+  background: #fbf7f1;
+}
+
+.dahab-page .rp-section {
+  background: #fbf7f1;
+}
+
+.dahab-page {
+  overflow-x: clip;
+}
+
+.dahab-page img {
+  max-width: 100%;
+}
+
+.dahab-page .rp-surface,
+.dahab-page .rp-surface-tight {
+  background: #fffdf9;
+  border: 1px solid rgba(185, 137, 95, 0.16);
+  box-shadow: 0 8px 24px rgba(62, 47, 43, 0.06);
+}
+
+.dahab-page .rp-h2,
+.dahab-page .rp-heading,
+.dahab-page .font-serif {
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab-page .rp-heading::after {
+  background: linear-gradient(
+    90deg,
+    rgba(185, 137, 95, 0.92),
+    rgba(156, 109, 70, 0.64)
+  );
+}
+
+.dahab-page .rp-kicker {
+  color: rgba(156, 109, 70, 0.92);
+}
+
+.dahab-page .rp-btn {
+  background: linear-gradient(180deg, #bf946b 0%, #a97a53 100%);
+  border: 1px solid rgba(160, 112, 72, 0.84);
+  box-shadow: 0 10px 24px rgba(130, 90, 58, 0.18);
+}
+
+.dahab-page .rp-btn:hover {
+  background: linear-gradient(180deg, #c79d74 0%, #af815a 100%);
+}
+
+.dahab-page .dahab-day-card {
+  background: #fffaf2;
+  border-color: rgba(185, 137, 95, 0.24);
+  box-shadow: 0 10px 24px rgba(62, 47, 43, 0.08);
+}
+
+.dahab-page .dahab-day-card::before {
+  background: linear-gradient(180deg, rgba(191, 148, 107, 0.95), rgba(191, 148, 107, 0.4));
+}
+
+.dahab-page .dahab-day-chip {
+  background: rgba(191, 148, 107, 0.12);
+  border-color: rgba(185, 137, 95, 0.36);
+  color: rgba(130, 90, 58, 0.92);
+}
+
+.dahab-trainers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dahab-trainer-card {
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  border-radius: 18px;
+  background: #fffaf3;
+  padding: 0.75rem 0.75rem 0.95rem;
+}
+
+.dahab-trainer-media {
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: 1 / 1;
+}
+
+.dahab-trainer-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 280ms ease;
+}
+
+.dahab-trainer-card:hover .dahab-trainer-media img {
+  transform: scale(1.04);
+}
+
+.dahab-trainer-name {
+  margin: 0.8rem 0 0.25rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.08rem;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab-trainer-role {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(62, 47, 43, 0.72);
+  overflow-wrap: anywhere;
+}
+
+.dahab-journey-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  grid-auto-flow: dense;
+}
+
+.dahab-gallery-item {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(185, 137, 95, 0.2);
+  background: #fffdf9;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 8px 18px rgba(62, 47, 43, 0.06);
+}
+
+.dahab-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 320ms ease, filter 320ms ease;
+  filter: saturate(1.03) contrast(1.02);
+}
+
+.dahab-gallery-item:hover img {
+  transform: scale(1.045);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.dahab-gallery-more {
+  min-width: 170px;
+}
+
+.dahab-journey-gallery .dahab-gallery-item:nth-child(1),
+.dahab-journey-gallery .dahab-gallery-item:nth-child(7) {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: 1 / 1;
+}
+
+.dahab-journey-gallery .dahab-gallery-item:nth-child(4),
+.dahab-journey-gallery .dahab-gallery-item:nth-child(10) {
+  grid-column: span 2;
+  aspect-ratio: 16 / 10;
+}
+
+.dahab-page .dahab-includes-card {
+  border-color: rgba(185, 137, 95, 0.22);
+  background: #f6eee3;
+  box-shadow: 0 16px 34px rgba(62, 47, 43, 0.11);
+  padding: 1.5rem;
+}
+
+.dahab-page .dahab-includes-top {
+  margin-bottom: 1.2rem;
+}
+
+.dahab-page .dahab-includes-top h3 {
+  color: rgba(62, 47, 43, 0.98);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.25;
+}
+
+.dahab-page .dahab-includes-grid {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
+  gap: 1rem;
+}
+
+.dahab-page .dahab-includes-block {
+  background: #f6eee3;
+  border-color: rgba(185, 137, 95, 0.26);
+  padding: 1.15rem 1.2rem 1.2rem;
+  border-radius: 18px;
+}
+
+.dahab-page .dahab-includes-block-soft {
+  background: #f6eee3;
+}
+
+.dahab-page .dahab-includes-title {
+  font-size: 1.02rem;
+  margin-bottom: 0.72rem;
+}
+
+.dahab-page .dahab-includes-list {
+  gap: 0.62rem;
+}
+
+.dahab-page .dahab-includes-list li {
+  display: block;
+  width: 100%;
+  text-align: start;
+  font-size: 0.98rem;
+  line-height: 1.72;
+  padding-inline-start: 1.35rem;
+}
+
+.dahab-page .dahab-price-row {
+  margin-top: 1.15rem;
+  padding-top: 1.1rem;
+}
+
+.dahab-page .dahab-price-value {
+  font-size: clamp(1.75rem, 2.9vw, 2.25rem);
+}
+
+.dahab-goal-showcase {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+  min-height: 420px;
+}
+
+.dahab-goal-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dahab-goal-showcase::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(28, 20, 14, 0.24) 0%, rgba(28, 20, 14, 0.62) 74%, rgba(93, 64, 40, 0.76) 100%);
+}
+
+.dahab-goal-overlay {
+  position: relative;
+  z-index: 2;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 2rem 1.1rem;
+}
+
+.dahab-goal-title {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+}
+
+.dahab-goal-subtitle {
+  margin-top: 0.9rem;
+  font-size: clamp(1rem, 1.7vw, 1.28rem);
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  max-width: 42ch;
+}
+
+.dahab-goal-chips {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.dahab-goal-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(196, 158, 109, 0.44);
+  background: rgba(166, 124, 87, 0.55);
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 650;
+  padding: 0.6rem 1rem;
+  white-space: nowrap;
+}
+
+.dahab-goal-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0.75rem;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  border-top: 0;
+  border-radius: 0 0 20px 20px;
+  background: #fff8ef;
+}
+
+.dahab-goal-stat {
+  text-align: center;
+  padding: 1rem 0.7rem 0.95rem;
+  border-inline-end: 1px solid rgba(185, 137, 95, 0.18);
+}
+
+.dahab-goal-stat:last-child {
+  border-inline-end: 0;
+}
+
+.dahab-goal-stat strong {
+  display: block;
+  color: rgba(122, 82, 52, 0.98);
+  font-size: clamp(1.28rem, 2.1vw, 2.1rem);
+  line-height: 1.2;
+}
+
+.dahab-goal-stat span {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(62, 47, 43, 0.72);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .dahab-page .dahab-includes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dahab-goal-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dahab-goal-stat:nth-child(2) {
+    border-inline-end: 0;
+  }
+}
+
 @media (max-width: 640px) {
+  .dahab-trainers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dahab-journey-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .dahab-gallery-more {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dahab-journey-gallery .dahab-gallery-item:nth-child(1),
+  .dahab-journey-gallery .dahab-gallery-item:nth-child(4),
+  .dahab-journey-gallery .dahab-gallery-item:nth-child(7),
+  .dahab-journey-gallery .dahab-gallery-item:nth-child(10) {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 4 / 3;
+  }
+
+  .dahab-goal-showcase,
+  .dahab-goal-overlay {
+    min-height: 360px;
+  }
+
+  .dahab-goal-overlay {
+    padding: 1.4rem 0.8rem;
+  }
+
+  .dahab-goal-title {
+    font-size: clamp(1.55rem, 8vw, 2.4rem);
+  }
+
+  .dahab-goal-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .dahab-goal-chip {
+    font-size: 0.88rem;
+    padding: 0.52rem 0.82rem;
+    white-space: normal;
+  }
+
+  .dahab-goal-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid rgba(185, 137, 95, 0.22);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .dahab-goal-stat {
+    border-inline-end: 1px solid rgba(185, 137, 95, 0.16);
+    border-top: 1px solid rgba(185, 137, 95, 0.16);
+    padding: 0.8rem 0.5rem 0.78rem;
+    min-height: 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dahab-goal-stat:nth-child(1),
+  .dahab-goal-stat:nth-child(2) {
+    border-top: 0;
+  }
+
+  .dahab-goal-stat:nth-child(2n) {
+    border-inline-end: 0;
+  }
+
+  .dahab-goal-stat strong {
+    font-size: clamp(1.1rem, 5.2vw, 1.35rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .dahab-goal-stat span {
+    margin-top: 0.28rem;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .dahab-day-card {
+    border-radius: 16px;
+    padding: 0.95rem 0.9rem 1rem 1rem;
+  }
+
+  .dahab-day-list {
+    padding-inline-start: 1rem !important;
+    padding-inline-end: 0 !important;
+  }
+
+  [dir="rtl"] .dahab-day-card {
+    padding-left: 0.9rem;
+    padding-right: 1rem;
+  }
+
+  .dahab-day-head h3 {
+    font-size: 1rem;
+  }
+
+  .dahab-day-meta {
+    font-size: 0.8rem;
+  }
+
+  .dahab-includes-card {
+    border-radius: 20px;
+    padding: 1rem;
+  }
+
+  .dahab-page .dahab-includes-list li {
+    font-size: 0.92rem;
+    line-height: 1.62;
+  }
+
+  .dahab-includes-cta {
+    width: 100%;
+  }
+
+  .dahab-price-row {
+    gap: 0.75rem;
+  }
+
   .rp-cta {
     padding: 2.35rem 1.1rem;
     border-radius: 26px;
@@ -837,6 +1526,33 @@
   [dir="rtl"] #retreat-included.rp-experience-list .retreat-bullets > li {
     padding: 1rem 1.0rem 1.05rem 1.0rem !important;
     padding-right: 5.0rem !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .dahab-page .rp-container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .dahab-goal-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dahab-goal-stat {
+    border-inline-end: 0 !important;
+  }
+
+  .dahab-goal-stat + .dahab-goal-stat {
+    border-top: 1px solid rgba(185, 137, 95, 0.16);
+  }
+
+  .dahab-goal-title {
+    font-size: clamp(1.4rem, 8.2vw, 2rem);
+  }
+
+  .dahab-page .dahab-includes-title {
+    font-size: 0.95rem;
   }
 }
 

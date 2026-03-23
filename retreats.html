@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Available Retreats | Nawal Omar</title>
+  <meta name="description" content="Explore available yoga retreats with Nawal Omar.">
+  <link rel="icon" type="image/png" href="public/media/Nawal_yoga_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <link rel="stylesheet" href="css/scroll-media.css">
+</head>
+<body class="antialiased">
+  <nav class="lang-switcher" aria-label="Language">
+    <button type="button" class="lang-btn" data-lang-set="en">
+      <span class="lang-toggle-text">
+        <span class="lang-toggle-text-en">En</span>
+        <span class="lang-toggle-text-ar">En</span>
+      </span>
+    </button>
+    <button type="button" class="lang-btn" data-lang-set="ar">
+      <span class="lang-toggle-text">
+        <span class="lang-toggle-text-en">Ar</span>
+        <span class="lang-toggle-text-ar">Ar</span>
+      </span>
+    </button>
+  </nav>
+
+  <main class="min-h-screen bg-[var(--bg-body)] text-[var(--text-main)]">
+    <section class="animate-section border-b border-[var(--color-primary)]/25 bg-[#faf8f5] pt-14 pb-14 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20">
+      <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
+        <div class="mb-8 sm:mb-10">
+          <a href="index.html#workshops" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" aria-label="Back">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <span data-i18n="back">Back</span>
+          </a>
+        </div>
+
+        <div class="animate-content mx-auto max-w-4xl text-center">
+          <p class="mb-3 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]" data-i18n="retreats_page_label">Retreat Collection</p>
+          <h1 class="font-serif text-3xl font-light text-[var(--color-text)] sm:text-4xl md:text-5xl" data-i18n="retreats_page_title">Available Retreats</h1>
+          <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-soft)] sm:text-lg" data-i18n="retreats_page_intro">Choose your next wellness journey.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="animate-section py-12 sm:py-14 md:py-16">
+      <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
+        <div class="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-2">
+          <article class="workshop-card group">
+            <div class="workshop-card-inner flex flex-col overflow-hidden">
+              <div class="workshop-card-image-wrap">
+                <img src="public/media/Zanzibar/zanzibarterminus-20260319-0007.jpg" alt="Zanzibar Retreat" class="workshop-card-image" loading="lazy">
+              </div>
+              <div class="workshop-card-body flex flex-col flex-1">
+                <div class="workshop-card-header">
+                  <span class="workshop-card-tag">Retreat</span>
+                  <h2 class="workshop-card-title font-serif" data-i18n="retreats_zanzibar_title">Zanzibar Retreat</h2>
+                </div>
+                <p class="workshop-card-desc" data-i18n="retreats_zanzibar_desc">8 days | 7 nights of yoga, sound healing, nature, and deep restoration.</p>
+                <div class="workshop-card-footer">
+                  <a href="retreat.html" class="workshop-card-cta">
+                    <span data-i18n="retreats_view_details">View retreat details</span>
+                    <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="workshop-card group">
+            <div class="workshop-card-inner flex flex-col overflow-hidden">
+              <div class="workshop-card-image-wrap">
+                <img src="public/media/dahab/dahab.jpeg" alt="Dahab Retreat" class="workshop-card-image" loading="lazy">
+              </div>
+              <div class="workshop-card-body flex flex-col flex-1">
+                <div class="workshop-card-header">
+                  <span class="workshop-card-tag">Retreat</span>
+                  <h2 class="workshop-card-title font-serif" data-i18n="retreats_dahab_title">Dahab Retreat</h2>
+                </div>
+                <p class="workshop-card-desc" data-i18n="retreats_dahab_desc">A calm Red Sea retreat in Dahab with yoga, breathwork, and mindful rest.</p>
+                <div class="workshop-card-footer">
+                  <a href="retreat-dahab.html" class="workshop-card-cta">
+                    <span data-i18n="retreats_view_details">View retreat details</span>
+                    <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/reveal.js"></script>
+</body>
+</html>
+
