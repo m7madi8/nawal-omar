@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
 /* RTL: Arabic layout, language switcher & Arabic typography */
 
-/* خطوط عربية مميزة ونادرة: العناوين = أميري Amiri (كلاسيكي أنيق) | النصوص = شهرزاد الجديدة Scheherazade New (دافئة حكائية) */
+/* Arabic typography: use Tajawal across all Arabic UI */
 /* Optional: لاستخدام 29LT Bukra بدل أميري، أضف ملفات الخط في /fonts/ وفعّل قواعد @font-face أدناه */
 
 /*
@@ -81,8 +83,8 @@
 }
 
 [dir="rtl"] body {
-  font-family: 'Scheherazade New', serif;
-  font-weight: 400;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 500;
 }
 [dir="rtl"] .font-serif,
 [dir="rtl"] h1,
@@ -92,7 +94,7 @@
 [dir="rtl"] .workshop-card-title,
 [dir="rtl"] .hero-name,
 [dir="rtl"] .page-footer-name {
-  font-family: 'Amiri', serif;
+  font-family: 'Tajawal', sans-serif;
   font-weight: 700;
 }
 [dir="rtl"] .workshop-card-title {
