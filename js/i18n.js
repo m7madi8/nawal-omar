@@ -26,7 +26,7 @@
       hero_title1: 'Change begins',
       hero_title2: 'here',
       hero_subtitle: 'Exceptional yoga with a certified instructor. Vinyasa, Yin, Hatha & meditation—in a calm studio or in nature.',
-      hero_cta_book: 'Book your session',
+      hero_cta_book: 'Explore workshops',
       hero_cta_discover: 'Discover more',
       hero_bottom: 'Private · group · retreats',
 
@@ -443,7 +443,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       hero_title1: 'التغيير يبدأ',
       hero_title2: 'هنا',
       hero_subtitle: 'يوغا استثنائية مع مدربة معتمدة. فينيسا، يين، هاثا والتأمل—في استوديو هادئ أو في الطبيعة.',
-      hero_cta_book: 'احجزي جلستك',
+      hero_cta_book: 'استكشفي الورشات',
       hero_cta_discover: 'اكتشفي المزيد',
       hero_bottom: 'خاص · جماعي · رحلات راحة',
 
