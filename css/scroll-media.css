@@ -135,6 +135,78 @@ table {
   -webkit-backdrop-filter: blur(6px);
 }
 
+/* Homepage moments carousel */
+.moments-carousel {
+  position: relative;
+  margin: 0 auto;
+  width: min(100%, 1100px);
+  user-select: none;
+  overflow: hidden;
+}
+
+.moments-carousel-track {
+  position: relative;
+  min-height: clamp(260px, 46vw, 560px);
+  height: clamp(260px, 46vw, 560px);
+}
+
+.moments-carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.985);
+  transition: opacity 0.65s ease, transform 0.75s ease;
+  pointer-events: none;
+}
+
+.moments-carousel-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.moments-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 0;
+}
+
+.moments-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+}
+
+.moments-carousel-dots {
+  margin-top: 0.95rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.moments-carousel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.25s ease;
+}
+
+.moments-carousel-dot.is-active {
+  width: 22px;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+.moments-carousel.is-dragging {
+  cursor: grabbing;
+}
+
 @media (max-width: 640px) {
   .lang-switcher {
     top: 0.75rem;
@@ -153,6 +225,19 @@ table {
     min-height: 42px;
     padding: 0.5rem 0.92rem;
     font-size: 0.86rem;
+  }
+
+  .moments-carousel-track {
+    min-height: clamp(220px, 66vw, 380px);
+    height: clamp(220px, 66vw, 380px);
+  }
+
+  .moments-carousel-slide {
+    inset: 0;
+  }
+
+  .moments-carousel-btn {
+    display: none;
   }
 }
 

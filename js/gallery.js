@@ -1,95 +1,105 @@
 /**
- * Moments gallery: stack carousel with prev/next and drag
+ * Moments gallery: spotlight slider (fixed layout)
  */
 (function () {
-  var transforms = [
-    { x: -8, y: 8, r: -4 },
-    { x: -4, y: 4, r: -2 },
-    { x: 0, y: 0, r: 0 },
-    { x: 4, y: -4, r: 2 },
-    { x: 8, y: -8, r: 4 }
-  ];
-
-  function stackPosition(currentIndex, index, total) {
-    var order = (index - currentIndex + total) % total;
-    return (total - 1) - order;
-  }
-
-  function applyTransforms(wrap, currentIndex) {
-    var cards = wrap.querySelectorAll('.stack-card');
-    var total = cards.length;
-    cards.forEach(function (card, index) {
-      var pos = stackPosition(currentIndex, index, total);
-      var t = transforms[pos] || transforms[0];
-      card.style.zIndex = pos + 1;
-      card.style.setProperty('--tx', t.x + 'px');
-      card.style.setProperty('--ty', t.y + 'px');
-      card.style.setProperty('--rotate', t.r + 'deg');
-    });
-  }
-
   function init() {
-    var wrap = document.querySelector('.stack-wrap');
-    if (!wrap) return;
+    var carousel = document.querySelector('.moments-carousel');
+    if (!carousel) return;
 
-    var cards = wrap.querySelectorAll('.stack-card');
-    var total = cards.length;
-    if (total === 0) return;
+    var slides = Array.prototype.slice.call(
+      carousel.querySelectorAll('.moments-carousel-slide')
+    );
+    var total = slides.length;
+    if (!total) return;
 
+    var prevBtn = carousel.querySelector('.stack-btn--prev');
+    var nextBtn = carousel.querySelector('.stack-btn--next');
+    var dotsWrap = carousel.querySelector('.moments-carousel-dots');
     var currentIndex = 0;
-    var prevBtn = document.querySelector('.stack-btn--prev');
-    var nextBtn = document.querySelector('.stack-btn--next');
+    var autoTimer = null;
+    var startX = 0;
+    var endX = 0;
 
-    function goNext() {
-      currentIndex = (currentIndex + 1) % total;
-      applyTransforms(wrap, currentIndex);
+    function renderDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      slides.forEach(function (_, idx) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'moments-carousel-dot' + (idx === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (idx + 1));
+        dot.addEventListener('click', function () {
+          goTo(idx);
+          restartAuto();
+        });
+        dotsWrap.appendChild(dot);
+      });
     }
 
-    function goPrev() {
-      currentIndex = (currentIndex - 1 + total) % total;
-      applyTransforms(wrap, currentIndex);
+    function paint() {
+      slides.forEach(function (slide, idx) {
+        slide.classList.toggle('is-active', idx === currentIndex);
+      });
+      if (!dotsWrap) return;
+      dotsWrap.querySelectorAll('.moments-carousel-dot').forEach(function (dot, idx) {
+        dot.classList.toggle('is-active', idx === currentIndex);
+      });
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', goPrev);
-    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    function goTo(idx) {
+      currentIndex = (idx + total) % total;
+      paint();
+    }
 
-    applyTransforms(wrap, currentIndex);
+    function next() {
+      goTo(currentIndex + 1);
+    }
 
-    var touchStartX = 0;
-    var touchEndX = 0;
-    wrap.addEventListener('touchstart', function (e) {
-      touchStartX = e.touches[0].clientX;
-    });
-    wrap.addEventListener('touchend', function () {
-      var diff = touchStartX - touchEndX;
-      if (diff > 50) goNext();
-      else if (diff < -50) goPrev();
-    });
-    wrap.addEventListener('touchmove', function (e) {
-      touchEndX = e.touches[0].clientX;
-    });
+    function prev() {
+      goTo(currentIndex - 1);
+    }
 
-    var mouseStartX = 0;
-    var mouseEndX = 0;
-    wrap.addEventListener('mousedown', function (e) {
-      if (e.button !== 0) return;
-      wrap.classList.add('is-dragging');
-      mouseStartX = e.clientX;
-      mouseEndX = e.clientX;
-      function onMouseMove(e) {
-        mouseEndX = e.clientX;
+    function stopAuto() {
+      if (!autoTimer) return;
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(next, 4300);
+    }
+
+    function restartAuto() {
+      startAuto();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); restartAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { next(); restartAuto(); });
+
+    carousel.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      endX = startX;
+      stopAuto();
+    }, { passive: true });
+    carousel.addEventListener('touchmove', function (e) {
+      endX = e.touches[0].clientX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', function () {
+      var diff = startX - endX;
+      if (Math.abs(diff) > 45) {
+        if (diff > 0) next();
+        else prev();
       }
-      function onMouseUp() {
-        wrap.classList.remove('is-dragging');
-        var diff = mouseStartX - mouseEndX;
-        if (diff > 40) goNext();
-        else if (diff < -40) goPrev();
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-      }
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
+      startAuto();
     });
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+
+    renderDots();
+    paint();
+    startAuto();
   }
 
   if (document.readyState === 'loading') {
