@@ -128,8 +128,7 @@ body::before {
 .hero-item-2 { animation-delay: 0.5s; }
 .hero-item-3 { animation-delay: 0.65s; }
 .hero-item-4 { animation-delay: 0.82s; }
-.hero-item-5 { animation-delay: 0.98s; }
-.hero-item-6 { animation-delay: 1.14s; }
+.hero-item-6 { animation-delay: 0.98s; }
 @keyframes heroItemIn {
   to { opacity: 1; transform: translateY(0); }
 }
@@ -157,9 +156,53 @@ body::before {
 .hero-headline {
   text-shadow: 0 2px 40px rgba(0,0,0,0.2);
 }
+
+/* Deferred on home: hero starts when loader fades (see page-loader.css + app.js) */
+.hero-luxury--await-loader .hero-bg-wrap {
+  animation: none;
+  opacity: 0;
+  transform: scale(1.04);
+}
+.hero-luxury--await-loader .hero-overlay {
+  animation: none;
+  opacity: 0;
+}
+.hero-luxury--await-loader .hero-bg {
+  animation: none;
+  transform: scale(1.06);
+}
+.hero-luxury--await-loader .hero-item {
+  animation: none;
+  opacity: 0;
+  transform: translateY(28px);
+}
+.hero-luxury--await-loader .hero-line {
+  animation: none;
+  opacity: 0;
+  transform: translateY(-50%) scaleY(0);
+  transform-origin: center top;
+}
+.hero-luxury--await-loader .hero-bottom {
+  animation: none;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-wrap, .hero-overlay, .hero-line, .hero-item, .hero-bottom { animation: none; opacity: 1; transform: none; }
   .hero-bg { animation: none; transform: scale(1.05); }
+  .hero-luxury--await-loader .hero-bg-wrap,
+  .hero-luxury--await-loader .hero-overlay,
+  .hero-luxury--await-loader .hero-line,
+  .hero-luxury--await-loader .hero-item,
+  .hero-luxury--await-loader .hero-bottom {
+    opacity: 1;
+    transform: none;
+  }
+  .hero-luxury--await-loader .hero-bg {
+    animation: none;
+    transform: scale(1.05);
+  }
 }
 
 /* Video */

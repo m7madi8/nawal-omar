@@ -29,10 +29,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/page-loader.css">
   <link rel="stylesheet" href="css/rtl.css">
   <link rel="stylesheet" href="css/scroll-media.css">
 </head>
 <body class="antialiased">
+  <script>document.documentElement.classList.add('page-loader-lock'); window.__nawalLoaderStart = Date.now();</script>
+  <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-busy="true" data-i18n-attr="aria-label:page_loader_aria">
+    <div class="page-loader__center">
+      <img src="public/media/Nawal_yoga_logo.png" alt="" class="page-loader__logo" width="640" height="224" decoding="async">
+      <p class="page-loader__tagline" data-i18n="hero_tagline">Yoga · Mindfulness · Retreat</p>
+    </div>
+  </div>
   <header class="site-header" role="banner">
     <div class="site-header-bar">
       <a href="index.html" class="site-header-brand">
@@ -129,7 +137,7 @@
     </div>
 
     <main class="min-w-0">
-      <section class="hero-luxury hero-luxury--fill relative overflow-hidden">
+      <section class="hero-luxury hero-luxury--fill hero-luxury--await-loader relative overflow-hidden">
         <div class="absolute inset-0 hero-bg-wrap">
           <img src="public/media/hero.jpg" alt="" class="hero-bg h-full w-full object-cover object-center" loading="eager">
           <div class="absolute inset-0 bg-[var(--color-secondary)]/60 hero-overlay"></div>

@@ -176,6 +176,64 @@
     document.head.appendChild(s);
   }
 
+  function initPageLoader() {
+    var el = document.getElementById('page-loader');
+    if (!el) return;
+
+    var html = document.documentElement;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var minMs = 2000;
+    var start = typeof window.__nawalLoaderStart === 'number' ? window.__nawalLoaderStart : Date.now();
+
+    function finish() {
+      el.setAttribute('aria-busy', 'false');
+      html.classList.remove('page-loader-lock');
+      try {
+        delete window.__nawalLoaderStart;
+      } catch (e) {
+        window.__nawalLoaderStart = undefined;
+      }
+      window.setTimeout(function () {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, prefersReduced ? 220 : 650);
+    }
+
+    function hide() {
+      var heroRevealed = false;
+      function revealHero() {
+        if (heroRevealed) return;
+        heroRevealed = true;
+        var hero = document.querySelector('.hero-luxury--await-loader');
+        if (hero) hero.classList.remove('hero-luxury--await-loader');
+        window.dispatchEvent(new CustomEvent('nawal-hero-reveal'));
+      }
+
+      function onTransitionEnd(e) {
+        if (e.propertyName !== 'opacity') return;
+        el.removeEventListener('transitionend', onTransitionEnd);
+        revealHero();
+      }
+
+      el.addEventListener('transitionend', onTransitionEnd);
+      window.setTimeout(function () {
+        el.removeEventListener('transitionend', onTransitionEnd);
+        revealHero();
+      }, 900);
+
+      el.classList.add('page-loader--done');
+      finish();
+    }
+
+    function scheduleHide() {
+      var elapsed = Date.now() - start;
+      var wait = Math.max(0, minMs - elapsed);
+      window.setTimeout(hide, wait);
+    }
+
+    if (document.readyState === 'complete') scheduleHide();
+    else window.addEventListener('load', scheduleHide);
+  }
+
   function initMenu() {
     var toggle = document.getElementById('menu-toggle');
     var panel = document.getElementById('menu-panel');
@@ -231,6 +289,7 @@
     if (yearEl) yearEl.textContent = new Date().getFullYear();
     initSeoUrls();
     initSeoJsonLdHome();
+    initPageLoader();
     initAudioConsent();
     initCursor();
     initMenu();

@@ -101,6 +101,12 @@
   font-weight: 600;
 }
 
+[dir="rtl"] .page-loader__tagline {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
 [dir="rtl"] .lang-switcher {
   right: auto;
   left: 1rem;
