@@ -74,3 +74,59 @@ body[data-menu-open="true"] .menu-launcher-bar.bar3 {
   }
 }
 
+/* Global mobile safety layer (all pages include this file) */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+/* Prevent long text from pushing layout on narrow screens */
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span {
+  overflow-wrap: anywhere;
+}
+
+/* Tables stay usable on phones */
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .lang-switcher {
+    top: 0.75rem;
+    right: 0.75rem;
+    transform: scale(0.95);
+    transform-origin: top right;
+  }
+
+  [dir="rtl"] .lang-switcher {
+    right: auto;
+    left: 0.75rem;
+    transform-origin: top left;
+  }
+}
+
