@@ -228,12 +228,17 @@ table {
   }
 
   .moments-carousel-track {
-    min-height: clamp(220px, 66vw, 380px);
-    height: clamp(220px, 66vw, 380px);
+    min-height: clamp(320px, 66svh, 500px);
+    height: clamp(320px, 66svh, 500px);
   }
 
   .moments-carousel-slide {
     inset: 0;
+  }
+
+  .moments-carousel-img {
+    object-fit: contain;
+    object-position: center;
   }
 
   .moments-carousel-btn {
