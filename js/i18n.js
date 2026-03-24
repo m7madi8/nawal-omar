@@ -14,6 +14,9 @@
       nav_al_tira: 'Al-Tira Yoga',
       nav_jiva: 'Haifa Yoga',
       nav_retreat: 'Retreat',
+      seo_title: 'Nawal Omar | Yoga Teacher in Haifa, Israel · Vinyasa, Yin & Retreats',
+      seo_description:
+        'Certified yoga instructor Nawal Omar in Haifa, Israel: Vinyasa, Yin, Hatha & meditation. Private and group classes, Al-Tira & Haifa workshops, and international retreats. Book yoga in Israel.',
       menu_label: 'Menu',
       menu_close: 'Close menu',
       lang_toggle: 'Change language',
@@ -85,7 +88,8 @@
       retreats_view_details: 'View retreat details',
       retreat_dahab_page_label: 'Dahab Retreat with Nawal Omar',
       retreat_dahab_meta_title: 'Dahab Retreat | Nawal Omar',
-      retreat_dahab_meta_desc: 'Dahab Retreat with Nawal Omar.',
+      retreat_dahab_meta_desc:
+        'Dahab & Saint Catherine retreat with Nawal Omar, yoga teacher from Haifa, Israel. Red Sea yoga, breathwork and mountain journey.',
       retreat_dahab_page_title: 'Saint Catherine Mountain Climb & Dahab Retreat',
       retreat_dahab_page_intro: 'To the highest peak in Egypt, plus a special retreat with guide Nawal Omar.',
       retreat_dahab_book: 'Book',
@@ -437,6 +441,9 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       nav_al_tira: 'الطيرة يوغا',
       nav_jiva: 'حيفا يوغا',
       nav_retreat: 'ريتريت',
+      seo_title: 'نوال عمر | مدربة يوغا في حيفا، إسرائيل · فينيسا، يين وريتريت',
+      seo_description:
+        'مدربة يوغا معتمدة نوال عمر في حيفا وإسرائيل: فينيسا، يين، هاثا وتأمل. حصص خاصة وجماعية، ورش الطيرة وحيفا، وريتريت دولية. يوغا في إسرائيل.',
       menu_label: 'القائمة',
       menu_close: 'إغلاق القائمة',
       lang_toggle: 'تغيير اللغة',
@@ -508,7 +515,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreats_view_details: 'عرض تفاصيل الريتريت',
       retreat_dahab_page_label: 'ريتريت دهب مع نوال عمر',
       retreat_dahab_meta_title: 'ريتريت دهب | نوال عمر',
-      retreat_dahab_meta_desc: 'ريتريت دهب مع نوال عمر.',
+      retreat_dahab_meta_desc:
+        'ريتريت دهب وجبل سانت كاترين مع نوال عمر، مدربة يوغا من حيفا، إسرائيل. يوغا البحر الأحمر، عمل بالنفس ورحلة جبلية.',
       retreat_dahab_page_title: 'تسلق جبل سانت كاثرين وريتريت دهب',
       retreat_dahab_page_intro: 'الى اعلى قمة في مصر.. وريتريت مميزة مع المرشدة نوال عمر',
       retreat_dahab_book: 'حجز',
@@ -904,6 +912,18 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       btn.classList.toggle('font-semibold', l === lang);
       btn.setAttribute('aria-pressed', l === lang ? 'true' : 'false');
     });
+
+    var seoDesc = document.getElementById('seo-meta-description');
+    if (seoDesc) {
+      document.title = getText(lang, 'seo_title');
+      seoDesc.setAttribute('content', getText(lang, 'seo_description'));
+      var ogDesc = document.getElementById('og-description');
+      if (ogDesc) ogDesc.setAttribute('content', getText(lang, 'seo_description'));
+      var ogTitle = document.getElementById('og-title');
+      if (ogTitle) ogTitle.setAttribute('content', getText(lang, 'seo_title'));
+      var twTitle = document.getElementById('twitter-title');
+      if (twTitle) twTitle.setAttribute('content', getText(lang, 'seo_title'));
+    }
 
     window.dispatchEvent(new CustomEvent('nawal-lang-change', { detail: { lang: lang } }));
   }

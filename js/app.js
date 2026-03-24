@@ -76,6 +76,106 @@
     });
   }
 
+  function initSeoUrls() {
+    var o = location.origin;
+    if (!o || o === 'null' || (location.protocol && location.protocol.indexOf('file') === 0)) return;
+    var clean = location.href.split('#')[0].split('?')[0];
+    var c = document.getElementById('seo-canonical');
+    if (c) c.setAttribute('href', clean);
+    var ou = document.getElementById('og-url');
+    if (ou) ou.setAttribute('content', clean);
+    ['hreflang-en', 'hreflang-ar', 'hreflang-def'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute('href', clean);
+    });
+    var ogImg = document.getElementById('og-image');
+    if (ogImg) {
+      try {
+        ogImg.setAttribute('content', new URL('public/media/hero.jpg', clean).href);
+      } catch (e1) {}
+    }
+  }
+
+  function initSeoJsonLdHome() {
+    if (document.documentElement.getAttribute('data-page') !== 'home') return;
+    var o = location.origin;
+    if (!o || o === 'null' || (location.protocol && location.protocol.indexOf('file') === 0)) return;
+    if (document.querySelector('script[type="application/ld+json"][data-nawal-seo]')) return;
+    var clean = location.href.split('#')[0].split('?')[0];
+    var base;
+    try {
+      base = new URL('./', clean).href;
+    } catch (e) {
+      return;
+    }
+    var imgPerson;
+    var imgHero;
+    try {
+      imgPerson = new URL('public/media/10.jpg', clean).href;
+      imgHero = new URL('public/media/hero.jpg', clean).href;
+    } catch (e2) {
+      return;
+    }
+    var graph = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': base + '#website',
+          url: base,
+          name: 'Nawal Omar Yoga',
+          description:
+            'Yoga classes, workshops and retreats with certified instructor Nawal Omar in Haifa, Israel.',
+          inLanguage: ['en', 'ar'],
+          publisher: { '@id': base + '#person' }
+        },
+        {
+          '@type': 'Person',
+          '@id': base + '#person',
+          name: 'Nawal Omar',
+          jobTitle: 'Certified Yoga Instructor',
+          description:
+            'Yoga teacher offering Vinyasa, Yin, Hatha and meditation in Haifa, Israel; workshops in Al-Tira and Haifa; international retreats.',
+          url: base,
+          image: imgPerson,
+          sameAs: ['https://www.instagram.com/nawal_aom/'],
+          telephone: '+972-52-2496366',
+          nationality: { '@type': 'Country', name: 'Israel' },
+          homeLocation: {
+            '@type': 'Place',
+            name: 'Haifa, Israel',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Haifa',
+              addressCountry: 'IL'
+            }
+          },
+          knowsAbout: ['Yoga', 'Vinyasa Yoga', 'Yin Yoga', 'Hatha Yoga', 'Meditation', 'Mindfulness']
+        },
+        {
+          '@type': 'ProfessionalService',
+          '@id': base + '#yoga-service',
+          name: 'Nawal Omar Yoga',
+          url: base,
+          description:
+            'Yoga instruction: private sessions, group classes, workshops (Al-Tira, Haifa), and retreats.',
+          serviceType: 'Yoga instruction',
+          areaServed: [
+            { '@type': 'City', name: 'Haifa', containedInPlace: { '@type': 'Country', name: 'Israel' } },
+            { '@type': 'Country', name: 'Israel' }
+          ],
+          provider: { '@id': base + '#person' },
+          image: imgHero
+        }
+      ]
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.setAttribute('data-nawal-seo', '1');
+    s.textContent = JSON.stringify(graph);
+    document.head.appendChild(s);
+  }
+
   function initMenu() {
     var toggle = document.getElementById('menu-toggle');
     var panel = document.getElementById('menu-panel');
@@ -129,6 +229,8 @@
   function init() {
     var yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+    initSeoUrls();
+    initSeoJsonLdHome();
     initAudioConsent();
     initCursor();
     initMenu();

@@ -1,0 +1,4 @@
+# Allow search engines to crawl the site. After you deploy, add your sitemap in Google Search Console, e.g.:
+# Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+User-agent: *
+Allow: /
