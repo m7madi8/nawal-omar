@@ -297,6 +297,47 @@ body:has(.site-header) {
   padding-top: 3.5rem;
 }
 
+/* Index hero: full viewport; with fixed header subtract body offset */
+.hero-luxury.hero-luxury--fill {
+  min-height: 100svh;
+}
+
+@media (min-width: 768px) {
+  .hero-luxury.hero-luxury--fill {
+    min-height: 100dvh;
+  }
+}
+
+.hero-luxury--fill .hero-luxury-inner {
+  min-height: 100svh;
+}
+
+@media (min-width: 768px) {
+  .hero-luxury--fill .hero-luxury-inner {
+    min-height: 100dvh;
+  }
+}
+
+body:has(.site-header) .hero-luxury.hero-luxury--fill {
+  min-height: calc(100svh - 3.5rem);
+}
+
+@media (min-width: 768px) {
+  body:has(.site-header) .hero-luxury.hero-luxury--fill {
+    min-height: calc(100dvh - 3.5rem);
+  }
+}
+
+body:has(.site-header) .hero-luxury--fill .hero-luxury-inner {
+  min-height: calc(100svh - 3.5rem);
+}
+
+@media (min-width: 768px) {
+  body:has(.site-header) .hero-luxury--fill .hero-luxury-inner {
+    min-height: calc(100dvh - 3.5rem);
+  }
+}
+
 .site-header-bar {
   display: flex;
   align-items: center;
