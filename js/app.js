@@ -81,31 +81,30 @@
     var panel = document.getElementById('menu-panel');
     if (!toggle || !panel) return;
 
-    var sheet = panel.querySelector('div');
     var closeBtn = panel.querySelector('[data-menu-close]');
+    var links = panel.querySelectorAll('a[href]');
 
     function openMenu() {
-      panel.style.display = 'block';
-      panel.classList.remove('opacity-0');
-      panel.classList.add('opacity-100');
-      if (sheet) sheet.style.transform = 'translateX(0)';
+      panel.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
       document.body.dataset.menuOpen = 'true';
+      /* Two frames: let layout settle so opacity/transform transitions run (no display:none flash). */
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          panel.classList.add('is-open');
+        });
+      });
     }
 
     function closeMenu() {
-      panel.classList.add('opacity-0');
-      panel.classList.remove('opacity-100');
-      if (sheet) sheet.style.transform = '';
+      panel.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
       document.body.dataset.menuOpen = 'false';
-      window.setTimeout(function () {
-        if (document.body.dataset.menuOpen !== 'true') {
-          panel.style.display = 'none';
-        }
-      }, 300);
+      panel.setAttribute('aria-hidden', 'true');
     }
 
     toggle.addEventListener('click', function () {
-      var isOpen = document.body.dataset.menuOpen === 'true';
+      var isOpen = panel.classList.contains('is-open');
       if (isOpen) closeMenu();
       else openMenu();
     });
@@ -116,6 +115,10 @@
 
     panel.addEventListener('click', function (e) {
       if (e.target === panel) closeMenu();
+    });
+
+    links.forEach(function (a) {
+      a.addEventListener('click', closeMenu);
     });
 
     window.addEventListener('keydown', function (e) {

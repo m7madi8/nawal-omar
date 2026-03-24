@@ -131,3 +131,32 @@
   margin-left: 0;
   margin-right: 0.5rem;
 }
+
+/* Language switcher inside site header / mobile sheet (not fixed corner) */
+.site-header .lang-switcher--bar,
+.site-menu-sheet .lang-switcher--bar {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  transform: none !important;
+  z-index: auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 0.2rem 0;
+}
+
+.site-header .lang-switcher--bar .lang-btn,
+.site-menu-sheet .lang-switcher--bar .lang-btn {
+  color: rgba(90, 70, 50, 0.58);
+  font-weight: 500;
+}
+
+.site-header .lang-switcher--bar .lang-btn:hover,
+.site-menu-sheet .lang-switcher--bar .lang-btn:hover {
+  background: transparent;
+  color: var(--color-accent, #a67c52);
+}
