@@ -190,6 +190,13 @@
       retreat_dahab_price_label: 'Cost',
       retreat_dahab_price_note: '(Payment link will be sent after initial registration)',
       retreat_dahab_book_now: 'Book now',
+      retreat_dahab_policy_title: 'Booking confirmation & cancellation policy',
+      retreat_dahab_policy_1: 'An initial deposit of 400₪ is required to secure your booking.',
+      retreat_dahab_policy_2: 'This deposit is non-refundable.',
+      retreat_dahab_policy_3: 'After sending the deposit, please share a transfer receipt image to confirm your booking officially.',
+      retreat_dahab_policy_4: 'A seat is reserved only after the first deposit is received.',
+      retreat_dahab_policy_5: 'Seats are limited, and priority is given to participants who confirm first.',
+      retreat_dahab_policy_6: 'If cancellation happens within 14 days before retreat date, no amount is refunded.',
 
       audio_question: 'Would you like to enable sound for videos on this device?',
       audio_later: 'Later',
@@ -264,7 +271,17 @@ Important notes about pricing and payment
 • If paying in NIS (Shekel), the price is calculated according to Bank Hapoalim's USD exchange rate on the execution date.
 • Price does not include personal travel insurance.
 • Price does not include the visa/permit to Zanzibar.
-• Horse riding on the beach is an optional activity and is not included in the base price. If you want to add it: +55$ per person.`,
+• Horse riding on the beach is an optional activity and is not included in the base price. If you want to add it: +55$ per person.
+• A non-refundable initial deposit of 400$ is required to secure your booking.
+• After sending the deposit, please share a transfer receipt image to confirm your booking officially.
+• A seat is reserved only after the first deposit is received.
+• Seats are limited, and priority is given to participants who secure their booking first.
+
+Booking & cancellation policy
+• If cancellation happens less than one month before retreat date, no amount is refunded.
+• In case of no-show for any reason, no refund is provided.
+• Booking can be transferred to another participant only if you find a replacement yourself.
+• Booking confirmation is based on a non-refundable first deposit.`,
       retreat_share2: `Final daily itinerary
 The days were reorganized according to logistical notes, to make the sequence more comfortable and logical in terms of transfers, cost, and overall energy for the group.
 
@@ -590,6 +607,13 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_dahab_price_label: 'التكلفة',
       retreat_dahab_price_note: '(سيتم إرسال رابط الدفع بعد التسجيل الأولي)',
       retreat_dahab_book_now: 'احجزي الآن',
+      retreat_dahab_policy_title: 'سياسة تثبيت الحجز والإلغاء',
+      retreat_dahab_policy_1: 'يلزم دفع دفعة أولية بقيمة 400₪ لتثبيت الحجز.',
+      retreat_dahab_policy_2: 'هذه الدفعة غير قابلة للإرجاع.',
+      retreat_dahab_policy_3: 'بعد إرسال الدفعة، يرجى إرسال صورة عن التحويل لتأكيد الحجز رسميًا.',
+      retreat_dahab_policy_4: 'يتم حجز المقعد فقط بعد تحويل الدفعة الأولى.',
+      retreat_dahab_policy_5: 'عدد الأماكن محدود، والأولوية لمن تثبّت حجزها أولًا.',
+      retreat_dahab_policy_6: 'في حال الإلغاء قبل 14 يوم من موعد الريتريت، لا يتم استرجاع أي مبلغ.',
 
       audio_question: 'هل ترغبين بتشغيل الصوت للفيديوهات على هذا الجهاز؟',
       audio_later: 'لاحقاً',
@@ -664,7 +688,18 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 • في حال الدفع بالشيكل، يتم احتساب السعر وفق שער الدولار (העברות והמחאות מכירה) של بنك הפועלים ביום التنفيذ.
 • السعر لا يشمل التأمين الشخصي على السفر.
 • السعر لا يشمل الفيزا/التأشيرة إلى زنجبار.
-• ركوب الخيل على الشاطئ فعالية اختيارية وغير مشمولة في السعر الأساسي. من ترغب بإضافتها: +55$ للشخص.`,
+• ركوب الخيل على الشاطئ فعالية اختيارية وغير مشمولة في السعر الأساسي. من ترغب بإضافتها: +55$ للشخص.
+• يلزم دفع دفعة أولية بقيمة 400$ لتثبيت الحجز.
+• هذه الدفعة غير قابلة للإرجاع.
+• بعد إرسال الدفعة، يرجى إرسال صورة عن التحويل لتأكيد الحجز رسميًا.
+• يتم حجز المقعد فقط بعد تحويل الدفعة الأولى.
+• عدد الأماكن محدود، والأولوية لمن تثبّت حجزها أولًا.
+
+سياسة تثبيت الحجز والإلغاء
+• في حال الإلغاء قبل شهر من موعد الريتريت، لا يتم استرجاع أي مبلغ.
+• في حال عدم الحضور لأي سبب، لا يوجد استرجاع.
+• يمكن تحويل الحجز لمشاركة أخرى في حال إيجاد بديلة بنفسك.
+• تثبيت الحجز يتم بدفعة أولى غير مستردة.`,
       retreat_share2: `البرنامج اليومي النهائي
 تمت إعادة ترتيب الأيام وفق الملاحظات التنظيمية حتى يكون تسلسل الرحلة أكثر راحة ومنطقيًا من ناحية الانتقالات، الكلفة، والطاقة العامة للمجموعة.
 

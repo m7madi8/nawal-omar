@@ -608,6 +608,39 @@
   color: rgba(62, 47, 43, 0.95);
 }
 
+.retreat-policy-box {
+  margin-top: 1.15rem;
+  border: 1px solid rgba(185, 137, 95, 0.26);
+  border-radius: 18px;
+  padding: 1rem 1rem 0.9rem;
+  background: linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(247, 238, 225, 0.92));
+}
+
+.retreat-policy-title {
+  margin: 0 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.02rem;
+  color: rgba(122, 82, 52, 0.98);
+  font-weight: 700;
+}
+
+.retreat-policy-body .retreat-bullets {
+  margin-bottom: 0;
+  list-style-position: inside;
+  padding-inline-start: 0.35rem;
+  padding-inline-end: 0.2rem;
+}
+
+.retreat-policy-body .retreat-bullets li {
+  margin: 0.42rem 0;
+  overflow-wrap: anywhere;
+}
+
+[dir="rtl"] .retreat-policy-body .retreat-bullets {
+  padding-left: 0;
+  padding-right: 0.45rem;
+}
+
 .rp-cta {
   border-radius: 30px;
   padding: 3rem 1.25rem;
@@ -1223,6 +1256,48 @@
   font-size: clamp(1.75rem, 2.9vw, 2.25rem);
 }
 
+.dahab-policy-box {
+  margin-top: 1rem;
+  border: 1px solid rgba(185, 137, 95, 0.3);
+  border-radius: 16px;
+  padding: 0.95rem 1rem 0.9rem;
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.dahab-policy-title {
+  margin: 0 0 0.62rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1rem;
+  color: rgba(122, 82, 52, 0.98);
+}
+
+.dahab-policy-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.dahab-policy-list li {
+  position: relative;
+  padding-inline-start: 1.1rem;
+  color: rgba(62, 47, 43, 0.88);
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+.dahab-policy-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.55rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: rgba(171, 122, 80, 0.92);
+}
+
 .dahab-goal-showcase {
   position: relative;
   border-radius: 22px;
@@ -1350,6 +1425,16 @@
 }
 
 @media (max-width: 640px) {
+  .retreat-policy-box {
+    border-radius: 14px;
+    padding: 0.9rem 0.9rem 0.75rem;
+  }
+
+  .retreat-policy-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.62rem;
+  }
+
   .dahab-trainers-grid {
     grid-template-columns: 1fr;
   }
@@ -1472,6 +1557,15 @@
     line-height: 1.62;
   }
 
+  .dahab-policy-box {
+    padding: 0.85rem 0.85rem 0.78rem;
+  }
+
+  .dahab-policy-list li {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
   .dahab-includes-cta {
     width: 100%;
   }
@@ -1557,16 +1651,16 @@
   }
 
   .dahab-goal-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .dahab-goal-stat {
-    border-inline-end: 0 !important;
+    border-inline-end: 1px solid rgba(185, 137, 95, 0.16) !important;
   }
 
-  .dahab-goal-stat + .dahab-goal-stat {
-    border-top: 1px solid rgba(185, 137, 95, 0.16);
-  }
+  .dahab-goal-stat:nth-child(2n) { border-inline-end: 0 !important; }
+  .dahab-goal-stat:nth-child(1),
+  .dahab-goal-stat:nth-child(2) { border-top: 0; }
 
   .dahab-goal-title {
     font-size: clamp(1.4rem, 8.2vw, 2rem);

@@ -474,8 +474,30 @@
         html += '</tbody></table>';
 
         if (notesLines.length) {
-          var notesText = notesLines.join('\n').trim();
-          html += '<div style="margin-top:1rem;">' + renderBullets(notesText) + '</div>';
+          var policyMarker = isAr ? 'سياسة تثبيت الحجز والإلغاء' : 'Booking & cancellation policy';
+          var policyIdx = -1;
+          for (var j = 0; j < notesLines.length; j++) {
+            if ((notesLines[j] || '').trim().indexOf(policyMarker) === 0) {
+              policyIdx = j;
+              break;
+            }
+          }
+
+          var pricingNotes = policyIdx === -1 ? notesLines : notesLines.slice(0, policyIdx);
+          var policyNotes = policyIdx === -1 ? [] : notesLines.slice(policyIdx + 1);
+
+          if (pricingNotes.length) {
+            var notesText = pricingNotes.join('\n').trim();
+            html += '<div style="margin-top:1rem;">' + renderBullets(notesText) + '</div>';
+          }
+
+          if (policyNotes.length) {
+            var policyText = policyNotes.join('\n').trim();
+            html += '<div class="retreat-policy-box">';
+            html += '<h3 class="retreat-policy-title">' + escapeHtml(policyMarker) + '</h3>';
+            html += '<div class="retreat-policy-body">' + renderBullets(policyText) + '</div>';
+            html += '</div>';
+          }
         }
         return html;
       }
