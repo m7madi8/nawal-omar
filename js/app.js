@@ -279,6 +279,10 @@
       a.addEventListener('click', closeMenu);
     });
 
+    panel.querySelectorAll('[data-lang-set]').forEach(function (btn) {
+      btn.addEventListener('click', closeMenu);
+    });
+
     window.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeMenu();
     });

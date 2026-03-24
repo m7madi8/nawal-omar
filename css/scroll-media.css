@@ -816,3 +816,14 @@ body[data-menu-open="true"] .site-header .menu-launcher-bar.bar3 {
   }
 }
 
+/* Logical text-align (LTR: left, RTL: right); build may omit Tailwind text-start */
+.text-start {
+  text-align: start;
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-start {
+    text-align: start;
+  }
+}
+
