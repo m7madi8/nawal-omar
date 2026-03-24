@@ -198,8 +198,7 @@
       retreat_page_label: 'Zanzibar Retreat with Nawal Omar',
       retreat_page_title: '8 Days | 7 Nights',
       retreat_page_intro: `7/7/2026 - 14/7/2026
-8 days of yoga, sound healing, the sea, renewal, and a deep connection with body and nature in Zanzibar.
-Yoga and sound healing retreat with Nawal Omar in Zanzibar.`,
+Yoga and sound healing retreat with a Zanzibar Island exploration.`,
       retreat_from: 'A journey designed to help you pause, breathe, and return to your body',
       retreat_bio1: 'A journey designed for women who need to pause, breathe, return to the body, and restore inner balance amid the beauty of Zanzibar.',
       retreat_bio2: 'This retreat is not just a vacation; it is a real space for rest, transformation, calm, and a deep connection with yourself through yoga, breathwork, sound healing, and nature.',
@@ -600,7 +599,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_page_label: 'ريتريت زنجبار مع نوال عمر',
       retreat_page_title: '8 أيام | 7 ليالٍ',
       retreat_page_intro: `7/7/2026 - 14/7/2026
-ريتريت يوغا وساوند هياينچ مع اكتشاف جزيرة زنزيبار`,
+ريتريت يوغا وساوند هيلينغ مع اكتشاف جزيرة زنجبار`,
       retreat_from: 'رحلة مصممة للنساء اللواتي يحتجن إلى التوقف',
       retreat_bio1: 'رحلة مصممة للنساء اللواتي يحتجن إلى التوقف، التنفس، العودة إلى الجسد، واستعادة التوازن الداخلي وسط جمال زنجبار الساحر.',
       retreat_bio2: 'هذا الريتريت ليس مجرد عطلة، بل مساحة حقيقية للراحة، التحوّل، الهدوء، والاتصال العميق بالنفس من خلال اليوغا، التنفس، الساوند هيلينغ، والطبيعة.',
