@@ -412,58 +412,8 @@
       }
 
       function renderHotels(hotelsText, isAr) {
-        var lines = toLines(hotelsText).filter(function (l) { return l.trim() !== ''; });
-        if (!lines.length) return '';
-
-        var headings = [];
-        for (var i = 0; i < lines.length; i++) {
-          var l = lines[i];
-          if (l.indexOf(' - ') !== -1 && (l.indexOf('Hotel') !== -1 || l.indexOf('Resort') !== -1)) {
-            headings.push(i);
-          }
-        }
-        if (!headings.length) return linkifyUrls(hotelsText);
-
-        var blocks = [];
-        for (var h = 0; h < headings.length; h++) {
-          var start = headings[h];
-          var end = (h + 1 < headings.length) ? headings[h + 1] : lines.length;
-          blocks.push(lines.slice(start, end));
-        }
-
-        var html = '<div class="retreat-hotel-grid">';
-        blocks.forEach(function (b) {
-          var title = b[0] || '';
-          var url = '';
-          var descLines = [];
-          var mediaImg = 'public/media/Zanzibar/zanzibarterminus-20260319-0001.jpg';
-          var lowerTitle = String(title || '').toLowerCase();
-          if (lowerTitle.indexOf('nur') !== -1) mediaImg = 'public/media/Zanzibar/NUR Beach Hotel - Jambiani.jpg';
-          if (lowerTitle.indexOf('mvuvi') !== -1 || lowerTitle.indexOf('kiwengwa') !== -1) {
-            mediaImg = 'public/media/Zanzibar/Mvuvi Boutique Resort - Kiwengwa.jpg';
-          }
-          for (var i = 1; i < b.length; i++) {
-            var line = b[i].trim();
-            if (line.indexOf('الرابط الرسمي:') === 0) {
-              url = line.replace('الرابط الرسمي:', '').trim();
-            } else if (line.indexOf('Official link:') === 0) {
-              url = line.replace('Official link:', '').trim();
-            } else {
-              descLines.push(line);
-            }
-          }
-          var desc = descLines.filter(function (x) { return x.trim() !== ''; }).join('<br/>');
-          html += '<div class="retreat-hotel-card">';
-          html += '<div class="retreat-hotel-media" aria-hidden="true" style="background-image:url(\'' + escapeHtml(mediaImg) + '\')"></div>';
-          html += '<h3>' + escapeHtml(title) + '</h3>';
-          html += '<p>' + linkifyUrls(descLines.join('\n')) + '</p>';
-          if (url) {
-            html += '<p class="mt-3"><a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="underline hover:text-[var(--color-accent)]">' + (isAr ? 'الرابط الرسمي' : 'Official link') + '</a></p>';
-          }
-          html += '</div>';
-        });
-        html += '</div>';
-        return html;
+        if (!hotelsText || !String(hotelsText).trim()) return '';
+        return '<div class="retreat-rich">' + renderBullets(hotelsText) + '</div>';
       }
 
       function renderPricing(pricingText, isAr) {
@@ -698,9 +648,9 @@
         var included = afterToken(
           raw1,
           isAr ? 'ماذا تشمل الباقة؟' : 'What is included?',
-          'NUR Beach Hotel'
+          isAr ? 'تفاصيل الإقامة المختارة' : 'Selected accommodation details'
         );
-        var hotels = sliceFromTo(raw1, 'NUR Beach Hotel', isAr ? 'الخيار' : 'Option');
+        var hotels = sliceFromTo(raw1, isAr ? 'تفاصيل الإقامة المختارة' : 'Selected accommodation details', isAr ? 'الخيار' : 'Option');
         var pricing = sliceFromTo(raw1, isAr ? 'الخيار' : 'Option', '');
 
         var itin = afterToken(raw2, isAr ? 'البرنامج اليومي النهائي' : 'Final daily itinerary', '');

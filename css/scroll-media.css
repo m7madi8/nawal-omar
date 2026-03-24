@@ -101,10 +101,15 @@ h2,
 h3,
 h4,
 h5,
-h6,
-a,
-span {
+h6 {
   overflow-wrap: anywhere;
+}
+
+a,
+button,
+span {
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 /* Tables stay usable on phones */
@@ -113,6 +118,21 @@ table {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Shared top back link style */
+.top-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 8px 16px rgba(62, 47, 43, 0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 @media (max-width: 640px) {
@@ -127,6 +147,12 @@ table {
     right: auto;
     left: 0.75rem;
     transform-origin: top left;
+  }
+
+  .top-back-link {
+    min-height: 42px;
+    padding: 0.5rem 0.92rem;
+    font-size: 0.86rem;
   }
 }
 

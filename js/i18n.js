@@ -112,7 +112,7 @@
       retreat_dahab_day2_chip: 'Day 02',
       retreat_dahab_day2_title: 'Wadi El-Arbaeen -> Mount Saint Catherine -> Dahab',
       retreat_dahab_day2_meta: 'Day 2 (08.05.2026) - Summit ascent and transfer to Dahab',
-      retreat_dahab_day2_p1: 'We leave camp early and walk through Wadi El-Arbaeen toward Shaq Mousa. The route passes dramatic granite cliffs until we reach Um Sella, then continue ascending to Mount Saint Catherine summit, the highest mountain in Egypt. From the peak, we witness an endless panorama of mountains and silent valleys. We have lunch at the summit, descend, then continue about two hours to Dahab for overnight at Coral Coast Hotel.',
+      retreat_dahab_day2_p1: 'We leave camp early and walk through Wadi El-Arbaeen toward Shaq Mousa. The route passes dramatic granite cliffs until we reach Um Sella, then continue ascending to Mount Saint Catherine summit, the highest mountain in Egypt. From the peak, we witness an endless panorama of mountains and silent valleys. We have lunch at the summit, descend, then continue about two hours to Dahab for overnight at the retreat accommodation.',
       retreat_dahab_day2_stat1: '18 km',
       retreat_dahab_day2_stat2: 'Ascent 1,048 m',
       retreat_dahab_day2_stat3: 'Descent 1,061 m',
@@ -157,7 +157,7 @@
       retreat_dahab_trainer1_name: 'Nawal Omar',
       retreat_dahab_trainer1_role: 'Yoga & mindfulness guide',
       retreat_dahab_trainer2_name: 'Hanan',
-      retreat_dahab_trainer2_role: 'Retreat support',
+      retreat_dahab_trainer2_role: 'Mountain trail leader in the Dahab retreat.',
       retreat_dahab_gallery_title: 'Journey moments',
       retreat_dahab_gallery_alt1: 'Dahab sea',
       retreat_dahab_gallery_alt2: 'Retreat view',
@@ -233,8 +233,8 @@ What is included?
 • Baggage up to 20 kg
 • Carry-on bag
 • All ground transfers within Zanzibar
-• 4 nights in a boutique hotel in the south of the island – Jambiani
-• 3 nights in a boutique beachfront hotel in Kiwengwa
+• 4 nights in carefully selected accommodation in the south of Zanzibar
+• 3 nights in carefully selected beachfront accommodation in the north-east of Zanzibar
 • Meals:
   o Daily breakfast
   o Daily dinner
@@ -247,17 +247,16 @@ What is included?
 • Visit to Prison Island
 • Tour of Stone Town
 
-NUR Beach Hotel - Jambiani
-Located on the beach in Jambiani (South-East Zanzibar). It offers a quiet atmosphere, units close to the shore, a swimming pool, and a comfortable space to begin your inner journey gently.
-Official link: https://nur-zanzibar.com/
-
-Mvuvi Boutique Resort - Kiwengwa
-Located on the Kiwengwa beach, offering a more intimate boutique atmosphere. With a spa, sea views, and a yoga space designed for your integration and closing in the second part of the journey.
-Official link: https://mvuvizanzibar.com/
+Selected accommodation details
+• 4 nights in carefully selected accommodation in the south of Zanzibar.
+• 3 nights in carefully selected beachfront accommodation in the north-east of Zanzibar.
+• Final accommodation details are shared after booking confirmation.
 
 Option	Final bank transfer price	Notes
-Triple room - with flight	3100$	Full package with flight.
-Double room - with flight	3400$	Full package with flight.
+Triple room - with flight (booking until 10/5)	3100$	Early booking price.
+Triple room - with flight (booking after 10/5)	3200$	Regular price after 10/5.
+Double room - with flight (booking until 10/5)	3400$	Early booking price.
+Double room - with flight (booking after 10/5)	3500$	Regular price after 10/5.
 
 Important notes about pricing and payment
 • The price is for payment via bank transfer.
@@ -277,7 +276,7 @@ Dinner	A light dinner coordinated in advance with the hotel, to avoid long waits
 First meet	Very short introductions with the group, then rest and sleep.
 ✨ Value of this day
 The goal of this day is to settle after travel, reduce stress, and enter the retreat atmosphere gradually—without pressure.
-Useful links related to this day: NUR Beach Hotel
+Useful links related to this day: Accommodation details are shared after booking confirmation
 
 Wednesday 8/7/2026 - Return to the root
 The morning starts with sunrise yoga on the beach, plus an opening ceremony for the retreat intention. Then a group breakfast, followed by a visit to Salaam Cave. Instead of making lunch inside The Rock the default option (due to higher prices), we’ll do a free photo stop near the restaurant area and have a more affordable lunch nearby.
@@ -312,7 +311,7 @@ Time / Details	Details
 08:00	Breakfast + check-out.
 09:30	Visit Jozani Forest: mindful walk in the forest + observation of Red Colobus monkeys.
 12:00	Visit Spice Farm: getting to know cinnamon, vanilla, cloves, nutmeg, and how aromas affect the nervous system.
-Afternoon	Transfer to Mvuvi Boutique Resort - Kiwengwa + check-in.
+Afternoon	Transfer to the second accommodation in the north-east + check-in.
 18:30	Sunset soft yoga.
 19:30	First Sound Healing session at the second hotel.
 ✨ Value of this day
@@ -330,7 +329,7 @@ Morning	Free time for the sea / rest / spa—according to each participant.
 20:30	Meditative journaling: what changed inside you since the start of the retreat?
 ✨ Value of this day
 This day creates space to integrate everything that came before, and gives the body a chance to catch its breath before the final phase of the journey.
-Useful links related to this day: Mvuvi Boutique Resort
+Useful links related to this day: Accommodation details are shared after booking confirmation
 
 Sunday 12/7/2026 - Mnemba Island + horse-riding option
 A new sea day at one of Zanzibar’s most beautiful snorkeling spots.
@@ -353,7 +352,7 @@ Before sunset	Personal prep for the closing ceremony—white outfit.
 From sunset to night	Closing ceremony: shared circle, new intentions, and burning pages of "the ghost of weakness" under the open sky.
 ✨ Value of this day
 We end the night the way we began: with clear structure, an open heart, and a real inner sense that something has truly released.
-Useful links related to this day: Mvuvi Boutique Resort
+Useful links related to this day: Accommodation details are shared after booking confirmation
 
 Tuesday 14/7/2026 - Stone Town & return to Israel
 The last day is planned to gather quiet morning time, then visit Prison Island and tour Stone Town before heading back to the airport.
@@ -513,7 +512,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_dahab_day2_chip: 'اليوم 02',
       retreat_dahab_day2_title: 'وادي الأربعين ← جبل سانت كاثرين ← دهب',
       retreat_dahab_day2_meta: 'اليوم 2 (08.05.2026) - صعود القمة والانتقال إلى دهب',
-      retreat_dahab_day2_p1: 'نغادر المخيم باكرًا ونسير عبر وادي الأربعين باتجاه شق موسى. يقودنا المسار بين جروف جرانيتية شاهقة حتى نصل إلى أم سِلّة، ثم نتابع الصعود نحو قمة جبل سانت كاثرين—أعلى جبل في مصر. من القمة نشاهد بانوراما لا نهائية من الجبال والحواف الحادة والوديان الصحراوية الصامتة. نتناول الغداء على القمة، ثم نبدأ النزول، وبعدها ننطلق في رحلة تستغرق حوالي ساعتين باتجاه دهب، حيث يكون المبيت في Coral Coast Hotel.',
+      retreat_dahab_day2_p1: 'نغادر المخيم باكرًا ونسير عبر وادي الأربعين باتجاه شق موسى. يقودنا المسار بين جروف جرانيتية شاهقة حتى نصل إلى أم سِلّة، ثم نتابع الصعود نحو قمة جبل سانت كاثرين—أعلى جبل في مصر. من القمة نشاهد بانوراما لا نهائية من الجبال والحواف الحادة والوديان الصحراوية الصامتة. نتناول الغداء على القمة، ثم نبدأ النزول، وبعدها ننطلق في رحلة تستغرق حوالي ساعتين باتجاه دهب، حيث يكون المبيت في مكان الإقامة الخاص بالريتريت.',
       retreat_dahab_day2_stat1: '18 كم',
       retreat_dahab_day2_stat2: 'صعود 1,048م',
       retreat_dahab_day2_stat3: 'نزول 1,061م',
@@ -556,9 +555,9 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_dahab_day6_p3: 'نغادر دهب وقد حملنا معنا: هدوء الجبل، قوة الصحراء، وخفة البحر.',
       retreat_dahab_trainers_title: 'المدربات',
       retreat_dahab_trainer1_name: 'نوال عمر',
-      retreat_dahab_trainer1_role: 'مرشدة يوغا ووعي',
+      retreat_dahab_trainer1_role: 'مدربة يوغا ووعي',
       retreat_dahab_trainer2_name: 'حنان',
-      retreat_dahab_trainer2_role: 'دعم الريتريت',
+      retreat_dahab_trainer2_role: 'قائد مسار الجبل',
       retreat_dahab_gallery_title: 'صور من الرحلة',
       retreat_dahab_gallery_alt1: 'بحر دهب',
       retreat_dahab_gallery_alt2: 'إطلالة من الرحلة',
@@ -634,8 +633,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 • حقيبة حتى 20 كغم
 • حقيبة يد
 • جميع التنقلات الأرضية داخل زنجبار
-• 4 ليالٍ في فندق بوتيكي في جنوب الجزيرة – جامبياني
-• 3 ليالٍ في فندق بوتيكي على الشاطئ في Kiwengwa
+• 4 ليالٍ في إقامة مختارة بعناية في جنوب زنجبار
+• 3 ليالٍ في إقامة مختارة بعناية على الشاطئ في شمال شرق زنجبار
 • وجبات:
   o فطور يومي
   o عشاء يومي
@@ -648,17 +647,16 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 • زيارة Prison Island
 • جولة في Stone Town
 
-NUR Beach Hotel - Jambiani
-يقع على شاطئ جامبياني في الجنوب الشرقي من الجزيرة، ويتميّز بأجوائه الهادئة، وحداته القريبة من الشاطئ، وبركة سباحة ومساحة مريحة لبدء المسار الداخلي بلطف.
-الرابط الرسمي: https://nur-zanzibar.com/
-
-Mvuvi Boutique Resort - Kiwengwa
-يقع على شاطئ Kiwengwa ويقدّم أجواء بوتيك أكثر حميمية، مع سبا، إطلالات بحرية، ومساحة يوغا مناسبة لمرحلة الاندماج والختام في القسم الثاني من الرحلة.
-الرابط الرسمي: https://mvuvizanzibar.com/
+تفاصيل الإقامة المختارة
+• 4 ليالٍ في إقامة مختارة بعناية في جنوب زنجبار.
+• 3 ليالٍ في إقامة مختارة بعناية على الشاطئ في شمال شرق زنجبار.
+• سيتم مشاركة تفاصيل الإقامة النهائية بعد تأكيد الحجز.
 
 الخيار	السعر النهائي بالتحويل البنكي	ملاحظات
-غرفة ثلاثية - مع طيران	3100$	الباقة الكاملة مع الطيران.
-غرفة مزدوجة - مع طيران	3400$	الباقة الكاملة مع الطيران.
+غرفة ثلاثية - مع طيران (للتسجيل حتى 10.5)	3100$	سعر التسجيل المبكر.
+غرفة ثلاثية - مع طيران (بعد 10.5)	3200$	السعر بعد تاريخ 10.5.
+غرفة مزدوجة - مع طيران (للتسجيل حتى 10.5)	3400$	سعر التسجيل المبكر.
+غرفة مزدوجة - مع طيران (بعد 10.5)	3500$	السعر بعد تاريخ 10.5.
 
 ملاحظات مهمة بخصوص التسعير والدفع
 • السعر المذكور هو للدفع عبر تحويل بنكي.
@@ -678,7 +676,7 @@ Mvuvi Boutique Resort - Kiwengwa
 لقاء أولي	لقاء تعارف قصير جدًا مع المجموعة ثم راحة ونوم.
 ✨ قيمة هذا اليوم
 الهدف من هذا اليوم هو الاستقرار بعد السفر، تخفيف الإجهاد، والدخول التدريجي إلى أجواء الريتريت بدون ضغط.
-روابط مفيدة مرتبطة بهذا اليوم: NUR Beach Hotel
+روابط مفيدة مرتبطة بهذا اليوم: تفاصيل الإقامة تُشارك بعد تأكيد الحجز
 
 الأربعاء 8/7/2026 - العودة إلى الجذر
 يبدأ اليوم بجلسة يوغا شروق على الشاطئ وسيرموني افتتاحي لنية الرحلة، ثم فطور جماعي، وبعده زيارة Salaam Cave. وبدل جعل الغداء داخل The Rock كخيار أساسي بسبب ارتفاع الأسعار، تم اعتماد توقف تصويري حر بالقرب من المطعم ثم غداء حر في مكان أنسب سعريًا في المنطقة.
@@ -713,7 +711,7 @@ Mvuvi Boutique Resort - Kiwengwa
 08:00	فطور وتسجيل خروج.
 09:30	زيارة Jozani Forest ومشي تأملي وسط الغابة ومشاهدة قرود الـ Red Colobus.
 12:00	زيارة Spice Farm والتعرّف إلى القرفة، الفانيلا، القرنفل وجوزة الطيب وتأثير الروائح على الجهاز العصبي.
-بعد الظهر	الانتقال إلى Mvuvi Boutique Resort - Kiwengwa وتسجيل الدخول.
+بعد الظهر	الانتقال إلى مكان الإقامة الثاني في شمال شرق الجزيرة وتسجيل الدخول.
 18:30	يوغا ناعمة عند الغروب.
 19:30	جلسة Sound Healing أولى في الفندق الثاني.
 ✨ قيمة هذا اليوم
@@ -731,7 +729,7 @@ Mvuvi Boutique Resort - Kiwengwa
 20:30	جلسة كتابة تأملية: ما الذي تغيّر داخلي منذ بداية الرحلة؟
 ✨ قيمة هذا اليوم
 هذا اليوم يخلق مساحة لدمج كل ما مرّ سابقًا، ويمنح الجسد فرصة لالتقاط الأنفاس قبل دخول المرحلة الأخيرة من الرحلة.
-روابط مفيدة مرتبطة بهذا اليوم: Mvuvi Boutique Resort
+روابط مفيدة مرتبطة بهذا اليوم: تفاصيل الإقامة تُشارك بعد تأكيد الحجز
 
 الأحد 12/7/2026 - Mnemba Island + خيار ركوب الخيل
 يوم بحري جديد في أحد أجمل مواقع السنوركلينغ في زنجبار.
@@ -754,7 +752,7 @@ Mvuvi Boutique Resort - Kiwengwa
 من الغروب حتى الليل	Ceremony الختام: دائرة مشتركة، نوايا جديدة، وحرق أوراق "شبح الضعف" تحت السماء المفتوحة.
 ✨ قيمة هذا اليوم
 ننهي الليلة كما بدأنا الرحلة: بنية واضحة، قلب مفتوح، وإحساس داخلي بأن شيئًا تحرّر فعلًا.
-روابط مفيدة مرتبطة بهذا اليوم: Mvuvi Boutique Resort
+روابط مفيدة مرتبطة بهذا اليوم: تفاصيل الإقامة تُشارك بعد تأكيد الحجز
 
 الثلاثاء 14/7/2026 - ستون تاون والعودة إلى إسرائيل
 تم اعتماد اليوم الأخير ليجمع بين وقت صباحي هادئ، ثم زيارة Prison Island وجولة في Stone Town قبل العودة إلى المطار.

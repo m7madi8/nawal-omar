@@ -108,6 +108,16 @@
   left: 1.25rem;
   right: auto;
   z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0.5rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 241, 235, 0.35);
+  background: rgba(62, 47, 43, 0.24);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 [dir="rtl"] .rp-hero-back-link {
@@ -151,6 +161,8 @@
 
 .rp-hero-back-link:hover {
   color: rgba(255, 255, 255, 1);
+  background: rgba(62, 47, 43, 0.38);
+  border-color: rgba(245, 241, 235, 0.62);
 }
 
 .rp-hero-title {
