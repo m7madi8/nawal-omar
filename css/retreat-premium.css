@@ -33,9 +33,15 @@
 
 .rp-hero {
   position: relative;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--site-header-offset, 3.5rem));
   background: #ffffff;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .rp-hero {
+    min-height: calc(100dvh - var(--site-header-offset, 3.5rem));
+  }
 }
 
 .rp-hero::after {
@@ -88,13 +94,19 @@
 .rp-hero-content {
   position: relative;
   z-index: 2;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--site-header-offset, 3.5rem));
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 7.5rem 1.25rem 5rem;
+}
+
+@media (min-width: 768px) {
+  .rp-hero-content {
+    min-height: calc(100dvh - var(--site-header-offset, 3.5rem));
+  }
 }
 
 .rp-hero-center {
