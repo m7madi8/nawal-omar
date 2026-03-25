@@ -934,7 +934,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 
   function initI18n() {
     var stored = getStoredLang();
-    var lang = stored === 'ar' || stored === 'en' ? stored : 'en';
+    var lang = stored === 'ar' || stored === 'en' ? stored : 'ar';
     applyLanguage(lang);
 
     document.querySelectorAll('[data-lang-set]').forEach(function (btn) {
@@ -946,7 +946,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
   }
 
   window.nawalI18n = {
-    getLang: function () { return getStoredLang() || 'en'; },
+    getLang: function () { return getStoredLang() || 'ar'; },
     setLang: applyLanguage,
     t: getText,
     init: initI18n
