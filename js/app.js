@@ -288,6 +288,30 @@
     });
   }
 
+  function initMobileLangToggle() {
+    var btn = document.getElementById('mobile-lang-toggle');
+    if (!btn) return;
+    if (!window.nawalI18n || !window.nawalI18n.getLang || !window.nawalI18n.setLang) return;
+
+    function update() {
+      var current = window.nawalI18n.getLang() || 'en';
+      var target = current === 'ar' ? 'en' : 'ar';
+      btn.setAttribute('data-lang-set', target);
+      // Icon-only toggle; we only update the target language.
+    }
+
+    btn.addEventListener('click', function () {
+      var target = btn.getAttribute('data-lang-set');
+      if (target === 'ar' || target === 'en') window.nawalI18n.setLang(target);
+    });
+
+    window.addEventListener('nawal-lang-change', function () {
+      update();
+    });
+
+    update();
+  }
+
   function init() {
     var yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -296,6 +320,7 @@
     initPageLoader();
     initAudioConsent();
     initCursor();
+    initMobileLangToggle();
     initMenu();
   }
 

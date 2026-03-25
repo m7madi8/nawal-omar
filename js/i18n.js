@@ -30,6 +30,8 @@
       back: 'Back',
       lang_ar: 'العربية',
       lang_en: 'English',
+      lang_btn_ar: 'العربية',
+      lang_btn_en: 'الانجليزية',
 
       hero_tagline: 'Yoga · Mindfulness · Retreat',
       hero_title1: 'Change begins',
@@ -457,6 +459,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       back: 'رجوع',
       lang_ar: 'العربية',
       lang_en: 'English',
+      lang_btn_ar: 'العربية',
+      lang_btn_en: 'الانجليزية',
 
       hero_tagline: 'يوغا · وعي · راحة',
       hero_title1: 'التغيير يبدأ',
