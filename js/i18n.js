@@ -14,7 +14,7 @@
       nav_al_tira: 'Al-Tira Yoga',
       nav_jiva: 'Haifa Yoga',
       nav_retreat: 'Retreat',
-      seo_title: 'Nawal Omar | Yoga Teacher in Haifa, Israel · Vinyasa, Yin & Retreats',
+      seo_title: 'Nawal Omar',
       seo_description:
         'Certified yoga instructor Nawal Omar in Haifa, Israel: Vinyasa, Yin, Hatha & meditation. Private and group classes, Al-Tira & Haifa workshops, and international retreats. Book yoga in Israel.',
       menu_label: 'Menu',
@@ -443,7 +443,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       nav_al_tira: 'الطيرة يوغا',
       nav_jiva: 'حيفا يوغا',
       nav_retreat: 'ريتريت',
-      seo_title: 'نوال عمر | مدربة يوغا في حيفا، إسرائيل · فينيسا، يين وريتريت',
+      seo_title: 'نوال عمر',
       seo_description:
         'مدربة يوغا معتمدة نوال عمر في حيفا وإسرائيل: فينيسا، يين، هاثا وتأمل. حصص خاصة وجماعية، ورش الطيرة وحيفا، وريتريت دولية. يوغا في إسرائيل.',
       menu_label: 'القائمة',
