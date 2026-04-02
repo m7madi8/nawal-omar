@@ -203,7 +203,7 @@
       retreat_dahab_price_note: '(Payment link will be sent after initial registration)',
       retreat_dahab_book_now: 'Book now',
       retreat_dahab_policy_title: 'Booking confirmation & cancellation policy',
-      retreat_dahab_policy_1: 'An initial deposit of 400₪ is required to secure your booking.',
+      retreat_dahab_policy_1: 'A non-refundable initial deposit is required to secure your booking.',
       retreat_dahab_policy_2: 'This deposit is non-refundable.',
       retreat_dahab_policy_3: 'After sending the deposit, please share a transfer receipt image to confirm your booking officially.',
       retreat_dahab_policy_4: 'A seat is reserved only after the first deposit is received.',
@@ -226,7 +226,7 @@ Yoga and sound healing retreat with a Zanzibar Island exploration.`,
       retreat_heading_experience: 'What you will experience',
       retreat_heading_daily_journey: 'Daily journey',
       retreat_heading_accommodation: 'Accommodation & food',
-      retreat_heading_pricing: 'Pricing',
+      retreat_heading_booking_policy: 'Booking & cancellation policy',
       retreat_heading_for_whom: 'Who is this retreat for?',
       retreat_heading_closing: 'Final message',
       retreat_scroll_down: 'Scroll',
@@ -270,24 +270,6 @@ Selected accommodation details
 • 4 nights in carefully selected accommodation in the south of Zanzibar.
 • 3 nights in carefully selected beachfront accommodation in the north-east of Zanzibar.
 • Final accommodation details are shared after booking confirmation.
-
-Option	Final bank transfer price	Notes
-Triple room - with flight (booking until 10/5)	3100$	Early booking price.
-Triple room - with flight (booking after 10/5)	3200$	Regular price after 10/5.
-Double room - with flight (booking until 10/5)	3400$	Early booking price.
-Double room - with flight (booking after 10/5)	3500$	Regular price after 10/5.
-
-Important notes about pricing and payment
-• The price is for payment via bank transfer.
-• Credit card payment is available with a +1.7% credit card fee. Payment can be split into up to 3 installments, and in some cases up to 4.
-• If paying in NIS (Shekel), the price is calculated according to Bank Hapoalim's USD exchange rate on the execution date.
-• Price does not include personal travel insurance.
-• Price does not include the visa/permit to Zanzibar.
-• Horse riding on the beach is an optional activity and is not included in the base price. If you want to add it: +55$ per person.
-• A non-refundable initial deposit of 400$ is required to secure your booking.
-• After sending the deposit, please share a transfer receipt image to confirm your booking officially.
-• A seat is reserved only after the first deposit is received.
-• Seats are limited, and priority is given to participants who secure their booking first.
 
 Booking & cancellation policy
 • If cancellation happens less than one month before retreat date, no amount is refunded.
@@ -632,7 +614,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_dahab_price_note: '(سيتم إرسال رابط الدفع بعد التسجيل الأولي)',
       retreat_dahab_book_now: 'احجزي الآن',
       retreat_dahab_policy_title: 'سياسة تثبيت الحجز والإلغاء',
-      retreat_dahab_policy_1: 'يلزم دفع دفعة أولية بقيمة 400₪ لتثبيت الحجز.',
+      retreat_dahab_policy_1: 'يلزم دفع دفعة أولية غير قابلة للإرجاع لتثبيت الحجز.',
       retreat_dahab_policy_2: 'هذه الدفعة غير قابلة للإرجاع.',
       retreat_dahab_policy_3: 'بعد إرسال الدفعة، يرجى إرسال صورة عن التحويل لتأكيد الحجز رسميًا.',
       retreat_dahab_policy_4: 'يتم حجز المقعد فقط بعد تحويل الدفعة الأولى.',
@@ -655,7 +637,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_heading_experience: 'ماذا ستختبرين؟',
       retreat_heading_daily_journey: 'الرحلة اليومية',
       retreat_heading_accommodation: 'الإقامة والطعام',
-      retreat_heading_pricing: 'الأسعار والدفع',
+      retreat_heading_booking_policy: 'سياسة تثبيت الحجز والإلغاء',
       retreat_heading_for_whom: 'لمن يناسب هذا الريتريت؟',
       retreat_heading_closing: 'رسالة ختامية',
       retreat_scroll_down: 'مرر للأسفل',
@@ -699,25 +681,6 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 • 4 ليالٍ في إقامة مختارة بعناية في جنوب زنجبار.
 • 3 ليالٍ في إقامة مختارة بعناية على الشاطئ في شمال شرق زنجبار.
 • سيتم مشاركة تفاصيل الإقامة النهائية بعد تأكيد الحجز.
-
-الخيار	السعر النهائي بالتحويل البنكي	ملاحظات
-غرفة ثلاثية - مع طيران (للتسجيل حتى 10.5)	3100$	سعر التسجيل المبكر.
-غرفة ثلاثية - مع طيران (بعد 10.5)	3200$	السعر بعد تاريخ 10.5.
-غرفة مزدوجة - مع طيران (للتسجيل حتى 10.5)	3400$	سعر التسجيل المبكر.
-غرفة مزدوجة - مع طيران (بعد 10.5)	3500$	السعر بعد تاريخ 10.5.
-
-ملاحظات مهمة بخصوص التسعير والدفع
-• السعر المذكور هو للدفع عبر تحويل بنكي.
-• يمكن الدفع ببطاقة ائتمان مع إضافة 1.7% عمولة ائتمان. يمكن تقسيم الدفع حتى 3 دفعات، وفي بعض الحالات حتى 4 دفعات.
-• في حال الدفع بالشيكل، يتم احتساب السعر وفق שער الدولار (העברות והמחאות מכירה) של بنك הפועלים ביום التنفيذ.
-• السعر لا يشمل التأمين الشخصي على السفر.
-• السعر لا يشمل الفيزا/التأشيرة إلى زنجبار.
-• ركوب الخيل على الشاطئ فعالية اختيارية وغير مشمولة في السعر الأساسي. من ترغب بإضافتها: +55$ للشخص.
-• يلزم دفع دفعة أولية بقيمة 400$ لتثبيت الحجز.
-• هذه الدفعة غير قابلة للإرجاع.
-• بعد إرسال الدفعة، يرجى إرسال صورة عن التحويل لتأكيد الحجز رسميًا.
-• يتم حجز المقعد فقط بعد تحويل الدفعة الأولى.
-• عدد الأماكن محدود، والأولوية لمن تثبّت حجزها أولًا.
 
 سياسة تثبيت الحجز والإلغاء
 • في حال الإلغاء قبل شهر من موعد الريتريت، لا يتم استرجاع أي مبلغ.

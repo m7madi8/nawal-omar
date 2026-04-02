@@ -231,12 +231,12 @@
       </section>
 
 
-      <!-- PRICING -->
+      <!-- BOOKING POLICY -->
       <section class="rp-section animate-section">
         <div class="rp-container">
           <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
-            <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_pricing">Pricing</h2>
-            <div id="retreat-pricing" class="retreat-section-body text-sm leading-relaxed"></div>
+            <h2 class="rp-h2 rp-heading" data-i18n="retreat_heading_booking_policy">Booking & cancellation policy</h2>
+            <div id="retreat-booking-policy" class="retreat-section-body text-sm leading-relaxed"></div>
           </div>
         </div>
       </section>
@@ -505,92 +505,6 @@
         return '<div class="retreat-rich">' + renderBullets(hotelsText) + '</div>';
       }
 
-      function renderPricing(pricingText, isAr) {
-        var lines = toLines(pricingText).filter(function (l) { return l.trim() !== ''; });
-        if (!lines.length) return '';
-
-        var notesMarker = isAr ? 'ملاحظات مهمة بخصوص التسعير والدفع' : 'Important notes about pricing and payment';
-        var notesIdx = -1;
-        for (var i = 0; i < lines.length; i++) {
-          if (lines[i].indexOf(notesMarker) === 0) { notesIdx = i; break; }
-        }
-
-        var tableLines = notesIdx === -1 ? lines : lines.slice(0, notesIdx);
-        var notesLines = notesIdx === -1 ? [] : lines.slice(notesIdx + 1);
-
-        var headerMarker = isAr ? 'الخيار' : 'Option';
-        var headerLine = tableLines[0] && tableLines[0].indexOf(headerMarker) !== -1 ? tableLines[0] : '';
-        var headerCols = headerLine ? headerLine.split('\t') : [];
-        if (!headerCols.length || headerCols.length < 3) headerCols = isAr
-          ? ['الخيار', 'السعر النهائي بالتحويل البنكي', 'ملاحظات']
-          : ['Option', 'Final bank transfer price', 'Notes'];
-
-        var rows = [];
-        tableLines.slice(1).forEach(function (line) {
-          if (!line || line.trim() === '') return;
-          var t = line.trim();
-          if (isAr) {
-            if (t.indexOf('غرفة') !== 0) return;
-          } else {
-            if (t.toLowerCase().indexOf('room') === -1) return;
-          }
-          var cols = t.split('\t');
-          if (cols.length < 3) {
-            var m = t.match(/^(.*?)[\t ]+(\d+\$)[\t ]+(.*)$/);
-            if (m) cols = [m[1], m[2], m[3]];
-          }
-          if (cols.length >= 3) {
-            rows.push([cols[0], cols[1], cols.slice(2).join(' ')]);
-          }
-        });
-
-        var html = '<table class="retreat-table">';
-        html += '<thead><tr>' +
-          headerCols.slice(0, 3).map(function (h) { return '<th>' + escapeHtml(h.trim()) + '</th>'; }).join('') +
-          '</tr></thead>';
-        html += '<tbody>';
-        if (!rows.length) {
-          html += '<tr><td colspan="3">' + escapeHtml(pricingText) + '</td></tr>';
-        } else {
-          rows.forEach(function (r) {
-            html += '<tr>' +
-              '<td>' + escapeHtml(String(r[0] || '').trim()) + '</td>' +
-              '<td style="text-align:center;">' + escapeHtml(String(r[1] || '').trim()) + '</td>' +
-              '<td>' + escapeHtml(String(r[2] || '').trim()) + '</td>' +
-              '</tr>';
-          });
-        }
-        html += '</tbody></table>';
-
-        if (notesLines.length) {
-          var policyMarker = isAr ? 'سياسة تثبيت الحجز والإلغاء' : 'Booking & cancellation policy';
-          var policyIdx = -1;
-          for (var j = 0; j < notesLines.length; j++) {
-            if ((notesLines[j] || '').trim().indexOf(policyMarker) === 0) {
-              policyIdx = j;
-              break;
-            }
-          }
-
-          var pricingNotes = policyIdx === -1 ? notesLines : notesLines.slice(0, policyIdx);
-          var policyNotes = policyIdx === -1 ? [] : notesLines.slice(policyIdx + 1);
-
-          if (pricingNotes.length) {
-            var notesText = pricingNotes.join('\n').trim();
-            html += '<div style="margin-top:1rem;">' + renderBullets(notesText) + '</div>';
-          }
-
-          if (policyNotes.length) {
-            var policyText = policyNotes.join('\n').trim();
-            html += '<div class="retreat-policy-box">';
-            html += '<h3 class="retreat-policy-title">' + escapeHtml(policyMarker) + '</h3>';
-            html += '<div class="retreat-policy-body">' + renderBullets(policyText) + '</div>';
-            html += '</div>';
-          }
-        }
-        return html;
-      }
-
       function renderItinerary(itinText, isAr) {
         var lines = toLines(itinText);
         var dayRe = isAr
@@ -737,7 +651,7 @@
         var elDiff = document.getElementById('retreat-diff');
         var elIncluded = document.getElementById('retreat-included');
         var elHotels = document.getElementById('retreat-hotels');
-        var elPricing = document.getElementById('retreat-pricing');
+        var elBookingPolicy = document.getElementById('retreat-booking-policy');
         var elItinerary = document.getElementById('retreat-itinerary');
         var elForWhom = document.getElementById('retreat-for-whom');
         var elClosing = document.getElementById('retreat-closing');
@@ -761,8 +675,16 @@
           isAr ? 'ماذا تشمل الباقة؟' : 'What is included?',
           isAr ? 'تفاصيل الإقامة المختارة' : 'Selected accommodation details'
         );
-        var hotels = sliceFromTo(raw1, isAr ? 'تفاصيل الإقامة المختارة' : 'Selected accommodation details', isAr ? 'الخيار' : 'Option');
-        var pricing = sliceFromTo(raw1, isAr ? 'الخيار' : 'Option', '');
+        var hotels = sliceFromTo(
+          raw1,
+          isAr ? 'تفاصيل الإقامة المختارة' : 'Selected accommodation details',
+          isAr ? 'سياسة تثبيت الحجز والإلغاء' : 'Booking & cancellation policy'
+        );
+        var bookingPolicy = afterToken(
+          raw1,
+          isAr ? 'سياسة تثبيت الحجز والإلغاء' : 'Booking & cancellation policy',
+          ''
+        );
 
         var itin = afterToken(raw2, isAr ? 'البرنامج اليومي النهائي' : 'Final daily itinerary', '');
 
@@ -776,7 +698,7 @@
         if (elDiff) elDiff.innerHTML = renderRich(diff);
         if (elIncluded) elIncluded.innerHTML = renderBullets(included);
         if (elHotels) elHotels.innerHTML = renderHotels(hotels, isAr);
-        if (elPricing) elPricing.innerHTML = renderPricing(pricing, isAr);
+        if (elBookingPolicy) elBookingPolicy.innerHTML = bookingPolicy ? renderBullets(bookingPolicy) : '';
         if (elItinerary) elItinerary.innerHTML = renderItinerary(itin, isAr);
         if (elForWhom) elForWhom.innerHTML = renderBullets(forWhom);
         if (elClosing) elClosing.innerHTML = renderParagraphs(closing);
