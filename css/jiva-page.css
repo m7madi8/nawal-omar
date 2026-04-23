@@ -165,6 +165,24 @@
   padding: clamp(0.9rem, 2.4vw, 1.2rem);
 }
 
+.jiva-page .jiva-moments-swipe-hint {
+  margin: 0 0 0.7rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--jiva-muted);
+  background: rgba(166, 124, 82, 0.09);
+  border-radius: var(--jiva-radius-sm);
+  border: 1px solid rgba(166, 124, 82, 0.18);
+}
+
+@media (min-width: 640px) {
+  .jiva-page .jiva-moments-swipe-hint {
+    display: none;
+  }
+}
+
 .jiva-page .jiva-moments-reels {
   display: flex;
   flex-direction: row;
@@ -638,4 +656,31 @@
 
 [dir="rtl"] .jiva-page .jiva-back svg {
   transform: scaleX(-1);
+}
+
+/* Arabic: Tajawal (jiva-page loads after rtl.css; these override Playfair here) */
+[dir="rtl"] .jiva-page {
+  font-family: 'Tajawal', sans-serif;
+}
+
+[dir="rtl"] .jiva-page .jiva-page-title,
+[dir="rtl"] .jiva-page .jiva-subtitle,
+[dir="rtl"] .jiva-page .jiva-shell-greeting,
+[dir="rtl"] .jiva-page .jiva-plan-card__price,
+[dir="rtl"] .jiva-page .jiva-gift-title {
+  font-family: 'Tajawal', sans-serif;
+}
+
+[dir="rtl"] .jiva-page .jiva-page-title,
+[dir="rtl"] .jiva-page .jiva-subtitle,
+[dir="rtl"] .jiva-page .jiva-shell-greeting {
+  font-weight: 700;
+}
+
+[dir="rtl"] .jiva-page .jiva-plan-card__price {
+  font-weight: 800;
+}
+
+[dir="rtl"] .jiva-page .jiva-gift-title {
+  font-weight: 700;
 }
