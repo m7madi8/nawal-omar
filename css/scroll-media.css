@@ -79,6 +79,7 @@ body[data-menu-open="true"] .menu-launcher-bar.bar3 {
 .video-frame,
 .stack-card-inner,
 .workshop-card-image-wrap,
+.jiva-moment-photo,
 .retreat-page .overflow-hidden img {
   opacity: 0;
   transform: translateY(22px) scale(.96);
@@ -90,6 +91,7 @@ body[data-menu-open="true"] .menu-launcher-bar.bar3 {
 .animate-section.in-view .video-frame,
 .animate-section.in-view .stack-card-inner,
 .animate-section.in-view .workshop-card-image-wrap,
+.animate-section.in-view .jiva-moment-photo,
 .animate-section.in-view .overflow-hidden img {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -100,6 +102,7 @@ body[data-menu-open="true"] .menu-launcher-bar.bar3 {
   .video-frame,
   .stack-card-inner,
   .workshop-card-image-wrap,
+  .jiva-moment-photo,
   .retreat-page .overflow-hidden img {
     opacity: 1;
     transform: none;

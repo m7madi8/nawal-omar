@@ -1,0 +1,641 @@
+/**
+ * Haifa / Jiva workshop page — unified layout & tokens
+ */
+
+.workshop-page.jiva-page {
+  --jiva-bg: #f7f5f2;
+  --jiva-bg-elevated: #faf9f7;
+  --jiva-surface: #ffffff;
+  --jiva-surface-muted: #fdfcfa;
+  --jiva-border: rgba(90, 70, 50, 0.1);
+  --jiva-border-strong: rgba(90, 70, 50, 0.16);
+  --jiva-muted: rgba(90, 70, 50, 0.7);
+  --jiva-heading: #3a3028;
+  --jiva-radius-xl: 1.125rem;
+  --jiva-radius-lg: 1rem;
+  --jiva-radius-md: 0.8125rem;
+  --jiva-radius-sm: 0.6875rem;
+  --jiva-shadow-panel: 0 1px 0 rgba(255, 255, 255, 0.92) inset, 0 22px 50px -34px rgba(45, 35, 28, 0.22);
+  --jiva-shadow-soft: 0 14px 36px -28px rgba(45, 35, 28, 0.18);
+  --jiva-section-pad-y: clamp(2rem, 5vw, 2.75rem);
+  --jiva-stack: clamp(1.25rem, 3vw, 1.75rem);
+  --jiva-content-max: 42rem;
+  --jiva-wrap-pad-x: clamp(1rem, 4vw, 1.65rem);
+  background: var(--jiva-bg);
+}
+
+/* Single column shell */
+.jiva-page .jiva-page-wrap {
+  max-width: var(--jiva-content-max);
+  margin-inline: auto;
+  padding-inline: var(--jiva-wrap-pad-x);
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.jiva-page .jiva-section-inner {
+  width: 100%;
+}
+
+.jiva-page .jiva-page-wrap > .jiva-section:not(:first-child) {
+  margin-top: var(--jiva-section-pad-y);
+}
+
+/* Shared card surface */
+.jiva-page .jiva-panel {
+  border-radius: var(--jiva-radius-xl);
+  border: 1px solid var(--jiva-border);
+  background: var(--jiva-surface);
+  box-shadow: var(--jiva-shadow-panel);
+}
+
+/* Typography scale */
+.jiva-page .jiva-eyebrow {
+  margin: 0 0 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent, #a67c52);
+  text-align: center;
+}
+
+.jiva-page .jiva-eyebrow--left {
+  text-align: start;
+  margin-top: 0.25rem;
+}
+
+.jiva-page .jiva-page-title {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 5vw, 2.65rem);
+  line-height: 1.1;
+  color: var(--jiva-heading);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.jiva-page .jiva-subtitle {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.28rem, 2.8vw, 1.55rem);
+  font-weight: 500;
+  color: var(--jiva-heading);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+}
+
+.jiva-page .jiva-subtitle--tight {
+  margin-top: 0.35rem;
+}
+
+.jiva-page .jiva-lead {
+  margin: 1rem auto 0;
+  max-width: 34rem;
+  font-size: 0.9375rem;
+  line-height: 1.68;
+  color: var(--jiva-muted);
+  text-align: center;
+}
+
+.jiva-page .jiva-lead--compact {
+  margin-top: 0.75rem;
+  max-width: none;
+}
+
+.jiva-page .jiva-block-head {
+  margin-bottom: var(--jiva-stack);
+  text-align: center;
+}
+
+.jiva-page .jiva-block-head .jiva-eyebrow {
+  margin-bottom: 0.4rem;
+}
+
+.jiva-page .jiva-block-head .jiva-eyebrow--left {
+  text-align: center;
+}
+
+/* Hero */
+.jiva-page .jiva-hero {
+  padding-top: clamp(3.25rem, 10vw, 4.25rem);
+  padding-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.jiva-page .jiva-hero-top {
+  margin-bottom: var(--jiva-stack);
+}
+
+.jiva-page .jiva-hero-panel {
+  padding: clamp(1.35rem, 3.5vw, 2rem) clamp(1.1rem, 3vw, 1.75rem);
+  text-align: center;
+}
+
+/* Story */
+.jiva-page .jiva-story-grid {
+  display: grid;
+  gap: var(--jiva-stack);
+  align-items: start;
+}
+
+.jiva-page .jiva-story-grid--text-only {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.jiva-page .jiva-story-body {
+  padding: clamp(1.35rem, 3.2vw, 1.85rem);
+}
+
+.jiva-page .jiva-story-body p {
+  margin: 0.85rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.72;
+  color: var(--jiva-muted);
+}
+
+.jiva-page .jiva-story-body p + p {
+  margin-top: 0.75rem;
+}
+
+/* Reels & photos */
+.jiva-page .jiva-moments-shell {
+  max-width: none;
+  margin-inline: 0;
+  padding: clamp(0.9rem, 2.4vw, 1.2rem);
+}
+
+.jiva-page .jiva-moments-reels {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.65rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  padding-bottom: 0.35rem;
+  margin-inline: -0.1rem;
+  padding-inline: 0.1rem;
+}
+
+.jiva-page .jiva-moments-reels::-webkit-scrollbar {
+  height: 4px;
+}
+
+.jiva-page .jiva-moments-reels::-webkit-scrollbar-thumb {
+  background: rgba(166, 124, 82, 0.35);
+  border-radius: 999px;
+}
+
+.jiva-page .jiva-moments-reels .jiva-reel {
+  flex: 0 0 min(92vw, 22rem);
+  width: min(92vw, 22rem);
+  max-width: 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.jiva-page .jiva-reel.jiva-reel-player {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--jiva-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--jiva-border);
+  background: #0c0b0a;
+  margin-inline: 0;
+  box-shadow: var(--jiva-shadow-soft);
+}
+
+.jiva-page .jiva-reel-player .jiva-reel-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.jiva-page .jiva-reel-player.is-playing .jiva-reel-video {
+  cursor: pointer;
+}
+
+.jiva-page .jiva-reel-playbtn {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary, #5a4632);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.28);
+  transition: opacity 0.28s ease, transform 0.22s ease, background 0.2s ease;
+}
+
+.jiva-page .jiva-reel-playbtn:hover {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+.jiva-page .jiva-reel-playbtn:focus-visible {
+  outline: 2px solid var(--color-accent, #a67c52);
+  outline-offset: 3px;
+}
+
+.jiva-page .jiva-reel-playbtn__ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+}
+
+.jiva-page .jiva-reel-playbtn__icon {
+  position: relative;
+  margin-inline-start: 3px;
+}
+
+.jiva-page .jiva-reel-player.is-playing .jiva-reel-playbtn {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jiva-page .jiva-reel-playbtn,
+  .jiva-page .jiva-reel-player.is-playing .jiva-reel-playbtn {
+    transition: none;
+  }
+}
+
+.jiva-page .jiva-moments-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.jiva-page .jiva-moments-photos .jiva-moment-photo {
+  margin: 0;
+  border-radius: var(--jiva-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--jiva-border);
+  background: #edeae6;
+  aspect-ratio: 4 / 3;
+  box-shadow: var(--jiva-shadow-soft);
+}
+
+.jiva-page .jiva-moment-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 640px) {
+  .jiva-page .jiva-moments-reels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+    gap: 0.85rem;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+
+  .jiva-page .jiva-moments-reels .jiva-reel {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    scroll-snap-align: unset;
+  }
+
+  .jiva-page .jiva-moments-photos {
+    gap: 0.85rem;
+    margin-top: 1rem;
+  }
+}
+
+.jiva-page .jiva-shell {
+  max-width: none;
+  margin-inline: 0;
+  padding: clamp(1.35rem, 3.5vw, 2rem);
+}
+
+.jiva-page .jiva-shell .jiva-eyebrow--left {
+  margin-top: 0.6rem;
+}
+
+.jiva-page .jiva-shell-greeting {
+  margin: 0 0 1.25rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-weight: 500;
+  color: var(--jiva-heading);
+  text-align: center;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--jiva-border);
+}
+
+.jiva-page .jiva-plans {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .jiva-page .jiva-plans {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+}
+
+.jiva-page .jiva-plan-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1rem 0.95rem 0.95rem;
+  border-radius: var(--jiva-radius-md);
+  border: 1px solid var(--jiva-border);
+  background: var(--jiva-surface-muted);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.jiva-page .jiva-plan-card:hover {
+  border-color: rgba(166, 124, 82, 0.38);
+  box-shadow: var(--jiva-shadow-soft);
+  transform: translateY(-2px);
+}
+
+.jiva-page .jiva-plan-card__title {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--jiva-heading);
+  line-height: 1.35;
+}
+
+.jiva-page .jiva-plan-card__price {
+  margin: 0.35rem 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-secondary, #5a4632);
+  letter-spacing: -0.02em;
+}
+
+.jiva-page .jiva-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.jiva-page .jiva-btn--primary {
+  background: var(--color-secondary, #5a4632);
+  color: #fff;
+  border-color: rgba(45, 35, 28, 0.2);
+}
+
+.jiva-page .jiva-btn--primary:hover {
+  background: var(--color-accent, #a67c52);
+  color: #fff;
+}
+
+.jiva-page .jiva-btn--ghost {
+  background: transparent;
+  color: var(--color-secondary, #5a4632);
+  border-color: var(--jiva-border-strong);
+}
+
+.jiva-page .jiva-btn--ghost:hover {
+  background: rgba(90, 70, 50, 0.06);
+}
+
+/* Gift */
+.jiva-page .jiva-gift {
+  margin-top: var(--jiva-stack);
+  padding: 1.15rem 1.05rem 1.1rem;
+  border-radius: var(--jiva-radius-lg);
+  border: 1px dashed rgba(166, 124, 82, 0.42);
+  background: linear-gradient(165deg, #fffefb 0%, #f9f5ee 100%);
+  text-align: start;
+  position: relative;
+}
+
+.jiva-page .jiva-gift-badge {
+  position: absolute;
+  top: 0.95rem;
+  inset-inline-end: 0.95rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a4632;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--jiva-border);
+}
+
+.jiva-page .jiva-gift-title {
+  margin: 0;
+  padding-inline-end: 5.25rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--jiva-heading);
+  line-height: 1.35;
+}
+
+@media (min-width: 480px) {
+  .jiva-page .jiva-gift-title {
+    font-size: 1.125rem;
+    padding-inline-end: 5.75rem;
+  }
+}
+
+.jiva-page .jiva-gift-sub {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--jiva-muted);
+}
+
+.jiva-page .jiva-gift-females {
+  margin: 0.4rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-accent, #a67c52);
+}
+
+.jiva-page .jiva-gift-prices {
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.jiva-page .jiva-gift-prices p {
+  margin: 0;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.8125rem;
+  border-radius: var(--jiva-radius-sm);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--jiva-border);
+  color: var(--jiva-muted);
+}
+
+.jiva-page .jiva-gift-note {
+  margin: 0.7rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--jiva-muted);
+}
+
+.jiva-page .jiva-gift-actions {
+  margin-top: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 520px) {
+  .jiva-page .jiva-gift-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .jiva-page .jiva-gift-actions .jiva-btn {
+    flex: 1;
+    min-width: 9.25rem;
+    margin-top: 0;
+  }
+}
+
+/* Meta + schedule (inset panels) */
+.jiva-page .jiva-meta {
+  margin-top: var(--jiva-stack);
+  display: grid;
+  gap: 0.65rem;
+}
+
+@media (min-width: 560px) {
+  .jiva-page .jiva-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.jiva-page .jiva-meta-tile {
+  padding: 0.95rem 1rem;
+  border-radius: var(--jiva-radius-md);
+  border: 1px solid var(--jiva-border);
+  background: var(--jiva-surface-muted);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+}
+
+.jiva-page .jiva-meta-tile h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent, #a67c52);
+}
+
+.jiva-page .jiva-meta-tile p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--jiva-muted);
+}
+
+.jiva-page .jiva-schedule {
+  margin-top: 0.85rem;
+  padding: 0.95rem 1rem;
+  border-radius: var(--jiva-radius-md);
+  border: 1px solid var(--jiva-border);
+  background: var(--jiva-surface-muted);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.75) inset;
+}
+
+.jiva-page .jiva-schedule h4 {
+  margin: 0 0 0.45rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent, #a67c52);
+}
+
+.jiva-page .jiva-schedule-line {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--jiva-muted);
+}
+
+.jiva-page .jiva-schedule-line--slot2 {
+  margin-top: 0.4rem;
+}
+
+/* Join */
+.jiva-page .jiva-join {
+  max-width: none;
+  margin-top: var(--jiva-stack);
+  margin-inline: 0;
+  padding: clamp(1.35rem, 3.5vw, 1.85rem);
+  text-align: center;
+}
+
+.jiva-page .jiva-join .jiva-btn {
+  margin-top: 1.15rem;
+  margin-inline: auto;
+  width: auto;
+  min-width: 13.5rem;
+  padding: 0.65rem 1.25rem;
+}
+
+.jiva-page ~ .footer-isla {
+  background: var(--jiva-bg);
+  border-top-color: var(--jiva-border);
+}
+
+.jiva-page .jiva-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--jiva-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.jiva-page .jiva-back:hover {
+  color: var(--color-accent, #a67c52);
+}
+
+[dir="rtl"] .jiva-page .jiva-back svg {
+  transform: scaleX(-1);
+}
