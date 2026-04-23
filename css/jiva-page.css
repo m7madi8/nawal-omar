@@ -377,8 +377,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(143, 168, 150, 0.55),
-    rgba(166, 124, 82, 0.65),
+    rgba(255, 252, 248, 0.95),
+    rgba(166, 124, 82, 0.75),
+    rgba(255, 248, 240, 0.85),
     transparent
   );
 }
@@ -460,16 +461,16 @@
   height: 3px;
   margin: -1.15rem -1rem 0.9rem;
   border-radius: 1.05rem 1.05rem 0 0;
-  background: linear-gradient(90deg, #9eb5a8, #c4a882);
-  opacity: 0.88;
+  background: linear-gradient(90deg, #faf6f1, #e8d9cc, #c4a882);
+  opacity: 0.92;
 }
 
 .jiva-page .jiva-plan-card:nth-child(2)::before {
-  background: linear-gradient(90deg, #c4a882, #b89a7e);
+  background: linear-gradient(90deg, #f2e8de, #c4a882, #9a7b5c);
 }
 
 .jiva-page .jiva-plan-card:nth-child(3)::before {
-  background: linear-gradient(90deg, #a8b8ae, #8a9a91);
+  background: linear-gradient(90deg, #efe6dc, #b89a7e, #6b5848);
 }
 
 .jiva-page .jiva-plan-card:hover {
