@@ -409,10 +409,10 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 
       jiva_page_label: 'Jiva Yoga',
       jiva_page_title: 'Jiva Yoga',
-      jiva_page_intro: 'Connect body, breath and mind. A holistic approach blending movement, meditation and mindfulness in a supportive space.',
-      jiva_heading: 'Body, breath and mindfulness',
-      jiva_p1: 'Jiva Yoga is a holistic practice that weaves movement, breathwork, and meditation into one flow. In a calm and supportive environment, we cultivate awareness and presence—on and off the mat.',
-      jiva_p2: 'Join the Jiva Yoga community on WhatsApp for class updates, inspiration, and connection with fellow practitioners.',
+      jiva_page_body:
+        'Holistic Vinyasa by the sea: movement, breathwork, and meditation woven into one calm, supportive flow—cultivating awareness on the mat and in daily life.',
+      jiva_page_whatsapp:
+        'Join the Haifa Yoga community on WhatsApp for class updates, inspiration, and connection with fellow practitioners.',
       jiva_moments_kicker: 'Reels & photos',
       jiva_moments_title: 'From the mat & the sea',
       jiva_moments_reels_label: 'Short video reels',
@@ -863,10 +863,10 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 
       jiva_page_label: 'حيفا يوغا',
       jiva_page_title: 'حيفا يوغا',
-      jiva_page_intro: 'ربط الجسد والنفس والعقل. نهج شامل يدمج الحركة والتأمل والوعي في فضاء داعم.',
-      jiva_heading: 'جسد ونفس ووعي',
-      jiva_p1: 'حيفا يوغا ممارسة شاملة تنسج الحركة وعمل النفس والتأمل في تدفق واحد. في بيئة هادئة وداعمة، نزرع الوعي والحضور—على السجادة وخارجها.',
-      jiva_p2: 'انضمي لمجتمع حيفا يوغا على واتساب لتحديثات الحصص والإلهام والاتصال بالممارسين.',
+      jiva_page_body:
+        'فينشياسا شاملة قرب البحر: ننسج الحركة وعمل النَفَس والتأمل في تدفق واحد هادئ، ونزرع الوعي والحضور—في الحصة وفي اليوم.',
+      jiva_page_whatsapp:
+        'لمتابعة المواعيد والإلهام والقرب من المجتمع: انضمي إلى مجموعة واتساب حيفا يوغا.',
       jiva_moments_kicker: 'ريلز وصور',
       jiva_moments_title: 'من السجادة والبحر',
       jiva_moments_reels_label: 'ريلز فيديو قصيرة',

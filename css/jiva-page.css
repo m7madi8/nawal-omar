@@ -119,7 +119,7 @@
 /* Hero */
 .jiva-page .jiva-hero {
   padding-top: clamp(3.25rem, 10vw, 4.25rem);
-  padding-bottom: clamp(1.5rem, 4vw, 2rem);
+  padding-bottom: clamp(1.75rem, 4.5vw, 2.35rem);
 }
 
 .jiva-page .jiva-hero-top {
@@ -131,31 +131,12 @@
   text-align: center;
 }
 
-/* Story */
-.jiva-page .jiva-story-grid {
-  display: grid;
-  gap: var(--jiva-stack);
-  align-items: start;
-}
-
-.jiva-page .jiva-story-grid--text-only {
-  max-width: none;
-  margin-inline: 0;
-}
-
-.jiva-page .jiva-story-body {
-  padding: clamp(1.35rem, 3.2vw, 1.85rem);
-}
-
-.jiva-page .jiva-story-body p {
-  margin: 0.85rem 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.72;
+.jiva-page .jiva-lead--whatsapp {
+  margin-top: clamp(1rem, 2.8vw, 1.35rem);
+  max-width: 33rem;
+  font-size: 0.875rem;
+  line-height: 1.68;
   color: var(--jiva-muted);
-}
-
-.jiva-page .jiva-story-body p + p {
-  margin-top: 0.75rem;
 }
 
 /* Reels & photos */
