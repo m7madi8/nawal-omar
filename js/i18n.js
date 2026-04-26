@@ -407,8 +407,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       al_tira_join_text: 'Get schedules, updates, and connect with others in the Al-Tira Yoga community on WhatsApp.',
       al_tira_join_btn: 'Join Al-Tira Yoga WhatsApp group',
 
-      jiva_page_label: 'Jiva Yoga',
-      jiva_page_title: 'Jiva Yoga',
+      jiva_page_label: 'Haifa Yoga',
+      jiva_page_title: 'Haifa Yoga',
       jiva_page_body:
         'Holistic Vinyasa by the sea: movement, breathwork, and meditation woven into one calm, supportive flow—cultivating awareness on the mat and in daily life.',
       jiva_page_whatsapp:
@@ -448,9 +448,9 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_schedule_slot1: 'NAMASTE · Saturday · 18:00 · by the sea ❤️',
       jiva_schedule_slot2: 'Tuesday · 19:20 · by the sea ❤️',
       jiva_join_eyebrow: 'Community',
-      jiva_join_title: 'Join the Jiva Yoga group',
-      jiva_join_text: 'Get schedules, updates, and connect with others in the Jiva Yoga community on WhatsApp.',
-      jiva_join_btn: 'Join Jiva Yoga WhatsApp group',
+      jiva_join_title: 'Join the Haifa Yoga group',
+      jiva_join_text: 'Get schedules, updates, and connect with others in the Haifa Yoga community on WhatsApp.',
+      jiva_join_btn: 'Join Haifa Yoga WhatsApp group',
 
       nawal_loader: 'Breathe',
       nawal_tagline: 'A quiet space for your inner light',
