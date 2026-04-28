@@ -13,12 +13,12 @@
       <h1>Welcome back</h1>
       <p class="login-subtitle">Sign in to manage yoga classes and retreat requests.</p>
 
-      <form id="loginForm" class="login-form" novalidate>
+      <form id="loginForm" class="login-form" novalidate autocomplete="off">
         <label for="username">Username</label>
-        <input id="username" name="username" type="text" autocomplete="username" placeholder="nawal" required>
+        <input id="username" name="username" type="text" autocomplete="off" placeholder="Enter username" required>
 
         <label for="password">Password</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="nawalll" required>
+        <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Enter password" required>
 
         <p id="loginError" class="form-error" aria-live="polite"></p>
         <button type="submit" class="btn btn-primary">Login</button>

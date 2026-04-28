@@ -108,7 +108,7 @@
         return;
       }
 
-      error.textContent = "Invalid credentials. Use nawal / nawalll.";
+      error.textContent = "Invalid username or password.";
     });
   }
 
