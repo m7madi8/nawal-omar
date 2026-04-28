@@ -100,7 +100,7 @@
       color: #564031;
       font-size: 0.93rem;
     }
-    input, textarea, select {
+    input:not([type="radio"]):not([type="checkbox"]), textarea, select {
       width: 100%;
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -111,7 +111,7 @@
       font-size: 0.95rem;
     }
     textarea { min-height: 110px; resize: vertical; }
-    input:focus, textarea:focus, select:focus {
+    input:not([type="radio"]):not([type="checkbox"]):focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(183, 136, 95, 0.18);
@@ -144,6 +144,10 @@
     .choice-control {
       flex: 0 0 auto;
       margin-inline-start: 10px;
+      width: 18px;
+      height: 18px;
+      accent-color: #b07a4f;
+      box-shadow: none !important;
     }
     .check-item:has(input:checked), .radio-item:has(input:checked) {
       border-color: #c59f79;
@@ -228,10 +232,6 @@
               <input id="phone" name="رقم الهاتف" type="tel" required>
             </div>
             <div>
-              <label for="email" data-t="email">3) Email</label>
-              <input id="email" name="البريد الإلكتروني" type="email">
-            </div>
-            <div>
               <label for="age" data-t="age">4) Age *</label>
               <input id="age" name="العمر" type="number" min="16" required>
             </div>
@@ -309,8 +309,7 @@
 
       <div class="contact" id="contactBox">
         لأي سؤال أو استفسار:<br>
-        📞 052-249-6366<br>
-        ✉️ eslamhuhu1@gmail.com
+        📞 052-249-6366
       </div>
     </section>
   </main>
@@ -329,7 +328,7 @@
           secBasic: "Basic Information",
           fullName: "1) Full Name *",
           phone: "2) Phone Number (WhatsApp) *",
-          email: "3) Email",
+          email: "",
           age: "4) Age *",
           city: "5) City *",
           secIntent: "Your Intention",
@@ -357,7 +356,7 @@
           freeNote: "15) Anything else you would like to share?",
           submit: "Submit Initial Registration",
           successMsg: "Form submitted successfully. We will contact you soon.",
-          contact: "For questions:\n📞 052-249-6366\n✉️ eslamhuhu1@gmail.com",
+          contact: "For questions:\n📞 052-249-6366",
           checkError: "Please select at least one activity.",
           submitError: "Something went wrong while sending. Please try again."
         },
@@ -370,7 +369,7 @@
           secBasic: "البيانات الأساسية",
           fullName: "1) الاسم الكامل *",
           phone: "2) رقم الهاتف (واتساب) *",
-          email: "3) البريد الإلكتروني",
+          email: "",
           age: "4) العمر *",
           city: "5) مكان السكن *",
           secIntent: "الهدف من المشاركة",
@@ -398,7 +397,7 @@
           freeNote: "15) أي شيء إضافي تحبين مشاركته معنا؟",
           submit: "إرسال التسجيل الأوّلي",
           successMsg: "تم إرسال النموذج بنجاح. سنتواصل معكِ قريبًا.",
-          contact: "لأي سؤال أو استفسار:\n📞 052-249-6366\n✉️ eslamhuhu1@gmail.com",
+          contact: "لأي سؤال أو استفسار:\n📞 052-249-6366",
           checkError: "يرجى اختيار نشاط واحد على الأقل.",
           submitError: "حصل خطأ أثناء الإرسال. حاولي مرة أخرى."
         }
