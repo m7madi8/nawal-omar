@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Initial Registration | Wadi Rum Retreat</title>
+  <meta name="description" content="Initial registration form for Wadi Rum desert retreat.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f1ea;
+      --card: #fffdf9;
+      --line: #e4d8ca;
+      --text: #3e2f2b;
+      --muted: #7a6455;
+      --primary: #b7885f;
+      --primary-dark: #986a43;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Cairo", system-ui, sans-serif;
+      background: radial-gradient(circle at 15% 15%, #fdfaf6 0, #f7f1ea 45%, #eeddca 100%);
+      color: var(--text);
+      padding: 22px 14px;
+    }
+    .wrap {
+      width: min(920px, 100%);
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(152, 106, 67, 0.2);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 14px 30px rgba(89, 59, 35, 0.08);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #dec5ad;
+      background: #fff8ef;
+      color: #7d5f48;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      color: #2f221d;
+    }
+    .lead {
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+    .small-note {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border: 1px dashed #d4bea9;
+      border-radius: 12px;
+      background: #fff8ef;
+      color: #6a513f;
+      font-size: 0.92rem;
+    }
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+      color: #654b39;
+    }
+    .form-section {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid #eadac9;
+      background: linear-gradient(180deg, #fffdf9 0%, #fdf7ef 100%);
+    }
+    .section-sub {
+      margin: 0 0 10px;
+      color: #7b6556;
+      font-size: 0.88rem;
+    }
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #564031;
+      font-size: 0.93rem;
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdfb;
+      color: var(--text);
+      padding: 11px 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(183, 136, 95, 0.18);
+    }
+    .check-grid, .radio-grid {
+      display: grid;
+      gap: 8px;
+    }
+    .check-item, .radio-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: #5d4738;
+      font-size: 0.93rem;
+      transition: border-color 160ms ease, background-color 160ms ease;
+      cursor: pointer;
+      text-align: right;
+    }
+    .choice-text {
+      flex: 1;
+      min-width: 0;
+      text-align: right;
+      line-height: 1.55;
+    }
+    .choice-control {
+      flex: 0 0 auto;
+      margin-inline-start: 10px;
+    }
+    .check-item:has(input:checked), .radio-item:has(input:checked) {
+      border-color: #c59f79;
+      background: #fef4e8;
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      background: linear-gradient(180deg, #bf946b 0%, #a97a53 100%);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(149, 105, 67, 0.25);
+    }
+    button:hover { background: linear-gradient(180deg, #c79d74 0%, #b1845d 100%); }
+    .contact {
+      margin-top: 16px;
+      font-size: 0.93rem;
+      color: #6a5444;
+      line-height: 1.8;
+      border-top: 1px solid #e7dccf;
+      padding-top: 12px;
+    }
+    .ok {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #f4ece2;
+      color: #674b36;
+      border: 1px solid #dac4ae;
+    }
+    .ok.visible { display: block; }
+    @media (max-width: 760px) {
+      body { padding: 14px 10px 88px; }
+      .card { padding: 16px; border-radius: 18px; }
+      .grid.two { grid-template-columns: 1fr; }
+      .form-section { padding: 12px; border-radius: 14px; }
+      .actions {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        margin-top: 0;
+        z-index: 20;
+      }
+      .actions button {
+        width: 100%;
+        padding: 13px 16px;
+        border-radius: 14px;
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <span class="hero-badge" data-t="badge">🌙 Wadi Rum Retreat</span>
+      <h1 data-t="title">Initial Registration | Wadi Rum Desert Retreat</h1>
+      <p class="lead" data-t="lead1">This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.</p>
+      <p class="lead" data-t="lead2">Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.</p>
+      <div class="small-note" data-t="note">Wadi Rum Retreat – SHARAZAD CAMP | 17.6 - 21.6 | 5 days - 4 nights</div>
+
+      <form id="wadiRegForm" data-formsubmit-email="eslamhuhu1@gmail.com" novalidate>
+        <div class="form-section">
+          <h2 class="section-title" data-t="secBasic">Basic Information</h2>
+          <div class="grid two">
+            <div>
+              <label for="fullName" data-t="fullName">1) Full Name *</label>
+              <input id="fullName" name="الاسم الكامل" required>
+            </div>
+            <div>
+              <label for="phone" data-t="phone">2) Phone Number (WhatsApp) *</label>
+              <input id="phone" name="رقم الهاتف" type="tel" required>
+            </div>
+            <div>
+              <label for="email" data-t="email">3) Email</label>
+              <input id="email" name="البريد الإلكتروني" type="email">
+            </div>
+            <div>
+              <label for="age" data-t="age">4) Age *</label>
+              <input id="age" name="العمر" type="number" min="16" required>
+            </div>
+            <div>
+              <label for="city" data-t="city">5) City *</label>
+              <input id="city" name="مكان السكن" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="section-title" data-t="secIntent">Your Intention</h2>
+          <p class="section-sub" data-t="secIntentSub">Write freely. There is no right or wrong answer.</p>
+          <div class="grid">
+            <div>
+              <label for="reason" data-t="reason">6) What made you interested in this retreat? *</label>
+              <textarea id="reason" name="دافع الاهتمام بالريتريت" required></textarea>
+            </div>
+            <div>
+              <label for="expectation" data-t="expectation">7) What do you hope to receive from this experience?</label>
+              <textarea id="expectation" name="التوقع من التجربة"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="section-title" data-t="secHealth">Physical & Mental Background</h2>
+          <div class="grid two">
+            <div>
+              <label data-t="yogaExp">8) Do you have previous experience with yoga or meditation? *</label>
+              <div class="radio-grid">
+                <label class="radio-item"><span class="choice-text" data-t="y1">No, this is my first time</span><input class="choice-control" type="radio" name="خبرة يوغا/تأمل" value="no-first-time" required></label>
+                <label class="radio-item"><span class="choice-text" data-t="y2">Yes, basic experience</span><input class="choice-control" type="radio" name="خبرة يوغا/تأمل" value="yes-basic" required></label>
+                <label class="radio-item"><span class="choice-text" data-t="y3">Yes, I practice regularly</span><input class="choice-control" type="radio" name="خبرة يوغا/تأمل" value="yes-regular" required></label>
+              </div>
+            </div>
+            <div>
+              <label data-t="healthQ">9) Do you currently have a physical condition we should know about? *</label>
+              <div class="radio-grid">
+                <label class="radio-item"><span class="choice-text" data-t="no">No</span><input class="choice-control" type="radio" name="حالة صحية حالية" value="no" required></label>
+                <label class="radio-item"><span class="choice-text" data-t="yes">Yes</span><input class="choice-control" type="radio" name="حالة صحية حالية" value="yes" required></label>
+              </div>
+              <label for="healthDetails" style="margin-top:8px;" data-t="healthDetails">Additional details (optional)</label>
+              <textarea id="healthDetails" name="تفاصيل صحية إضافية"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2 class="section-title" data-t="secActivities">Activities & Experience</h2>
+          <label data-t="activitiesLabel">11) Which activities interest you most? * (You can choose more than one)</label>
+          <div class="check-grid">
+            <label class="check-item"><span class="choice-text" data-t="a1">Yoga & breathwork</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="yoga-breath"></label>
+            <label class="check-item"><span class="choice-text" data-t="a2">Reflective writing</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="reflective-writing"></label>
+            <label class="check-item"><span class="choice-text" data-t="a3">Sound Healing</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="sound-healing"></label>
+            <label class="check-item"><span class="choice-text" data-t="a4">Desert & fire rituals</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="desert-fire-rituals"></label>
+            <label class="check-item"><span class="choice-text" data-t="a5">Meditative walk</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="meditative-walk"></label>
+            <label class="check-item"><span class="choice-text" data-t="a6">Sharing circles</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="sharing-circles"></label>
+            <label class="check-item"><span class="choice-text" data-t="a7">Nights under stars</span><input class="choice-control" type="checkbox" name="اهتمامات الأنشطة" value="star-nights"></label>
+          </div>
+
+          <div class="grid" style="margin-top:10px;">
+            <div>
+              <label for="freeNote" data-t="freeNote">15) Anything else you would like to share?</label>
+              <textarea id="freeNote" name="ملاحظات إضافية"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" data-t="submit">Submit Initial Registration</button>
+        </div>
+        <div id="okMsg" class="ok" data-t="successMsg">Form submitted successfully. We will contact you soon.</div>
+      </form>
+
+      <div class="contact" id="contactBox">
+        لأي سؤال أو استفسار:<br>
+        📞 052-249-6366<br>
+        ✉️ eslamhuhu1@gmail.com
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById("wadiRegForm");
+      const okMsg = document.getElementById("okMsg");
+      const translations = {
+        en: {
+          badge: "🌙 Wadi Rum Retreat",
+          title: "Initial Registration | Wadi Rum Desert Retreat",
+          lead1: "This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.",
+          lead2: "Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.",
+          note: "Wadi Rum Retreat – SHARAZAD CAMP | 17.6 - 21.6 | 5 days - 4 nights",
+          secBasic: "Basic Information",
+          fullName: "1) Full Name *",
+          phone: "2) Phone Number (WhatsApp) *",
+          email: "3) Email",
+          age: "4) Age *",
+          city: "5) City *",
+          secIntent: "Your Intention",
+          secIntentSub: "Write freely. There is no right or wrong answer.",
+          reason: "6) What made you interested in this retreat? *",
+          expectation: "7) What do you hope to receive from this experience?",
+          secHealth: "Physical & Mental Background",
+          yogaExp: "8) Do you have previous experience with yoga or meditation? *",
+          y1: "No, this is my first time",
+          y2: "Yes, basic experience",
+          y3: "Yes, I practice regularly",
+          healthQ: "9) Do you currently have a physical condition we should know about? *",
+          no: "No",
+          yes: "Yes",
+          healthDetails: "Additional details (optional)",
+          secActivities: "Activities & Experience",
+          activitiesLabel: "11) Which activities interest you most? * (You can choose more than one)",
+          a1: "Yoga & breathwork",
+          a2: "Reflective writing",
+          a3: "Sound Healing",
+          a4: "Desert & fire rituals",
+          a5: "Meditative walk",
+          a6: "Sharing circles",
+          a7: "Nights under stars",
+          freeNote: "15) Anything else you would like to share?",
+          submit: "Submit Initial Registration",
+          successMsg: "Form submitted successfully. We will contact you soon.",
+          contact: "For questions:\n📞 052-249-6366\n✉️ eslamhuhu1@gmail.com",
+          checkError: "Please select at least one activity.",
+          submitError: "Something went wrong while sending. Please try again."
+        },
+        ar: {
+          badge: "🌙 ريتريت وادي رم",
+          title: "التسجيل الأوّلي | ريتريت الصحراء – وادي رم",
+          lead1: "هذا النموذج مخصّص للتسجيل الأوّلي. العدد محدود (حتى 20 مشاركة)، وسيتم التواصل معكِ بعد تعبئة النموذج لتأكيد التفاصيل.",
+          lead2: "ريتريت وادي رم هو مسار رجوع: لجسمك، لنَفَسك، وللمساحة الهادئة داخلك. التفاصيل الكاملة موجودة في صفحة الريتريت.",
+          note: "ريتريت وادي رم – SHARAZAD CAMP | 17.6 - 21.6 | 5 أيام - 4 ليالي",
+          secBasic: "البيانات الأساسية",
+          fullName: "1) الاسم الكامل *",
+          phone: "2) رقم الهاتف (واتساب) *",
+          email: "3) البريد الإلكتروني",
+          age: "4) العمر *",
+          city: "5) مكان السكن *",
+          secIntent: "الهدف من المشاركة",
+          secIntentSub: "اكتبي بحرية، لا يوجد جواب صحيح أو خاطئ.",
+          reason: "6) ما الذي دفعكِ للاهتمام بهذا الريتريت؟ *",
+          expectation: "7) ما الذي تتمنين أن تحصلي عليه من هذه التجربة؟",
+          secHealth: "الخلفية الجسدية والنفسية",
+          yogaExp: "8) هل لديكِ تجربة سابقة في اليوغا أو التأمل؟ *",
+          y1: "لا، هذه تجربتي الأولى",
+          y2: "نعم، تجربة بسيطة",
+          y3: "نعم، أمارس بشكل منتظم",
+          healthQ: "9) هل تعانين من حالة صحية جسدية يجب أن نعرفها؟ *",
+          no: "لا",
+          yes: "نعم",
+          healthDetails: "تفاصيل إضافية (اختياري)",
+          secActivities: "الأنشطة والتجربة",
+          activitiesLabel: "11) أي من الأنشطة التالية تثير اهتمامك أكثر؟ * (يمكن اختيار أكثر من خيار)",
+          a1: "يوغا وتنفس",
+          a2: "كتابة تأملية",
+          a3: "Sound Healing",
+          a4: "طقوس الصحراء والنار",
+          a5: "المشي التأملي",
+          a6: "دوائر مشاركة",
+          a7: "السهرات تحت النجوم",
+          freeNote: "15) أي شيء إضافي تحبين مشاركته معنا؟",
+          submit: "إرسال التسجيل الأوّلي",
+          successMsg: "تم إرسال النموذج بنجاح. سنتواصل معكِ قريبًا.",
+          contact: "لأي سؤال أو استفسار:\n📞 052-249-6366\n✉️ eslamhuhu1@gmail.com",
+          checkError: "يرجى اختيار نشاط واحد على الأقل.",
+          submitError: "حصل خطأ أثناء الإرسال. حاولي مرة أخرى."
+        }
+      };
+      let currentLang = localStorage.getItem("nawal-lang") === "ar" ? "ar" : "en";
+
+      function t(k) { return translations[currentLang][k] || k; }
+      function applyLang() {
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+        document.title = currentLang === "ar" ? "تسجيل أوّلي | ريتريت وادي رم" : "Initial Registration | Wadi Rum Retreat";
+        document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t(el.getAttribute("data-t")); });
+        const contactBox = document.getElementById("contactBox");
+        if (contactBox) contactBox.innerHTML = t("contact").replace(/\n/g, "<br>");
+      }
+
+      function hasActivityChecked() {
+        return Array.from(form.querySelectorAll('input[name="اهتمامات الأنشطة"]')).some((c) => c.checked);
+      }
+
+      async function sendFormSubmit() {
+        const email = form.getAttribute("data-formsubmit-email");
+        const data = new FormData(form);
+        data.set("_subject", "Wadi Rum Initial Registration");
+        data.set("_captcha", "false");
+        data.set("_template", "table");
+        const res = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(email), {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: data
+        });
+        if (!res.ok) throw new Error("submit failed");
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        if (!hasActivityChecked()) {
+          alert(t("checkError"));
+          return;
+        }
+        try {
+          await sendFormSubmit();
+          okMsg.classList.add("visible");
+          form.reset();
+        } catch (_err) {
+          alert(t("submitError"));
+        }
+      });
+
+      applyLang();
+    })();
+  </script>
+</body>
+</html>
