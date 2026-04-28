@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoga Admin Dashboard</title>
+  <link rel="icon" type="image/jpeg" href="public/media/14.jpg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h1 class="sidebar-title">Yoga Admin</h1>
+      <p class="sidebar-subtitle">Calm operations panel</p>
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <button class="nav-link active" data-section="classes">Yoga Classes Requests</button>
+        <button class="nav-link" data-section="retreats">Retreat Requests</button>
+      </nav>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="summary-grid" aria-label="Dashboard Summary">
+        <article class="summary-card">
+          <p>Total Requests</p>
+          <strong id="totalCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <p>Classes Requests</p>
+          <strong id="classesCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <p>Retreat Requests</p>
+          <strong id="retreatsCount">0</strong>
+        </article>
+      </header>
+
+      <section class="panel-card">
+        <div class="panel-top">
+          <h2 id="sectionTitle">Yoga Classes Requests</h2>
+          <div class="filters" role="group" aria-label="Filter Requests">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+          </div>
+        </div>
+
+        <div id="requestsContainer" class="requests-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <h3>No requests currently</h3>
+          <p>There are no real requests yet.</p>
+        </div>
+      </section>
+
+      <div id="requestModal" class="modal-backdrop" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <div class="modal-head">
+            <h3 id="modalTitle">Full Registration Details</h3>
+            <button id="modalCloseBtn" class="modal-close" type="button" aria-label="Close">&times;</button>
+          </div>
+          <div id="modalBody" class="modal-body"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    window.YOGA_DASHBOARD_CONFIG = {
+      supabaseUrl: "https://xzxyskufrqansbhsbdkt.supabase.co",
+      supabaseAnonKey: "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph",
+      supabaseTable: "retreat_requests"
+    };
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

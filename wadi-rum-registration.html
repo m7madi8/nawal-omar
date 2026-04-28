@@ -219,7 +219,7 @@
       <p class="lead" data-t="lead2">Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.</p>
       <div class="small-note" data-t="note">Wadi Rum Retreat – SHARAZAD CAMP | 17.6 - 21.6 | 5 days - 4 nights</div>
 
-      <form id="wadiRegForm" data-formsubmit-email="eslamhuhu1@gmail.com" novalidate>
+      <form id="wadiRegForm" data-supabase-url="https://xzxyskufrqansbhsbdkt.supabase.co" data-supabase-anon-key="sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph" data-supabase-table="retreat_requests" novalidate>
         <div class="form-section">
           <h2 class="section-title" data-t="secBasic">Basic Information</h2>
           <div class="grid two">
@@ -418,18 +418,51 @@
         return Array.from(form.querySelectorAll('input[name="اهتمامات الأنشطة"]')).some((c) => c.checked);
       }
 
-      async function sendFormSubmit() {
-        const email = form.getAttribute("data-formsubmit-email");
-        const data = new FormData(form);
-        data.set("_subject", "Wadi Rum Initial Registration");
-        data.set("_captcha", "false");
-        data.set("_template", "table");
-        const res = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(email), {
+      async function sendToSupabase() {
+        const supabaseUrl = (form.getAttribute("data-supabase-url") || "").trim().replace(/\/+$/, "");
+        const supabaseKey = (form.getAttribute("data-supabase-anon-key") || "").trim();
+        const table = (form.getAttribute("data-supabase-table") || "retreat_requests").trim();
+        if (!supabaseUrl || !supabaseKey || !table) {
+          throw new Error("Missing Supabase config");
+        }
+
+        const now = new Date();
+        const payload = {
+          id: "req-" + now.getTime(),
+          source: "wadi-rum-registration",
+          retreatType: "Wadi Rum",
+          submittedAt: now.toISOString(),
+          fullName: (form.querySelector("#fullName").value || "").trim(),
+          phone: (form.querySelector("#phone").value || "").trim(),
+          age: (form.querySelector("#age").value || "").trim(),
+          city: (form.querySelector("#city").value || "").trim(),
+          reason: (form.querySelector("#reason").value || "").trim(),
+          expectation: (form.querySelector("#expectation").value || "").trim(),
+          yogaExperience: (form.querySelector('input[name="خبرة يوغا/تأمل"]:checked') || {}).value || "",
+          healthStatus: (form.querySelector('input[name="حالة صحية حالية"]:checked') || {}).value || "",
+          healthDetails: (form.querySelector("#healthDetails").value || "").trim(),
+          activities: Array.from(form.querySelectorAll('input[name="اهتمامات الأنشطة"]:checked')).map((x) => x.value),
+          freeNote: (form.querySelector("#freeNote").value || "").trim(),
+          status: "pending",
+          createdAt: now.toISOString()
+        };
+
+        const res = await fetch(`${supabaseUrl}/rest/v1/${encodeURIComponent(table)}`, {
           method: "POST",
-          headers: { Accept: "application/json" },
-          body: data
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "apikey": supabaseKey,
+            "Authorization": `Bearer ${supabaseKey}`,
+            "Prefer": "return=representation"
+          },
+          body: JSON.stringify([payload])
         });
-        if (!res.ok) throw new Error("submit failed");
+
+        if (!res.ok) {
+          const errTxt = await res.text().catch(() => "");
+          throw new Error(errTxt || "Supabase request failed");
+        }
       }
 
       form.addEventListener("submit", async function (e) {
@@ -443,7 +476,7 @@
           return;
         }
         try {
-          await sendFormSubmit();
+          await sendToSupabase();
           okMsg.classList.add("visible");
           form.reset();
         } catch (_err) {
