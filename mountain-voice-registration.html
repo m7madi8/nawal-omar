@@ -363,7 +363,7 @@
         <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
       </div>
 
-      <form id="retreatForm" novalidate data-formsubmit-email="eslamhuhu1@gmail.com">
+      <form id="retreatForm" novalidate data-supabase-url="https://xzxyskufrqansbhsbdkt.supabase.co" data-supabase-anon-key="sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph" data-supabase-table="retreat_requests">
         <div id="stepViewport" class="step-viewport">
           <section class="step-panel active" data-step="1">
             <h2 class="step-title" data-t="step1Title">1) Personal Information</h2>
@@ -633,35 +633,61 @@
       let currentLang = "en";
       let canDraw = false;
 
-      async function submitToFormSubmit() {
-        const receiverEmail = (form.getAttribute("data-formsubmit-email") || "").trim();
-        if (!receiverEmail || receiverEmail === "your-email@example.com") {
-          alert("Please set your FormSubmit email first in data-formsubmit-email.");
-          return false;
-        }
+      async function submitToSupabase() {
+        const supabaseUrl = (form.getAttribute("data-supabase-url") || "").trim().replace(/\/+$/, "");
+        const supabaseKey = (form.getAttribute("data-supabase-anon-key") || "").trim();
+        const table = (form.getAttribute("data-supabase-table") || "retreat_requests").trim();
+        if (!supabaseUrl || !supabaseKey || !table) return false;
 
-        const formData = new FormData(form);
-        formData.set("_subject", "Health Declaration Form");
-        formData.set("_captcha", "false");
-        formData.set("_template", "table");
-        formData.set("signature_mode", signMode);
+        const now = new Date();
+        const payload = {
+          id: "req-" + now.getTime(),
+          source: "mountain-voice-registration",
+          retreatType: "Health Declaration",
+          submittedAt: now.toISOString(),
+          fullName: (form.fullName && form.fullName.value || "").trim(),
+          phone: (form.phone && form.phone.value || "").trim(),
+          age: "",
+          city: (form.meetingPoint && form.meetingPoint.value || "").trim(),
+          reason: (form.notes && form.notes.value || "").trim(),
+          expectation: "",
+          yogaExperience: (form.activityLevel && form.activityLevel.value || "").trim(),
+          healthStatus: (form.querySelector("input[name='chronic']:checked") || {}).value || "",
+          healthDetails: (form.chronicDetails && form.chronicDetails.value || "").trim(),
+          activities: [],
+          freeNote: [
+            "ID: " + ((form.idNumber && form.idNumber.value) || "-"),
+            "Birth Date: " + ((form.birthDate && form.birthDate.value) || "-"),
+            "Email: " + ((form.email && form.email.value) || "-"),
+            "Emergency: " + ((form.emergencyName && form.emergencyName.value) || "-") + " / " + ((form.emergencyPhone && form.emergencyPhone.value) || "-") + " / " + ((form.relation && form.relation.value) || "-"),
+            "Allergy: " + ((form.allergy && form.allergy.value) || "-"),
+            "Medications: " + ((form.medications && form.medications.value) || "-"),
+            "Current Injuries: " + ((form.currentInjuries && form.currentInjuries.value) || "-"),
+            "Past Fractures: " + ((form.pastFractures && form.pastFractures.value) || "-"),
+            "Surgeries: " + ((form.surgeries && form.surgeries.value) || "-"),
+            "Pain Zones: " + ((form.painZones && form.painZones.value) || "-"),
+            "Heart Issues: " + ((form.heartIssues && form.heartIssues.value) || "-"),
+            "Breathing / Dizziness: " + ((form.breathingDizziness && form.breathingDizziness.value) || "-"),
+            "Signature Mode: " + signMode,
+            "Typed Signature: " + (typedSignature.value.trim() || "-")
+          ].join("\n"),
+          status: "pending",
+          createdAt: now.toISOString()
+        };
 
-        if (signMode === "draw" && canDraw && hasDrawn) {
-          formData.set("signature_image", signatureCanvas.toDataURL("image/png"));
-        } else {
-          formData.set("signature_text", typedSignature.value.trim());
-        }
-
-        const endpoint = "https://formsubmit.co/ajax/" + encodeURIComponent(receiverEmail);
-        const response = await fetch(endpoint, {
+        const response = await fetch(supabaseUrl + "/rest/v1/" + encodeURIComponent(table), {
           method: "POST",
-          headers: { Accept: "application/json" },
-          body: formData
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "apikey": supabaseKey,
+            "Authorization": "Bearer " + supabaseKey,
+            "Prefer": "return=representation"
+          },
+          body: JSON.stringify([payload])
         });
 
-        if (!response.ok) return false;
-        const result = await response.json().catch(() => ({}));
-        return !(result && result.success === "false");
+        return response.ok;
       }
 
       function t(key) {
@@ -920,7 +946,7 @@
         if (!validateStep(currentStep, true)) return;
         submitBtn.disabled = true;
         try {
-          const sent = await submitToFormSubmit();
+          const sent = await submitToSupabase();
           if (!sent) {
             alert("Failed to send form. Please try again.");
             return;

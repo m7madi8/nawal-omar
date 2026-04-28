@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yoga Admin Dashboard</title>
-  <link rel="icon" type="image/jpeg" href="public/media/14.jpg">
+  <link rel="icon" type="image/png" href="public/media/Nawal_yoga_logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="dashboard-body">
   <div class="dashboard-layout">
     <aside class="sidebar">
-      <h1 class="sidebar-title">Yoga Admin</h1>
+      <h1 class="sidebar-title">nawal omar</h1>
       <p class="sidebar-subtitle">Calm operations panel</p>
       <nav class="sidebar-nav" aria-label="Main Navigation">
-        <button class="nav-link active" data-section="classes">Yoga Classes Requests</button>
+        <button class="nav-link active" data-section="form">Health Form Requests</button>
         <button class="nav-link" data-section="retreats">Retreat Requests</button>
+        <button class="nav-link" data-section="yoga">Yoga Classes Requests</button>
       </nav>
       <button id="logoutBtn" class="btn btn-ghost">Logout</button>
     </aside>
@@ -26,18 +27,22 @@
           <strong id="totalCount">0</strong>
         </article>
         <article class="summary-card">
-          <p>Classes Requests</p>
-          <strong id="classesCount">0</strong>
+          <p>Health Form Requests</p>
+          <strong id="formCount">0</strong>
         </article>
         <article class="summary-card">
           <p>Retreat Requests</p>
           <strong id="retreatsCount">0</strong>
         </article>
+        <article class="summary-card">
+          <p>Yoga Classes Requests</p>
+          <strong id="yogaCount">0</strong>
+        </article>
       </header>
 
       <section class="panel-card">
         <div class="panel-top">
-          <h2 id="sectionTitle">Yoga Classes Requests</h2>
+          <h2 id="sectionTitle">Health Form Requests</h2>
           <div class="filters" role="group" aria-label="Filter Requests">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="pending">Pending</button>
