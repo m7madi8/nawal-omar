@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nawal Omar</title>
+  <meta name="description" content="Wadi Rum women retreat with Nawal Omar. Desert yoga, sound healing, breathwork, and inner reset under the stars." data-i18n-attr="content:retreat_wadi_meta_desc">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" id="seo-canonical" href="">
+  <link rel="icon" type="image/png" href="public/media/Nawal_yoga_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/rtl.css">
+  <link rel="stylesheet" href="css/scroll-media.css">
+  <link rel="stylesheet" href="css/retreat-page.css">
+  <link rel="stylesheet" href="css/retreat-premium.css">
+  <style>
+    .wadi-carousel-wrap {
+      position: relative;
+      margin-top: 1.5rem;
+    }
+
+    .wadi-carousel-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    .wadi-carousel-track::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .wadi-carousel-track::-webkit-scrollbar-thumb {
+      background: rgba(166, 126, 85, 0.42);
+      border-radius: 999px;
+    }
+
+    .wadi-carousel-item {
+      flex: 0 0 72vw;
+      scroll-snap-align: start;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(166, 126, 85, 0.18);
+      background: #fffdf9;
+      box-shadow: 0 10px 24px rgba(83, 56, 34, 0.08);
+      cursor: zoom-in;
+    }
+
+    .wadi-carousel-item img {
+      width: 100%;
+      height: clamp(260px, 55vh, 520px);
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #fffaf3;
+    }
+
+    .wadi-carousel-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .wadi-carousel-btn {
+      border: 1px solid rgba(166, 126, 85, 0.3);
+      background: #fff8ef;
+      color: #6f5137;
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background-color 180ms ease, transform 180ms ease;
+    }
+
+    .wadi-carousel-btn:hover {
+      background: #f6e9d9;
+      transform: translateY(-1px);
+    }
+
+    .wadi-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 17, 10, 0.82);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 70;
+      padding: 20px;
+    }
+
+    .wadi-lightbox.is-open {
+      display: flex;
+    }
+
+    .wadi-lightbox img {
+      max-width: min(100%, 1180px);
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .wadi-lightbox-close {
+      position: absolute;
+      top: 16px;
+      inset-inline-end: 16px;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .wadi-reels-hint {
+      margin: 1rem 0 0.6rem;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 0.86rem;
+    }
+
+    .wadi-reels-grid {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(64%, 1fr);
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 4px;
+    }
+
+    .wadi-reel-card {
+      position: relative;
+      scroll-snap-align: start;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(166, 126, 85, 0.18);
+      background: #fffdf9;
+      box-shadow: 0 10px 24px rgba(83, 56, 34, 0.08);
+    }
+
+    .wadi-reel-video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+
+    .wadi-reel-playbtn {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 62px;
+      height: 62px;
+      border-radius: 999px;
+      border: 0;
+      color: #fff;
+      background: rgba(26, 18, 11, 0.55);
+      backdrop-filter: blur(2px);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .wadi-reel-card.is-playing .wadi-reel-playbtn {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    @media (min-width: 768px) {
+      .wadi-reels-grid {
+        grid-auto-columns: minmax(32%, 1fr);
+      }
+
+      .wadi-carousel-item {
+        flex-basis: 38vw;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="site-header" role="banner">
+    <div class="site-header-bar">
+      <a href="index.html" class="site-header-brand">
+        <img src="public/media/Nawal_yoga_logo.png" alt="Nawal Omar Yoga" class="site-header-logo-img" width="140" height="48" decoding="async">
+      </a>
+      <div class="site-mobile-lang">
+        <button type="button" id="mobile-lang-toggle" class="mobile-lang-toggle" data-i18n-attr="aria-label:lang_toggle" aria-label="Change language">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18"></path>
+            <path d="M12 3a15.3 15.3 0 0 1 0 18"></path>
+            <path d="M12 3a15.3 15.3 0 0 0 0 18"></path>
+          </svg>
+          <span class="site-header-sr" data-i18n="lang_toggle">Change language</span>
+        </button>
+        <button type="button" id="menu-toggle" class="site-menu-toggle menu-launcher" aria-expanded="false" aria-controls="menu-panel" data-i18n-attr="aria-label:menu_label">
+          <span class="menu-launcher-icon" aria-hidden="true">
+            <span class="menu-launcher-bar bar1"></span>
+            <span class="menu-launcher-bar bar2"></span>
+            <span class="menu-launcher-bar bar3"></span>
+          </span>
+        </button>
+      </div>
+      <nav class="site-nav-desktop" aria-label="Main">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="index.html#about" data-i18n="nav_about">About</a>
+        <a href="index.html#video" data-i18n="nav_video">Video</a>
+        <a href="index.html#workshops" data-i18n="nav_workshops">Workshops</a>
+        <a href="workshops/al-tira.html" data-i18n="nav_al_tira">Al-Tira Yoga</a>
+        <a href="workshops/jiva.html" data-i18n="nav_jiva">Haifa Yoga</a>
+        <a href="retreats.html" data-i18n="nav_retreat">Retreat</a>
+        <div class="site-header-lang">
+          <nav class="lang-switcher lang-switcher--bar" aria-label="Language">
+            <button type="button" class="lang-btn" data-lang-set="en"><span class="lang-toggle-text"><span class="lang-toggle-text-en">En</span><span class="lang-toggle-text-ar">En</span></span></button>
+            <button type="button" class="lang-btn" data-lang-set="ar"><span class="lang-toggle-text"><span class="lang-toggle-text-en">Ar</span><span class="lang-toggle-text-ar">Ar</span></span></button>
+          </nav>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div id="menu-panel" class="site-menu-overlay" aria-hidden="true">
+    <div class="site-menu-sheet">
+      <div class="site-menu-head site-menu-animate">
+        <p class="site-menu-title" data-i18n="menu_label">Menu</p>
+        <button type="button" class="site-menu-close" data-menu-close data-i18n-attr="aria-label:menu_close" aria-label="Close menu">&times;</button>
+      </div>
+      <nav class="site-nav-mobile" aria-label="Main">
+        <a href="index.html" class="site-menu-animate" data-i18n="nav_home">Home</a>
+        <a href="index.html#about" class="site-menu-animate" data-i18n="nav_about">About</a>
+        <a href="index.html#video" class="site-menu-animate" data-i18n="nav_video">Video</a>
+        <a href="index.html#workshops" class="site-menu-animate" data-i18n="nav_workshops">Workshops</a>
+        <a href="workshops/al-tira.html" class="site-menu-animate" data-i18n="nav_al_tira">Al-Tira Yoga</a>
+        <a href="workshops/jiva.html" class="site-menu-animate" data-i18n="nav_jiva">Haifa Yoga</a>
+        <a href="retreats.html" class="site-menu-animate" data-i18n="nav_retreat">Retreat</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="retreat-page retreat-premium-root min-h-screen bg-[var(--bg-body)] text-[var(--text-main)]">
+    <section class="rp-section animate-section border-b border-[var(--color-primary)]/20 pt-14 pb-12 sm:pt-16 sm:pb-14 md:pt-20 md:pb-16">
+      <div class="rp-container">
+        <div class="mb-8 sm:mb-10">
+          <a href="retreats.html" class="top-back-link inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" aria-label="Back">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <span data-i18n="back">Back</span>
+          </a>
+        </div>
+        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content mx-auto max-w-4xl text-center">
+          <p class="rp-kicker mb-3" data-i18n="retreat_wadi_page_label">Wadi Rum Women Retreat</p>
+          <h1 class="rp-h2 rp-heading text-2xl sm:text-3xl md:text-4xl" data-i18n="retreat_wadi_page_title">Moonlit Wadi Rum Retreat</h1>
+          <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[var(--text-soft)] sm:text-lg" data-i18n="retreat_wadi_page_intro">A journey into the depth of the soul, where the desert meets the sky. 3.4 - 7.4</p>
+          <p class="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-[var(--text-soft)] sm:text-base" data-i18n="retreat_wadi_page_intro2">This is not just travel. This is an inner transition in a safe feminine space.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rp-section animate-section">
+      <div class="rp-container">
+        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_wadi_about_title">Who am I?</h2>
+          <div class="dahab-trainers-grid mt-6 sm:mt-8">
+            <article class="dahab-trainer-card">
+              <div class="dahab-trainer-media">
+                <img src="public/media/nawall.jpg" alt="Nawal Omar" data-i18n-attr="alt:retreat_wadi_about_nawal_name" loading="lazy" style="object-position: center 78%;">
+              </div>
+              <h3 class="dahab-trainer-name" data-i18n="retreat_wadi_about_nawal_name">Nawal Omar</h3>
+              <p class="dahab-trainer-role" data-i18n="retreat_wadi_about_nawal_role">Nurse and Vinyasa Yoga Teacher</p>
+              <p class="mt-3 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_wadi_about_nawal_text">I blend science with body awareness and spiritual practice, creating safe spaces for women to return to their bodies, heal the pelvis, calm the nervous system, and release old patterns that no longer serve them. This retreat is a natural extension of my message.</p>
+            </article>
+
+            <article class="dahab-trainer-card">
+              <div class="dahab-trainer-media">
+                <img src="public/media/tasneem.jpg" alt="Tasneem Masad" data-i18n-attr="alt:retreat_wadi_about_tasneem_name" loading="lazy" style="object-position: center 35%;">
+              </div>
+              <h3 class="dahab-trainer-name" data-i18n="retreat_wadi_about_tasneem_name">Tasneem Masad</h3>
+              <p class="dahab-trainer-role" data-i18n="retreat_wadi_about_tasneem_role">Nurse and Master in NLP</p>
+              <p class="mt-3 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_wadi_about_tasneem_text">I combine warm containment with professional guidance. Through NLP tools, I offer space and stillness to rebuild your scattered parts and rediscover yourself. I believe true change begins by reorganizing the inner world, and I walk with you toward your most balanced and elevated version.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rp-section animate-section">
+      <div class="rp-container">
+        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_wadi_gallery_title">Moments from Wadi Rum</h2>
+          <div class="wadi-carousel-wrap">
+            <div class="wadi-carousel-track" id="wadi-carousel-track">
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/IMG-20260428-WA0028.jpg" alt="Wadi Rum moment" data-i18n-attr="alt:retreat_wadi_gallery_alt1" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/IMG-20260428-WA0029.jpg" alt="Wadi Rum dunes" data-i18n-attr="alt:retreat_wadi_gallery_alt2" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/IMG-20260428-WA0031.jpg" alt="Desert sunrise" data-i18n-attr="alt:retreat_wadi_gallery_alt3" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/IMG-20260428-WA0040.jpg" alt="Women circle in retreat" data-i18n-attr="alt:retreat_wadi_gallery_alt4" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/Wadi Rum Desert, Jordan.jpg" alt="Night stars in desert" data-i18n-attr="alt:retreat_wadi_gallery_alt5" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/Wadi Rum, Jordan.jpg" alt="Wadi Rum panorama" data-i18n-attr="alt:retreat_wadi_gallery_alt6" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/download.jpg" alt="Desert tent camp" data-i18n-attr="alt:retreat_wadi_gallery_alt7" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/Desert camp ⛺️.jpg" alt="Desert camp" data-i18n-attr="alt:retreat_wadi_gallery_alt8" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/📷_ @eljackson.jpg" alt="Wadi Rum portrait moment" data-i18n-attr="alt:retreat_wadi_gallery_alt9" loading="lazy"></figure>
+              <figure class="wadi-carousel-item"><img src="public/media/wadi rum/Nuit en bivouac à Wadi Rum _ une immersion bédouine inoubliable.jpg" alt="Night bivouac in Wadi Rum" data-i18n-attr="alt:retreat_wadi_gallery_alt10" loading="lazy"></figure>
+            </div>
+            <div class="wadi-carousel-controls">
+              <button type="button" class="wadi-carousel-btn" id="wadi-prev" aria-label="Previous">←</button>
+              <button type="button" class="wadi-carousel-btn" id="wadi-next" aria-label="Next">→</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rp-section animate-section">
+      <div class="rp-container">
+        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_wadi_reels_title">Reels from the retreat</h2>
+          <p class="wadi-reels-hint" data-i18n="retreat_wadi_reels_hint">Swipe sideways and tap play.</p>
+          <div class="wadi-reels-grid" data-i18n-attr="aria-label:retreat_wadi_reels_label">
+            <div class="wadi-reel-card">
+              <video class="wadi-reel-video" src="public/media/wadi rum/VID-20260428-WA0034.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:retreat_wadi_reel_aria_1" aria-label="Wadi Rum reel"></video>
+              <button type="button" class="wadi-reel-playbtn" data-i18n-attr="aria-label:retreat_wadi_reel_play">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+            <div class="wadi-reel-card">
+              <video class="wadi-reel-video" src="public/media/wadi rum/VID-20260428-WA0036.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:retreat_wadi_reel_aria_2" aria-label="Wadi Rum reel"></video>
+              <button type="button" class="wadi-reel-playbtn" data-i18n-attr="aria-label:retreat_wadi_reel_play">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+            <div class="wadi-reel-card">
+              <video class="wadi-reel-video" src="public/media/wadi rum/VID-20260428-WA0037.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:retreat_wadi_reel_aria_3" aria-label="Wadi Rum reel"></video>
+              <button type="button" class="wadi-reel-playbtn" data-i18n-attr="aria-label:retreat_wadi_reel_play">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+            <div class="wadi-reel-card">
+              <video class="wadi-reel-video" src="public/media/wadi rum/VID-20260428-WA0039.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:retreat_wadi_reel_aria_4" aria-label="Wadi Rum reel"></video>
+              <button type="button" class="wadi-reel-playbtn" data-i18n-attr="aria-label:retreat_wadi_reel_play">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rp-section animate-section">
+      <div class="rp-container">
+        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_wadi_why_title">Why this retreat is different?</h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <article class="dahab-day-card"><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_why_1_title">1) The desert returns you to yourself</h3><p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_wadi_why_1_text">Desert silence calms overthinking and brings you back to your roots and grounding.</p></article>
+            <article class="dahab-day-card"><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_why_2_title">2) The women circle heals</h3><p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_wadi_why_2_text">A space without judgment or comparison. Women supporting women with awareness and love.</p></article>
+            <article class="dahab-day-card"><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_why_3_title">3) The body is released</h3><p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_wadi_why_3_text">Daily yoga, deep breathwork, and sound healing to restore inner balance.</p></article>
+            <article class="dahab-day-card"><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_why_4_title">4) A true release ritual</h3><p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_wadi_why_4_text">Under Wadi Rum stars, we release old patterns and return lighter, clearer, and more aligned.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rp-section animate-section">
+      <div class="rp-container">
+        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_wadi_program_title">Full program</h2>
+          <div class="dahab-itinerary mt-6 space-y-5">
+            <article class="dahab-day-card">
+              <div class="dahab-day-head"><span class="dahab-day-chip" data-i18n="retreat_wadi_day1_chip">Day 01</span><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_day1_title">Arrival & intention setting</h3></div>
+              <ul class="dahab-day-list mt-3 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
+                <li data-i18n="retreat_wadi_day1_b1">Meet at Beit Shean crossing and transfer to Wadi Rum.</li>
+                <li data-i18n="retreat_wadi_day1_b2">Warm Bedouin welcome and traditional dinner.</li>
+                <li data-i18n="retreat_wadi_day1_b3">Deep introductions and intention workshop.</li>
+                <li data-i18n="retreat_wadi_day1_b4">Light breath session and calm night under stars.</li>
+              </ul>
+            </article>
+            <article class="dahab-day-card">
+              <div class="dahab-day-head"><span class="dahab-day-chip" data-i18n="retreat_wadi_day2_chip">Day 02</span><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_day2_title">Desert power day</h3></div>
+              <ul class="dahab-day-list mt-3 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
+                <li data-i18n="retreat_wadi_day2_b1">Sunrise yoga focused on root and pelvis.</li>
+                <li data-i18n="retreat_wadi_day2_b2">Breathwork, healthy breakfast, and deep workshop with Israa.</li>
+                <li data-i18n="retreat_wadi_day2_b3">Silent reflection + journaling and sound healing session.</li>
+                <li data-i18n="retreat_wadi_day2_b4">Star meditation and telescope workshop.</li>
+              </ul>
+            </article>
+            <article class="dahab-day-card">
+              <div class="dahab-day-head"><span class="dahab-day-chip" data-i18n="retreat_wadi_day3_chip">Day 03</span><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_day3_title">Inner and outer journey</h3></div>
+              <ul class="dahab-day-list mt-3 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
+                <li data-i18n="retreat_wadi_day3_b1">Heart-opening yoga + guided meditation.</li>
+                <li data-i18n="retreat_wadi_day3_b2">Power cards and emotional writing.</li>
+                <li data-i18n="retreat_wadi_day3_b3">Jeep desert tour in Wadi Rum.</li>
+                <li data-i18n="retreat_wadi_day3_b4">Sunset yoga with light acro for trust and balance.</li>
+              </ul>
+            </article>
+            <article class="dahab-day-card">
+              <div class="dahab-day-head"><span class="dahab-day-chip" data-i18n="retreat_wadi_day4_chip">Day 04</span><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_day4_title">Integration and transformation</h3></div>
+              <ul class="dahab-day-list mt-3 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
+                <li data-i18n="retreat_wadi_day4_b1">Deep morning yoga to integrate feminine energy.</li>
+                <li data-i18n="retreat_wadi_day4_b2">Second workshop with Israa and personal rest time.</li>
+                <li data-i18n="retreat_wadi_day4_b3">Camel ride and deep closing sound healing.</li>
+                <li data-i18n="retreat_wadi_day4_b4">Light celebration and retreat closing circle.</li>
+              </ul>
+            </article>
+            <article class="dahab-day-card">
+              <div class="dahab-day-head"><span class="dahab-day-chip" data-i18n="retreat_wadi_day5_chip">Day 05</span><h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_wadi_day5_title">Farewell and anchoring</h3></div>
+              <ul class="dahab-day-list mt-3 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
+                <li data-i18n="retreat_wadi_day5_b1">Closing breakfast and intention anchoring circle.</li>
+                <li data-i18n="retreat_wadi_day5_b2">Desert farewell and return with renewed energy.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rp-section animate-section">
+      <div class="rp-container">
+        <div class="dahab-includes-card animate-content">
+          <div class="dahab-includes-top">
+            <p class="dahab-includes-kicker" data-i18n="retreat_wadi_accommodation_kicker">Wadi Rum Retreat</p>
+            <h3 class="font-serif text-2xl sm:text-3xl" data-i18n="retreat_wadi_accommodation_title">Accommodation options</h3>
+          </div>
+          <div class="dahab-includes-grid">
+            <div class="dahab-includes-block">
+              <h4 class="dahab-includes-title" data-i18n="retreat_wadi_stay1_title">Bubbles room</h4>
+              <ul class="dahab-includes-list">
+                <li data-i18n="retreat_wadi_stay1_b1">Luxury under-the-stars circular room.</li>
+                <li data-i18n="retreat_wadi_stay1_b2">AC + private bathroom + full privacy.</li>
+                <li data-i18n="retreat_wadi_stay1_b3">Very comfortable beds + private outdoor sitting area.</li>
+              </ul>
+              <p class="dahab-price-note mt-3" data-i18n="retreat_wadi_stay1_price">3500 ILS per person (double room)</p>
+            </div>
+            <div class="dahab-includes-block dahab-includes-block-soft">
+              <h4 class="dahab-includes-title" data-i18n="retreat_wadi_stay2_title">Panorama room</h4>
+              <ul class="dahab-includes-list">
+                <li data-i18n="retreat_wadi_stay2_b1">Spacious room with open desert view.</li>
+                <li data-i18n="retreat_wadi_stay2_b2">AC + private bathroom + very comfortable beds.</li>
+                <li data-i18n="retreat_wadi_stay2_b3">Premium comfort with panoramic atmosphere.</li>
+              </ul>
+              <p class="dahab-price-note mt-3" data-i18n="retreat_wadi_stay2_price">3100 ILS per person (double room)</p>
+            </div>
+          </div>
+
+          <div class="dahab-includes-grid mt-8">
+            <div class="dahab-includes-block">
+              <h4 class="dahab-includes-title" data-i18n="retreat_wadi_includes_title">Price includes</h4>
+              <ul class="dahab-includes-list">
+                <li data-i18n="retreat_wadi_inc1">4 nights accommodation.</li>
+                <li data-i18n="retreat_wadi_inc2">Daily breakfast + dinner and 3 lunches.</li>
+                <li data-i18n="retreat_wadi_inc3">Transfers to/from the border crossing.</li>
+                <li data-i18n="retreat_wadi_inc4">Jeep tour + camel ride + telescope workshop.</li>
+                <li data-i18n="retreat_wadi_inc5">Daily yoga + breathwork + meditation.</li>
+                <li data-i18n="retreat_wadi_inc6">2 workshops with Israa + sound healing + emotional support + professional photography.</li>
+              </ul>
+            </div>
+            <div class="dahab-includes-block dahab-includes-block-soft">
+              <h4 class="dahab-includes-title" data-i18n="retreat_wadi_payment_title">Payment and cancellation policy</h4>
+              <ul class="dahab-includes-list">
+                <li data-i18n="retreat_wadi_policy_1">A non-refundable first deposit of 400 ILS confirms booking.</li>
+                <li data-i18n="retreat_wadi_policy_2">Remaining amount is due by 20.3.</li>
+                <li data-i18n="retreat_wadi_policy_3">Available methods: bank transfer or Bit.</li>
+                <li data-i18n="retreat_wadi_policy_4">Please send transfer proof image to confirm your booking.</li>
+                <li data-i18n="retreat_wadi_policy_5">Seats are limited and priority is for first confirmed bookings.</li>
+                <li data-i18n="retreat_wadi_policy_6">Cancellation within 14 days of retreat date is non-refundable.</li>
+                <li data-i18n="retreat_wadi_policy_7">No-show is non-refundable. Booking transfer is allowed if you find a replacement.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="dahab-price-row mt-8">
+            <div>
+              <p class="dahab-price-label" data-i18n="retreat_wadi_price_label">Start from</p>
+              <p class="dahab-price-value" data-i18n="retreat_wadi_price_value">3100 ILS</p>
+              <p class="dahab-price-note" data-i18n="retreat_wadi_price_note">Desert retreat, women circle, and deep reset.</p>
+            </div>
+            <a href="https://wa.me/972522496366?text=%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D8%B1%D9%8A%D8%AA%D8%B1%D9%8A%D8%AA%20%D9%88%D8%A7%D8%AF%D9%8A%20%D8%B1%D9%85" target="_blank" rel="noopener noreferrer" class="dahab-includes-cta">
+              <span data-i18n="retreat_wadi_book_now">Book Wadi Rum retreat</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="wadi-lightbox" id="wadi-lightbox" aria-hidden="true">
+    <button type="button" class="wadi-lightbox-close" id="wadi-lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="Expanded retreat moment" id="wadi-lightbox-image">
+  </div>
+
+  <footer class="footer-isla animate-section border-t border-[var(--color-primary)]/20 bg-white">
+    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
+      <div class="animate-content flex justify-center pt-10 pb-2 sm:pt-10 sm:pb-3 md:pt-12 md:pb-4">
+        <a href="index.html" class="inline-block transition-opacity hover:opacity-90">
+          <img src="public/media/Nawal_yoga_logo.png" alt="Nawal Omar Yoga" class="footer-logo h-20 w-auto max-w-[260px] object-contain sm:h-24 md:h-28">
+        </a>
+      </div>
+      <p class="animate-content text-center text-sm leading-relaxed text-[var(--color-secondary)] max-w-xs mx-auto pb-6 sm:pb-7" data-i18n="footer_tagline">Where yoga meets calm and quality</p>
+      <nav class="animate-content flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-sm pb-6 sm:pb-7 md:gap-x-8" aria-label="Quick links">
+        <a href="index.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_home">Home</a>
+        <a href="index.html#about" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_about">About</a>
+        <a href="index.html#video" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_video">Video</a>
+        <a href="index.html#workshops" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_workshops">Workshops</a>
+        <a href="workshops/al-tira.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_al_tira">Al-Tira Yoga</a>
+        <a href="workshops/jiva.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_jiva">Jiva Yoga</a>
+        <a href="retreats.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_retreat">Retreat</a>
+      </nav>
+      <div class="animate-content flex items-center justify-center gap-3 pb-10 sm:pb-12 md:pb-14" aria-label="Social links">
+        <a href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" class="footer-social flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-primary)]/20 hover:text-[var(--color-accent)]" aria-label="WhatsApp"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.865 9.865 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://instagram.com/nawal_aom" target="_blank" rel="noopener noreferrer" class="footer-social flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-secondary)] transition-colors hover:bg-[var(--color-primary)]/20 hover:text-[var(--color-accent)]" aria-label="Instagram"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <div class="border-t border-[var(--color-primary)]/20 py-4 text-center">
+        <p class="text-xs text-[var(--color-secondary)]">© <span id="current-year"></span> Nawal Omar. <span data-i18n="copyright">All rights reserved.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      var track = document.getElementById('wadi-carousel-track');
+      var prev = document.getElementById('wadi-prev');
+      var next = document.getElementById('wadi-next');
+      if (!track || !prev || !next) return;
+
+      function slideByCard(direction) {
+        var card = track.querySelector('.wadi-carousel-item');
+        if (!card) return;
+        var cardWidth = card.getBoundingClientRect().width + 14;
+        track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+      }
+
+      prev.addEventListener('click', function () { slideByCard(-1); });
+      next.addEventListener('click', function () { slideByCard(1); });
+
+      function applyAdaptiveWidths() {
+        var isDesktop = window.matchMedia('(min-width: 768px)').matches;
+        track.querySelectorAll('.wadi-carousel-item img').forEach(function (img) {
+          var ratio = 1.2;
+          if (img.naturalWidth && img.naturalHeight) {
+            ratio = img.naturalWidth / img.naturalHeight;
+          }
+
+          var widthValue;
+          if (isDesktop) {
+            if (ratio < 0.8) widthValue = '24vw';
+            else if (ratio < 1.2) widthValue = '30vw';
+            else widthValue = '40vw';
+          } else {
+            if (ratio < 0.8) widthValue = '54vw';
+            else if (ratio < 1.2) widthValue = '66vw';
+            else widthValue = '82vw';
+          }
+
+          var parent = img.closest('.wadi-carousel-item');
+          if (parent) parent.style.flexBasis = widthValue;
+        });
+      }
+
+      track.querySelectorAll('.wadi-carousel-item img').forEach(function (img) {
+        if (img.complete) return;
+        img.addEventListener('load', applyAdaptiveWidths);
+      });
+      applyAdaptiveWidths();
+      window.addEventListener('resize', applyAdaptiveWidths);
+    })();
+  </script>
+  <script>
+    (function () {
+      var lightbox = document.getElementById('wadi-lightbox');
+      var lightboxImg = document.getElementById('wadi-lightbox-image');
+      var closeBtn = document.getElementById('wadi-lightbox-close');
+      if (!lightbox || !lightboxImg || !closeBtn) return;
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+      }
+
+      document.querySelectorAll('.wadi-carousel-item img').forEach(function (img) {
+        img.addEventListener('click', function () {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt || 'Retreat moment';
+          lightbox.classList.add('is-open');
+          lightbox.setAttribute('aria-hidden', 'false');
+        });
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      function syncState(wrap, video) {
+        if (video.paused) wrap.classList.remove('is-playing');
+        else wrap.classList.add('is-playing');
+      }
+
+      document.querySelectorAll('.wadi-reel-card').forEach(function (wrap) {
+        var video = wrap.querySelector('.wadi-reel-video');
+        var btn = wrap.querySelector('.wadi-reel-playbtn');
+        if (!video || !btn) return;
+
+        syncState(wrap, video);
+
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          video.play().catch(function () {});
+        });
+
+        video.addEventListener('play', function () { syncState(wrap, video); });
+        video.addEventListener('pause', function () { syncState(wrap, video); });
+        video.addEventListener('click', function (e) {
+          if (e.target !== video) return;
+          if (!video.paused) video.pause();
+        });
+      });
+    })();
+  </script>
+  <script src="js/reveal.js"></script>
+  <script>
+    (function () {
+      var y = document.getElementById('current-year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

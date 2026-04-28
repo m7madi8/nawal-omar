@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Declaration Form</title>
+  <meta name="description" content="A calm, multi-step registration form for Mountain Voice Retreat.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f1eb;
+      --card: #fffdf9;
+      --line: #e3d8ca;
+      --text: #3e2f2b;
+      --muted: #7c6355;
+      --primary: #ba8c61;
+      --primary-dark: #9e6f46;
+      --danger: #be5a5a;
+      --shadow: 0 16px 38px rgba(86, 60, 40, 0.1);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 15% 15%, #fdfaf6 0, var(--bg) 48%, #ebdcc8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .retreat-form-shell {
+      width: min(780px, 100%);
+    }
+
+    .top-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .top-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .back-link {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px;
+      background: #fffaf2;
+    }
+
+    .lang-btn {
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #5b453a;
+      padding: 6px 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background: #f3e4d3;
+      color: #6a4b33;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid rgba(158, 111, 70, 0.2);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .form-header h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.25rem, 3.4vw, 2rem);
+      line-height: 1.3;
+      font-weight: 700;
+      color: #3b2b26;
+    }
+
+    .form-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .progress-wrap {
+      margin: 20px 0 10px;
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: #ede2d5;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 14.28%;
+      background: linear-gradient(90deg, #c79d74, #af815a);
+      border-radius: inherit;
+      transition: width 360ms ease;
+    }
+
+    .step-viewport {
+      position: relative;
+      min-height: 370px;
+      margin-top: 16px;
+    }
+
+    .step-panel {
+      display: none;
+      opacity: 0;
+      transform: translateX(20px) scale(0.98);
+    }
+
+    .step-panel.active {
+      display: block;
+      animation: enterStep 420ms ease both;
+    }
+
+    .step-panel.leaving {
+      display: block;
+      animation: leaveStep 360ms ease both;
+    }
+
+    .step-title {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      color: #3b2b26;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.9rem;
+      color: #5a4337;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      border-radius: 14px;
+      padding: 11px 13px;
+      font-size: 0.97rem;
+      color: var(--text);
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(186, 140, 97, 0.18);
+    }
+
+    .radio-group, .checks {
+      display: grid;
+      gap: 10px;
+    }
+
+    .radio-group label, .checks label {
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: #5a4337;
+      cursor: pointer;
+    }
+
+    .error {
+      border-color: var(--danger) !important;
+      box-shadow: 0 0 0 3px rgba(190, 90, 90, 0.14) !important;
+    }
+
+    .shake {
+      animation: shake 340ms ease;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-top: 4px;
+    }
+
+    .signature-tools {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: #fffaf2;
+      color: #5b453a;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: #f5e7d8;
+      border-color: #d9bea4;
+      color: #6b4b33;
+    }
+
+    .signature-canvas-wrap {
+      border: 1px dashed #d8c5b1;
+      border-radius: 14px;
+      padding: 10px;
+      background: #fffaf3;
+    }
+
+    #signatureCanvas {
+      width: 100%;
+      height: 140px;
+      border-radius: 10px;
+      background: #fffdf9;
+      border: 1px solid #e3d3c1;
+      display: block;
+      touch-action: none;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 150ms ease, opacity 150ms ease, background-color 150ms ease;
+      font-family: inherit;
+    }
+
+    .btn:active { transform: translateY(1px); }
+    .btn.secondary {
+      background: #f3e8dc;
+      color: #5d4638;
+    }
+    .btn.primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn.primary:hover { background: var(--primary-dark); }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 30px 16px 10px;
+      animation: fadeIn 440ms ease both;
+    }
+
+    .success-state.visible { display: block; }
+
+    .checkmark {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      background: #f6ece0;
+      border: 2px solid #d7b998;
+      display: grid;
+      place-items: center;
+      color: #8d643f;
+      font-size: 2rem;
+      animation: pop 550ms ease;
+    }
+
+    @keyframes enterStep {
+      from { opacity: 0; transform: translateX(18px) scale(0.98); }
+      to { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes leaveStep {
+      from { opacity: 1; transform: translateX(0) scale(1); }
+      to { opacity: 0; transform: translateX(-18px) scale(0.995); }
+    }
+    @keyframes shake {
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes pop {
+      0% { transform: scale(0.65); opacity: 0; }
+      65% { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 720px) {
+      .card { padding: 18px; border-radius: 18px; }
+      .grid.two { grid-template-columns: 1fr; }
+      .step-viewport { min-height: 420px; }
+      .actions { flex-direction: column-reverse; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="retreat-form-shell">
+    <div class="top-actions">
+      <div class="top-actions-group">
+        <a class="back-link" href="retreat-dahab.html" data-t="backLink">← Back to retreat page</a>
+        <nav class="lang-switcher" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang-set="en">En</button>
+          <button type="button" class="lang-btn" data-lang-set="ar">Ar</button>
+        </nav>
+      </div>
+      <span id="draftStatus" data-t="draftIdle">Auto-save enabled</span>
+    </div>
+
+    <section class="card">
+      <header class="form-header">
+        <h1 data-t="formTitle">Health Declaration Form</h1>
+        <p data-t="formSubtitle">A calm registration experience, one step at a time.</p>
+      </header>
+
+      <div class="progress-wrap">
+        <div class="progress-row">
+          <strong id="progressText">Step 1 of 7</strong>
+          <span id="progressPercent">14%</span>
+        </div>
+        <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+
+      <form id="retreatForm" novalidate data-formsubmit-email="eslamhuhu1@gmail.com">
+        <div id="stepViewport" class="step-viewport">
+          <section class="step-panel active" data-step="1">
+            <h2 class="step-title" data-t="step1Title">1) Personal Information</h2>
+            <div class="grid two">
+              <div class="field"><label for="fullName" data-t="fullName">Full Name</label><input id="fullName" name="fullName" required></div>
+              <div class="field"><label for="idNumber" data-t="idNumber">ID Number</label><input id="idNumber" name="idNumber" required></div>
+              <div class="field"><label for="birthDate" data-t="birthDate">Date of Birth</label><input id="birthDate" name="birthDate" type="date" required></div>
+              <div class="field"><label for="phone" data-t="phone">Phone</label><input id="phone" name="phone" type="tel" required></div>
+              <div class="field"><label for="email" data-t="email">Email</label><input id="email" name="email" type="email" required></div>
+              <div class="field"><label for="meetingPoint" data-t="meetingPoint">Meeting Point</label><input id="meetingPoint" name="meetingPoint" required></div>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="2">
+            <h2 class="step-title" data-t="step2Title">2) Emergency Contact</h2>
+            <div class="grid">
+              <div class="field"><label for="emergencyName" data-t="name">Name</label><input id="emergencyName" name="emergencyName" required></div>
+              <div class="field"><label for="emergencyPhone" data-t="phone">Phone</label><input id="emergencyPhone" name="emergencyPhone" type="tel" required></div>
+              <div class="field"><label for="relation" data-t="relationship">Relationship</label><input id="relation" name="relation" required></div>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="3">
+            <h2 class="step-title" data-t="step3Title">3) Health Status</h2>
+            <div class="grid">
+              <div class="field">
+                <label data-t="chronicQuestion">Do you have chronic conditions?</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="chronic" value="no" required> <span data-t="no">No</span></label>
+                  <label><input type="radio" name="chronic" value="yes" required> <span data-t="yes">Yes</span></label>
+                </div>
+              </div>
+              <div class="field" id="chronicDetailsWrap" style="display:none;">
+                <label for="chronicDetails" data-t="chronicDetails">If yes, please provide details</label>
+                <textarea id="chronicDetails" name="chronicDetails"></textarea>
+              </div>
+              <div class="field"><label for="allergy" data-t="allergy">Allergies</label><input id="allergy" name="allergy" required></div>
+              <div class="field"><label for="medications" data-t="medications">Current Medications</label><input id="medications" name="medications" required></div>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="4">
+            <h2 class="step-title" data-t="step4Title">4) Injuries and Fitness</h2>
+            <div class="grid">
+              <div class="field"><label for="currentInjuries" data-t="currentInjuries">Current Injuries</label><textarea id="currentInjuries" name="currentInjuries" required></textarea></div>
+              <div class="field"><label for="pastFractures" data-t="pastFractures">Previous Fractures</label><textarea id="pastFractures" name="pastFractures" required></textarea></div>
+              <div class="field"><label for="surgeries" data-t="surgeries">Surgeries</label><textarea id="surgeries" name="surgeries" required></textarea></div>
+              <div class="field">
+                <label for="activityLevel" data-t="activityLevel">Physical Activity Level</label>
+                <select id="activityLevel" name="activityLevel" required>
+                  <option value="" data-t="selectLevel">Select level</option>
+                  <option value="low" data-t="low">Low</option>
+                  <option value="medium" data-t="medium">Medium</option>
+                  <option value="high" data-t="high">High</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="5">
+            <h2 class="step-title" data-t="step5Title">5) Mobility and Cardio</h2>
+            <div class="grid">
+              <div class="field"><label for="painZones" data-t="painZones">Back / Neck / Knee Pain</label><textarea id="painZones" name="painZones" required></textarea></div>
+              <div class="field"><label for="heartIssues" data-t="heartIssues">Heart Issues</label><textarea id="heartIssues" name="heartIssues" required></textarea></div>
+              <div class="field"><label for="breathingDizziness" data-t="breathingDizziness">Breathing Issues / Dizziness</label><textarea id="breathingDizziness" name="breathingDizziness" required></textarea></div>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="6">
+            <h2 class="step-title" data-t="step6Title">6) Notes + Consent</h2>
+            <div class="grid">
+              <div class="field"><label for="notes" data-t="notes">Additional Notes</label><textarea id="notes" name="notes"></textarea></div>
+              <div class="checks">
+                <label><input type="checkbox" name="consentInfo" required> <span data-t="consentInfo">I confirm the information is accurate</span></label>
+                <label><input type="checkbox" name="consentPhysical" required> <span data-t="consentPhysical">I understand this retreat includes physical activity</span></label>
+                <label><input type="checkbox" name="consentFirstAid" required> <span data-t="consentFirstAid">I consent to first aid if needed</span></label>
+                <label><input type="checkbox" name="consentPhotos" required> <span data-t="consentPhotos">I agree to photos/video during the retreat</span></label>
+              </div>
+            </div>
+          </section>
+
+          <section class="step-panel" data-step="7">
+            <h2 class="step-title" data-t="step7Title">7) Signature</h2>
+            <div class="grid">
+              <div class="field">
+                <label data-t="signatureMethod">Signature Method</label>
+                <div class="signature-tools">
+                  <button type="button" class="chip" data-sign-mode="draw" data-t="draw">Draw</button>
+                  <button type="button" class="chip active" data-sign-mode="type" data-t="type">Type</button>
+                </div>
+
+                <div id="drawWrap" class="signature-canvas-wrap" style="display:none;">
+                  <canvas id="signatureCanvas"></canvas>
+                  <div class="hint" data-t="drawHint">Draw your signature inside the box.</div>
+                  <button id="clearSign" type="button" class="chip" style="margin-top:8px;" data-t="clearSignature">Clear signature</button>
+                </div>
+
+                <div id="typeWrap" style="display:none;">
+                  <input id="typedSignature" name="typedSignature" data-t-placeholder="typedSignaturePlaceholder" placeholder="Type your signature">
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="actions">
+          <button id="prevBtn" type="button" class="btn secondary" data-t="prev">Back</button>
+          <button id="nextBtn" type="button" class="btn primary" data-t="next">Next</button>
+          <button id="submitBtn" type="submit" class="btn primary" style="display:none;" data-t="submit">Submit</button>
+        </div>
+      </form>
+
+      <div id="successState" class="success-state" role="status" aria-live="polite">
+        <div class="checkmark">✓</div>
+        <h2 data-t="successTitle">Registration submitted successfully</h2>
+        <p data-t="successText">Thank you. Your details have been saved and we will contact you soon.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script>
+    (function () {
+      const translations = {
+        en: {
+          pageTitle: "Health Declaration Form",
+          pageDescription: "A calm, multi-step registration form for Mountain Voice Retreat.",
+          backLink: "← Back to retreat page",
+          formTitle: "Health Declaration Form",
+          formSubtitle: "A calm registration experience, one step at a time.",
+          draftIdle: "Auto-save enabled",
+          draftSaved: "Draft saved",
+          stepLabel: "Step {current} of {total}",
+          step1Title: "1) Personal Information",
+          step2Title: "2) Emergency Contact",
+          step3Title: "3) Health Status",
+          step4Title: "4) Injuries and Fitness",
+          step5Title: "5) Mobility and Cardio",
+          step6Title: "6) Notes + Consent",
+          step7Title: "7) Signature",
+          fullName: "Full Name",
+          idNumber: "ID Number",
+          birthDate: "Date of Birth",
+          phone: "Phone",
+          email: "Email",
+          meetingPoint: "Meeting Point",
+          name: "Name",
+          relationship: "Relationship",
+          chronicQuestion: "Do you have chronic conditions?",
+          yes: "Yes",
+          no: "No",
+          chronicDetails: "If yes, please provide details",
+          allergy: "Allergies",
+          medications: "Current Medications",
+          currentInjuries: "Current Injuries",
+          pastFractures: "Previous Fractures",
+          surgeries: "Surgeries",
+          activityLevel: "Physical Activity Level",
+          selectLevel: "Select level",
+          low: "Low",
+          medium: "Medium",
+          high: "High",
+          painZones: "Back / Neck / Knee Pain",
+          heartIssues: "Heart Issues",
+          breathingDizziness: "Breathing Issues / Dizziness",
+          notes: "Additional Notes",
+          consentInfo: "I confirm the information is accurate",
+          consentPhysical: "I understand this retreat includes physical activity",
+          consentFirstAid: "I consent to first aid if needed",
+          consentPhotos: "I agree to photos/video during the retreat",
+          signatureMethod: "Signature Method",
+          draw: "Draw",
+          type: "Type",
+          drawHint: "Draw your signature inside the box.",
+          clearSignature: "Clear signature",
+          typedSignaturePlaceholder: "Type your signature",
+          prev: "Back",
+          next: "Next",
+          submit: "Submit",
+          successTitle: "Registration submitted successfully",
+          successText: "Thank you. Your details have been saved and we will contact you soon."
+        },
+        ar: {
+          pageTitle: "استمارة صحية",
+          pageDescription: "استمارة تسجيل هادئة ومتعددة الخطوات لرحلة Mountain Voice Retreat.",
+          backLink: "← العودة لصفحة الريتريت",
+          formTitle: "استمارة صحية",
+          formSubtitle: "تجربة تسجيل هادئة، خطوة بخطوة.",
+          draftIdle: "يتم الحفظ تلقائيًا",
+          draftSaved: "تم حفظ المسودة",
+          stepLabel: "الخطوة {current} من {total}",
+          step1Title: "1) المعلومات الشخصية",
+          step2Title: "2) جهة الطوارئ",
+          step3Title: "3) الحالة الصحية",
+          step4Title: "4) الإصابات واللياقة",
+          step5Title: "5) الجهاز الحركي والقلب",
+          step6Title: "6) ملاحظات + إقرار",
+          step7Title: "7) التوقيع",
+          fullName: "الاسم الكامل",
+          idNumber: "رقم الهوية",
+          birthDate: "تاريخ الميلاد",
+          phone: "الهاتف",
+          email: "البريد الإلكتروني",
+          meetingPoint: "نقطة اللقاء",
+          name: "الاسم",
+          relationship: "صلة القرابة",
+          chronicQuestion: "هل لديك أمراض مزمنة؟",
+          yes: "نعم",
+          no: "لا",
+          chronicDetails: "إذا كانت الإجابة نعم، اذكري التفاصيل",
+          allergy: "حساسية",
+          medications: "أدوية حالية",
+          currentInjuries: "إصابات حالية",
+          pastFractures: "كسور سابقة",
+          surgeries: "عمليات جراحية",
+          activityLevel: "مستوى النشاط الرياضي",
+          selectLevel: "اختاري المستوى",
+          low: "منخفض",
+          medium: "متوسط",
+          high: "عالٍ",
+          painZones: "ألم ظهر / رقبة / ركب",
+          heartIssues: "مشاكل قلب",
+          breathingDizziness: "تنفس / دوخة",
+          notes: "ملاحظات إضافية",
+          consentInfo: "أقر بصحة المعلومات",
+          consentPhysical: "أدرك أن النشاط بدني ويتطلب جهوزية",
+          consentFirstAid: "أوافق على الإسعافات الأولية عند الحاجة",
+          consentPhotos: "أوافق على التصوير أثناء الرحلة",
+          signatureMethod: "طريقة التوقيع",
+          draw: "رسم",
+          type: "كتابة",
+          drawHint: "ارسمي توقيعك داخل المساحة.",
+          clearSignature: "مسح التوقيع",
+          typedSignaturePlaceholder: "اكتبي توقيعك هنا",
+          prev: "رجوع",
+          next: "التالي",
+          submit: "إرسال",
+          successTitle: "تم إرسال التسجيل بنجاح",
+          successText: "شكرًا لك. تم حفظ بياناتك وسنتواصل معك قريبًا."
+        }
+      };
+
+      const form = document.getElementById("retreatForm");
+      const steps = Array.from(document.querySelectorAll(".step-panel"));
+      const progressFill = document.getElementById("progressFill");
+      const progressText = document.getElementById("progressText");
+      const progressPercent = document.getElementById("progressPercent");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const submitBtn = document.getElementById("submitBtn");
+      const draftStatus = document.getElementById("draftStatus");
+      const successState = document.getElementById("successState");
+      const chronicDetailsWrap = document.getElementById("chronicDetailsWrap");
+      const chronicDetails = document.getElementById("chronicDetails");
+      const drawWrap = document.getElementById("drawWrap");
+      const typeWrap = document.getElementById("typeWrap");
+      const typedSignature = document.getElementById("typedSignature");
+      const signatureCanvas = document.getElementById("signatureCanvas");
+      const clearSign = document.getElementById("clearSign");
+      const signModeButtons = document.querySelectorAll("[data-sign-mode]");
+      const langButtons = document.querySelectorAll("[data-lang-set]");
+      const storageKey = "mountain-voice-retreat-draft";
+
+      let currentStep = 1;
+      let signMode = "type";
+      let drawing = false;
+      let hasDrawn = false;
+      let currentLang = "en";
+      let canDraw = false;
+
+      async function submitToFormSubmit() {
+        const receiverEmail = (form.getAttribute("data-formsubmit-email") || "").trim();
+        if (!receiverEmail || receiverEmail === "your-email@example.com") {
+          alert("Please set your FormSubmit email first in data-formsubmit-email.");
+          return false;
+        }
+
+        const formData = new FormData(form);
+        formData.set("_subject", "Health Declaration Form");
+        formData.set("_captcha", "false");
+        formData.set("_template", "table");
+        formData.set("signature_mode", signMode);
+
+        if (signMode === "draw" && canDraw && hasDrawn) {
+          formData.set("signature_image", signatureCanvas.toDataURL("image/png"));
+        } else {
+          formData.set("signature_text", typedSignature.value.trim());
+        }
+
+        const endpoint = "https://formsubmit.co/ajax/" + encodeURIComponent(receiverEmail);
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: formData
+        });
+
+        if (!response.ok) return false;
+        const result = await response.json().catch(() => ({}));
+        return !(result && result.success === "false");
+      }
+
+      function t(key) {
+        return (translations[currentLang] && translations[currentLang][key]) || (translations.en && translations.en[key]) || key;
+      }
+
+      function applyLanguage(lang) {
+        currentLang = lang === "ar" ? "ar" : "en";
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+        localStorage.setItem("nawal-lang", currentLang);
+
+        document.title = t("pageTitle");
+        const desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute("content", t("pageDescription"));
+
+        document.querySelectorAll("[data-t]").forEach((el) => {
+          const key = el.getAttribute("data-t");
+          el.textContent = t(key);
+        });
+        document.querySelectorAll("[data-t-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-t-placeholder");
+          el.setAttribute("placeholder", t(key));
+        });
+        langButtons.forEach((btn) => btn.classList.toggle("active", btn.getAttribute("data-lang-set") === currentLang));
+        updateProgress();
+      }
+
+      function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        const rect = signatureCanvas.getBoundingClientRect();
+        signatureCanvas.width = rect.width * ratio;
+        signatureCanvas.height = rect.height * ratio;
+        const ctx = signatureCanvas.getContext("2d");
+        ctx.scale(ratio, ratio);
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#5b4336";
+      }
+
+      function drawStart(e) {
+        drawing = true;
+        const p = getPoint(e);
+        const ctx = signatureCanvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+      }
+
+      function drawMove(e) {
+        if (!drawing) return;
+        const p = getPoint(e);
+        const ctx = signatureCanvas.getContext("2d");
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        hasDrawn = true;
+      }
+
+      function drawEnd() {
+        drawing = false;
+      }
+
+      function getPoint(e) {
+        const rect = signatureCanvas.getBoundingClientRect();
+        const source = e.touches ? e.touches[0] : e;
+        return { x: source.clientX - rect.left, y: source.clientY - rect.top };
+      }
+
+      function setSignMode(mode) {
+        if (mode === "draw" && !canDraw) mode = "type";
+        signMode = mode;
+        signModeButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.signMode === mode));
+        drawWrap.style.display = mode === "draw" ? "block" : "none";
+        typeWrap.style.display = mode === "type" ? "block" : "none";
+        updateNextState();
+      }
+
+      function getStepElement(stepNumber) {
+        return steps.find((step) => Number(step.dataset.step) === stepNumber);
+      }
+
+      function updateProgress() {
+        const total = steps.length;
+        const percent = Math.round((currentStep / total) * 100);
+        progressText.textContent = t("stepLabel").replace("{current}", String(currentStep)).replace("{total}", String(total));
+        progressPercent.textContent = percent + "%";
+        progressFill.style.width = percent + "%";
+      }
+
+      function autofocusStep(stepEl) {
+        const first = stepEl.querySelector("input, select, textarea, button");
+        if (first) first.focus({ preventScroll: true });
+      }
+
+      function validateStep(stepNumber, withShake) {
+        const stepEl = getStepElement(stepNumber);
+        const inputs = Array.from(stepEl.querySelectorAll("input, textarea, select"));
+        let valid = true;
+
+        inputs.forEach((input) => {
+          input.classList.remove("error", "shake");
+
+          if (input.name === "chronicDetails") {
+            if (chronicDetailsWrap.style.display !== "none" && !input.value.trim()) {
+              valid = false;
+              markInvalid(input, withShake);
+            }
+            return;
+          }
+
+          if (input.type === "radio") {
+            if (input.required) {
+              const group = form.querySelectorAll("input[name='" + input.name + "']");
+              const checked = Array.from(group).some((r) => r.checked);
+              if (!checked) {
+                valid = false;
+                if (withShake) {
+                  const firstRadio = group[0];
+                  const groupCard = firstRadio.closest(".radio-group");
+                  if (groupCard) {
+                    groupCard.classList.add("shake");
+                    setTimeout(() => groupCard.classList.remove("shake"), 360);
+                  }
+                }
+              }
+            }
+            return;
+          }
+
+          if (input.type === "checkbox") {
+            if (input.required && !input.checked) {
+              valid = false;
+              markInvalid(input, withShake);
+            }
+            return;
+          }
+
+          if (input.required && !input.value.trim()) {
+            valid = false;
+            markInvalid(input, withShake);
+          }
+        });
+
+        if (stepNumber === 7) {
+          const signatureValid = signMode === "draw" ? hasDrawn : typedSignature.value.trim().length > 1;
+          if (!signatureValid) {
+            valid = false;
+            const target = signMode === "draw" ? signatureCanvas : typedSignature;
+            markInvalid(target, withShake);
+          }
+        }
+
+        if (!valid && withShake && "vibrate" in navigator) {
+          navigator.vibrate(35);
+        }
+
+        return valid;
+      }
+
+      function markInvalid(input, withShake) {
+        input.classList.add("error");
+        if (withShake) {
+          input.classList.add("shake");
+          setTimeout(() => input.classList.remove("shake"), 360);
+        }
+      }
+
+      function updateNextState() {
+        const valid = validateStep(currentStep, false);
+        nextBtn.disabled = !valid;
+        submitBtn.disabled = !valid;
+      }
+
+      function switchStep(nextStep) {
+        if (nextStep < 1 || nextStep > steps.length || nextStep === currentStep) return;
+        const currentEl = getStepElement(currentStep);
+        const nextEl = getStepElement(nextStep);
+
+        currentEl.classList.remove("active");
+        currentEl.classList.add("leaving");
+
+        setTimeout(() => {
+          currentEl.classList.remove("leaving");
+          nextEl.classList.add("active");
+          currentStep = nextStep;
+          updateProgress();
+          updateButtons();
+          updateNextState();
+          saveDraft();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          setTimeout(() => autofocusStep(nextEl), 120);
+        }, 340);
+      }
+
+      function updateButtons() {
+        prevBtn.style.visibility = currentStep === 1 ? "hidden" : "visible";
+        const isLast = currentStep === steps.length;
+        nextBtn.style.display = isLast ? "none" : "inline-block";
+        submitBtn.style.display = isLast ? "inline-block" : "none";
+      }
+
+      function saveDraft() {
+        const data = {};
+        Array.from(form.elements).forEach((el) => {
+          if (!el.name) return;
+          if (el.type === "checkbox") data[el.name] = el.checked;
+          else if (el.type === "radio") {
+            if (el.checked) data[el.name] = el.value;
+          } else data[el.name] = el.value;
+        });
+        data.__step = currentStep;
+        data.__signMode = signMode;
+        data.__hasDrawn = hasDrawn;
+        localStorage.setItem(storageKey, JSON.stringify(data));
+        draftStatus.textContent = t("draftSaved");
+        setTimeout(() => { draftStatus.textContent = t("draftIdle"); }, 1200);
+      }
+
+      function loadDraft() {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
+        try {
+          const data = JSON.parse(raw);
+          Array.from(form.elements).forEach((el) => {
+            if (!el.name || !(el.name in data)) return;
+            if (el.type === "checkbox") el.checked = Boolean(data[el.name]);
+            else if (el.type === "radio") el.checked = data[el.name] === el.value;
+            else el.value = data[el.name] || "";
+          });
+          setSignMode(data.__signMode || "type");
+          hasDrawn = Boolean(data.__hasDrawn);
+          const step = Number(data.__step || 1);
+          getStepElement(currentStep).classList.remove("active");
+          currentStep = Math.max(1, Math.min(steps.length, step));
+          getStepElement(currentStep).classList.add("active");
+        } catch (_err) {}
+      }
+
+      form.addEventListener("input", () => {
+        const chronicAnswer = form.querySelector("input[name='chronic']:checked");
+        const chronicYes = chronicAnswer && chronicAnswer.value === "yes";
+        chronicDetailsWrap.style.display = chronicYes ? "block" : "none";
+        if (!chronicYes) chronicDetails.value = "";
+        updateNextState();
+        saveDraft();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (!validateStep(currentStep, true)) return;
+        switchStep(currentStep + 1);
+      });
+
+      prevBtn.addEventListener("click", () => switchStep(currentStep - 1));
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!validateStep(currentStep, true)) return;
+        submitBtn.disabled = true;
+        try {
+          const sent = await submitToFormSubmit();
+          if (!sent) {
+            alert("Failed to send form. Please try again.");
+            return;
+          }
+          form.style.display = "none";
+          successState.classList.add("visible");
+          localStorage.removeItem(storageKey);
+        } catch (_err) {
+          alert("Failed to send form. Please try again.");
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+
+      signModeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => setSignMode(btn.dataset.signMode));
+      });
+      langButtons.forEach((btn) => {
+        btn.addEventListener("click", () => applyLanguage(btn.getAttribute("data-lang-set")));
+      });
+
+      clearSign.addEventListener("click", () => {
+        const ctx = signatureCanvas.getContext("2d");
+        ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+        hasDrawn = false;
+        updateNextState();
+        saveDraft();
+      });
+
+      signatureCanvas.addEventListener("mousedown", drawStart);
+      signatureCanvas.addEventListener("mousemove", drawMove);
+      window.addEventListener("mouseup", drawEnd);
+      signatureCanvas.addEventListener("touchstart", drawStart, { passive: true });
+      signatureCanvas.addEventListener("touchmove", drawMove, { passive: true });
+      window.addEventListener("touchend", drawEnd, { passive: true });
+
+      window.addEventListener("resize", resizeCanvas);
+
+      canDraw = Boolean(signatureCanvas.getContext) && ("PointerEvent" in window || "ontouchstart" in window || "onmousedown" in window);
+      if (canDraw) {
+        resizeCanvas();
+      } else {
+        const drawBtn = document.querySelector('[data-sign-mode="draw"]');
+        if (drawBtn) drawBtn.style.display = "none";
+        drawWrap.style.display = "none";
+      }
+      applyLanguage(localStorage.getItem("nawal-lang") || "en");
+      loadDraft();
+      setSignMode(signMode);
+      updateProgress();
+      updateButtons();
+      updateNextState();
+      const chronicAnswer = form.querySelector("input[name='chronic']:checked");
+      chronicDetailsWrap.style.display = chronicAnswer && chronicAnswer.value === "yes" ? "block" : "none";
+      autofocusStep(getStepElement(currentStep));
+    })();
+  </script>
+</body>
+</html>
