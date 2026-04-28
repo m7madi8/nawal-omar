@@ -186,6 +186,71 @@
       transform: translate(-50%, -50%) scale(0.9);
     }
 
+    .wadi-premium-panel {
+      background: linear-gradient(180deg, #fffdf9 0%, #fbf5ed 100%);
+      border: 1px solid rgba(176, 133, 88, 0.22);
+      box-shadow: 0 14px 32px rgba(79, 53, 31, 0.08);
+    }
+
+    .wadi-premium-panel .dahab-includes-kicker {
+      color: #8a694f;
+      letter-spacing: 0.1em;
+    }
+
+    .wadi-premium-panel .dahab-includes-block {
+      background: linear-gradient(180deg, #fffaf3 0%, #f8efe3 100%);
+      border: 1px solid rgba(176, 133, 88, 0.2);
+      box-shadow: 0 8px 20px rgba(82, 55, 32, 0.06);
+    }
+
+    .wadi-premium-panel .dahab-includes-block-soft {
+      background: linear-gradient(180deg, #fcf4e8 0%, #f6e8d6 100%);
+    }
+
+    .wadi-premium-panel .dahab-includes-title {
+      color: #6a4b33;
+      font-weight: 700;
+    }
+
+    .wadi-premium-panel .dahab-includes-list li {
+      color: #5b4638;
+      line-height: 1.75;
+      border-bottom: 1px dashed rgba(176, 133, 88, 0.2);
+      padding-bottom: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .wadi-premium-panel .dahab-includes-list li:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .wadi-premium-panel .dahab-price-row {
+      border-top: 1px solid rgba(176, 133, 88, 0.25);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .wadi-premium-panel .dahab-price-value {
+      color: #8d6139;
+    }
+
+    .wadi-premium-panel .dahab-price-note {
+      color: #7f6654;
+    }
+
+    .wadi-premium-panel .dahab-includes-cta {
+      background: linear-gradient(180deg, #bf946b 0%, #a97a53 100%);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(143, 99, 63, 0.26);
+    }
+
+    .wadi-premium-panel .dahab-includes-cta:hover {
+      background: linear-gradient(180deg, #c99e75 0%, #b5865e 100%);
+      transform: translateY(-1px);
+    }
+
     @media (min-width: 768px) {
       .wadi-reels-grid {
         grid-auto-columns: minmax(32%, 1fr);
@@ -432,7 +497,7 @@
 
     <section class="rp-section animate-section">
       <div class="rp-container">
-        <div class="dahab-includes-card animate-content">
+        <div class="dahab-includes-card wadi-premium-panel animate-content">
           <div class="dahab-includes-top">
             <p class="dahab-includes-kicker" data-i18n="retreat_wadi_accommodation_kicker">Wadi Rum Retreat</p>
             <h3 class="font-serif text-2xl sm:text-3xl" data-i18n="retreat_wadi_accommodation_title">Accommodation options</h3>
