@@ -50,42 +50,10 @@
       font-size: 0.95rem;
     }
 
-    .top-actions-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
     .back-link {
       color: var(--primary-dark);
       text-decoration: none;
       font-weight: 600;
-    }
-
-    .lang-switcher {
-      display: inline-flex;
-      gap: 6px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 4px;
-      background: #fffaf2;
-    }
-
-    .lang-btn {
-      border: 0;
-      border-radius: 999px;
-      background: transparent;
-      color: #5b453a;
-      padding: 6px 12px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .lang-btn.active {
-      background: #f3e4d3;
-      color: #6a4b33;
     }
 
     .card {
@@ -377,13 +345,7 @@
 <body>
   <main class="retreat-form-shell">
     <div class="top-actions">
-      <div class="top-actions-group">
-        <a class="back-link" href="retreat-dahab.html" data-t="backLink">← Back to retreat page</a>
-        <nav class="lang-switcher" aria-label="Language">
-          <button type="button" class="lang-btn" data-lang-set="en">En</button>
-          <button type="button" class="lang-btn" data-lang-set="ar">Ar</button>
-        </nav>
-      </div>
+      <a class="back-link" href="retreat-dahab.html" data-t="backLink">← Back to retreat page</a>
       <span id="draftStatus" data-t="draftIdle">Auto-save enabled</span>
     </div>
 
@@ -662,7 +624,6 @@
       const signatureCanvas = document.getElementById("signatureCanvas");
       const clearSign = document.getElementById("clearSign");
       const signModeButtons = document.querySelectorAll("[data-sign-mode]");
-      const langButtons = document.querySelectorAll("[data-lang-set]");
       const storageKey = "mountain-voice-retreat-draft";
 
       let currentStep = 1;
@@ -725,7 +686,6 @@
           const key = el.getAttribute("data-t-placeholder");
           el.setAttribute("placeholder", t(key));
         });
-        langButtons.forEach((btn) => btn.classList.toggle("active", btn.getAttribute("data-lang-set") === currentLang));
         updateProgress();
       }
 
@@ -978,10 +938,6 @@
       signModeButtons.forEach((btn) => {
         btn.addEventListener("click", () => setSignMode(btn.dataset.signMode));
       });
-      langButtons.forEach((btn) => {
-        btn.addEventListener("click", () => applyLanguage(btn.getAttribute("data-lang-set")));
-      });
-
       clearSign.addEventListener("click", () => {
         const ctx = signatureCanvas.getContext("2d");
         ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
