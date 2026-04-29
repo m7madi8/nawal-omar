@@ -189,6 +189,51 @@
       return status === "completed" ? "Completed" : "Pending";
     }
 
+    function parseHealthFormFreeNote(text) {
+      var parsed = {
+        idNumber: "-",
+        birthDate: "-",
+        emergencyName: "-",
+        emergencyPhone: "-",
+        relation: "-",
+        allergy: "-",
+        medications: "-",
+        currentInjuries: "-",
+        pastFractures: "-",
+        surgeries: "-",
+        painZones: "-",
+        heartIssues: "-",
+        breathingDizziness: "-",
+        signatureMode: "-",
+        typedSignature: "-"
+      };
+      if (!text) return parsed;
+      String(text).split("\n").forEach(function (line) {
+        var idx = line.indexOf(":");
+        if (idx === -1) return;
+        var key = line.slice(0, idx).trim();
+        var value = line.slice(idx + 1).trim() || "-";
+        if (key === "ID") parsed.idNumber = value;
+        else if (key === "Birth Date") parsed.birthDate = value;
+        else if (key === "Emergency") {
+          var parts = value.split("/").map(function (v) { return v.trim(); });
+          parsed.emergencyName = parts[0] || "-";
+          parsed.emergencyPhone = parts[1] || "-";
+          parsed.relation = parts[2] || "-";
+        } else if (key === "Allergy") parsed.allergy = value;
+        else if (key === "Medications") parsed.medications = value;
+        else if (key === "Current Injuries") parsed.currentInjuries = value;
+        else if (key === "Past Fractures") parsed.pastFractures = value;
+        else if (key === "Surgeries") parsed.surgeries = value;
+        else if (key === "Pain Zones") parsed.painZones = value;
+        else if (key === "Heart Issues") parsed.heartIssues = value;
+        else if (key === "Breathing / Dizziness") parsed.breathingDizziness = value;
+        else if (key === "Signature Mode") parsed.signatureMode = value;
+        else if (key === "Typed Signature") parsed.typedSignature = value;
+      });
+      return parsed;
+    }
+
     function applyFilter(data) {
       if (state.filter === "all") return data;
       return data.filter(function (item) {
@@ -296,22 +341,53 @@
     function openModal(item) {
       if (!requestModal || !modalBody) return;
       var retreat = normalizeRequest(item);
-      var fields = [
-        ["Full Name", retreat.fullName],
-        ["Request Type", retreat.retreatType],
-        ["Phone", retreat.phone],
-        ["Age", retreat.age],
-        ["City", retreat.city],
-        ["Submitted At", retreat.date],
-        ["Reason", retreat.reason],
-        ["Expectation", retreat.expectation],
-        ["Yoga Experience", retreat.yogaExperience],
-        ["Health Status", retreat.healthStatus],
-        ["Health Details", retreat.healthDetails],
-        ["Activities", retreat.activities.join(", ") || "-"],
-        ["Additional Note", retreat.freeNote],
-        ["Status", statusLabel(retreat.status)]
-      ];
+      var fields;
+      if (retreat.source === "mountain-voice-registration") {
+        var extra = parseHealthFormFreeNote(retreat.freeNote);
+        fields = [
+          ["Full Name", retreat.fullName],
+          ["Request Type", retreat.retreatType],
+          ["Phone", retreat.phone],
+          ["ID Number", extra.idNumber],
+          ["Birth Date", extra.birthDate],
+          ["Submitted At", retreat.date],
+          ["Emergency Contact Name", extra.emergencyName],
+          ["Emergency Contact Phone", extra.emergencyPhone],
+          ["Emergency Relationship", extra.relation],
+          ["Do you have chronic conditions?", retreat.healthStatus || "-"],
+          ["If yes, details", retreat.healthDetails || "-"],
+          ["Physical Activity Level", retreat.yogaExperience || "-"],
+          ["Allergy", extra.allergy],
+          ["Current Medications", extra.medications],
+          ["Current Injuries", extra.currentInjuries],
+          ["Previous Fractures", extra.pastFractures],
+          ["Surgeries", extra.surgeries],
+          ["Back / Neck / Knee Pain", extra.painZones],
+          ["Heart Issues", extra.heartIssues],
+          ["Breathing Issues / Dizziness", extra.breathingDizziness],
+          ["Additional Notes", retreat.reason || "-"],
+          ["Signature Method", extra.signatureMode],
+          ["Typed Signature", extra.typedSignature],
+          ["Status", statusLabel(retreat.status)]
+        ];
+      } else {
+        fields = [
+          ["Full Name", retreat.fullName],
+          ["Request Type", retreat.retreatType],
+          ["Phone", retreat.phone],
+          ["Age", retreat.age],
+          ["City", retreat.city],
+          ["Submitted At", retreat.date],
+          ["Reason", retreat.reason],
+          ["Expectation", retreat.expectation],
+          ["Yoga Experience", retreat.yogaExperience],
+          ["Health Status", retreat.healthStatus],
+          ["Health Details", retreat.healthDetails],
+          ["Activities", retreat.activities.join(", ") || "-"],
+          ["Additional Note", retreat.freeNote],
+          ["Status", statusLabel(retreat.status)]
+        ];
+      }
 
       modalBody.innerHTML = "";
       fields.forEach(function (pair) {

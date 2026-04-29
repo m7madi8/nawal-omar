@@ -372,8 +372,6 @@
               <div class="field"><label for="idNumber" data-t="idNumber">ID Number</label><input id="idNumber" name="idNumber" required></div>
               <div class="field"><label for="birthDate" data-t="birthDate">Date of Birth</label><input id="birthDate" name="birthDate" type="date" required></div>
               <div class="field"><label for="phone" data-t="phone">Phone</label><input id="phone" name="phone" type="tel" required></div>
-              <div class="field"><label for="email" data-t="email">Email</label><input id="email" name="email" type="email" required></div>
-              <div class="field"><label for="meetingPoint" data-t="meetingPoint">Meeting Point</label><input id="meetingPoint" name="meetingPoint" required></div>
             </div>
           </section>
 
@@ -648,7 +646,7 @@
           fullName: (form.fullName && form.fullName.value || "").trim(),
           phone: (form.phone && form.phone.value || "").trim(),
           age: "",
-          city: (form.meetingPoint && form.meetingPoint.value || "").trim(),
+          city: "",
           reason: (form.notes && form.notes.value || "").trim(),
           expectation: "",
           yogaExperience: (form.activityLevel && form.activityLevel.value || "").trim(),
@@ -658,7 +656,6 @@
           freeNote: [
             "ID: " + ((form.idNumber && form.idNumber.value) || "-"),
             "Birth Date: " + ((form.birthDate && form.birthDate.value) || "-"),
-            "Email: " + ((form.email && form.email.value) || "-"),
             "Emergency: " + ((form.emergencyName && form.emergencyName.value) || "-") + " / " + ((form.emergencyPhone && form.emergencyPhone.value) || "-") + " / " + ((form.relation && form.relation.value) || "-"),
             "Allergy: " + ((form.allergy && form.allergy.value) || "-"),
             "Medications: " + ((form.medications && form.medications.value) || "-"),
