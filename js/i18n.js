@@ -93,7 +93,7 @@
       gallery_swipe: 'Swipe or drag to browse',
 
       workshops_label: 'Workshops',
-      workshops_heading: 'Al-Tira · Haifa · Retreat',
+      workshops_heading: 'Haifa · Retreat',
       al_tira_title: 'Al-Tira Yoga',
       al_tira_desc: 'Experience freedom in the air. Suspension-based practice for strength, flexibility and playfulness—suitable for all levels.',
       al_tira_cta: 'Discover more',
@@ -676,7 +676,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       gallery_swipe: 'اسحبي أو اسحب للتصفح',
 
       workshops_label: 'ورش العمل',
-      workshops_heading: 'الطيرة · حيفا · ريتريت',
+      workshops_heading: 'حيفا · ريتريت',
       al_tira_title: 'الطيرة يوغا',
       al_tira_desc: 'اختبري الحرية في الهواء. ممارسة معلقة للقوة والمرونة والمرح—مناسبة لجميع المستويات.',
       al_tira_cta: 'اكتشفي المزيد',
