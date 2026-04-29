@@ -241,11 +241,17 @@
 
     var closeBtn = panel.querySelector('[data-menu-close]');
     var links = panel.querySelectorAll('a[href]');
+    var closeTimer = null;
 
     function openMenu() {
+      if (closeTimer) {
+        window.clearTimeout(closeTimer);
+        closeTimer = null;
+      }
       panel.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
       document.body.dataset.menuOpen = 'true';
+      document.body.style.overflow = 'hidden';
       /* Two frames: let layout settle so opacity/transform transitions run (no display:none flash). */
       window.requestAnimationFrame(function () {
         window.requestAnimationFrame(function () {
@@ -258,7 +264,11 @@
       panel.classList.remove('is-open');
       toggle.setAttribute('aria-expanded', 'false');
       document.body.dataset.menuOpen = 'false';
-      panel.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (closeTimer) window.clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(function () {
+        panel.setAttribute('aria-hidden', 'true');
+      }, 460);
     }
 
     toggle.addEventListener('click', function () {

@@ -9,7 +9,8 @@
 </head>
 <body class="dashboard-body">
   <div class="dashboard-layout">
-    <aside class="sidebar">
+    <aside class="sidebar" id="dashboardSidebar">
+      <button id="sidebarCloseBtn" class="sidebar-close" type="button" aria-label="Close menu">&times;</button>
       <h1 class="sidebar-title">nawal omar</h1>
       <p class="sidebar-subtitle">Calm operations panel</p>
       <nav class="sidebar-nav" aria-label="Main Navigation">
@@ -19,8 +20,12 @@
       </nav>
       <button id="logoutBtn" class="btn btn-ghost">Logout</button>
     </aside>
+    <div id="sidebarOverlay" class="sidebar-overlay" hidden></div>
 
     <main class="main-content">
+      <div class="mobile-dashboard-bar">
+        <button id="sidebarMenuToggle" class="sidebar-menu-toggle" type="button" aria-expanded="false" aria-controls="dashboardSidebar">☰ Menu</button>
+      </div>
       <header class="summary-grid" aria-label="Dashboard Summary">
         <article class="summary-card">
           <p>Total Requests</p>

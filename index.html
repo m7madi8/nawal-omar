@@ -32,6 +32,145 @@
   <link rel="stylesheet" href="css/page-loader.css">
   <link rel="stylesheet" href="css/rtl.css">
   <link rel="stylesheet" href="css/scroll-media.css">
+  <style>
+    .dashboard-section {
+      background: linear-gradient(180deg, #f9f6f2 0%, #ffffff 100%);
+      border-top: 1px solid rgba(166, 124, 82, 0.2);
+      border-bottom: 1px solid rgba(166, 124, 82, 0.2);
+    }
+    .dashboard-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem;
+    }
+    .dashboard-head {
+      margin-bottom: 1.25rem;
+    }
+    .dashboard-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .dashboard-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.7rem;
+      line-height: 1.2;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .dashboard-intro {
+      color: rgba(90, 70, 50, 0.88);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      max-width: 62ch;
+    }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+      margin-top: 1.25rem;
+    }
+    .dash-card {
+      background: #fff;
+      border: 1px solid rgba(166, 124, 82, 0.24);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 8px 22px rgba(90, 70, 50, 0.06);
+    }
+    .dash-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.55rem;
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+    .dash-list {
+      display: grid;
+      gap: 0.45rem;
+      color: rgba(90, 70, 50, 0.88);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .dash-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.55rem;
+      margin-top: 0.85rem;
+    }
+    .dash-metric {
+      border: 1px solid rgba(166, 124, 82, 0.2);
+      border-radius: 10px;
+      padding: 0.65rem;
+      background: rgba(214, 191, 169, 0.1);
+    }
+    .dash-metric strong {
+      display: block;
+      color: var(--color-secondary);
+      font-size: 1rem;
+      line-height: 1.2;
+      margin-bottom: 0.15rem;
+    }
+    .dash-metric span {
+      color: rgba(90, 70, 50, 0.82);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .dash-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.2rem;
+    }
+    .dash-btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .dash-btn-primary {
+      background: var(--color-secondary);
+      color: #fff;
+      border: 1px solid var(--color-secondary);
+    }
+    .dash-btn-primary:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    .dash-btn-soft {
+      background: #fff;
+      color: var(--color-secondary);
+      border: 1px solid rgba(166, 124, 82, 0.35);
+    }
+    .dash-btn-soft:hover {
+      background: rgba(214, 191, 169, 0.2);
+    }
+    @media (min-width: 760px) {
+      .dashboard-shell {
+        padding: 3rem 1.4rem;
+      }
+      .dashboard-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .dashboard-title {
+        font-size: 2.1rem;
+      }
+      .dash-card {
+        padding: 1.15rem;
+      }
+    }
+    [dir="rtl"] .dashboard-title {
+      font-family: "Tajawal", sans-serif;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body class="antialiased">
   <script>document.documentElement.classList.add('page-loader-lock'); window.__nawalLoaderStart = Date.now();</script>
@@ -192,6 +331,63 @@
         </div>
         <div class="hero-bottom absolute bottom-0 left-0 right-0 z-10 flex items-end justify-end px-5 pb-8 sm:px-8 md:px-10 lg:px-16">
           <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-white/40" data-i18n="hero_bottom">Private · group · retreats</p>
+        </div>
+      </section>
+
+      <section class="dashboard-section animate-section" id="dashboard">
+        <div class="dashboard-shell">
+          <header class="dashboard-head animate-content">
+            <p class="dashboard-kicker" data-i18n="dashboard_label">Practice dashboard</p>
+            <h2 class="dashboard-title" data-i18n="dashboard_title">Everything you need in one clear view</h2>
+            <p class="dashboard-intro" data-i18n="dashboard_intro">A focused overview of programs, intensity levels, and easiest ways to book. Built for mobile first so every detail stays clear and easy to act on.</p>
+          </header>
+
+          <div class="dashboard-grid">
+            <article class="dash-card animate-content">
+              <h3 data-i18n="dashboard_card1_title">Quick practice stats</h3>
+              <div class="dash-metrics">
+                <div class="dash-metric">
+                  <strong data-i18n="dashboard_metric_1_value">500+</strong>
+                  <span data-i18n="dashboard_metric_1_label">Students</span>
+                </div>
+                <div class="dash-metric">
+                  <strong data-i18n="dashboard_metric_2_value">5+ years</strong>
+                  <span data-i18n="dashboard_metric_2_label">Teaching</span>
+                </div>
+                <div class="dash-metric">
+                  <strong data-i18n="dashboard_metric_3_value">4 styles</strong>
+                  <span data-i18n="dashboard_metric_3_label">Yoga methods</span>
+                </div>
+                <div class="dash-metric">
+                  <strong data-i18n="dashboard_metric_4_value">2 cities</strong>
+                  <span data-i18n="dashboard_metric_4_label">Weekly presence</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="dash-card animate-content">
+              <h3 data-i18n="dashboard_card2_title">What fits you best</h3>
+              <ul class="dash-list">
+                <li data-i18n="dashboard_card2_item1">Private sessions: 1:1 care for flexibility, posture, and confidence.</li>
+                <li data-i18n="dashboard_card2_item2">Group classes: balanced flow with mindful community energy.</li>
+                <li data-i18n="dashboard_card2_item3">Workshops: focused themes for faster progress and deeper technique.</li>
+                <li data-i18n="dashboard_card2_item4">Retreats: full reset with movement, breathwork, and nature.</li>
+              </ul>
+            </article>
+
+            <article class="dash-card animate-content">
+              <h3 data-i18n="dashboard_card3_title">Book in 3 easy steps</h3>
+              <ul class="dash-list">
+                <li data-i18n="dashboard_card3_item1">1) Choose your preferred format: class, workshop, or retreat.</li>
+                <li data-i18n="dashboard_card3_item2">2) Message on WhatsApp with your name, level, and preferred day.</li>
+                <li data-i18n="dashboard_card3_item3">3) Receive confirmation and your session details quickly.</li>
+              </ul>
+              <div class="dash-actions">
+                <a class="dash-btn dash-btn-primary" href="#workshops" data-i18n="dashboard_action_1">View workshops</a>
+                <a class="dash-btn dash-btn-soft" href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" data-i18n="dashboard_action_2">Book on WhatsApp</a>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
