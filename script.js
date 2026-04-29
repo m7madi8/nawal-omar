@@ -173,7 +173,7 @@
 
     function sectionSources(section) {
       if (section === "form") return ["mountain-voice-registration"];
-      if (section === "retreats") return ["wadi-rum-registration", "zanzibar-retreat-reserve"];
+      if (section === "retreats") return ["wadi-rum-registration", "zanzibar-retreat-reserve", "dahab-retreat-reserve"];
       if (section === "yoga") return ["yoga-class-registration", "yoga-class-request"];
       return [];
     }
@@ -315,7 +315,7 @@
     async function fetchSummaryCounts() {
       var all = await fetchAllRequestsFromSupabase();
       var form = all.filter(function (row) { return row.source === "mountain-voice-registration"; }).length;
-      var retreats = all.filter(function (row) { return row.source === "wadi-rum-registration" || row.source === "zanzibar-retreat-reserve"; }).length;
+      var retreats = all.filter(function (row) { return row.source === "wadi-rum-registration" || row.source === "zanzibar-retreat-reserve" || row.source === "dahab-retreat-reserve"; }).length;
       var yoga = all.filter(function (row) { return sectionSources("yoga").indexOf(String(row.source || "")) !== -1; }).length;
       if (!yoga) {
         yoga = readLegacyRequests(LEGACY_CLASS_KEY).length;
@@ -370,6 +370,27 @@
           ["Typed Signature", extra.typedSignature],
           ["Status", statusLabel(retreat.status)]
         ];
+      } else if (retreat.source === "zanzibar-retreat-reserve" || retreat.source === "dahab-retreat-reserve") {
+        fields = [
+          ["Full Name", retreat.fullName],
+          ["Request Type", retreat.retreatType || "Retreat"],
+          ["Phone", retreat.phone],
+          ["Notes", retreat.reason || retreat.freeNote || "-"],
+          ["Submitted At", retreat.date],
+          ["Status", statusLabel(retreat.status)]
+        ];
+      } else if (sectionSources("yoga").indexOf(String(retreat.source || "")) !== -1) {
+        fields = [
+          ["Full Name", retreat.fullName],
+          ["Request Type", retreat.retreatType || "Yoga Class"],
+          ["Phone", retreat.phone],
+          ["City", retreat.city || "Haifa"],
+          ["Submitted At", retreat.date],
+          ["Status", statusLabel(retreat.status)]
+        ];
+        if (retreat.freeNote && retreat.freeNote !== "Registration from Haifa page") {
+          fields.push(["Additional Note", retreat.freeNote]);
+        }
       } else {
         fields = [
           ["Full Name", retreat.fullName],

@@ -832,6 +832,12 @@ body[data-menu-open="true"] .site-header .menu-launcher-bar.bar3 {
   gap: 0.5rem;
 }
 
+@media (min-width: 768px) {
+  .site-mobile-lang {
+    display: none;
+  }
+}
+
 /* Mobile language toggle next to menu button */
 .mobile-lang-toggle {
   display: inline-flex;

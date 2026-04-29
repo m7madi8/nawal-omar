@@ -52,7 +52,7 @@
         <a href="index.html#about" data-i18n="nav_about">About</a>
         <a href="index.html#video" data-i18n="nav_video">Video</a>
         <a href="index.html#workshops" data-i18n="nav_workshops">Workshops</a>
-        <a href="workshops/jiva.html" data-i18n="nav_jiva">Haifa Yoga</a>
+        <a href="workshops/haifa.html" data-i18n="nav_jiva">Haifa Yoga</a>
         <a href="retreats.html" data-i18n="nav_retreat">Retreat</a>
         <div class="site-header-lang">
           <nav class="lang-switcher lang-switcher--bar" aria-label="Language">
@@ -85,7 +85,7 @@
           <a href="index.html#about" class="site-menu-animate" data-i18n="nav_about">About</a>
           <a href="index.html#video" class="site-menu-animate" data-i18n="nav_video">Video</a>
           <a href="index.html#workshops" class="site-menu-animate" data-i18n="nav_workshops">Workshops</a>
-          <a href="workshops/jiva.html" class="site-menu-animate" data-i18n="nav_jiva">Haifa Yoga</a>
+          <a href="workshops/haifa.html" class="site-menu-animate" data-i18n="nav_jiva">Haifa Yoga</a>
           <a href="retreats.html" class="site-menu-animate" data-i18n="nav_retreat">Retreat</a>
         </nav>
         <div class="site-menu-foot">
@@ -310,12 +310,13 @@
 
                 <div class="mt-4 flex flex-col sm:flex-row gap-3 items-stretch">
                   <button type="submit" class="rp-btn flex-1">
-                    <span data-i18n="retreat_form_submit">Send to WhatsApp</span>
+                    <span data-i18n="retreat_form_submit">Send</span>
                     <span aria-hidden="true">→</span>
                   </button>
                 </div>
               </form>
             </div>
+            <div id="retreat-reserve-success" class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800" hidden data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
           </div>
         </div>
       </section>
@@ -341,7 +342,7 @@
           <a href="index.html#about" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_about">About</a>
           <a href="index.html#video" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_video">Video</a>
           <a href="index.html#workshops" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_workshops">Workshops</a>
-          <a href="workshops/jiva.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_jiva">Jiva Yoga</a>
+          <a href="workshops/haifa.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_jiva">Haifa Yoga</a>
           <a href="retreats.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_retreat">Retreat</a>
         </nav>
         <div class="animate-content flex items-center justify-center gap-3 pb-10 sm:pb-12 md:pb-14" aria-label="Social links">
@@ -368,6 +369,15 @@
       function getVal(id) {
         var el = document.getElementById(id);
         return el ? String(el.value || '').trim() : '';
+      }
+
+      var successBox = document.getElementById('retreat-reserve-success');
+
+      function t(key) {
+        var i18n = window.nawalI18n;
+        var lang = (i18n && i18n.getLang && i18n.getLang()) || 'en';
+        if (i18n && i18n.t) return i18n.t(lang, key);
+        return key;
       }
 
       form.addEventListener('submit', async function (e) {
@@ -403,7 +413,7 @@
           };
 
           try {
-            await fetch(supabaseUrl + '/rest/v1/' + encodeURIComponent(supabaseTable), {
+            var res = await fetch(supabaseUrl + '/rest/v1/' + encodeURIComponent(supabaseTable), {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -414,19 +424,20 @@
               },
               body: JSON.stringify([payload])
             });
-          } catch (_err) {}
+            if (!res.ok) throw new Error('submit failed');
+          } catch (_err) {
+            alert(t('retreat_form_error'));
+            return;
+          }
         }
 
-        var message =
-          'Hi Nawal,%0A%0A' +
-          'I would like to reserve the Zanzibar Retreat.%0A' +
-          (name ? ('Name: ' + encodeURIComponent(name) + '%0A') : '') +
-          (phone ? ('Phone: ' + encodeURIComponent(phone) + '%0A') : '') +
-          (notes ? ('Notes: ' + encodeURIComponent(notes) + '%0A') : '') +
-          '%0AThank you.';
-
-        var url = 'https://wa.me/972522496366?text=' + message;
-        window.open(url, '_blank', 'noopener,noreferrer');
+        form.reset();
+        if (successBox) {
+          successBox.hidden = false;
+          window.setTimeout(function () {
+            successBox.hidden = true;
+          }, 3500);
+        }
       });
     })();
   </script>

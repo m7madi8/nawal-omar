@@ -17,6 +17,51 @@
   <link rel="stylesheet" href="css/scroll-media.css">
   <link rel="stylesheet" href="css/retreat-page.css">
   <link rel="stylesheet" href="css/retreat-premium.css">
+  <style>
+    .dahab-book-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(24, 18, 13, 0.5);
+      backdrop-filter: blur(2px);
+    }
+    .dahab-book-modal[hidden] { display: none !important; }
+    .dahab-book-card {
+      width: min(100%, 30rem);
+      background: #fffdf9;
+      border: 1px solid rgba(166, 124, 82, 0.26);
+      border-radius: 1rem;
+      box-shadow: 0 20px 40px rgba(20, 14, 10, 0.2);
+      padding: 1rem;
+    }
+    .dahab-book-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.7rem;
+    }
+    .dahab-book-close {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(166, 124, 82, 0.3);
+      background: #f8efe3;
+      color: #5a4632;
+      font-size: 1.1rem;
+    }
+    .dahab-book-form { display: grid; gap: 0.45rem; }
+    .dahab-book-label { font-size: 0.82rem; color: #6a5547; }
+    .dahab-book-input {
+      border: 1px solid rgba(166, 124, 82, 0.35);
+      border-radius: 0.65rem;
+      padding: 0.55rem 0.7rem;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body class="antialiased">
   <header class="site-header" role="banner">
@@ -53,7 +98,7 @@
         <a href="index.html#about" data-i18n="nav_about">About</a>
         <a href="index.html#video" data-i18n="nav_video">Video</a>
         <a href="index.html#workshops" data-i18n="nav_workshops">Workshops</a>
-        <a href="workshops/jiva.html" data-i18n="nav_jiva">Haifa Yoga</a>
+        <a href="workshops/haifa.html" data-i18n="nav_jiva">Haifa Yoga</a>
         <a href="retreats.html" data-i18n="nav_retreat">Retreat</a>
         <div class="site-header-lang">
           <nav class="lang-switcher lang-switcher--bar" aria-label="Language">
@@ -86,7 +131,7 @@
           <a href="index.html#about" class="site-menu-animate" data-i18n="nav_about">About</a>
           <a href="index.html#video" class="site-menu-animate" data-i18n="nav_video">Video</a>
           <a href="index.html#workshops" class="site-menu-animate" data-i18n="nav_workshops">Workshops</a>
-          <a href="workshops/jiva.html" class="site-menu-animate" data-i18n="nav_jiva">Haifa Yoga</a>
+          <a href="workshops/haifa.html" class="site-menu-animate" data-i18n="nav_jiva">Haifa Yoga</a>
           <a href="retreats.html" class="site-menu-animate" data-i18n="nav_retreat">Retreat</a>
         </nav>
         <div class="site-menu-foot">
@@ -363,16 +408,12 @@
               <p class="dahab-price-value" data-i18n="retreat_dahab_price_value">3800₪</p>
               <p class="dahab-price-note" data-i18n="retreat_dahab_price_note">(سيتم إرسال رابط الدفع بعد التسجيل الأولي)</p>
             </div>
-            <a
-              href="https://wa.me/972522496366?text=%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D8%AA%D8%B3%D9%84%D9%82%20%D8%AC%D8%A8%D9%84%20%D8%B3%D8%A7%D9%86%D8%AA%20%D9%83%D8%A7%D8%AA%D8%B1%D9%8A%D9%86%20%D9%88%D8%B1%D9%8A%D8%AA%D8%B1%D9%8A%D8%AA%20%D8%AF%D9%87%D8%A8"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="dahab-includes-cta"
-            >
+            <button type="button" id="dahab-book-btn" class="dahab-includes-cta">
               <span data-i18n="retreat_dahab_book_now">احجزي الآن</span>
               <span aria-hidden="true">→</span>
-            </a>
+            </button>
           </div>
+          <div id="dahab-book-success" class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800" hidden data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
 
           <div class="dahab-policy-box">
             <h4 class="dahab-policy-title" data-i18n="retreat_dahab_policy_title">💳 طريقة الدفع</h4>
@@ -396,6 +437,24 @@
       </div>
     </section>
   </main>
+  <div id="dahab-book-modal" class="dahab-book-modal" hidden>
+    <div class="dahab-book-card" role="dialog" aria-modal="true" aria-labelledby="dahab-book-title">
+      <div class="dahab-book-head">
+        <h3 id="dahab-book-title" data-i18n="dahab_book_form_title">Book Dahab Retreat</h3>
+        <button type="button" id="dahab-book-close" class="dahab-book-close" data-i18n-attr="aria-label:menu_close" aria-label="Close menu">&times;</button>
+      </div>
+      <form id="dahab-book-form" class="dahab-book-form">
+        <label class="dahab-book-label" for="dahab-book-name" data-i18n="dahab_book_name">Full name</label>
+        <input id="dahab-book-name" name="fullName" class="dahab-book-input" required>
+        <label class="dahab-book-label" for="dahab-book-phone" data-i18n="dahab_book_phone">Phone (WhatsApp preferred)</label>
+        <input id="dahab-book-phone" name="phone" class="dahab-book-input" required>
+        <button type="submit" class="dahab-includes-cta mt-3">
+          <span data-i18n="dahab_book_confirm">Confirm booking</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </div>
 
   <footer class="footer-isla animate-section border-t border-[var(--color-primary)]/20 bg-white">
     <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
@@ -410,7 +469,7 @@
         <a href="index.html#about" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_about">About</a>
         <a href="index.html#video" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_video">Video</a>
         <a href="index.html#workshops" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_workshops">Workshops</a>
-        <a href="workshops/jiva.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_jiva">Jiva Yoga</a>
+        <a href="workshops/haifa.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_jiva">Haifa Yoga</a>
         <a href="retreats.html" class="footer-link text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" data-i18n="nav_retreat">Retreat</a>
       </nav>
       <div class="animate-content flex items-center justify-center gap-3 pb-10 sm:pb-12 md:pb-14" aria-label="Social links">
@@ -425,6 +484,99 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    (function () {
+      var modal = document.getElementById('dahab-book-modal');
+      var openBtn = document.getElementById('dahab-book-btn');
+      var closeBtn = document.getElementById('dahab-book-close');
+      var form = document.getElementById('dahab-book-form');
+      var successBox = document.getElementById('dahab-book-success');
+      if (!modal || !openBtn || !closeBtn || !form) return;
+
+      function t(key) {
+        var i18n = window.nawalI18n;
+        var lang = (i18n && i18n.getLang && i18n.getLang()) || 'en';
+        if (i18n && i18n.t) return i18n.t(lang, key);
+        return key;
+      }
+
+      function openModal() {
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      async function submitBooking(fullName, phone) {
+        var supabaseUrl = 'https://xzxyskufrqansbhsbdkt.supabase.co';
+        var supabaseKey = 'sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph';
+        var table = 'retreat_requests';
+        var now = new Date();
+        var payload = {
+          id: 'req-dahab-' + now.getTime(),
+          source: 'dahab-retreat-reserve',
+          retreatType: 'Dahab Retreat',
+          submittedAt: now.toISOString(),
+          fullName: fullName,
+          phone: phone,
+          age: '',
+          city: '',
+          reason: 'Dahab retreat booking request',
+          expectation: '',
+          yogaExperience: '',
+          healthStatus: '',
+          healthDetails: '',
+          activities: [],
+          freeNote: 'Booking from Dahab page',
+          status: 'pending',
+          createdAt: now.toISOString()
+        };
+
+        var res = await fetch(supabaseUrl + '/rest/v1/' + encodeURIComponent(table), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'apikey': supabaseKey,
+            'Authorization': 'Bearer ' + supabaseKey,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('submit failed');
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var fullName = String(form.fullName.value || '').trim();
+        var phone = String(form.phone.value || '').trim();
+        if (!fullName || !phone) return;
+        try {
+          await submitBooking(fullName, phone);
+          form.reset();
+          closeModal();
+          if (successBox) {
+            successBox.hidden = false;
+            window.setTimeout(function () { successBox.hidden = true; }, 3500);
+          }
+        } catch (_err) {
+          alert(t('retreat_form_error'));
+        }
+      });
+    })();
+  </script>
   <script>
     (function () {
       var toggleBtn = document.getElementById('dahab-gallery-toggle');

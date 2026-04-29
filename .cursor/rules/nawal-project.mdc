@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Stack
 - Static site: plain HTML, CSS (Tailwind-built style.css), vanilla JS. No framework or build step.
-- Pages: `index.html`, `retreat.html`, `nawal.html`, `workshops/al-tira.html`, `workshops/jiva.html`.
+- Pages: `index.html`, `retreat.html`, `nawal.html`, `workshops/al-tira.html`, `workshops/haifa.html`.
 
 ## Language (i18n)
 - **EN / AR** via `js/i18n.js`. Stored in `localStorage` key `nawal-lang`.
