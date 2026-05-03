@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Stack
 - Static site: plain HTML, CSS (Tailwind-built style.css), vanilla JS. No framework or build step.
-- Pages: `index.html`, `retreat.html`, `nawal.html`, `workshops/al-tira.html`, `workshops/haifa.html`.
+- Pages: `index.html`, `Zanzibar.html`, `nawal.html`, `workshops/al-tira.html`, `workshops/haifa.html`.
 
 ## Language (i18n)
 - **EN / AR** via `js/i18n.js`. Stored in `localStorage` key `nawal-lang`.
@@ -21,7 +21,7 @@ alwaysApply: true
 - Workshop names in Arabic: **الطيرة** (Al-Tira), **حيفا** (Jiva/Haifa), **ريتريت** (Retreat). Use these exact terms in Arabic translations.
 
 ## Paths
-- Root pages use `css/`, `js/`, `public/`. Subpages under `workshops/` use `../css/`, `../js/`, `../public/` and `../index.html`, `../retreat.html` for links.
+- Root pages use `css/`, `js/`, `public/`. Subpages under `workshops/` use `../css/`, `../js/`, `../public/` and `../index.html`, `../Zanzibar.html` for links.
 
 ## UI
 - Language switcher: `.lang-switcher` with `data-lang-set="en"` and `data-lang-set="ar"`. Include it and `js/i18n.js` on every page. RTL positioning for the switcher is in `rtl.css`.

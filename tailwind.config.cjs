@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     './index.html',
-    './retreat.html',
+    './Zanzibar.html',
     './workshops/*.html',
     './js/*.js'
   ],
