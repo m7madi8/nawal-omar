@@ -384,9 +384,9 @@ Yoga and sound healing retreat with a Zanzibar Island exploration.`,
       retreat_share_title: 'Retreat Details',
       retreat_share1: `Why this retreat is different?
 • A balanced program between movement and rest, plus sea activities and nature.
-• Two boutique accommodations chosen for a calm, retreat-friendly atmosphere.
+• One distinguished hotel in Zanzibar, chosen for comfort, nature, and a calm retreat-friendly atmosphere.
 • Daily breakfast and dinner to reduce logistical load.
-• Two Sound Healing sessions with a specialist who brings the equipment to both hotels.
+• Two Sound Healing sessions with a specialist who brings the equipment to the hotel.
 • A blend of the travel experience and a deep inner process led by Nawal.
 • The option to join according to each participant's needs.
 
@@ -395,12 +395,11 @@ What is included?
 • Baggage up to 20 kg
 • Carry-on bag
 • All ground transfers within Zanzibar
-• 4 nights in carefully selected accommodation in the south of Zanzibar
-• 3 nights in carefully selected beachfront accommodation in the north-east of Zanzibar
+• 7 nights in carefully selected accommodation in one distinguished hotel in Zanzibar
 • Meals:
   o Daily breakfast
   o Daily dinner
-• Two Sound Healing sessions with a specialist arriving with equipment to both hotels
+• Two Sound Healing sessions with a specialist arriving with equipment to the hotel
 • Visit to Salaam Cave
 • Safari Blue boat trip
 • Visit to Jozani Forest
@@ -410,9 +409,8 @@ What is included?
 • Tour of Stone Town
 
 Selected accommodation details
-• 4 nights in carefully selected accommodation in the south of Zanzibar.
-• 3 nights in carefully selected beachfront accommodation in the north-east of Zanzibar.
-• Final accommodation details are shared after booking confirmation.
+• 7 nights in carefully selected accommodation in one distinguished hotel in Zanzibar, bringing together comfort, nature, and a calm atmosphere suited to the retreat experience.
+• Final hotel details are shared after booking confirmation.
 
 Booking & cancellation policy
 • If cancellation happens less than one month before retreat date, no amount is refunded.
@@ -458,18 +456,18 @@ During the trip	Meditation on water, focusing on the sound of the sea, breathing
 The value here is releasing tension from the body, expanding inner sensation, and letting the sea return the group to a calm, flexible rhythm.
 Useful links related to this day: Safari Blue
 
-Friday 10/7/2026 - From the south to the north-east - Nature & culture
-This day was designed as an efficient transfer day from the south to Kiwengwa, making smart use of it by passing through Jozani Forest and the Spice Farm before reaching the second hotel.
+Friday 10/7/2026 - Nature & culture
+A day for Jozani Forest, the Spice Farm, and a gentle rhythm back at the hotel—all while staying in the same accommodation.
 Time / Details	Details
-07:00	Light morning yoga.
-08:00	Breakfast + check-out.
-09:30	Visit Jozani Forest: mindful walk in the forest + observation of Red Colobus monkeys.
-12:00	Visit Spice Farm: getting to know cinnamon, vanilla, cloves, nutmeg, and how aromas affect the nervous system.
-Afternoon	Transfer to the second accommodation in the north-east + check-in.
-18:30	Sunset soft yoga.
-19:30	First Sound Healing session at the second hotel.
+07:00	Light morning yoga
+08:00	Breakfast
+09:30	Visit Jozani Forest: mindful walk in nature + observation of Red Colobus monkeys
+12:00	Visit Spice Farm: getting to know cinnamon, vanilla, cloves, nutmeg, and how aromas affect the nervous system
+Afternoon	Return to the hotel for rest and relaxation
+18:30	Soft sunset yoga
+19:30	First Sound Healing session
 ✨ Value of this day
-This order keeps the transfer day practical, organized, and rich in experience—not just travel.
+Nature, culture, and sensory discovery—with space to rest at the hotel before evening practice and sound.
 Useful links related to this day: Jozani Forest - Spice Farm
 
 Saturday 11/7/2026 - Quiet day & integration in Kiwengwa
@@ -986,9 +984,9 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_share_title: 'لماذا هذا الريتريت مختلف؟',
       retreat_share1: `لماذا هذا الريتريت مختلف؟
 برنامج متوازن بين الحركة والراحة والأنشطة البحرية والطبيعة.
-إقامتان بوتيك تم اختيارهما لأجواء هادئة ومناسبة للريتريت.
+فندق واحد مميز في زنجبار تم اختياره لأجواء هادئة ومناسبة للريتريت.
 وجبتا فطور وعشاء يوميًا لتخفيف العبء اللوجستي عن المشاركات.
-جلستا Sound Healing مع مختصة تأتي بالمعدات إلى الفندقين.
+جلستا Sound Healing مع مختصة تأتي بالمعدات إلى الفندق.
 مزيج بين التجربة السياحية والمسار الداخلي العميق بقيادة نوال.
 إمكانية الانضمام بحسب حاجة كل مشاركة.
 
@@ -997,12 +995,11 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 • حقيبة حتى 20 كغم
 • حقيبة يد
 • جميع التنقلات الأرضية داخل زنجبار
-• 4 ليالٍ في إقامة مختارة بعناية في جنوب زنجبار
-• 3 ليالٍ في إقامة مختارة بعناية على الشاطئ في شمال شرق زنجبار
+• 7 ليالٍ في إقامة مختارة بعناية في فندق واحد مميز في زنجبار
 • وجبات:
   o فطور يومي
   o عشاء يومي
-• جلستان Sound Healing مع مختصة تصل مع معداتها إلى الفندقين
+• جلستان Sound Healing مع مختصة تصل مع معداتها إلى الفندق
 • زيارة Salaam Cave
 • رحلة Safari Blue
 • زيارة Jozani Forest
@@ -1012,9 +1009,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 • جولة في Stone Town
 
 تفاصيل الإقامة المختارة
-• 4 ليالٍ في إقامة مختارة بعناية في جنوب زنجبار.
-• 3 ليالٍ في إقامة مختارة بعناية على الشاطئ في شمال شرق زنجبار.
-• سيتم مشاركة تفاصيل الإقامة النهائية بعد تأكيد الحجز.
+• 7 ليالٍ في إقامة مختارة بعناية في فندق واحد مميز في زنجبار، يجمع بين الراحة، الطبيعة، والأجواء الهادئة المناسبة لتجربة الريتريت.
+• سيتم مشاركة تفاصيل الفندق النهائية بعد تأكيد الحجز.
 
 سياسة تثبيت الحجز والإلغاء
 • في حال الإلغاء قبل شهر من موعد الريتريت، لا يتم استرجاع أي مبلغ.
@@ -1060,18 +1056,18 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
 القيمة هنا هي تحرير التوتر من الجسد، توسيع الإحساس الداخلي، والسماح للبحر أن يعيد للمشاركات الإيقاع الهادئ والمرن.
 روابط مفيدة مرتبطة بهذا اليوم: Safari Blue
 
-الجمعة 10/7/2026 - من الجنوب إلى الشمال الشرقي - الطبيعة والثقافة
-تم اعتماد هذا اليوم كيوم انتقال من الجنوب إلى Kiwengwa مع الاستفادة منه بذكاء من خلال المرور في Jozani Forest ومزرعة التوابل قبل الوصول إلى الفندق الثاني.
+الجمعة 10/7/2026 - يوم الطبيعة والثقافة
+يوم للطبيعة والثقافة بإيقاع هادئ، مع العودة إلى الفندق نفسه للراحة والمساء.
 الوقت / الفقرة	التفاصيل
-07:00	يوغا صباحية خفيفة.
-08:00	فطور وتسجيل خروج.
-09:30	زيارة Jozani Forest ومشي تأملي وسط الغابة ومشاهدة قرود الـ Red Colobus.
-12:00	زيارة Spice Farm والتعرّف إلى القرفة، الفانيلا، القرنفل وجوزة الطيب وتأثير الروائح على الجهاز العصبي.
-بعد الظهر	الانتقال إلى مكان الإقامة الثاني في شمال شرق الجزيرة وتسجيل الدخول.
-18:30	يوغا ناعمة عند الغروب.
-19:30	جلسة Sound Healing أولى في الفندق الثاني.
+07:00	يوغا صباحية خفيفة
+08:00	فطور
+09:30	زيارة غابة Jozani ومشي تأملي وسط الطبيعة ومشاهدة قرود الـ Red Colobus
+12:00	زيارة مزرعة التوابل والتعرّف على القرفة، الفانيلا، القرنفل وجوزة الطيب وتأثير الروائح على الجهاز العصبي
+بعد الظهر	عودة إلى الفندق ووقت راحة / استرخاء
+18:30	يوغا ناعمة عند الغروب
+19:30	جلسة Sound Healing أولى
 ✨ قيمة هذا اليوم
-بهذا الترتيب نحافظ على يوم انتقال عملي، منظم، وغني بالتجربة بدل أن يكون يوم مواصلات فقط.
+جسر بين الطبيعة والحواس والراحة في مكان الإقامة، مع مساحة للجسد قبل يوغا الغروب وجلسة الصوت.
 روابط مفيدة مرتبطة بهذا اليوم: Jozani Forest - Spice Farm
 
 السبت 11/7/2026 - يوم الهدوء والاندماج في Kiwengwa
