@@ -1683,3 +1683,71 @@
   }
 }
 
+/* Zanzibar page — horizontal reels strip (below intro image gallery) */
+.rp-zb-reels-wrap .rp-zb-reels-hint {
+  margin: 0.75rem 0 0.85rem;
+  text-align: center;
+  color: var(--text-soft, #6b5d55);
+  font-size: 0.86rem;
+}
+
+.rp-zb-reels-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(68%, 1fr);
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rp-zb-reel-card {
+  position: relative;
+  scroll-snap-align: start;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(166, 126, 85, 0.2);
+  background: #fffdf9;
+  box-shadow: 0 10px 24px rgba(83, 56, 34, 0.08);
+}
+
+.rp-zb-reel-video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: min(72vh, 520px);
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.rp-zb-reel-playbtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  border: 0;
+  color: #fff;
+  background: rgba(26, 18, 11, 0.55);
+  backdrop-filter: blur(2px);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.rp-zb-reel-card.is-playing .rp-zb-reel-playbtn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+@media (min-width: 768px) {
+  .rp-zb-reels-grid {
+    grid-auto-columns: minmax(28%, 1fr);
+  }
+}
+

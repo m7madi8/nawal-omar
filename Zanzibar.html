@@ -201,6 +201,43 @@
         </div>
       </section>
 
+      <!-- Zanzibar reels: replace video src with your files in public/media/Zanzibar/ when ready -->
+      <section id="zanzibar-reels" class="rp-section animate-section rp-zb-reels-wrap">
+        <div class="rp-container">
+          <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
+            <p class="rp-kicker" data-i18n="zanzibar_reels_kicker">Reels</p>
+            <h2 class="rp-h2 rp-heading" data-i18n="zanzibar_reels_title">Videos (reels) from Zanzibar</h2>
+            <p class="rp-zb-reels-hint" data-i18n="zanzibar_reels_hint">Swipe sideways and tap play.</p>
+            <div class="rp-zb-reels-grid" data-i18n-attr="aria-label:zanzibar_reels_label">
+              <div class="rp-zb-reel-card">
+                <video class="rp-zb-reel-video" src="public/media/Zanzibar/video.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:zanzibar_reel_aria_1" aria-label="Zanzibar reel"></video>
+                <button type="button" class="rp-zb-reel-playbtn" data-i18n-attr="aria-label:zanzibar_reel_play" aria-label="Play reel">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <div class="rp-zb-reel-card">
+                <video class="rp-zb-reel-video" src="public/media/Zanzibar/catalinavonbonin-20260503-0001.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:zanzibar_reel_aria_2" aria-label="Zanzibar reel"></video>
+                <button type="button" class="rp-zb-reel-playbtn" data-i18n-attr="aria-label:zanzibar_reel_play" aria-label="Play reel">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <div class="rp-zb-reel-card">
+                <video class="rp-zb-reel-video" src="public/media/Zanzibar/sandramaria__travellover-20260503-0001.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:zanzibar_reel_aria_3" aria-label="Zanzibar reel"></video>
+                <button type="button" class="rp-zb-reel-playbtn" data-i18n-attr="aria-label:zanzibar_reel_play" aria-label="Play reel">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <div class="rp-zb-reel-card">
+                <video class="rp-zb-reel-video" src="public/media/Zanzibar/kozanow_productions_official-20260503-0001.mp4" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:zanzibar_reel_aria_4" aria-label="Zanzibar reel"></video>
+                <button type="button" class="rp-zb-reel-playbtn" data-i18n-attr="aria-label:zanzibar_reel_play" aria-label="Play reel">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- WHAT YOU WILL EXPERIENCE -->
       <section class="rp-section animate-section">
         <div class="rp-container">
@@ -357,6 +394,52 @@
   </div>
 
   <script src="js/i18n.js"></script>
+  <script>
+    (function () {
+      /* Soft playback level (~28%) when user taps play — audible but not loud */
+      var REEL_VOLUME = 0.28;
+
+      function syncState(wrap, video) {
+        if (video.paused) wrap.classList.remove('is-playing');
+        else wrap.classList.add('is-playing');
+      }
+
+      document.querySelectorAll('.rp-zb-reel-card').forEach(function (wrap) {
+        var video = wrap.querySelector('.rp-zb-reel-video');
+        var btn = wrap.querySelector('.rp-zb-reel-playbtn');
+        if (!video || !btn) return;
+
+        video.volume = REEL_VOLUME;
+        video.muted = true;
+
+        syncState(wrap, video);
+
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          document.querySelectorAll('.rp-zb-reel-card .rp-zb-reel-video').forEach(function (v) {
+            if (v !== video) {
+              if (!v.paused) v.pause();
+              v.muted = true;
+            }
+          });
+          video.volume = REEL_VOLUME;
+          video.muted = false;
+          video.play().catch(function () {});
+        });
+
+        video.addEventListener('play', function () { syncState(wrap, video); });
+        video.addEventListener('pause', function () {
+          video.muted = true;
+          syncState(wrap, video);
+        });
+        video.addEventListener('click', function (e) {
+          if (e.target !== video) return;
+          if (!video.paused) video.pause();
+        });
+      });
+    })();
+  </script>
   <script src="js/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
