@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-retreat-last-day="2026-05-12">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/scroll-media.css">
   <link rel="stylesheet" href="css/retreat-page.css">
   <link rel="stylesheet" href="css/retreat-premium.css">
+  <link rel="stylesheet" href="css/retreat-completed.css">
   <style>
     .dahab-book-modal {
       position: fixed;
@@ -182,7 +183,10 @@
 
         <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content mx-auto max-w-4xl text-center">
           <p class="rp-kicker mb-3" data-i18n="retreat_dahab_page_label">Dahab Retreat with Nawal Omar</p>
-          <h1 class="rp-h2 rp-heading text-2xl sm:text-3xl md:text-4xl" data-i18n="retreat_dahab_page_title">Saint Catherine Mountain Climb & Dahab Retreat</h1>
+          <div id="dahab-hero-badge-slot" class="flex justify-center">
+            <span id="dahab-retreat-status-badge" class="retreat-status-badge" hidden data-i18n="retreat_status_badge">Completed</span>
+          </div>
+          <h1 class="rp-h2 rp-heading mt-4 text-2xl sm:text-3xl md:text-4xl" data-i18n="retreat_dahab_page_title">Saint Catherine Mountain Climb & Dahab Retreat</h1>
           <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-soft)] sm:text-lg" data-i18n="retreat_dahab_page_intro">To the highest peak in Egypt, plus a special retreat with guide Nawal Omar.</p>
           <div class="dahab-trainers-grid mt-6 sm:mt-8">
             <article class="dahab-trainer-card">
@@ -242,9 +246,10 @@
             <div class="dahab-goal-overlay">
               <h3 class="dahab-goal-title" data-i18n="retreat_dahab_goal_headline">Retreat «Voice of the mountain»</h3>
               <p class="dahab-goal-subtitle" data-i18n="retreat_dahab_goal_text">A mindful mountain and sea journey that combines challenge, grounding, and calm.</p>
-              <div class="dahab-goal-chips">
+              <div class="dahab-goal-chips flex flex-wrap items-center justify-center gap-2">
                 <span class="dahab-goal-chip" data-i18n="retreat_dahab_goal_chip_date">07.05.2026 - 12.05.2026</span>
                 <span class="dahab-goal-chip" data-i18n="retreat_dahab_goal_chip_country">Egypt</span>
+                <span id="dahab-retreat-status-badge-goal" class="retreat-status-badge retreat-status-badge--inline" hidden data-i18n="retreat_status_badge">Completed</span>
               </div>
             </div>
           </div>
@@ -408,10 +413,14 @@
               <p class="dahab-price-value" data-i18n="retreat_dahab_price_value">3800₪</p>
               <p class="dahab-price-note" data-i18n="retreat_dahab_price_note">(سيتم إرسال رابط الدفع بعد التسجيل الأولي)</p>
             </div>
-            <button type="button" id="dahab-book-btn" class="dahab-includes-cta">
-              <span data-i18n="retreat_dahab_book_now">احجزي الآن</span>
+            <button type="button" id="dahab-book-btn" class="dahab-includes-cta dahab-includes-cta--disabled" disabled aria-disabled="true">
+              <span id="dahab-book-btn-label" data-i18n="retreat_dahab_booking_unavailable">Booking closed</span>
               <span aria-hidden="true">→</span>
             </button>
+          </div>
+          <div id="dahab-registration-completed-wrap" class="dahab-registration-completed" hidden>
+            <p class="dahab-registration-closed-note" data-i18n="retreat_registration_closed_note">Registration is currently closed.</p>
+            <div id="dahab-registration-form-slot"></div>
           </div>
           <div id="dahab-book-success" class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800" hidden data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
 
@@ -501,6 +510,7 @@
       }
 
       function openModal() {
+        if (openBtn.disabled) return;
         modal.hidden = false;
         document.body.style.overflow = 'hidden';
       }
@@ -549,7 +559,9 @@
         if (!res.ok) throw new Error('submit failed');
       }
 
-      openBtn.addEventListener('click', openModal);
+      if (!openBtn.disabled) {
+        openBtn.addEventListener('click', openModal);
+      }
       closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', function (e) {
         if (e.target === modal) closeModal();
@@ -560,6 +572,7 @@
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        if (openBtn.disabled) return;
         var fullName = String(form.fullName.value || '').trim();
         var phone = String(form.phone.value || '').trim();
         if (!fullName || !phone) return;
@@ -577,6 +590,7 @@
       });
     })();
   </script>
+  <script src="js/retreat-completed.js"></script>
   <script>
     (function () {
       var toggleBtn = document.getElementById('dahab-gallery-toggle');

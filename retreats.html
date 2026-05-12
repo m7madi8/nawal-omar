@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/rtl.css">
   <link rel="stylesheet" href="css/scroll-media.css">
+  <link rel="stylesheet" href="css/retreat-completed.css">
 </head>
 <body class="antialiased">
   <header class="site-header" role="banner">
@@ -133,7 +134,7 @@
 
         <div class="animate-content mx-auto max-w-4xl text-center">
           <p class="mb-3 text-xs font-medium uppercase tracking-[0.35em] text-[var(--color-accent)]" data-i18n="retreats_page_label">Retreat Collection</p>
-          <h1 class="font-serif text-3xl font-light text-[var(--color-text)] sm:text-4xl md:text-5xl" data-i18n="retreats_page_title">Available Retreats</h1>
+          <h1 class="font-serif text-3xl font-light text-[var(--color-text)] sm:text-4xl md:text-5xl" data-i18n="retreats_page_title">Retreats</h1>
           <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-soft)] sm:text-lg" data-i18n="retreats_page_intro">Choose your next wellness journey.</p>
         </div>
       </div>
@@ -141,7 +142,8 @@
 
     <section class="animate-section py-12 sm:py-14 md:py-16">
       <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 lg:px-10 min-w-0">
-        <div class="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-2">
+        <h2 class="retreats-subheading animate-content" data-i18n="retreats_upcoming_title">Upcoming retreats</h2>
+        <div id="retreats-upcoming-grid" class="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-2">
           <article class="workshop-card group">
             <div class="workshop-card-inner flex flex-col overflow-hidden">
               <div class="workshop-card-image-wrap">
@@ -163,7 +165,7 @@
             </div>
           </article>
 
-          <article class="workshop-card group">
+          <article class="workshop-card group" data-retreat-last-day="2026-05-12">
             <div class="workshop-card-inner flex flex-col overflow-hidden">
               <div class="workshop-card-image-wrap">
                 <img src="public/media/dahab/dahab.jpeg" alt="Dahab Retreat" class="workshop-card-image" loading="lazy">
@@ -172,6 +174,7 @@
                 <div class="workshop-card-header">
                   <span class="workshop-card-tag">Retreat</span>
                   <h2 class="workshop-card-title font-serif" data-i18n="retreats_dahab_title">Dahab Retreat</h2>
+                  <span class="retreat-list-badge" hidden data-i18n="retreat_status_badge">Completed</span>
                 </div>
                 <p class="workshop-card-desc" data-i18n="retreats_dahab_desc">A calm Red Sea retreat in Dahab with yoga, breathwork, and mindful rest.</p>
                 <div class="workshop-card-footer">
@@ -184,7 +187,7 @@
             </div>
           </article>
 
-          <article class="workshop-card group">
+          <article class="workshop-card group" data-retreat-last-day="2026-06-21">
             <div class="workshop-card-inner flex flex-col overflow-hidden">
               <div class="workshop-card-image-wrap">
                 <img src="public/media/wadi rum/📷_ @eljackson.jpg" alt="Wadi Rum Retreat" class="workshop-card-image" loading="lazy" style="object-position: center 60%;">
@@ -193,6 +196,7 @@
                 <div class="workshop-card-header">
                   <span class="workshop-card-tag">Retreat</span>
                   <h2 class="workshop-card-title font-serif" data-i18n="retreats_wadi_title">Wadi Rum Retreat</h2>
+                  <span class="retreat-list-badge" hidden data-i18n="retreat_status_badge">Completed</span>
                 </div>
                 <p class="workshop-card-desc" data-i18n="retreats_wadi_desc">A moonlit women retreat in Wadi Rum with yoga, breathwork, healing circles, and desert rituals.</p>
                 <div class="workshop-card-footer">
@@ -226,6 +230,11 @@
             </div>
           </article>
         </div>
+
+        <div id="retreats-past-section" class="retreats-past-band animate-section" hidden>
+          <h2 class="retreats-subheading animate-content mt-0" data-i18n="retreats_past_title">Past retreats</h2>
+          <div id="retreats-past-grid" class="mx-auto grid max-w-5xl gap-6 sm:gap-8 lg:grid-cols-2"></div>
+        </div>
       </div>
     </section>
   </main>
@@ -258,6 +267,7 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/retreat-completed.js"></script>
   <script src="js/reveal.js"></script>
   <script>
     (function () {
