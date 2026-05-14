@@ -558,7 +558,9 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_page_label: 'Haifa Yoga',
       jiva_page_title: 'Haifa Yoga',
       jiva_page_body:
-        'Holistic Vinyasa by the sea: movement, breathwork, and meditation woven into one calm, supportive flow—cultivating awareness on the mat and in daily life.',
+        'Vinyasa yoga is a dynamic practice that connects movement and breath, so each shape flows into the next with rhythm and awareness.',
+      jiva_page_body_2:
+        'This style strengthens the body, builds flexibility, calms the mind, and deepens breath–body coordination—making class a grounded experience of presence and inner balance.',
       jiva_page_whatsapp:
         'Join the Haifa Yoga community on WhatsApp for class updates, inspiration, and connection with fellow practitioners.',
       jiva_moments_kicker: 'Reels & photos',
@@ -593,8 +595,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_policy_title: 'Cancellation policy',
       jiva_cancel_rule: 'Class cancellation is allowed only up to 12 hours before.',
       jiva_meeting_title: 'Class time',
-      jiva_schedule_slot1: 'NAMASTE · Saturday · 18:00 · by the sea ❤️',
-      jiva_schedule_slot2: 'Tuesday · 19:20 · by the sea ❤️',
+      jiva_schedule_slot1: 'Tuesday · Naeem Studio · 19:20',
+      jiva_schedule_slot2: 'Saturday · by the sea · 18:30',
       jiva_join_eyebrow: 'Community',
       jiva_join_title: 'Join the Haifa Yoga group',
       jiva_join_text: 'Get schedules, updates, and connect with others in the Haifa Yoga community on WhatsApp.',
@@ -1173,7 +1175,9 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_page_label: 'حيفا يوغا',
       jiva_page_title: 'حيفا يوغا',
       jiva_page_body:
-        'فينشياسا شاملة قرب البحر: ننسج الحركة وعمل النَفَس والتأمل في تدفق واحد هادئ، ونزرع الوعي والحضور—في الحصة وفي اليوم.',
+        'اليوغا ڤينياسا هي أسلوب يوغا ديناميكي يربط بين الحركة والتنفس، بحيث كل حركة بتنتقل للتانية بتناغم ووعي.',
+      jiva_page_body_2:
+        'هاد النوع من اليوغا بساعد على تقوية الجسم، زيادة المرونة، تهدئة العقل، وتحسين التواصل بين النفس والجسد، ليصير التمرين تجربة متكاملة للحضور والتوازن الداخلي.',
       jiva_page_whatsapp:
         'لمتابعة المواعيد والإلهام والقرب من المجتمع: انضمي إلى مجموعة واتساب حيفا يوغا.',
       jiva_moments_kicker: 'ريلز وصور',
@@ -1208,8 +1212,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_policy_title: 'سياسة الإلغاء',
       jiva_cancel_rule: 'إلغاء درس قبل ب ١٢ ساعة فقط',
       jiva_meeting_title: 'موعد الحصة',
-      jiva_schedule_slot1: 'NAMASTE · موعدنا يوم السبت · الساعة 18:00 · قبال البحر ❤️',
-      jiva_schedule_slot2: 'موعدنا يوم الثلاثاء · الساعة 19:20 · قبال البحر ❤️',
+      jiva_schedule_slot1: 'الثلاثاء · في ستوديو نعيم · الساعة 19:20',
+      jiva_schedule_slot2: 'السبت · قبال البحر · الساعة 18:30',
       jiva_join_eyebrow: 'المجتمع',
       jiva_join_title: 'انضمي لمجموعة حيفا يوغا',
       jiva_join_text: 'احصلي على الجداول والتحديثات وتواصلي مع الآخرين في مجتمع حيفا يوغا على واتساب.',
