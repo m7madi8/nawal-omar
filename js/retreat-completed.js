@@ -33,6 +33,11 @@
     var pastSection = document.getElementById('retreats-past-section');
     if (!upcomingGrid || !pastGrid || !pastSection) return;
 
+    if (pastSection.hasAttribute('data-hide-past-retreats')) {
+      pastSection.hidden = true;
+      return;
+    }
+
     var toMove = [];
     upcomingGrid.querySelectorAll('[data-retreat-last-day]').forEach(function (article) {
       var iso = article.getAttribute('data-retreat-last-day');
