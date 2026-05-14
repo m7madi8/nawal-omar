@@ -1,0 +1,74 @@
+/**
+ * Utilities used on index.html that may be missing from the pre-built style.css
+ * when Tailwind CLI is not run. Safe to remove after `npm run build:css`.
+ */
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
+@media (min-width: 640px) {
+  .sm\:gap-12 {
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .lg\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+  .lg\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+  .lg\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
+  .lg\:gap-10 {
+    gap: 2.5rem;
+  }
+  .lg\:gap-12 {
+    gap: 3rem;
+  }
+  .lg\:gap-14 {
+    gap: 3.5rem;
+  }
+  .lg\:px-14 {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+  .xl\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
+  .xl\:gap-14 {
+    gap: 3.5rem;
+  }
+  .xl\:gap-16 {
+    gap: 4rem;
+  }
+  .xl\:p-10 {
+    padding: 2.5rem;
+  }
+  .xl\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+  .xl\:pl-8 {
+    padding-left: 2rem;
+  }
+  .xl\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
