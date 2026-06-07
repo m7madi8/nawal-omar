@@ -3,6 +3,7 @@ module.exports = {
   content: [
     './index.html',
     './Zanzibar.html',
+    './zanzibar-retreat-review-nw2606.html',
     './workshops/*.html',
     './js/*.js'
   ],
