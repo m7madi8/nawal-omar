@@ -613,9 +613,55 @@ html:has(.dahab-page) {
 }
 
 .dahab26-day-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   padding: 1rem 1.15rem;
   background: #fff;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background 200ms ease;
+}
+
+.dahab26-day-head::-webkit-details-marker {
+  display: none;
+}
+
+.dahab26-day-head::marker {
+  content: "";
+}
+
+.dahab26-day-head:hover {
+  background: rgba(250, 248, 245, 0.95);
+}
+
+.dahab26-day[open] .dahab26-day-head {
   border-bottom: 1px solid rgba(185, 137, 95, 0.14);
+}
+
+.dahab26-day-head-text {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.dahab26-day-chevron {
+  flex-shrink: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid rgba(130, 90, 58, 0.75);
+  border-bottom: 2px solid rgba(130, 90, 58, 0.75);
+  transform: rotate(45deg);
+  margin-top: -0.15rem;
+  transition: transform 250ms ease;
+}
+
+.dahab26-day[open] .dahab26-day-chevron {
+  transform: rotate(-135deg);
+  margin-top: 0.15rem;
 }
 
 .dahab26-day-chip {
@@ -629,9 +675,11 @@ html:has(.dahab-page) {
 }
 
 .dahab26-day-title {
+  display: block;
   margin: 0;
   font-family: "Playfair Display", Georgia, serif;
   font-size: 1.15rem;
+  line-height: 1.35;
   color: rgba(62, 47, 43, 0.96);
 }
 
