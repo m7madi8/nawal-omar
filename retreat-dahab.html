@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-retreat-last-day="2026-05-12">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/scroll-media.css">
   <link rel="stylesheet" href="css/retreat-page.css">
   <link rel="stylesheet" href="css/retreat-premium.css">
-  <link rel="stylesheet" href="css/retreat-completed.css">
+  <link rel="stylesheet" href="css/dahab-guide.css">
   <style>
     .dahab-book-modal {
       position: fixed;
@@ -171,49 +171,229 @@
     </div>
 
   <main class="retreat-page retreat-premium-root dahab-page min-h-screen bg-[var(--bg-body)] text-[var(--text-main)]">
-    <!-- DAHAB INTRO (no hero/video) -->
-    <section class="rp-section animate-section border-b border-[var(--color-primary)]/20 pt-14 pb-12 sm:pt-16 sm:pb-14 md:pt-20 md:pb-16">
+    <!-- DAHAB EDITORIAL HERO -->
+    <section class="dahab-hero animate-section" aria-labelledby="dahab-page-title">
       <div class="rp-container">
-        <div class="mb-8 sm:mb-10">
-          <a href="retreats.html" class="top-back-link inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" aria-label="Back">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-            <span data-i18n="back">Back</span>
-          </a>
-        </div>
+        <a href="retreats.html" class="dahab-hero-back top-back-link inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" aria-label="Back">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <span data-i18n="back">Back</span>
+        </a>
 
-        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content mx-auto max-w-4xl text-center">
-          <p class="rp-kicker mb-3" data-i18n="retreat_dahab_page_label">Dahab Retreat with Nawal Omar</p>
-          <div id="dahab-hero-badge-slot" class="flex justify-center">
-            <span id="dahab-retreat-status-badge" class="retreat-status-badge" hidden data-i18n="retreat_status_badge">Completed</span>
+        <div class="dahab-hero-shell">
+          <div class="dahab-hero-visual animate-content">
+            <span class="dahab-hero-watermark" aria-hidden="true">2026</span>
+            <figure class="dahab-hero-portrait">
+              <div class="dahab-hero-portrait-frame">
+                <img src="public/media/nawall.jpg" alt="Nawal Omar" data-i18n-attr="alt:retreat_dahab_trainer1_name" loading="eager" width="640" height="800">
+              </div>
+              <figcaption class="dahab-hero-portrait-caption">
+                <span class="dahab-hero-portrait-name" data-i18n="retreat_dahab_trainer1_name">Nawal Omar</span>
+                <span class="dahab-hero-portrait-role" data-i18n="retreat_dahab_hero_identity">Nurse · Yoga teacher · Women's health advocate</span>
+              </figcaption>
+            </figure>
           </div>
-          <h1 class="rp-h2 rp-heading mt-4 text-2xl sm:text-3xl md:text-4xl" data-i18n="retreat_dahab_page_title">Saint Catherine Mountain Climb & Dahab Retreat</h1>
-          <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-soft)] sm:text-lg" data-i18n="retreat_dahab_page_intro">To the highest peak in Egypt, plus a special retreat with guide Nawal Omar.</p>
-          <div class="dahab-trainers-grid mt-6 sm:mt-8">
-            <article class="dahab-trainer-card">
-              <div class="dahab-trainer-media">
-                <img src="public/media/6.jpg" alt="Nawal Omar" data-i18n-attr="alt:retreat_dahab_trainer1_name" loading="lazy">
-              </div>
-              <h3 class="dahab-trainer-name" data-i18n="retreat_dahab_trainer1_name">Nawal Omar</h3>
-              <p class="dahab-trainer-role" data-i18n="retreat_dahab_trainer1_role">Yoga & mindfulness guide</p>
-            </article>
 
-            <article class="dahab-trainer-card">
-              <div class="dahab-trainer-media">
-                <img src="public/media/dahab/she__hikes-20260323-0001.jpg.jpeg" alt="Catherine Guide" data-i18n-attr="alt:retreat_dahab_trainer2_name" loading="lazy">
-              </div>
-              <h3 class="dahab-trainer-name" data-i18n="retreat_dahab_trainer2_name">Hanan</h3>
-              <p class="dahab-trainer-role" data-i18n="retreat_dahab_trainer2_role">Retreat support</p>
-            </article>
+          <div class="dahab-hero-content animate-content">
+            <p class="dahab-hero-kicker" data-i18n="retreat_dahab_page_label">Dahab Women's Retreat 2026</p>
+            <h1 id="dahab-page-title" class="dahab-hero-title" data-i18n="retreat_dahab_page_title">Dahab Women's Retreat 2026</h1>
+            <p class="dahab-hero-lead" data-i18n="retreat_dahab_page_intro">19.8 – 23.8 · A journey back to the body, the sea, and the strength within.</p>
+            <div class="dahab-hero-chips">
+              <span class="dahab-hero-chip" data-i18n="retreat_dahab26_dates">19.8 – 23.8</span>
+              <span class="dahab-hero-chip" data-i18n="retreat_dahab_hero_badge">Women only · 20 places</span>
+            </div>
+            <ul class="dahab-hero-stats">
+              <li data-i18n="retreat_dahab_hero_stat1">7 international retreats led</li>
+              <li data-i18n="retreat_dahab_hero_stat2">2000+ women on this path</li>
+              <li data-i18n="retreat_dahab_hero_stat3">5 days · Dahab · Sinai</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="rp-section animate-section">
+    <section class="dahab-soul animate-section" aria-labelledby="dahab-soul-heading">
       <div class="rp-container">
-        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
-          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_dahab_gallery_title">Journey moments</h2>
-          <div class="dahab-journey-gallery mt-6">
+        <div class="dahab-soul-nawal animate-content">
+          <div class="dahab-soul-nawal-photo-wrap">
+            <img src="public/media/nawall.jpg" alt="" class="dahab-soul-nawal-photo" width="96" height="96" loading="lazy" aria-hidden="true">
+          </div>
+          <div class="dahab-soul-nawal-copy">
+            <p class="dahab-soul-nawal-label" data-i18n="retreat_dahab_hero_host">Your host</p>
+            <p class="dahab-soul-nawal-name" data-i18n="retreat_dahab_trainer1_name">Nawal Omar</p>
+            <p class="dahab-soul-nawal-role" data-i18n="retreat_dahab_hero_identity">Nurse · Yoga teacher · Women's health advocate</p>
+          </div>
+        </div>
+
+        <div class="dahab-soul-opening animate-content">
+          <p class="dahab-soul-kicker" data-i18n="retreat_dahab_soul_kicker">This is your place</p>
+          <h2 id="dahab-soul-heading" class="dahab-soul-lead" data-i18n="retreat_dahab_expect_title">What can I expect from the Dahab retreat?</h2>
+          <p class="dahab-soul-statement" data-i18n="retreat_dahab_soul_not_tourism">This retreat is not an ordinary holiday.</p>
+          <p class="dahab-soul-invite" data-i18n="retreat_dahab_soul_invite">It is a safe space for you to slow down, step away from daily pressure, and hear yourself again.</p>
+        </div>
+
+        <div class="dahab-soul-block animate-content">
+          <p class="dahab-soul-block-lead" data-i18n="retreat_dahab_expect_lead">Over five days, we will work on:</p>
+          <ul class="dahab-soul-pillars dahab-stagger-grid">
+            <li class="dahab-soul-pillar"><span class="dahab-soul-pillar-num" aria-hidden="true">01</span><p data-i18n="retreat_dahab_expect_1">Calming the nervous system and easing stress and pressure.</p></li>
+            <li class="dahab-soul-pillar"><span class="dahab-soul-pillar-num" aria-hidden="true">02</span><p data-i18n="retreat_dahab_expect_2">Returning to the body through yoga, breath, and conscious movement.</p></li>
+            <li class="dahab-soul-pillar"><span class="dahab-soul-pillar-num" aria-hidden="true">03</span><p data-i18n="retreat_dahab_expect_3">Building genuine connections with women who share your values and awareness.</p></li>
+            <li class="dahab-soul-pillar"><span class="dahab-soul-pillar-num" aria-hidden="true">04</span><p data-i18n="retreat_dahab_expect_4">Restoring energy and vitality away from the noise of everyday life.</p></li>
+            <li class="dahab-soul-pillar"><span class="dahab-soul-pillar-num" aria-hidden="true">05</span><p data-i18n="retreat_dahab_expect_5">Discovering new spaces of inner strength and confidence.</p></li>
+            <li class="dahab-soul-pillar"><span class="dahab-soul-pillar-num" aria-hidden="true">06</span><p data-i18n="retreat_dahab_expect_6">Creating memories and experiences that stay with you long after the retreat ends.</p></li>
+          </ul>
+        </div>
+
+        <div class="dahab-soul-why-panel animate-content">
+          <div class="dahab-soul-why-copy">
+            <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_why_dahab_title">Why Dahab?</h3>
+            <p class="dahab-soul-emphasis" data-i18n="retreat_dahab_why_dahab_lead">Because Dahab is different.</p>
+            <p data-i18n="retreat_dahab_why_dahab_p1">There is something here that is hard to put into words.</p>
+            <p data-i18n="retreat_dahab_why_dahab_p2">The sea, the mountains, the simplicity, the people, and the calm energy all create an ideal environment for healing, reflection, and renewal.</p>
+            <p data-i18n="retreat_dahab_why_dahab_p3">It is no coincidence that thousands of people around the world choose Dahab every year as a place to return to themselves.</p>
+          </div>
+          <div class="dahab-soul-why-media" aria-hidden="true">
+            <img src="public/media/dahab/dahab.jpeg" alt="" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dahab-soul-block animate-content">
+          <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_why_this_title">Why this retreat in particular?</h3>
+          <p data-i18n="retreat_dahab_why_this_lead">Because it is built with great care.</p>
+          <p data-i18n="retreat_dahab_why_this_p1">It is not just yoga or separate activities.</p>
+          <div class="dahab-soul-journey dahab-stagger-grid" aria-label="Retreat journey">
+            <div class="dahab-soul-journey-step">
+              <span class="dahab-soul-journey-dot" aria-hidden="true"></span>
+              <span data-i18n="retreat_dahab_journey_earth">Earth &amp; grounding</span>
+            </div>
+            <div class="dahab-soul-journey-line" aria-hidden="true"></div>
+            <div class="dahab-soul-journey-step">
+              <span class="dahab-soul-journey-dot" aria-hidden="true"></span>
+              <span data-i18n="retreat_dahab_journey_water">Water &amp; flow</span>
+            </div>
+            <div class="dahab-soul-journey-line" aria-hidden="true"></div>
+            <div class="dahab-soul-journey-step">
+              <span class="dahab-soul-journey-dot" aria-hidden="true"></span>
+              <span data-i18n="retreat_dahab_journey_presence">Full presence with yourself</span>
+            </div>
+          </div>
+          <p class="dahab-soul-journey-note" data-i18n="retreat_dahab_why_this_p2">Each day connects to the one before — a complete journey. Every session, workshop, and sharing space is chosen to create a real, safe, and meaningful experience.</p>
+        </div>
+
+        <div class="dahab-soul-spots animate-content">
+          <p class="dahab-soul-spots-kicker" data-i18n="retreat_dahab_spots_title">Limited places</p>
+          <p class="dahab-soul-spots-num" aria-hidden="true">20</p>
+          <p class="dahab-soul-spots-label" data-i18n="retreat_dahab_spots_count">20 women only</p>
+          <p data-i18n="retreat_dahab_spots_text">To protect privacy and the quality of the experience, participation is limited to 20 women.</p>
+          <p class="dahab-soul-spots-note" data-i18n="retreat_dahab_spots_note">I believe small groups allow deeper connection, safer sharing spaces, and personal attention for every participant.</p>
+        </div>
+
+        <div class="dahab-soul-block dahab-soul-block--warm animate-content">
+          <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_booking_title">How is booking confirmed?</h3>
+          <p data-i18n="retreat_dahab_booking_p1">After completing the registration form, each participant will be contacted by phone to get acquainted, answer all questions, and confirm that the retreat is right for her.</p>
+          <p data-i18n="retreat_dahab_booking_p2">Booking is confirmed only after the phone call and transfer of the deposit.</p>
+        </div>
+
+        <div class="dahab-soul-fit animate-content dahab-stagger-grid">
+          <article class="dahab-soul-fit-card dahab-soul-fit-card--yes">
+            <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_for_title">Who is this retreat for?</h3>
+            <ul class="dahab-soul-fit-list">
+              <li data-i18n="retreat_dahab_for_1">For the woman who feels she needs a real rest.</li>
+              <li data-i18n="retreat_dahab_for_2">For the woman who wants a new experience outside her comfort zone.</li>
+              <li data-i18n="retreat_dahab_for_3">For the woman seeking balance between body, mind, and emotions.</li>
+              <li data-i18n="retreat_dahab_for_4">For the woman who wants to meet inspiring women and a supportive community.</li>
+              <li data-i18n="retreat_dahab_for_5">For the woman who wants to give herself the time she deserves.</li>
+            </ul>
+          </article>
+          <article class="dahab-soul-fit-card dahab-soul-fit-card--no">
+            <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_not_for_title">Who is this retreat not for?</h3>
+            <ul class="dahab-soul-fit-list">
+              <li data-i18n="retreat_dahab_not_for_1">For those looking only for a fast-paced tourist trip full of activities.</li>
+              <li data-i18n="retreat_dahab_not_for_2">For those who do not wish to participate in a women-only group.</li>
+              <li data-i18n="retreat_dahab_not_for_3">For those with a health condition that prevents physical activity without consulting their doctor.</li>
+              <li data-i18n="retreat_dahab_not_for_4">For those expecting instant or magical results within a few days.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="dahab-soul-block animate-content">
+          <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_faq_title">Frequently asked questions</h3>
+          <div class="dahab-soul-faq">
+            <details class="dahab-soul-faq-item">
+              <summary data-i18n="retreat_dahab_faq_q1">Can I join if I am coming alone?</summary>
+              <p data-i18n="retreat_dahab_faq_a1">Absolutely. In fact, most participants in previous retreats joined alone. One of the most beautiful things that happens is women who start as strangers and leave as friends.</p>
+            </details>
+            <details class="dahab-soul-faq-item">
+              <summary data-i18n="retreat_dahab_faq_q2">Do I need previous yoga experience?</summary>
+              <p data-i18n="retreat_dahab_faq_a2">Not at all. All sessions are suitable for beginners and advanced practitioners, with modifications for every level.</p>
+            </details>
+            <details class="dahab-soul-faq-item">
+              <summary data-i18n="retreat_dahab_faq_q3">Can I share a room with a friend?</summary>
+              <p data-i18n="retreat_dahab_faq_a3">Yes, and this can be arranged in advance when registering.</p>
+            </details>
+            <details class="dahab-soul-faq-item">
+              <summary data-i18n="retreat_dahab_faq_q4">What should I bring?</summary>
+              <p data-i18n="retreat_dahab_faq_a4">A full list of details and essentials will be sent to each participant before the retreat date.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="dahab-soul-cancel animate-content">
+          <h3 class="dahab-soul-h3" data-i18n="retreat_dahab_cancel_title">Cancellation policy</h3>
+          <ul class="dahab-soul-cancel-list">
+            <li data-i18n="retreat_dahab_cancel_1">The deposit is non-refundable after booking is confirmed.</li>
+            <li data-i18n="retreat_dahab_cancel_2">If cancellation occurs up to 30 days before the retreat, the amount paid can be transferred to a future retreat or event.</li>
+            <li data-i18n="retreat_dahab_cancel_3">If cancellation occurs less than 30 days before the retreat, no refund is possible due to prior commitments with the hotel and service providers.</li>
+            <li data-i18n="retreat_dahab_cancel_4">If a replacement participant is found, the booking can be transferred to her after prior coordination.</li>
+          </ul>
+          <p class="dahab-soul-cancel-note" data-i18n="retreat_dahab_cancel_note">Please register only when you are sure you can commit to participating.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="dahab26 animate-section" aria-labelledby="dahab26-story-heading">
+      <div class="rp-container">
+        <div class="dahab26-story">
+          <aside class="dahab26-story-aside animate-content">
+            <h2 id="dahab26-story-heading" class="dahab26-story-kicker" data-i18n="retreat_dahab26_story_kicker">In Nawal's words</h2>
+            <figure class="dahab26-story-portrait">
+              <div class="dahab26-story-portrait-frame">
+                <img src="public/media/nawall.jpg" alt="Nawal Omar" data-i18n-attr="alt:retreat_dahab_trainer1_name" loading="lazy" width="480" height="600">
+              </div>
+            </figure>
+            <blockquote class="dahab26-quote" data-i18n="retreat_dahab26_quote">"Sometimes all we need is to step away a little… to return to ourselves."</blockquote>
+          </aside>
+
+          <div class="dahab26-letter animate-content dahab-stagger-text">
+          <p data-i18n="retreat_dahab26_story_1">I am Nawal Omar — a nurse specializing in women's health, a yoga teacher, and a daughter of the Palestinian community in Israel. I carry a message that began long before any retreat, project, or journey.</p>
+          <p data-i18n="retreat_dahab26_story_2">Since the beginning of my nursing path, my goal has been to raise health awareness in the Arab community and be part of the real change women and families deserve. I believed knowledge is power, and that every woman deserves support, awareness, and tools for a healthier, more balanced life.</p>
+          <p data-i18n="retreat_dahab26_story_3">Later I found in yoga an additional language of giving — one that goes beyond words and helps women return to their bodies, their breath, and their inner voice. From there I began building safe spaces that unite movement, awareness, and physical and emotional wellbeing.</p>
+          <p data-i18n="retreat_dahab26_story_4">My life has held difficult and painful experiences, among the hardest the loss of my father — the person who taught me giving, responsibility, and belonging. These experiences did not change my message; they deepened it, and taught me that pain can become strength, and that we can turn our hardest chapters into a truer, deeper way of serving others.</p>
+          <p data-i18n="retreat_dahab26_story_5">In recent years I have walked alongside more than 2,000 women across the country through workshops, lectures, programs, and women's retreats. This Dahab retreat is the seventh international retreat I lead.</p>
+          <p data-i18n="retreat_dahab26_story_6">I believe one woman's success does not diminish another's, and that the strongest communities are built on cooperation, not competition. I always seek partnerships with inspiring women professionals, because true feminine power shows when we hold each other's hands and walk together.</p>
+          <p data-i18n="retreat_dahab26_story_7">It is an honor to share this journey with you. I hope it becomes more than travel or vacation — a space where we return to ourselves and discover how much strength, light, and life still lives within us.</p>
+          </div>
+        </div>
+
+        <figure class="dahab26-moment animate-content">
+          <img src="public/media/home/5.jpg" alt="Yoga moment" data-i18n-attr="alt:retreat_dahab26_yoga_alt" loading="lazy">
+          <figcaption data-i18n="retreat_dahab26_yoga_caption">Yoga moment</figcaption>
+        </figure>
+
+        <div class="dahab26-guide-head animate-content">
+          <p class="dahab26-guide-kicker" data-i18n="retreat_dahab26_guide_kicker">Dahab Retreat Guide 2026</p>
+          <p class="dahab26-guide-title" data-i18n="retreat_dahab26_guide_subtitle">with Nawal Omar · A journey of rest, liberation, and return to the body</p>
+          <h3 class="dahab26-retreat-name" data-i18n="retreat_dahab26_name">Women's Dahab Retreat</h3>
+          <p class="dahab26-dates" data-i18n="retreat_dahab26_dates">19.8 – 23.8</p>
+          <p class="dahab26-tagline" data-i18n="retreat_dahab26_tagline">A journey back to the body, the sea, and the strength within</p>
+          <p class="dahab26-place" data-i18n="retreat_dahab26_place">In one of Sinai's most beautiful places, between mountains, sea, and calm energy, we meet for a deep women's retreat in Dahab — at Nour Boutique Hotel, a seaside boutique hotel with a quiet spirit, ideal for retreats, meditation, yoga, and return to self.</p>
+          <a href="https://nourboutiquehotel.com" target="_blank" rel="noopener noreferrer" class="dahab26-hotel-link" data-i18n="retreat_dahab26_hotel_link">nourboutiquehotel.com ↗</a>
+        </div>
+
+        <p class="dahab26-arc animate-content" data-i18n="retreat_dahab26_arc">The retreat is built as a complete journey: from earth… to water… to body… to senses… to heart.</p>
+
+        <div class="dahab-gallery-section animate-content" aria-labelledby="dahab-gallery-heading">
+          <h2 id="dahab-gallery-heading" class="dahab-gallery-title" data-i18n="retreat_dahab_gallery_title">Journey moments</h2>
+          <div class="dahab-journey-gallery dahab-stagger-grid">
             <figure class="dahab-gallery-item"><img src="public/media/dahab/IMG_6023-2.jpg.jpeg" alt="Dahab sea" data-i18n-attr="alt:retreat_dahab_gallery_alt1" loading="lazy"></figure>
             <figure class="dahab-gallery-item"><img src="public/media/dahab/Hiking-Sinai-Hikes-2-3.webp" alt="Retreat view" data-i18n-attr="alt:retreat_dahab_gallery_alt2" loading="lazy"></figure>
             <figure class="dahab-gallery-item"><img src="public/media/dahab/2022_7_19_3_29_27_467.jpeg" alt="Nature moment" data-i18n-attr="alt:retreat_dahab_gallery_alt3" loading="lazy"></figure>
@@ -224,227 +404,143 @@
             <figure class="dahab-gallery-item dahab-gallery-extra hidden"><img src="public/media/dahab/WhatsApp Image 2026-03-23 at 5.38.04 PM (1).jpeg" alt="Dahab journey" data-i18n-attr="alt:retreat_dahab_gallery_alt8" loading="lazy"></figure>
             <figure class="dahab-gallery-item dahab-gallery-extra hidden"><img src="public/media/dahab/WhatsApp Image 2026-03-23 at 5.38.04 PM (3).jpeg" alt="Dahab journey" data-i18n-attr="alt:retreat_dahab_gallery_alt9" loading="lazy"></figure>
             <figure class="dahab-gallery-item dahab-gallery-extra hidden"><img src="public/media/dahab/WhatsApp Image 2026-03-23 at 5.38.04 PM (4).jpeg" alt="Dahab journey" data-i18n-attr="alt:retreat_dahab_gallery_alt10" loading="lazy"></figure>
-            <figure class="dahab-gallery-item dahab-gallery-extra hidden"><img src="public/media/dahab/WhatsApp Image 2026-03-23 at 5.38.06 PM (1).jpeg" alt="Dahab journey" data-i18n-attr="alt:retreat_dahab_gallery_alt11" loading="lazy"></figure>
+            <figure class="dahab-gallery-item dahab-gallery-extra hidden"><img src="public/media/dahab/WhatsApp Image 2026-03-23 at 5.38.04 PM (1).jpeg" alt="Dahab journey" data-i18n-attr="alt:retreat_dahab_gallery_alt11" loading="lazy"></figure>
             <figure class="dahab-gallery-item dahab-gallery-extra hidden"><img src="public/media/dahab/WhatsApp Image 2026-03-23 at 5.38.07 PM (1).jpeg" alt="Dahab journey" data-i18n-attr="alt:retreat_dahab_gallery_alt12" loading="lazy"></figure>
           </div>
-          <div class="mt-6 text-center">
-            <button id="dahab-gallery-toggle" type="button" class="rp-btn-secondary dahab-gallery-more">
+          <div class="dahab-gallery-actions">
+            <button id="dahab-gallery-toggle" type="button" class="dahab-gallery-more-btn">
               <span class="dahab-gallery-more-label" data-i18n="retreat_dahab_gallery_more">Show more</span>
               <span class="dahab-gallery-less-label hidden" data-i18n="retreat_dahab_gallery_less">Show less</span>
             </button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="dahab-details" class="rp-section animate-section">
-      <div class="rp-container">
-        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
-          <h2 class="rp-h2 rp-heading" data-i18n="retreat_dahab_goal_label">Goal</h2>
-          <div class="dahab-goal-showcase mt-6">
-            <img src="public/media/dahab/57tx3vqx-9g-largejpg.jpg.jpeg" alt="Saint Catherine mountains" data-i18n-attr="alt:retreat_dahab_goal_image_alt" class="dahab-goal-image" loading="lazy">
-            <div class="dahab-goal-overlay">
-              <h3 class="dahab-goal-title" data-i18n="retreat_dahab_goal_headline">Retreat «Voice of the mountain»</h3>
-              <p class="dahab-goal-subtitle" data-i18n="retreat_dahab_goal_text">A mindful mountain and sea journey that combines challenge, grounding, and calm.</p>
-              <div class="dahab-goal-chips flex flex-wrap items-center justify-center gap-2">
-                <span class="dahab-goal-chip" data-i18n="retreat_dahab_goal_chip_date">07.05.2026 - 12.05.2026</span>
-                <span class="dahab-goal-chip" data-i18n="retreat_dahab_goal_chip_country">Egypt</span>
-                <span id="dahab-retreat-status-badge-goal" class="retreat-status-badge retreat-status-badge--inline" hidden data-i18n="retreat_status_badge">Completed</span>
-              </div>
+        <div class="dahab26-itinerary animate-content dahab-stagger-grid">
+          <article class="dahab26-day">
+            <div class="dahab26-day-head">
+              <span class="dahab26-day-chip" data-i18n="retreat_dahab26_d1_chip">Day 1 · 19.8</span>
+              <h4 class="dahab26-day-title" data-i18n="retreat_dahab26_d1_title">Arrival &amp; Opening</h4>
             </div>
-          </div>
-          <div class="dahab-goal-stats">
-            <div class="dahab-goal-stat">
-              <strong data-i18n="retreat_dahab_stat_difficulty_value">Medium</strong>
-              <span data-i18n="retreat_dahab_stat_difficulty_label">Difficulty</span>
+            <div class="dahab26-slots">
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d1_s1"><strong>10:00</strong> — Arrival in Dahab. Rest, room check-in, quiet time to breathe and settle into the place.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d1_s2"><strong>15:00</strong> — Opening Ceremony. Opening the retreat, setting the intention, ice-breaking, meeting the women, and creating a safe space to begin together.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d1_s3"><strong>19:00</strong> — Dinner. After dinner: a light mountain evening, calm, connection, and immersion in Dahab's atmosphere.</p>
             </div>
-            <div class="dahab-goal-stat">
-              <strong data-i18n="retreat_dahab_stat_distance_value">18 km</strong>
-              <span data-i18n="retreat_dahab_stat_distance_label">Distance</span>
+          </article>
+
+          <article class="dahab26-day">
+            <div class="dahab26-day-head">
+              <span class="dahab26-day-chip" data-i18n="retreat_dahab26_d2_chip">Day 2 · 20.8</span>
+              <h4 class="dahab26-day-title" data-i18n="retreat_dahab26_d2_title">Earth Element · Grounding &amp; Roots</h4>
             </div>
-            <div class="dahab-goal-stat">
-              <strong data-i18n="retreat_dahab_stat_days_value">6 Days</strong>
-              <span data-i18n="retreat_dahab_stat_days_label">Trail duration</span>
+            <div class="dahab26-slots">
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d2_s1"><strong>07:30</strong> — Morning yoga. Meditation, breathing techniques, and a yoga session focused on earth: stability, safety, roots, and return to the body.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d2_s2"><strong>09:00</strong> — Breakfast.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d2_s3"><strong>10:00</strong> — Trip to Blue Hole – Abu Galum – Blue Lagoon. A magical day between sea and mountains. Blue Hole is one of Dahab's most famous and beautiful areas — deep blue waters, coral reefs, and rare natural energy. Then Abu Galum and Blue Lagoon, among Sinai's calmest and most beautiful spots, ideal for stepping away from noise and returning to simplicity.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d2_s4">At Blue Lagoon we work with power cards: each woman chooses a card, a message, and an intention to carry for the rest of the journey.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d2_s5"><strong>19:00</strong> — Dinner. Free time to walk, rest, or sit with the sea.</p>
             </div>
-            <div class="dahab-goal-stat">
-              <strong data-i18n="retreat_dahab_stat_peak_value">2641 m</strong>
-              <span data-i18n="retreat_dahab_stat_peak_label">Highest point</span>
+          </article>
+
+          <article class="dahab26-day">
+            <div class="dahab26-day-head">
+              <span class="dahab26-day-chip" data-i18n="retreat_dahab26_d3_chip">Day 3 · 21.8</span>
+              <h4 class="dahab26-day-title" data-i18n="retreat_dahab26_d3_title">Water Element · Liberation &amp; Flow</h4>
             </div>
-          </div>
+            <div class="dahab26-slots">
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d3_s1"><strong>07:30</strong> — Morning yoga. Breathing techniques and yoga focused on water: flow, flexibility, emotions, and release from tension.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d3_s2"><strong>09:00</strong> — Breakfast.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d3_s3"><strong>10:00 – 17:00</strong> — The most important and beautiful day of the retreat. A special day for the body and nervous system: ice bath + sauna + lunch.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d3_s4">The ice bath is not just a powerful experience — it is deep training in breath, presence, and nervous system regulation. It helps the body release stress, build resilience, activate circulation, and bring a high sense of clarity and inner strength. With the sauna, the body moves between heat and cold, contraction and relaxation, challenge and rest.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d3_s5">This day will be one of the retreat's strongest moments — a day when we feel how intelligent, strong, and capable the body truly is.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d3_s6"><strong>19:00</strong> — Dinner. Free time and rest.</p>
+            </div>
+          </article>
+
+          <article class="dahab26-day">
+            <div class="dahab26-day-head">
+              <span class="dahab26-day-chip" data-i18n="retreat_dahab26_d4_chip">Day 4 · 22.8</span>
+              <h4 class="dahab26-day-title" data-i18n="retreat_dahab26_d4_title">The Senses · Presence &amp; Connection</h4>
+            </div>
+            <div class="dahab26-slots">
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d4_s1"><strong>07:30</strong> — Morning yoga. Meditation and deep work on the senses: how we hear, feel, touch, breathe, and return to the present moment.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d4_s2"><strong>09:00</strong> — Breakfast.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d4_s3"><strong>17:30</strong> — Sound Healing + Acro Yoga. A deep sound healing session to calm the nervous system, followed by Acro Yoga to strengthen trust, play, communication, and support among the women.</p>
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d4_s4"><strong>20:00</strong> — Closing Circle. Closing the retreat circle: sharing, gratitude, intentions for returning home, and a gentle farewell ritual.</p>
+            </div>
+          </article>
+
+          <article class="dahab26-day">
+            <div class="dahab26-day-head">
+              <span class="dahab26-day-chip" data-i18n="retreat_dahab26_d5_chip">Day 5 · 23.8</span>
+              <h4 class="dahab26-day-title" data-i18n="retreat_dahab26_d5_title">Departure</h4>
+            </div>
+            <div class="dahab26-slots">
+              <p class="dahab26-slot-text" data-i18n="retreat_dahab26_d5_s1">Breakfast, packing, farewell to Dahab, and return home with renewed energy.</p>
+            </div>
+          </article>
         </div>
-      </div>
-    </section>
 
-    <section class="rp-section animate-section">
-      <div class="rp-container">
-        <div class="rp-surface rp-surface-tight p-6 sm:p-8 animate-content">
-          <h2 class="rp-h2 rp-heading text-2xl sm:text-3xl" data-i18n="retreat_dahab_itinerary_title">تفاصيل المسار يوماً بيوم</h2>
-
-          <div class="dahab-itinerary mt-6 space-y-5">
-            <article class="dahab-day-card">
-              <div class="dahab-day-head">
-                <span class="dahab-day-chip" data-i18n="retreat_dahab_day1_chip">اليوم 01</span>
-                <h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_dahab_day1_title">الانتقال والوصول إلى سانت كاترين</h3>
-              </div>
-              <p class="dahab-day-meta" data-i18n="retreat_dahab_day1_meta">اليوم 1 (07.05.2026) - الوصول والاستعداد للمسار</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day1_p1">نبدأ رحلتنا بالانطلاق ليلًا بتاريخ 06.05 حوالي الساعة 00:00 بواسطة باص باتجاه معبر طابا. بعد عبور الحدود، نتابع الطريق نحو سانت كاترين، حيث تستغرق الرحلة حوالي ساعتين ونصف للوصول إلى المخيم.</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day1_p2">من المتوقع أن نصل صباح يوم 07.05 حوالي الساعة 10:00، لنبدأ تجربتنا بهدوء بين جبال سيناء، مع وقت للراحة، التعارف، والاستعداد لبداية المسار.</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day1_p3">تبدأ رحلتنا في سيناء بوصول هادئ إلى مدينة سانت كاترين. هذه البلدة الصحراوية الصغيرة، المحاطة بقمم الجرانيت الشاهقة، ستكون بوابتنا لعجائب جبال سيناء الروحية والطبيعية. سنسجّل دخولنا إلى مخيم بدوي محلي للراحة بعد السفر، والاستمتاع بهواء الجبل، ووجبة دافئة. نستخدم اليوم للتعارف مع المرشدين والفريق، تجهيز المعدات، والاستعداد الذهني للمسير الذي يبدأ صباح الغد.</p>
-            </article>
-
-            <article class="dahab-day-card">
-              <div class="dahab-day-head">
-                <span class="dahab-day-chip" data-i18n="retreat_dahab_day2_chip">اليوم 02</span>
-                <h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_dahab_day2_title">وادي الأربعين ← جبل سانت كاثرين ← دهب</h3>
-              </div>
-              <p class="dahab-day-meta" data-i18n="retreat_dahab_day2_meta">اليوم 2 (08.05.2026) - صعود القمة والانتقال إلى دهب</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day2_p1">نغادر المخيم باكرًا ونسير عبر وادي الأربعين باتجاه شق موسى. يقودنا المسار بين جروف جرانيتية شاهقة حتى نصل إلى أم سِلّة، ثم نتابع الصعود نحو قمة جبل سانت كاثرين—أعلى جبل في مصر. من القمة نشاهد بانوراما لا نهائية من الجبال والحواف الحادة والوديان الصحراوية الصامتة. نتناول الغداء على القمة، ثم نبدأ النزول، وبعدها ننطلق في رحلة تستغرق حوالي ساعتين باتجاه دهب، حيث يكون المبيت في مكان الإقامة الخاص بالريتريت.</p>
-              <ul class="dahab-day-list mt-3 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
-                <li data-i18n="retreat_dahab_day2_stat1">18 كم</li>
-                <li data-i18n="retreat_dahab_day2_stat2">صعود 1,048م</li>
-                <li data-i18n="retreat_dahab_day2_stat3">نزول 1,061م</li>
-                <li data-i18n="retreat_dahab_day2_stat4">أعلى نقطة 2,641م</li>
-                <li>B, L, D</li>
-              </ul>
-            </article>
-
-            <article class="dahab-day-card">
-              <div class="dahab-day-head">
-                <span class="dahab-day-chip" data-i18n="retreat_dahab_day3_chip">اليوم 03</span>
-                <h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_dahab_day3_title">ريتريت في دهب</h3>
-              </div>
-              <p class="dahab-day-meta" data-i18n="retreat_dahab_day3_meta">اليوم 3 (09.05.2026) - بداية الريتريت في دهب</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day3_p1">نبدأ أول أيام الريتريت في دهب بجلسة متكاملة مع نوال تشمل يوغا صباحية، تأمل، Sound Healing وتقنيات تنفس لتهدئة الجهاز العصبي بعد تجربة الجبل، إعادة الاتصال بالجسد وفتح مساحة للهدوء الداخلي. بعد الجلسة، تقود حنان دائرة مشاركة لفتح التعبير العاطفي وإفساح المجال للصوت الداخلي. من الصباح حتى الظهر يكون البرنامج موجّهًا، وبعده وقت حر للسباحة، المشي في دهب أو الاسترخاء، ثم في المساء جلسة Sound Healing مركّزة على تحرير المشاعر المخزّنة في الجسد مع تخيّل موجّه.</p>
-            </article>
-
-            <article class="dahab-day-card">
-              <div class="dahab-day-head">
-                <span class="dahab-day-chip" data-i18n="retreat_dahab_day4_chip">اليوم 04</span>
-                <h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_dahab_day4_title">ريتريت في دهب</h3>
-              </div>
-              <p class="dahab-day-meta" data-i18n="retreat_dahab_day4_meta">اليوم 4 (10.05.2026) - يوم البحر والتحرر الداخلي</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day4_p1">نبدأ الصباح بجلسة Mindfulness + Yoga تجمع بين التأمل الواعي وحركة يوغا لطيفة، ثم بعد الإفطار نخرج إلى Blue Hole من 10:00 حتى 17:00 للسباحة، الاسترخاء والاستمتاع بالبحر والطبيعة. بعد العودة، تقود نوال تجربة عميقة للمجموعة تحمل عنوان "لعبة القوة وشبح الضعف" لاستخراج القوة الشخصية لكل امرأة، تثبيت مفهوم الحرية والتحرر، وتجهيز "شبح الضعف" لطقس الحرق النهائي، مع ربط الصحراء بمعنى الحرية الداخلية ومواجهة المخاوف واكتشاف القوة الذاتية.</p>
-              <p class="mt-3 text-sm text-[var(--text-soft)]">B, L, D</p>
-            </article>
-
-            <article class="dahab-day-card">
-              <div class="dahab-day-head">
-                <span class="dahab-day-chip" data-i18n="retreat_dahab_day5_chip">اليوم 05</span>
-                <h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_dahab_day5_title">يوم التكامل والختام</h3>
-              </div>
-              <p class="dahab-day-meta" data-i18n="retreat_dahab_day5_meta">اليوم 5 (11.05.2026)</p>
-              <p class="mt-2 text-sm font-semibold text-[var(--color-secondary)]" data-i18n="retreat_dahab_day5_morning">الصباح</p>
-              <p class="mt-1 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day5_morning_text">جلسة مع نوال تشمل:</p>
-              <ul class="dahab-day-list mt-2 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
-                <li data-i18n="retreat_dahab_day5_b1">يوغا صباحية</li>
-                <li data-i18n="retreat_dahab_day5_b2">تخيل موجه (Guided Visualization)</li>
-                <li data-i18n="retreat_dahab_day5_b3">Acro Yoga وهي تجربة تفاعلية ممتعة تساعد على:</li>
-                <li data-i18n="retreat_dahab_day5_b4">بناء الثقة بين المشاركات</li>
-                <li data-i18n="retreat_dahab_day5_b5">تقوية التواصل</li>
-                <li data-i18n="retreat_dahab_day5_b6">إدخال عنصر اللعب والفرح في التجربة</li>
-              </ul>
-              <p class="mt-3 text-sm font-semibold text-[var(--color-secondary)]" data-i18n="retreat_dahab_day5_evening">المساء</p>
-              <p class="mt-1 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day5_p1">Ceremony ختامية تقام حول النار في مكان مفتوح.</p>
-              <p class="mt-1 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day5_p2">ترتدي المشاركات اللباس الأبيض كرمز للبداية الجديدة.</p>
-              <p class="mt-1 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day5_p3">تتضمن الجلسة:</p>
-              <ul class="dahab-day-list mt-2 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
-                <li data-i18n="retreat_dahab_day5_e1">طقس حرق "شبح الضعف"</li>
-                <li data-i18n="retreat_dahab_day5_e2">مشاركة التجربة الشخصية لكل مشاركة</li>
-                <li data-i18n="retreat_dahab_day5_e3">تثبيت النوايا الجديدة للحياة بعد الريتريت</li>
-              </ul>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day5_p4">(يمكن إضافة نشاط أو تجربة خاصة في دهب حسب الفكرة التي ستختارينها لاحقًا).</p>
-            </article>
-
-            <article class="dahab-day-card">
-              <div class="dahab-day-head">
-                <span class="dahab-day-chip" data-i18n="retreat_dahab_day6_chip">اليوم 06</span>
-                <h3 class="font-serif text-lg text-[var(--color-text)]" data-i18n="retreat_dahab_day6_title">المغادرة</h3>
-              </div>
-              <p class="dahab-day-meta" data-i18n="retreat_dahab_day6_meta">اليوم 6 (12.05.2026)</p>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day6_p1">في الصباح: فطور هادئ مع المجموعة.</p>
-              <p class="mt-1 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day6_p2">ثم:</p>
-              <ul class="dahab-day-list mt-2 list-disc space-y-1 pr-5 text-sm text-[var(--text-soft)]">
-                <li data-i18n="retreat_dahab_day6_b1">جمع الأغراض</li>
-                <li data-i18n="retreat_dahab_day6_b2">لحظة وداع</li>
-                <li data-i18n="retreat_dahab_day6_b3">العودة حسب ترتيبات السفر</li>
-              </ul>
-              <p class="mt-2 text-sm leading-relaxed text-[var(--text-soft)]" data-i18n="retreat_dahab_day6_p3">نغادر دهب وقد حملنا معنا: هدوء الجبل، قوة الصحراء، وخفة البحر.</p>
-            </article>
+        <div class="dahab26-pricing animate-content">
+          <h3 data-i18n="retreat_dahab26_price_title">Cost</h3>
+          <div class="dahab26-price-tiers">
+            <p class="dahab26-price-tier" data-i18n="retreat_dahab26_price_early">First 10 participants: <strong>3200₪</strong></p>
+            <p class="dahab26-price-tier" data-i18n="retreat_dahab26_price_regular">After that: <strong>3400₪</strong></p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="rp-section animate-section">
-      <div class="rp-container">
-        <div class="dahab-includes-card animate-content">
-          <div class="dahab-includes-top">
-            <p class="dahab-includes-kicker" data-i18n="retreat_dahab_includes_kicker">Dahab Retreat</p>
-            <h3 class="font-serif text-2xl sm:text-3xl" data-i18n="retreat_dahab_includes_title">ماذا تشمل الرحلة؟</h3>
-          </div>
-
-          <div class="dahab-includes-grid">
-            <div class="dahab-includes-block">
-              <h4 class="dahab-includes-title" data-i18n="retreat_dahab_includes_yes_title">تشمل الرحلة</h4>
-              <ul class="dahab-includes-list">
-                <li data-i18n="retreat_dahab_inc1">باص من وإلى معبر الحدود المصرية</li>
-                <li data-i18n="retreat_dahab_inc2">إرشاد احترافي: دليل محلي معتمد</li>
-                <li data-i18n="retreat_dahab_inc3">قائدة/مدرّبة يوغا للريتريت</li>
-                <li data-i18n="retreat_dahab_inc4">وجبات يومية حسب البرنامج: فطور + غداء + عشاء</li>
-                <li data-i18n="retreat_dahab_inc5">انتقال من طابا إلى دهب</li>
-                <li data-i18n="retreat_dahab_inc6">انتقالات داخل دهب</li>
-                <li data-i18n="retreat_dahab_inc7">استئجار مساحة اليوغا (Yoga Space)</li>
-              </ul>
-            </div>
-
-            <div class="dahab-includes-block dahab-includes-block-soft">
-              <h4 class="dahab-includes-title" data-i18n="retreat_dahab_includes_no_title">لا تشمل الرحلة</h4>
-              <ul class="dahab-includes-list">
-                <li data-i18n="retreat_dahab_exc1">تأمين السفر</li>
-                <li data-i18n="retreat_dahab_exc2">المشروبات والمشتريات الشخصية</li>
-                <li data-i18n="retreat_dahab_exc3">تأشيرة الدخول إلى مصر</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="dahab-price-row">
-            <div>
-              <p class="dahab-price-label" data-i18n="retreat_dahab_price_label">التكلفة</p>
-              <p class="dahab-price-value" data-i18n="retreat_dahab_price_value">3800₪</p>
-              <p class="dahab-price-note" data-i18n="retreat_dahab_price_note">(سيتم إرسال رابط الدفع بعد التسجيل الأولي)</p>
-            </div>
-            <button type="button" id="dahab-book-btn" class="dahab-includes-cta dahab-includes-cta--disabled" disabled aria-disabled="true">
-              <span id="dahab-book-btn-label" data-i18n="retreat_dahab_booking_unavailable">Booking closed</span>
+          <p class="dahab26-price-note" data-i18n="retreat_dahab26_price_note">Price includes transportation, accommodation, breakfast and dinner, workshops, and nature reserve entry.</p>
+          <div class="dahab-price-row dahab26-book-row">
+            <button type="button" id="dahab-book-btn" class="dahab-includes-cta">
+              <span id="dahab-book-btn-label" data-i18n="retreat_dahab_book">Book</span>
               <span aria-hidden="true">→</span>
             </button>
           </div>
-          <div id="dahab-registration-completed-wrap" class="dahab-registration-completed" hidden>
-            <p class="dahab-registration-closed-note" data-i18n="retreat_registration_closed_note">Registration is currently closed.</p>
-            <div id="dahab-registration-form-slot"></div>
-          </div>
-          <div id="dahab-book-success" class="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800" hidden data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
-
-          <div class="dahab-policy-box">
-            <h4 class="dahab-policy-title" data-i18n="retreat_dahab_policy_title">💳 طريقة الدفع</h4>
-            <ul class="dahab-policy-list">
-              <li data-i18n="retreat_dahab_policy_1">يتم تثبيت الحجز بدفعة أولى غير مستردة بقيمة 500 شيكل.</li>
-              <li data-i18n="retreat_dahab_policy_2">المبلغ المتبقي يُدفع حتى موعد أقصاه 20.4.</li>
-              <li data-i18n="retreat_dahab_policy_3">طرق الدفع المتاحة:</li>
-              <li data-i18n="retreat_dahab_policy_4">✔️ העברה בנקאית (تحويل بنكي)</li>
-              <li data-i18n="retreat_dahab_policy_5">✔️ Bit</li>
-              <li data-i18n="retreat_dahab_policy_6">بعد إرسال الدفعة، يرجى إرسال صورة عن التحويل لتأكيد الحجز رسميًا.</li>
-              <li data-i18n="retreat_dahab_policy_7">يتم حجز المقعد فقط بعد تحويل الدفعة الأولى.</li>
-              <li data-i18n="retreat_dahab_policy_8">عدد الأماكن محدود، والأولوية لمن تثبّت حجزها أولًا.</li>
-              <li data-i18n="retreat_dahab_policy_9">⚖️ سياسة الإلغاء</li>
-              <li data-i18n="retreat_dahab_policy_10">• في حال الإلغاء قبل 14 يوم من موعد الريتريت – لا يتم استرجاع أي مبلغ.</li>
-              <li data-i18n="retreat_dahab_policy_11">• في حال عدم الحضور لأي سبب – لا يوجد استرجاع.</li>
-              <li data-i18n="retreat_dahab_policy_12">• يمكن تحويل الحجز لمشاركة أخرى في حال إيجاد بديلة بنفسك.</li>
-              <li data-i18n="retreat_dahab_policy_13">• تثبيت الحجز يتم بدفعة أولى غير مستردة.</li>
-            </ul>
-          </div>
+          <div id="dahab-book-success" class="dahab-book-success mt-4 hidden" data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
         </div>
+
+        <p class="dahab26-closing animate-content" data-i18n="retreat_dahab26_closing">Dahab is not just travel… Dahab is a space where we return to ourselves.</p>
       </div>
     </section>
+
+    <section class="dahab-final animate-section" aria-labelledby="dahab-final-heading">
+      <div class="rp-container">
+        <header class="dahab-final-head animate-content">
+          <h2 id="dahab-final-heading" class="dahab-final-title" data-i18n="retreat_dahab_final_title">✨ What does the Dahab retreat include? ✨</h2>
+          <p class="dahab-final-intro" data-i18n="retreat_dahab_final_intro">5 days and 4 nights in one of Dahab's most beautiful hotels.</p>
+          <p class="dahab-final-lead" data-i18n="retreat_dahab_final_lead">The retreat includes:</p>
+        </header>
+
+        <ul class="dahab-final-list animate-content dahab-stagger-grid">
+          <li data-i18n="retreat_dahab_final_inc1">Stay at Nour Boutique Hotel.</li>
+          <li data-i18n="retreat_dahab_final_inc2">Daily breakfast and dinner.</li>
+          <li data-i18n="retreat_dahab_final_inc3">Daily morning yoga by the sea.</li>
+          <li data-i18n="retreat_dahab_final_inc4">Breathing techniques and guided meditations.</li>
+          <li data-i18n="retreat_dahab_final_inc5">Trip to Blue Hole – Abu Galum – Blue Lagoon.</li>
+          <li data-i18n="retreat_dahab_final_inc6">Power cards, reflection exercises, and writing.</li>
+          <li data-i18n="retreat_dahab_final_inc7">Sound Healing.</li>
+          <li data-i18n="retreat_dahab_final_inc8">Acro Yoga.</li>
+          <li data-i18n="retreat_dahab_final_inc9">Sharing sessions and a safe women's circle.</li>
+          <li data-i18n="retreat_dahab_final_inc10">Nature reserve entry fees.</li>
+          <li data-i18n="retreat_dahab_final_inc11">Round-trip transportation from Eilat to Dahab.</li>
+        </ul>
+
+        <article class="dahab-final-spotlight animate-content">
+          <h3 class="dahab-final-spotlight-title" data-i18n="retreat_dahab_final_highlight_title">⭐️ The standout experience: Ice Bath &amp; Sauna day ⭐️</h3>
+          <p class="dahab-final-spotlight-lead" data-i18n="retreat_dahab_final_highlight_lead">A full day dedicated to the body and nervous system, including:</p>
+          <div class="dahab-final-spotlight-chips">
+            <span class="dahab-final-chip dahab-final-chip--ice" data-i18n="retreat_dahab_final_ice">❄️ Ice bath</span>
+            <span class="dahab-final-chip dahab-final-chip--heat" data-i18n="retreat_dahab_final_sauna">🔥 Sauna</span>
+            <span class="dahab-final-chip dahab-final-chip--meal" data-i18n="retreat_dahab_final_lunch">🥗 Lunch</span>
+          </div>
+          <div class="dahab-final-spotlight-copy">
+            <p data-i18n="retreat_dahab_final_ice_p1">The ice bath is not just a physical challenge — it is a deep experience of learning to control the breath under stress, calming the nervous system, building inner strength, and growing self-confidence.</p>
+            <p data-i18n="retreat_dahab_final_ice_p2">Many women discover through this experience that they are far stronger than they ever believed.</p>
+            <p data-i18n="retreat_dahab_final_ice_p3">Between the heat of the sauna and the cold of the water, the body lives a unique experience that helps activate circulation, raise energy levels, and bring a deep sense of mental clarity.</p>
+            <p class="dahab-final-spotlight-heart" data-i18n="retreat_dahab_final_ice_p4">For me, this day is the heart of the retreat — one of the most impactful and transformative days of the entire experience. 🤍</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
   </main>
   <div id="dahab-book-modal" class="dahab-book-modal" hidden>
     <div class="dahab-book-card" role="dialog" aria-modal="true" aria-labelledby="dahab-book-title">
@@ -590,7 +686,6 @@
       });
     })();
   </script>
-  <script src="js/retreat-completed.js"></script>
   <script>
     (function () {
       var toggleBtn = document.getElementById('dahab-gallery-toggle');

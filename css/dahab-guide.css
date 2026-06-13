@@ -1,0 +1,1377 @@
+/* Dahab editorial — hero, Nawal identity, story layout */
+
+.dahab-hero {
+  position: relative;
+  padding: 5.5rem 0 3rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+.dahab-hero::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -8%;
+  top: 12%;
+  width: min(42vw, 22rem);
+  height: min(42vw, 22rem);
+  border-radius: 999px;
+  border: 1px solid rgba(185, 137, 95, 0.14);
+  pointer-events: none;
+}
+
+.dahab-hero-back {
+  display: inline-flex;
+  margin-bottom: 1.75rem;
+}
+
+.dahab-hero-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(1.5rem, 4vw, 3.25rem);
+  align-items: center;
+}
+
+.dahab-hero-visual {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 22rem);
+}
+
+.dahab-hero-watermark {
+  position: absolute;
+  inset-inline-end: -0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(4.5rem, 14vw, 7.5rem);
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: rgba(130, 90, 58, 0.1);
+  pointer-events: none;
+  user-select: none;
+}
+
+[dir="rtl"] .dahab-hero-watermark {
+  writing-mode: vertical-lr;
+}
+
+.dahab-hero-portrait {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.dahab-hero-portrait-frame {
+  position: relative;
+  border-radius: 999px 999px 28px 28px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 28px 60px rgba(62, 47, 43, 0.14);
+}
+
+.dahab-hero-portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: -0.65rem;
+  border: 1px solid rgba(185, 137, 95, 0.35);
+  border-radius: 999px 999px 34px 34px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dahab-hero-portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: -1.1rem;
+  bottom: 1.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid rgba(130, 90, 58, 0.22);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dahab-hero-portrait-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 72%;
+}
+
+.dahab-hero-portrait-caption {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 1.15rem;
+  padding-inline: 0.35rem;
+  text-align: center;
+}
+
+.dahab-hero-portrait-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 500;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab-hero-portrait-role {
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.82);
+}
+
+.dahab-hero-kicker {
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.88);
+}
+
+.dahab-hero-title {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5.5vw, 3.35rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: rgba(62, 47, 43, 0.97);
+  max-width: 12ch;
+}
+
+.dahab-hero-lead {
+  margin: 0 0 1.35rem;
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  line-height: 1.85;
+  color: rgba(62, 47, 43, 0.76);
+  max-width: 34rem;
+}
+
+.dahab-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+}
+
+.dahab-hero-chip {
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(185, 137, 95, 0.32);
+  background: #fff;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: rgba(62, 47, 43, 0.88);
+}
+
+.dahab-hero-stats {
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  border-top: 1px solid rgba(185, 137, 95, 0.18);
+}
+
+.dahab-hero-stats li {
+  position: relative;
+  padding-inline-start: 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(62, 47, 43, 0.72);
+}
+
+.dahab-hero-stats li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.55em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(130, 90, 58, 0.75);
+}
+
+/* Nawal host ribbon — soul section */
+.dahab-soul-nawal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 28rem;
+  margin: 0 auto 2.25rem;
+  padding: 0.85rem 1.15rem 0.85rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(62, 47, 43, 0.06);
+}
+
+[dir="rtl"] .dahab-soul-nawal {
+  padding: 0.85rem 0.85rem 0.85rem 1.15rem;
+}
+
+.dahab-soul-nawal-photo-wrap {
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid rgba(185, 137, 95, 0.28);
+}
+
+.dahab-soul-nawal-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 72%;
+}
+
+.dahab-soul-nawal-label {
+  margin: 0 0 0.15rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.8);
+}
+
+.dahab-soul-nawal-name {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.2rem;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab-soul-nawal-role {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: rgba(62, 47, 43, 0.62);
+}
+
+/* Nawal story — editorial split */
+.dahab26-story {
+  max-width: 54rem;
+  margin: 0 auto 2.5rem;
+}
+
+.dahab26-story-grid,
+.dahab26-story {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.dahab26-story-aside {
+  position: sticky;
+  top: 5.5rem;
+}
+
+.dahab26-story-kicker {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.88);
+  text-align: center;
+}
+
+.dahab26-story-portrait {
+  margin: 0 0 1.25rem;
+}
+
+.dahab26-story-portrait-frame {
+  border-radius: 22px 22px 999px 999px;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  box-shadow: 0 20px 44px rgba(62, 47, 43, 0.1);
+}
+
+.dahab26-story-portrait-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 68%;
+}
+
+.dahab26-story-aside .dahab26-quote {
+  margin: 0;
+  padding: 1rem 0 0;
+  border-inline: none;
+  border-top: 1px solid rgba(185, 137, 95, 0.2);
+  border-radius: 0;
+  background: transparent;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  text-align: center;
+}
+
+.dahab26-letter p:first-child {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: rgba(62, 47, 43, 0.92);
+}
+
+.dahab26-letter p:first-child::first-letter {
+  float: inline-start;
+  margin: 0.08em 0.12em 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 3.1rem;
+  line-height: 0.82;
+  font-weight: 500;
+  color: rgba(130, 90, 58, 0.88);
+}
+
+[dir="rtl"] .dahab-hero-title,
+[dir="rtl"] .dahab-hero-portrait-name,
+[dir="rtl"] .dahab-soul-nawal-name,
+[dir="rtl"] .dahab26-letter p:first-child {
+  font-family: Amiri, "Playfair Display", Georgia, serif;
+}
+
+[dir="rtl"] .dahab-hero-lead,
+[dir="rtl"] .dahab-hero-stats li,
+[dir="rtl"] .dahab-soul-nawal-role {
+  font-family: "Scheherazade New", Georgia, serif;
+  font-size: 1.02rem;
+}
+
+[dir="rtl"] .dahab26-quote {
+  font-family: Amiri, "Playfair Display", Georgia, serif;
+}
+
+@media (max-width: 900px) {
+  .dahab-hero-shell,
+  .dahab26-story {
+    grid-template-columns: 1fr;
+  }
+
+  .dahab-hero-visual {
+    width: min(100%, 18rem);
+  }
+
+  .dahab-hero-title {
+    max-width: none;
+  }
+
+  .dahab26-story-aside {
+    position: static;
+    display: grid;
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .dahab26-story-kicker {
+    grid-column: 1 / -1;
+  }
+
+  .dahab26-story-aside .dahab26-quote {
+    grid-column: 1 / -1;
+    text-align: start;
+    padding-top: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dahab-hero {
+    padding-top: 4.75rem;
+  }
+
+  .dahab26-story-aside {
+    grid-template-columns: 1fr;
+  }
+
+  .dahab26-story-portrait-frame {
+    max-width: 14rem;
+    margin-inline: auto;
+  }
+}
+
+/* Dahab 2026 guide — part 2 */
+.dahab26 {
+  padding: 2rem 0 3rem;
+  background: #fff;
+}
+
+.dahab26-hero {
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.dahab26-hero-title {
+  margin: 0 0 0.35rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 500;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab26-hero-with {
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.85);
+}
+
+.dahab26-quote {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border-inline: 3px solid rgba(130, 90, 58, 0.45);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: rgba(62, 47, 43, 0.88);
+  background: #fff;
+  border-radius: 4px;
+}
+
+.dahab26-story .dahab26-letter {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.dahab26-letter p {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  color: rgba(62, 47, 43, 0.8);
+}
+
+.dahab26-letter p:last-child {
+  margin-bottom: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+  color: rgba(62, 47, 43, 0.92);
+}
+
+.dahab26-moment {
+  max-width: 46rem;
+  margin: 0 auto 2.5rem;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(185, 137, 95, 0.18);
+  box-shadow: 0 24px 50px rgba(62, 47, 43, 0.1);
+  transform: rotate(-0.6deg);
+}
+
+.dahab26-moment img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.dahab26-moment figcaption {
+  padding: 0.65rem 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(62, 47, 43, 0.55);
+  background: #fff;
+}
+
+.dahab26-guide-head {
+  max-width: 46rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.dahab26-guide-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.9);
+}
+
+.dahab26-guide-title {
+  margin: 0 0 1.25rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.2rem, 2.8vw, 1.65rem);
+  line-height: 1.4;
+  color: rgba(62, 47, 43, 0.94);
+}
+
+.dahab26-retreat-name {
+  margin: 0 0 0.35rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.45rem, 3.5vw, 2rem);
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab26-dates {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(62, 47, 43, 0.9);
+  background: #fff;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+}
+
+.dahab26-tagline {
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(130, 90, 58, 0.9);
+}
+
+.dahab26-place {
+  margin: 0 0 1rem;
+  font-size: 0.96rem;
+  line-height: 1.85;
+  color: rgba(62, 47, 43, 0.78);
+  text-align: start;
+}
+
+.dahab26-hotel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(130, 90, 58, 0.9);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dahab26-arc {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+  margin: 1.5rem auto 2rem;
+  max-width: 40rem;
+  padding: 1rem 1.15rem;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(62, 47, 43, 0.88);
+  text-align: center;
+}
+
+.dahab26-itinerary {
+  max-width: 46rem;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.dahab26-day {
+  border-radius: 18px;
+  border: 1px solid rgba(185, 137, 95, 0.2);
+  background: #fff;
+  overflow: hidden;
+}
+
+.dahab26-day-head {
+  padding: 1rem 1.15rem;
+  background: #fff;
+  border-bottom: 1px solid rgba(185, 137, 95, 0.14);
+}
+
+.dahab26-day-chip {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(130, 90, 58, 0.8);
+}
+
+.dahab26-day-title {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.15rem;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab26-day-theme {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(130, 90, 58, 0.88);
+}
+
+.dahab26-slots {
+  padding: 0.85rem 1.15rem 1.1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.dahab26-slot-text {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: rgba(62, 47, 43, 0.76);
+}
+
+.dahab26-book-row {
+  justify-content: center;
+  margin-top: 0.5rem !important;
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.dahab26-slot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.dahab26-slot-time {
+  flex-shrink: 0;
+  min-width: 3.5rem;
+  padding-top: 0.1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(130, 90, 58, 0.75);
+}
+
+.dahab26-slot-body strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: rgba(62, 47, 43, 0.92);
+}
+
+.dahab26-slot-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: rgba(62, 47, 43, 0.76);
+}
+
+.dahab26-includes {
+  max-width: 46rem;
+  margin: 0 auto 2rem;
+  padding: 1.5rem 1.35rem;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid rgba(185, 137, 95, 0.18);
+}
+
+.dahab26-includes h3 {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.25rem;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab26-includes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.dahab26-includes li {
+  position: relative;
+  padding-inline-start: 1.35rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(62, 47, 43, 0.8);
+}
+
+.dahab26-includes li::before {
+  content: "◦";
+  position: absolute;
+  inset-inline-start: 0;
+  color: rgba(130, 90, 58, 0.85);
+}
+
+.dahab26-pricing {
+  max-width: 46rem;
+  margin: 0 auto 1.5rem;
+  padding: 1.75rem 1.5rem;
+  border-radius: 22px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(185, 137, 95, 0.25);
+  box-shadow: 0 14px 36px rgba(62, 47, 43, 0.08);
+}
+
+.dahab26-pricing h3 {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3rem;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab26-price-tiers {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.dahab26-price-tier {
+  font-size: 1.05rem;
+  color: rgba(62, 47, 43, 0.88);
+}
+
+.dahab26-price-tier strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+  color: rgba(130, 90, 58, 0.95);
+}
+
+.dahab26-price-note {
+  margin: 0 0 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: rgba(62, 47, 43, 0.65);
+}
+
+.dahab26-closing {
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: rgba(62, 47, 43, 0.88);
+}
+
+[dir="rtl"] .dahab26-hero-title,
+[dir="rtl"] .dahab26-quote,
+[dir="rtl"] .dahab26-letter p:last-child,
+[dir="rtl"] .dahab26-guide-title,
+[dir="rtl"] .dahab26-retreat-name,
+[dir="rtl"] .dahab26-day-title,
+[dir="rtl"] .dahab26-includes h3,
+[dir="rtl"] .dahab26-pricing h3,
+[dir="rtl"] .dahab26-closing {
+  font-family: Amiri, "Playfair Display", Georgia, serif;
+}
+
+[dir="rtl"] .dahab26-letter p,
+[dir="rtl"] .dahab26-place,
+[dir="rtl"] .dahab26-slot-body p,
+[dir="rtl"] .dahab26-includes li {
+  font-family: "Scheherazade New", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.95;
+}
+
+@media (max-width: 640px) {
+  .dahab26-slot {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+/* Final includes + ice bath spotlight */
+.dahab-final {
+  padding: 2.5rem 0 3.5rem;
+  background: #fff;
+}
+
+.dahab-final-head {
+  max-width: 40rem;
+  margin: 0 auto 1.75rem;
+  text-align: center;
+}
+
+.dahab-final-title {
+  margin: 0 0 0.85rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab-final-intro {
+  margin: 0 0 0.65rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: rgba(130, 90, 58, 0.9);
+}
+
+.dahab-final-lead {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(62, 47, 43, 0.82);
+}
+
+.dahab-final-list {
+  list-style: none;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+  padding: 1.35rem 1.25rem;
+  display: grid;
+  gap: 0.55rem;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid rgba(185, 137, 95, 0.18);
+}
+
+.dahab-final-list li {
+  position: relative;
+  padding-inline-start: 1.2rem;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: rgba(62, 47, 43, 0.8);
+}
+
+.dahab-final-list li::before {
+  content: "•";
+  position: absolute;
+  inset-inline-start: 0;
+  color: rgba(130, 90, 58, 0.85);
+  font-weight: 700;
+}
+
+.dahab-final-spotlight {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.6rem 1.35rem;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  box-shadow: 0 12px 32px rgba(62, 47, 43, 0.06);
+}
+
+.dahab-final-spotlight-title {
+  margin: 0 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.1rem, 2.8vw, 1.35rem);
+  line-height: 1.45;
+  text-align: center;
+  color: rgba(62, 47, 43, 0.94);
+}
+
+.dahab-final-spotlight-lead {
+  margin: 0 0 1rem;
+  text-align: center;
+  font-size: 0.92rem;
+  color: rgba(62, 47, 43, 0.72);
+}
+
+.dahab-final-spotlight-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 1.25rem;
+}
+
+.dahab-final-chip {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.dahab-final-chip--ice,
+.dahab-final-chip--heat,
+.dahab-final-chip--meal {
+  background: #fff;
+  border-color: rgba(185, 137, 95, 0.35);
+  color: rgba(62, 47, 43, 0.88);
+}
+
+.dahab-final-spotlight-copy p {
+  margin: 0 0 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(62, 47, 43, 0.78);
+}
+
+.dahab-final-spotlight-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.dahab-final-spotlight-heart {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.02rem !important;
+  color: rgba(62, 47, 43, 0.9) !important;
+}
+
+[dir="rtl"] .dahab-final-title,
+[dir="rtl"] .dahab-final-spotlight-title,
+[dir="rtl"] .dahab-final-spotlight-heart {
+  font-family: Amiri, "Playfair Display", Georgia, serif;
+}
+
+[dir="rtl"] .dahab-final-intro,
+[dir="rtl"] .dahab-final-list li,
+[dir="rtl"] .dahab-final-spotlight-copy p {
+  font-family: "Scheherazade New", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.95;
+}
+
+/* Gallery — inside dahab26, after arc / before itinerary */
+.dahab-gallery-section {
+  max-width: 52rem;
+  margin: 0 auto 2.5rem;
+  padding: 0 0 0.5rem;
+}
+
+.dahab-gallery-title {
+  margin: 0 0 1.35rem;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(62, 47, 43, 0.96);
+}
+
+.dahab-gallery-section .dahab-journey-gallery {
+  margin-bottom: 1.25rem;
+}
+
+.dahab-gallery-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.dahab-gallery-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 11rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(185, 137, 95, 0.35);
+  background: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(62, 47, 43, 0.88);
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.dahab-gallery-more-btn:hover {
+  border-color: rgba(130, 90, 58, 0.55);
+  color: rgba(130, 90, 58, 0.95);
+  box-shadow: 0 6px 18px rgba(62, 47, 43, 0.08);
+}
+
+.dahab-book-success {
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(185, 137, 95, 0.28);
+  background: #fff;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+  color: rgba(62, 47, 43, 0.88);
+}
+
+[dir="rtl"] .dahab-gallery-title {
+  font-family: Amiri, "Playfair Display", Georgia, serif;
+}
+
+@media (max-width: 640px) {
+  .dahab-gallery-section {
+    margin-bottom: 2rem;
+  }
+}
+
+/* ── Scroll reveal animations (Dahab page) ── */
+@keyframes dahabFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes dahabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes dahabSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes dahabPhotoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dahabScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) rotate(-1deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-0.6deg);
+  }
+}
+
+@keyframes dahabLineGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes dahabWatermarkIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dahab-page .animate-content > * {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+    transition:
+      opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dahab-page .animate-section.in-view .animate-content > *,
+  .dahab-page .animate-content.in-view > * {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .dahab-page .animate-section.in-view .animate-content > *:nth-child(1),
+  .dahab-page .animate-content.in-view > *:nth-child(1) { transition-delay: 0.04s; }
+  .dahab-page .animate-section.in-view .animate-content > *:nth-child(2),
+  .dahab-page .animate-content.in-view > *:nth-child(2) { transition-delay: 0.1s; }
+  .dahab-page .animate-section.in-view .animate-content > *:nth-child(3),
+  .dahab-page .animate-content.in-view > *:nth-child(3) { transition-delay: 0.16s; }
+  .dahab-page .animate-section.in-view .animate-content > *:nth-child(4),
+  .dahab-page .animate-content.in-view > *:nth-child(4) { transition-delay: 0.22s; }
+  .dahab-page .animate-section.in-view .animate-content > *:nth-child(5),
+  .dahab-page .animate-content.in-view > *:nth-child(5) { transition-delay: 0.28s; }
+  .dahab-page .animate-section.in-view .animate-content > *:nth-child(6),
+  .dahab-page .animate-content.in-view > *:nth-child(6) { transition-delay: 0.34s; }
+
+  .dahab-page .dahab-hero-visual.animate-content {
+    opacity: 0;
+    transform: translateX(-40px);
+    filter: blur(8px);
+    transition:
+      opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [dir="rtl"] .dahab-page .dahab-hero-visual.animate-content {
+    transform: translateX(40px);
+  }
+
+  .dahab-page .dahab-hero-visual.animate-content.in-view {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+
+  .dahab-page .dahab-hero-visual.in-view .dahab-hero-watermark {
+    animation: dahabWatermarkIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+  }
+
+  .dahab-page .dahab-hero-visual.in-view .dahab-hero-portrait-frame {
+    animation: dahabPhotoIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+
+  .dahab-page .dahab-hero-title {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dahab-page .dahab-hero-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(130, 90, 58, 0.85), rgba(130, 90, 58, 0));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s;
+  }
+
+  [dir="rtl"] .dahab-page .dahab-hero-title::after {
+    transform-origin: right center;
+    background: linear-gradient(270deg, rgba(130, 90, 58, 0.85), rgba(130, 90, 58, 0));
+  }
+
+  .dahab-page .dahab-hero-content.in-view .dahab-hero-title::after {
+    transform: scaleX(1);
+  }
+
+  .dahab-page .dahab-soul-lead,
+  .dahab-page .dahab-gallery-title,
+  .dahab-page .dahab-final-title {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(5px);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-lead,
+  .dahab-page .dahab-gallery-section.in-view .dahab-gallery-title,
+  .dahab-page .dahab-final-head.in-view .dahab-final-title {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-kicker,
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-statement,
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-invite {
+    animation: dahabFadeIn 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-kicker { animation-delay: 0.05s; }
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-statement { animation-delay: 0.15s; }
+  .dahab-page .dahab-soul-opening.in-view .dahab-soul-invite { animation-delay: 0.25s; }
+
+  .dahab-page .dahab-soul-nawal.animate-content {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    filter: blur(4px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dahab-page .dahab-soul-nawal.animate-content.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  .dahab-page .dahab-stagger-text:not(.in-view) > p,
+  .dahab-page .dahab-stagger-text:not(.in-view) > li {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+
+  .dahab-page .dahab-stagger-text.in-view > p,
+  .dahab-page .dahab-stagger-text.in-view > li {
+    animation: dahabFadeIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dahab-page .dahab-stagger-grid:not(.in-view) > *,
+  .dahab-page .animate-content:not(.in-view) .dahab-stagger-grid > * {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(4px);
+  }
+
+  .dahab-page .dahab-stagger-grid.in-view > *,
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > * {
+    animation: dahabFadeUp 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dahab-page .dahab-journey-gallery.dahab-stagger-grid.in-view > *,
+  .dahab-page .animate-content.in-view .dahab-journey-gallery.dahab-stagger-grid > * {
+    animation: dahabPhotoIn 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dahab-page .dahab26-story-aside.in-view .dahab26-story-portrait-frame {
+    animation: dahabPhotoIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+  }
+
+  .dahab-page .dahab26-story-aside.in-view .dahab26-quote {
+    animation: dahabFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+  }
+
+  .dahab-page .dahab26-moment.animate-content {
+    opacity: 0;
+    transform: scale(0.96) rotate(-2deg);
+    filter: blur(6px);
+    transition:
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dahab-page .dahab26-moment.animate-content.in-view {
+    opacity: 1;
+    transform: scale(1) rotate(-0.6deg);
+    filter: blur(0);
+  }
+
+  .dahab-page .dahab26-arc.animate-content {
+    opacity: 0;
+    letter-spacing: 0.02em;
+    transform: translateY(16px);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      letter-spacing 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dahab-page .dahab26-arc.animate-content.in-view {
+    opacity: 1;
+    letter-spacing: 0.06em;
+    transform: translateY(0);
+  }
+
+  .dahab-page .dahab-soul-spots.in-view .dahab-soul-spots-num {
+    animation: dahabScaleIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+
+  .dahab-page .dahab-soul-faq-item {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dahab-page .dahab-soul-block.animate-content.in-view .dahab-soul-faq-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .dahab-page .dahab-soul-block.animate-content.in-view .dahab-soul-faq-item:nth-child(1) { transition-delay: 0.08s; }
+  .dahab-page .dahab-soul-block.animate-content.in-view .dahab-soul-faq-item:nth-child(2) { transition-delay: 0.16s; }
+  .dahab-page .dahab-soul-block.animate-content.in-view .dahab-soul-faq-item:nth-child(3) { transition-delay: 0.24s; }
+  .dahab-page .dahab-soul-block.animate-content.in-view .dahab-soul-faq-item:nth-child(4) { transition-delay: 0.32s; }
+
+  .dahab-page .dahab26-closing.animate-content.in-view {
+    animation: dahabFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(1),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(1),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(1) { animation-delay: 0.04s; transition-delay: 0.04s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(2),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(2),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(2) { animation-delay: 0.1s; transition-delay: 0.1s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(3),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(3),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(3) { animation-delay: 0.16s; transition-delay: 0.16s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(4),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(4),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(4) { animation-delay: 0.22s; transition-delay: 0.22s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(5),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(5),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(5) { animation-delay: 0.28s; transition-delay: 0.28s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(6),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(6),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(6) { animation-delay: 0.34s; transition-delay: 0.34s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(7),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(7),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(7) { animation-delay: 0.4s; transition-delay: 0.4s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(8),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(8),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(8) { animation-delay: 0.46s; transition-delay: 0.46s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(9),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(9),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(9) { animation-delay: 0.52s; transition-delay: 0.52s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(10),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(10),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(10) { animation-delay: 0.58s; transition-delay: 0.58s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(11),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(11),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(11) { animation-delay: 0.64s; transition-delay: 0.64s; }
+  .dahab-page .dahab-stagger-text.in-view > :nth-child(12),
+  .dahab-page .dahab-stagger-grid.in-view > :nth-child(12),
+  .dahab-page .animate-content.in-view .dahab-stagger-grid > :nth-child(12) { animation-delay: 0.7s; transition-delay: 0.7s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dahab-page .animate-content > *,
+  .dahab-page .dahab-stagger-text > p,
+  .dahab-page .dahab-stagger-text > li,
+  .dahab-page .dahab-stagger-grid > *,
+  .dahab-page .dahab-soul-faq-item,
+  .dahab-page .dahab-soul-lead,
+  .dahab-page .dahab-gallery-title,
+  .dahab-page .dahab-final-title {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .dahab-page .dahab-hero-title::after {
+    transform: scaleX(1);
+  }
+}
+
