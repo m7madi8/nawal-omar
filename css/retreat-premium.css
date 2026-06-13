@@ -1986,7 +1986,20 @@
 }
 
 .dahab-soul-why-copy p {
+  margin: 0 0 0.85rem;
   color: rgba(62, 47, 43, 0.78);
+}
+
+.dahab-soul-why-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.dahab-soul-why-copy .dahab-soul-h3 {
+  margin-bottom: 0.75rem;
+}
+
+.dahab-soul-why-copy .dahab-soul-emphasis {
+  margin-bottom: 0.85rem;
 }
 
 .dahab-soul-why-copy .dahab-soul-h3,
@@ -2248,7 +2261,7 @@
 [dir="rtl"] .dahab-soul-lead,
 [dir="rtl"] .dahab-soul-statement,
 [dir="rtl"] .dahab-soul-h3 {
-  font-family: Amiri, "Playfair Display", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
 }
 
 [dir="rtl"] .dahab-soul-invite,
@@ -2256,7 +2269,7 @@
 [dir="rtl"] .dahab-soul-pillar p,
 [dir="rtl"] .dahab-soul-fit-list li,
 [dir="rtl"] .dahab-soul-faq-item p {
-  font-family: "Scheherazade New", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
   font-size: 1.05rem;
   line-height: 1.9;
 }

@@ -359,18 +359,18 @@ html:has(.dahab-page) {
 [dir="rtl"] .dahab-hero-portrait-name,
 [dir="rtl"] .dahab-soul-nawal-name,
 [dir="rtl"] .dahab26-letter p:first-child {
-  font-family: Amiri, "Playfair Display", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
 }
 
 [dir="rtl"] .dahab-hero-lead,
 [dir="rtl"] .dahab-hero-stats li,
 [dir="rtl"] .dahab-soul-nawal-role {
-  font-family: "Scheherazade New", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
   font-size: 1.02rem;
 }
 
 [dir="rtl"] .dahab26-quote {
-  font-family: Amiri, "Playfair Display", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
 }
 
 @media (max-width: 900px) {
@@ -844,14 +844,14 @@ html:has(.dahab-page) {
 [dir="rtl"] .dahab26-includes h3,
 [dir="rtl"] .dahab26-pricing h3,
 [dir="rtl"] .dahab26-closing {
-  font-family: Amiri, "Playfair Display", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
 }
 
 [dir="rtl"] .dahab26-letter p,
 [dir="rtl"] .dahab26-place,
 [dir="rtl"] .dahab26-slot-body p,
 [dir="rtl"] .dahab26-includes li {
-  font-family: "Scheherazade New", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
   font-size: 1.05rem;
   line-height: 1.95;
 }
@@ -996,13 +996,13 @@ html:has(.dahab-page) {
 [dir="rtl"] .dahab-final-title,
 [dir="rtl"] .dahab-final-spotlight-title,
 [dir="rtl"] .dahab-final-spotlight-heart {
-  font-family: Amiri, "Playfair Display", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
 }
 
 [dir="rtl"] .dahab-final-intro,
 [dir="rtl"] .dahab-final-list li,
 [dir="rtl"] .dahab-final-spotlight-copy p {
-  font-family: "Scheherazade New", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
   font-size: 1.05rem;
   line-height: 1.95;
 }
@@ -1070,7 +1070,7 @@ html:has(.dahab-page) {
 }
 
 [dir="rtl"] .dahab-gallery-title {
-  font-family: Amiri, "Playfair Display", Georgia, serif;
+  font-family: 'Tajawal', sans-serif;
 }
 
 @media (max-width: 640px) {
