@@ -2,9 +2,33 @@
 
 .dahab-hero {
   position: relative;
-  padding: 5.5rem 0 3rem;
+  padding: 5rem 0 3rem;
   background: #fff;
   overflow: hidden;
+}
+
+.dahab-scroll-book {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+html:has(.dahab-page) {
+  scroll-behavior: smooth;
+}
+
+#dahab-booking {
+  scroll-margin-top: calc(3.5rem + 1.25rem);
+}
+
+.dahab-hero-cta-row {
+  margin-bottom: 1.35rem;
+}
+
+.dahab-hero-cta {
+  min-width: 11rem;
+  padding: 0.9rem 1.45rem;
+  font-size: 0.95rem;
+  text-decoration: none;
 }
 
 .dahab-hero::before {
@@ -1372,6 +1396,10 @@
 
   .dahab-page .dahab-hero-title::after {
     transform: scaleX(1);
+  }
+
+  html:has(.dahab-page) {
+    scroll-behavior: auto;
   }
 }
 
