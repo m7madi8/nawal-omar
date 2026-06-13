@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="css/retreat-page.css">
   <link rel="stylesheet" href="css/retreat-premium.css">
   <link rel="stylesheet" href="css/dahab-guide.css">
+  <link rel="stylesheet" href="css/dahab-conversion.css">
   <style>
     .dahab-book-modal {
       position: fixed;
@@ -171,48 +172,110 @@
     </div>
 
   <main class="retreat-page retreat-premium-root dahab-page min-h-screen bg-[var(--bg-body)] text-[var(--text-main)]">
-    <!-- DAHAB EDITORIAL HERO -->
-    <section class="dahab-hero animate-section" aria-labelledby="dahab-page-title">
+    <!-- CONVERSION HERO -->
+    <section class="dahab-cv-hero animate-section" aria-labelledby="dahab-page-title">
       <div class="rp-container">
-        <a href="retreats.html" class="dahab-hero-back top-back-link inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)]" aria-label="Back">
+        <a href="retreats.html" class="dahab-hero-back top-back-link inline-flex items-center gap-2 text-sm font-medium text-[var(--color-secondary)] transition-colors hover:text-[var(--color-accent)] mb-6" aria-label="Back">
           <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           <span data-i18n="back">Back</span>
         </a>
+        <div class="dahab-cv-hero-grid">
+          <div class="dahab-cv-hero-copy">
+            <span class="dahab-cv-badge" data-i18n="retreat_dahab_cv_badge">Limited places</span>
+            <h1 id="dahab-page-title" class="dahab-cv-title" data-i18n="retreat_dahab_page_title">Dahab Women's Retreat 2026</h1>
+            <p class="dahab-cv-subtitle" data-i18n="retreat_dahab_cv_subtitle">Five days of full disconnect — yoga, sea, and deep calm with Nawal Omar.</p>
+            <div class="dahab-cv-price-tiers">
+              <p class="dahab-cv-price-tier" data-i18n="retreat_dahab26_price_early">First 10 participants: 3200₪</p>
+              <p class="dahab-cv-price-tier" data-i18n="retreat_dahab26_price_regular">After that: 3400₪</p>
+            </div>
+            <div class="dahab-cv-actions">
+              <a href="#dahab-booking" class="dahab-cv-btn dahab-cv-btn--primary dahab-scroll-book" data-i18n="retreat_dahab_cv_btn_register">Register now</a>
+              <a href="#dahab-program" class="dahab-cv-btn dahab-cv-btn--ghost" data-i18n="retreat_dahab_cv_btn_program">See the program</a>
+            </div>
+            <p class="dahab-cv-trust" data-i18n="retreat_dahab_cv_trust">7 international retreats · 2000+ women · secure booking</p>
+          </div>
+          <figure class="dahab-cv-hero-media">
+            <img src="public/media/10.jpg" alt="Nawal Omar" class="dahab-cv-hero-photo" data-i18n-attr="alt:retreat_dahab_trainer1_name" loading="eager" width="520" height="520">
+          </figure>
+        </div>
+      </div>
+    </section>
 
-        <div class="dahab-hero-shell">
-          <div class="dahab-hero-visual animate-content">
-            <span class="dahab-hero-watermark" aria-hidden="true">2026</span>
-            <figure class="dahab-hero-portrait">
-              <div class="dahab-hero-portrait-frame">
-                <img src="public/media/nawall.jpg" alt="Nawal Omar" data-i18n-attr="alt:retreat_dahab_trainer1_name" loading="eager" width="640" height="800">
+    <!-- SOCIAL PROOF -->
+    <section class="dahab-cv-proof animate-section" aria-label="Testimonials">
+      <div class="rp-container">
+        <p class="dahab-cv-proof-label" data-i18n="retreat_dahab_cv_proof_label">From our last retreat — 2025</p>
+        <div class="dahab-cv-proof-grid">
+          <article class="dahab-cv-proof-card">
+            <div class="dahab-cv-proof-head">
+              <span class="dahab-cv-proof-avatar" aria-hidden="true">A</span>
+              <div>
+                <p class="dahab-cv-proof-name" data-i18n="retreat_dahab_cv_t1_name">Ayeh</p>
               </div>
-              <figcaption class="dahab-hero-portrait-caption">
-                <span class="dahab-hero-portrait-name" data-i18n="retreat_dahab_trainer1_name">Nawal Omar</span>
-                <span class="dahab-hero-portrait-role" data-i18n="retreat_dahab_hero_identity">Nurse · Yoga teacher · Women's health advocate</span>
-              </figcaption>
-            </figure>
-          </div>
+            </div>
+            <p class="dahab-cv-proof-quote" data-i18n="retreat_dahab_cv_t1_quote">This retreat completely changed how I see myself.</p>
+            <p class="dahab-cv-stars" aria-label="5 stars">★★★★★</p>
+          </article>
+          <article class="dahab-cv-proof-card">
+            <div class="dahab-cv-proof-head">
+              <span class="dahab-cv-proof-avatar" aria-hidden="true">H</span>
+              <div>
+                <p class="dahab-cv-proof-name" data-i18n="retreat_dahab_cv_t2_name">Hanan</p>
+              </div>
+            </div>
+            <p class="dahab-cv-proof-quote" data-i18n="retreat_dahab_cv_t2_quote">I returned home lighter, clearer, and more connected to my body.</p>
+            <p class="dahab-cv-stars" aria-label="5 stars">★★★★★</p>
+          </article>
+          <article class="dahab-cv-proof-card">
+            <div class="dahab-cv-proof-head">
+              <span class="dahab-cv-proof-avatar" aria-hidden="true">F</span>
+              <div>
+                <p class="dahab-cv-proof-name" data-i18n="retreat_dahab_cv_t3_name">Fairuz</p>
+              </div>
+            </div>
+            <p class="dahab-cv-proof-quote" data-i18n="retreat_dahab_cv_t3_quote">The safest space I have ever experienced with women.</p>
+            <p class="dahab-cv-stars" aria-label="5 stars">★★★★★</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <div class="dahab-hero-content animate-content">
-            <p class="dahab-hero-kicker" data-i18n="retreat_dahab_page_label">Dahab Women's Retreat 2026</p>
-            <h1 id="dahab-page-title" class="dahab-hero-title" data-i18n="retreat_dahab_page_title">Dahab Women's Retreat 2026</h1>
-            <p class="dahab-hero-lead" data-i18n="retreat_dahab_page_intro">19.8 – 23.8 · A journey back to the body, the sea, and the strength within.</p>
-            <div class="dahab-hero-chips">
-              <span class="dahab-hero-chip" data-i18n="retreat_dahab26_dates">19.8 – 23.8</span>
-              <span class="dahab-hero-chip" data-i18n="retreat_dahab_hero_badge">Women only · 20 places</span>
-            </div>
-            <div class="dahab-hero-cta-row">
-              <a href="#dahab-booking" class="dahab-includes-cta dahab-hero-cta dahab-scroll-book">
-                <span data-i18n="retreat_dahab_book_now">Book now</span>
-                <span aria-hidden="true">↓</span>
-              </a>
-            </div>
-            <ul class="dahab-hero-stats">
-              <li data-i18n="retreat_dahab_hero_stat1">7 international retreats led</li>
-              <li data-i18n="retreat_dahab_hero_stat2">2000+ women on this path</li>
-              <li data-i18n="retreat_dahab_hero_stat3">5 days · Dahab · Sinai</li>
-            </ul>
-          </div>
+    <!-- INCLUDES ICON GRID -->
+    <section class="dahab-cv-includes animate-section" aria-labelledby="dahab-cv-includes-heading">
+      <div class="rp-container">
+        <h2 id="dahab-cv-includes-heading" class="dahab-cv-includes-title" data-i18n="retreat_dahab_cv_includes_title">Everything included</h2>
+        <p class="dahab-cv-includes-sub" data-i18n="retreat_dahab_cv_includes_sub">From the moment you arrive to your last breath</p>
+        <div class="dahab-cv-includes-grid">
+          <article class="dahab-cv-inc-card">
+            <svg class="dahab-cv-inc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10.5L12 4l9 6.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1v-9.5z"/></svg>
+            <h3 class="dahab-cv-inc-title" data-i18n="retreat_dahab_cv_inc1_title">Full stay</h3>
+            <p class="dahab-cv-inc-desc" data-i18n="retreat_dahab_cv_inc1_desc">4 nights at Nour Boutique Hotel by the sea.</p>
+          </article>
+          <article class="dahab-cv-inc-card">
+            <svg class="dahab-cv-inc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 11h16M6 11V8a2 2 0 012-2h3v5M6 11v7h12v-7M15 6h3a2 2 0 012 2v3"/></svg>
+            <h3 class="dahab-cv-inc-title" data-i18n="retreat_dahab_cv_inc2_title">Healthy meals</h3>
+            <p class="dahab-cv-inc-desc" data-i18n="retreat_dahab_cv_inc2_desc">Daily breakfast and dinner at the hotel.</p>
+          </article>
+          <article class="dahab-cv-inc-card">
+            <svg class="dahab-cv-inc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M12 7v3M8 20l4-4 4 4M9.5 13.5L12 11l2.5 2.5"/></svg>
+            <h3 class="dahab-cv-inc-title" data-i18n="retreat_dahab_cv_inc3_title">Yoga sessions</h3>
+            <p class="dahab-cv-inc-desc" data-i18n="retreat_dahab_cv_inc3_desc">Daily morning yoga with expert guide Nawal Omar.</p>
+          </article>
+          <article class="dahab-cv-inc-card">
+            <svg class="dahab-cv-inc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 15c2-1 4-3 6-3s4 2 6 3 4 3 6 3M4 18c1.5-.5 3-1.5 4.5-1.5S10 17.5 12 18"/></svg>
+            <h3 class="dahab-cv-inc-title" data-i18n="retreat_dahab_cv_inc4_title">Sea journeys</h3>
+            <p class="dahab-cv-inc-desc" data-i18n="retreat_dahab_cv_inc4_desc">Blue Hole, Abu Galum & Blue Lagoon trip.</p>
+          </article>
+          <article class="dahab-cv-inc-card">
+            <svg class="dahab-cv-inc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3c4 3 6 6 6 9a6 6 0 11-12 0c0-3 2-6 6-9z"/></svg>
+            <h3 class="dahab-cv-inc-title" data-i18n="retreat_dahab_cv_inc5_title">Breath workshops</h3>
+            <p class="dahab-cv-inc-desc" data-i18n="retreat_dahab_cv_inc5_desc">Pranayama, meditation & sound healing.</p>
+          </article>
+          <article class="dahab-cv-inc-card">
+            <svg class="dahab-cv-inc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="8" r="2.5"/><circle cx="16" cy="9" r="2"/><path d="M4 18c0-2.5 2.5-4 5-4s5 1.5 5 4"/></svg>
+            <h3 class="dahab-cv-inc-title" data-i18n="retreat_dahab_cv_inc6_title">Private circle</h3>
+            <p class="dahab-cv-inc-desc" data-i18n="retreat_dahab_cv_inc6_desc">Safe women's group & follow-up after the retreat.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -421,7 +484,7 @@
           </div>
         </div>
 
-        <div class="dahab26-itinerary animate-content dahab-stagger-grid">
+        <div id="dahab-program" class="dahab26-itinerary animate-content dahab-stagger-grid">
           <article class="dahab26-day">
             <div class="dahab26-day-head">
               <span class="dahab26-day-chip" data-i18n="retreat_dahab26_d1_chip">Day 1 · 19.8</span>
@@ -487,22 +550,6 @@
           </article>
         </div>
 
-        <div id="dahab-booking" class="dahab26-pricing animate-content">
-          <h3 data-i18n="retreat_dahab26_price_title">Cost</h3>
-          <div class="dahab26-price-tiers">
-            <p class="dahab26-price-tier" data-i18n="retreat_dahab26_price_early">First 10 participants: <strong>3200₪</strong></p>
-            <p class="dahab26-price-tier" data-i18n="retreat_dahab26_price_regular">After that: <strong>3400₪</strong></p>
-          </div>
-          <p class="dahab26-price-note" data-i18n="retreat_dahab26_price_note">Price includes transportation, accommodation, breakfast and dinner, workshops, and nature reserve entry.</p>
-          <div class="dahab-price-row dahab26-book-row">
-            <button type="button" id="dahab-book-btn" class="dahab-includes-cta" data-dahab-book-open>
-              <span id="dahab-book-btn-label" data-i18n="retreat_dahab_book">Book</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-          <div id="dahab-book-success" class="dahab-book-success mt-4 hidden" data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
-        </div>
-
         <p class="dahab26-closing animate-content" data-i18n="retreat_dahab26_closing">Dahab is not just travel… Dahab is a space where we return to ourselves.</p>
       </div>
     </section>
@@ -544,6 +591,68 @@
             <p class="dahab-final-spotlight-heart" data-i18n="retreat_dahab_final_ice_p4">For me, this day is the heart of the retreat — one of the most impactful and transformative days of the entire experience. 🤍</p>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="dahab-cv-urgency animate-section" aria-label="Countdown">
+      <div class="rp-container">
+        <div id="dahab-countdown" class="dahab-cv-countdown">
+          <div class="dahab-cv-cd-box">
+            <span id="dahab-cd-days" class="dahab-cv-cd-num">0</span>
+            <span class="dahab-cv-cd-label" data-i18n="retreat_dahab_cv_cd_days">Days</span>
+          </div>
+          <div class="dahab-cv-cd-box">
+            <span id="dahab-cd-hours" class="dahab-cv-cd-num">00</span>
+            <span class="dahab-cv-cd-label" data-i18n="retreat_dahab_cv_cd_hours">Hours</span>
+          </div>
+          <div class="dahab-cv-cd-box">
+            <span id="dahab-cd-mins" class="dahab-cv-cd-num">00</span>
+            <span class="dahab-cv-cd-label" data-i18n="retreat_dahab_cv_cd_minutes">Minutes</span>
+          </div>
+          <div class="dahab-cv-cd-box">
+            <span id="dahab-cd-secs" class="dahab-cv-cd-num">00</span>
+            <span class="dahab-cv-cd-label" data-i18n="retreat_dahab_cv_cd_seconds">Seconds</span>
+          </div>
+        </div>
+        <div class="dahab-cv-progress-wrap">
+          <div class="dahab-cv-progress-head">
+            <span data-i18n="retreat_dahab_cv_spots_count">Limited places</span>
+          </div>
+          <div class="dahab-cv-progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <span class="dahab-cv-progress-fill"></span>
+          </div>
+        </div>
+        <p class="dahab-cv-urgency-note" data-i18n="retreat_dahab_cv_urgency_note">Our last retreat sold out one month before the date.</p>
+      </div>
+    </section>
+
+    <section id="dahab-booking" class="dahab-cv-final animate-section" aria-labelledby="dahab-cv-final-heading">
+      <div class="rp-container">
+        <div class="dahab-cv-final-inner">
+          <h2 id="dahab-cv-final-heading" class="dahab-cv-final-title" data-i18n="retreat_dahab_cv_final_h2">Ready to begin your journey?</h2>
+          <p class="dahab-cv-final-text" data-i18n="retreat_dahab_cv_final_p">Five days away from noise, back to your body and the sea. A rare chance to slow down, breathe, and remember your strength — with women who understand you.</p>
+          <div class="dahab-cv-final-card">
+            <p class="dahab-cv-final-price-label" data-i18n="retreat_dahab_cv_final_price_label">Full price</p>
+            <div class="dahab-cv-final-prices">
+              <p class="dahab-cv-final-price-tier" data-i18n="retreat_dahab26_price_early">First 10 participants: 3200₪</p>
+              <p class="dahab-cv-final-price-tier" data-i18n="retreat_dahab26_price_regular">After that: 3400₪</p>
+            </div>
+            <p class="dahab-cv-final-price-note" data-i18n="retreat_dahab_cv_final_price_note">Includes stay, meals & all activities</p>
+            <ul class="dahab-cv-final-list">
+              <li data-i18n="retreat_dahab_cv_final_b1">Deposit confirms your spot</li>
+              <li data-i18n="retreat_dahab_cv_final_b2">Phone call before final confirmation</li>
+              <li data-i18n="retreat_dahab_cv_final_b3">Direct contact with Nawal Omar</li>
+            </ul>
+          </div>
+          <button type="button" id="dahab-book-btn" class="dahab-cv-btn dahab-cv-btn--primary dahab-cv-final-btn" data-dahab-book-open>
+            <span id="dahab-book-btn-label" data-i18n="retreat_dahab_cv_final_btn">Reserve your spot now</span>
+          </button>
+          <div id="dahab-book-success" class="dahab-book-success mt-4" hidden data-i18n="retreat_form_success">Thank you! Your request was sent successfully. We will contact you shortly.</div>
+          <a href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" class="dahab-cv-final-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.865 9.865 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-i18n="retreat_dahab_cv_final_whatsapp">Or contact us on WhatsApp</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -711,6 +820,7 @@
       });
     })();
   </script>
+  <script src="js/dahab-conversion.js"></script>
   <script src="js/reveal.js"></script>
   <script>
     (function () {
