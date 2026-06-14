@@ -2021,42 +2021,45 @@
 }
 
 .dahab-soul-journey {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.35rem;
-  margin: 1.25rem 0;
-  padding: 1.1rem 0.75rem;
-  border-radius: 16px;
-  background: #fff;
-  border: 1px solid rgba(185, 137, 95, 0.18);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1.35rem 0;
+  padding: 0;
+  list-style: none;
+  background: transparent;
+  border: none;
 }
 
 .dahab-soul-journey-step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 5.5rem;
+  padding: 1rem 0.85rem;
   text-align: center;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: rgba(62, 47, 43, 0.88);
-  max-width: 7.5rem;
+  border-radius: 16px;
+  background: linear-gradient(165deg, rgba(255, 253, 249, 0.98), rgba(250, 244, 236, 0.92));
+  border: 1px solid rgba(185, 137, 95, 0.24);
+  box-shadow: 0 6px 18px rgba(130, 90, 58, 0.07);
+}
+
+.dahab-soul-journey-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgba(62, 47, 43, 0.9);
 }
 
 .dahab-soul-journey-dot {
-  width: 0.65rem;
-  height: 0.65rem;
+  flex-shrink: 0;
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 999px;
-  background: rgba(130, 90, 58, 0.85);
-  box-shadow: 0 0 0 4px rgba(130, 90, 58, 0.12);
-}
-
-.dahab-soul-journey-line {
-  width: 1.75rem;
-  height: 1px;
-  background: rgba(130, 90, 58, 0.35);
+  background: rgba(130, 90, 58, 0.9);
+  box-shadow: 0 0 0 5px rgba(130, 90, 58, 0.12);
 }
 
 .dahab-soul-journey-note {
@@ -2236,6 +2239,18 @@
   gap: 0.55rem;
 }
 
+.dahab-soul-cancel-list--payment {
+  margin-bottom: 1.15rem;
+}
+
+.dahab-soul-cancel-sub {
+  margin: 0 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: rgba(62, 47, 43, 0.9);
+}
+
 .dahab-soul-cancel-list li {
   position: relative;
   padding-inline-start: 1rem;
@@ -2288,11 +2303,27 @@
     grid-template-columns: 1fr;
   }
 
-  .dahab-soul-journey-line {
-    display: none;
+  .dahab-soul-journey {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
   }
 
-  .dahab-soul-journey {
-    flex-direction: column;
+  .dahab-soul-journey-step {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.9rem;
+    min-height: 0;
+    padding: 0.9rem 1rem;
+    text-align: start;
+  }
+
+  [dir="rtl"] .dahab-soul-journey-step {
+    text-align: right;
+  }
+
+  .dahab-soul-journey-label {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 }
