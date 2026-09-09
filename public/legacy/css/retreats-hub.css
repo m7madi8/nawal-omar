@@ -37,3 +37,14 @@
   font-size: 1rem;
   line-height: 1.7;
 }
+
+.retreats-hub-empty {
+  max-width: 36rem;
+  margin: 1.75rem auto 0;
+  text-align: center;
+  color: rgba(62, 47, 43, 0.62);
+}
+
+.ny-door-grid:has(.ny-door:not([hidden])) + .retreats-hub-empty {
+  display: none;
+}

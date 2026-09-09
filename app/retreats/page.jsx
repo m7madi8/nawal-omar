@@ -2,14 +2,14 @@ import LegacyPage from '@/components/LegacyPage';
 
 export const metadata = {
   title: 'Retreats',
-  description: 'Upcoming Nawal Yoga retreats — Wadi Rum and more.',
+  description: 'Upcoming Nawal Yoga retreats — journeys for rest, release, and return to yourself.',
 };
 
 const html = `
 <main class="ny-inner ny-world retreats-hub">
   <section class="ny-world-hero" aria-labelledby="retreats-title">
     <div class="ny-world-hero__media" aria-hidden="true">
-      <img src="/media/wadi-rum/cover.jpg" alt="" width="1600" height="1200" decoding="async">
+      <img src="/media/dahab/cover.jpeg" alt="" width="1600" height="1200" decoding="async">
     </div>
     <div class="ny-world-hero__scrim" aria-hidden="true"></div>
     <div class="ny-world-hero__inner container">
@@ -24,7 +24,7 @@ const html = `
     <div class="container">
       <p class="retreats-hub-intro" data-en="Desert journeys for rest, release, and return to yourself." data-ar="رحلات صحراوية للراحة والتحرر والعودة إلى الذات.">Desert journeys for rest, release, and return to yourself.</p>
       <div class="ny-door-grid">
-        <a href="/retreats/wadi-rum" class="ny-door reveal" aria-labelledby="retreats-wadi-rum-title">
+        <a href="/retreats/wadi-rum" class="ny-door reveal" hidden data-retreat-listing-hidden="wadi-rum" aria-labelledby="retreats-wadi-rum-title">
           <div class="ny-door__media" aria-hidden="true">
             <img src="/media/wadi-rum/cover.jpg" alt="" width="1600" height="1200" loading="lazy" decoding="async">
           </div>
@@ -39,6 +39,7 @@ const html = `
           </div>
         </a>
       </div>
+      <p class="retreats-hub-empty body-l text-muted" data-en="New retreat dates will be announced here soon." data-ar="تواريخ الرحلات الجديدة ستُعلن هنا قريباً.">New retreat dates will be announced here soon.</p>
     </div>
   </section>
 </main>
