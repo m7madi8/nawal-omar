@@ -17,6 +17,17 @@
   var DEVELOPER_NAME = 'Mohammad';
   var OWNER_AVATAR = '/media/home/nawal_aom.jpg';
   var DEVELOPER_AVATAR = '/media/me.webp';
+  var BUILTIN_STAFF = [
+    {
+      id: 'builtin-shatha',
+      name: 'Shatha',
+      username: 'shada',
+      password: 'shadak12',
+      permissions: ['medical'],
+      viewOnly: true,
+      locked: true,
+    },
+  ];
 
   /* Icon set — 18px line icons, inherit currentColor */
   var ICONS = {
@@ -331,19 +342,50 @@
         permissions: STAFF_PERMISSIONS.map(function (item) { return item.id; }).concat(OWNER_ONLY_VIEWS),
       };
     }
+    var builtin = findBuiltinStaff(username, session.staffId);
+    if (builtin) {
+      return {
+        isLoggedIn: true,
+        username: builtin.username,
+        name: builtin.name,
+        role: 'staff',
+        staffId: builtin.id,
+        locked: true,
+        viewOnly: !!builtin.viewOnly,
+        permissions: Array.isArray(builtin.permissions) ? builtin.permissions.slice() : [],
+      };
+    }
     return {
       isLoggedIn: true,
       username: username,
       name: session.name || username,
       role: 'staff',
       staffId: session.staffId || '',
+      viewOnly: !!session.viewOnly,
       permissions: Array.isArray(session.permissions) ? session.permissions.slice() : [],
     };
+  }
+
+  function findBuiltinStaff(username, staffId) {
+    var needle = String(username || '').trim().toLowerCase();
+    return BUILTIN_STAFF.find(function (item) {
+      return (staffId && item.id === staffId) || String(item.username || '').toLowerCase() === needle;
+    }) || null;
   }
 
   function currentSession() {
     var session = normalizeSession(getSession());
     if (!session || session.role !== 'staff') return session;
+    var builtin = findBuiltinStaff(session.username, session.staffId);
+    if (builtin) {
+      session.username = builtin.username;
+      session.name = builtin.name;
+      session.staffId = builtin.id;
+      session.locked = true;
+      session.viewOnly = !!builtin.viewOnly;
+      session.permissions = Array.isArray(builtin.permissions) ? builtin.permissions.slice() : [];
+      return session;
+    }
     var member = loadStaff().find(function (item) {
       return (session.staffId && item.id === session.staffId) ||
         String(item.username || '').toLowerCase() === String(session.username || '').toLowerCase();
@@ -355,6 +397,7 @@
     session.username = member.username;
     session.name = member.name;
     session.staffId = member.id;
+    session.viewOnly = !!member.viewOnly;
     session.permissions = Array.isArray(member.permissions) ? member.permissions.slice() : [];
     return session;
   }
@@ -364,9 +407,15 @@
     return !!(session && (session.role === 'owner' || session.role === 'developer'));
   }
 
+  function isViewOnly(session) {
+    session = session || currentSession();
+    return !!(session && session.viewOnly);
+  }
+
   function isReservedUsername(username) {
     var value = String(username || '').trim().toLowerCase();
-    return value === USERNAME || value === DEVELOPER_USERNAME;
+    if (value === USERNAME || value === DEVELOPER_USERNAME) return true;
+    return !!findBuiltinStaff(value);
   }
 
   function hasPermission(viewId, session) {
@@ -397,7 +446,7 @@
       role.textContent = isDeveloper
         ? 'Web developer'
         : session && session.role === 'staff'
-          ? 'Team member'
+          ? (session.viewOnly ? 'View only' : 'Team member')
           : 'Owner';
     }
     if (avatar) {
@@ -421,8 +470,11 @@
 
   function findStaffAccount(username, password) {
     var needle = String(username || '').trim().toLowerCase();
+    var pass = String(password || '');
+    var builtin = findBuiltinStaff(needle);
+    if (builtin && String(builtin.password || '') === pass) return builtin;
     return loadStaff().find(function (item) {
-      return String(item.username || '').trim().toLowerCase() === needle && String(item.password || '') === String(password || '');
+      return String(item.username || '').trim().toLowerCase() === needle && String(item.password || '') === pass;
     }) || null;
   }
 
@@ -1357,8 +1409,10 @@
       html += '<td><div class="admin-table__person"><span class="admin-table__avatar">' + escapeHtml(initials(row.fullName)) + '</span><div><div class="admin-table__primary">' + escapeHtml(row.fullName) + '</div><div class="admin-table__sub">' + escapeHtml(row.phone) + '</div></div></div></td>';
       html += '<td><div class="admin-row-actions">';
       html += '<button type="button" class="admin-row-btn" data-action="view">View</button>';
-      html += '<button type="button" class="admin-row-btn" data-action="toggle">' + (row.status === 'completed' ? 'Mark pending' : 'Complete') + '</button>';
-      html += '<button type="button" class="admin-row-btn admin-row-btn--danger" data-action="delete">Delete</button>';
+      if (!isViewOnly()) {
+        html += '<button type="button" class="admin-row-btn" data-action="toggle">' + (row.status === 'completed' ? 'Mark pending' : 'Complete') + '</button>';
+        html += '<button type="button" class="admin-row-btn admin-row-btn--danger" data-action="delete">Delete</button>';
+      }
       html += '</div></td></tr>';
     });
     html += '</tbody></table></div>';
@@ -1367,25 +1421,34 @@
 
   function bindTableActions(root, allRows) {
     if (!root) return;
+    var viewOnly = isViewOnly();
     root.querySelectorAll('tr[data-id]').forEach(function (tr) {
       var id = tr.getAttribute('data-id');
       var row = allRows.find(function (item) { return item.id === id; });
       if (!row) return;
-      tr.querySelector('[data-action="view"]').addEventListener('click', function () { openModal(row); });
-      tr.querySelector('[data-action="toggle"]').addEventListener('click', async function () {
-        var next = row.status === 'completed' ? 'pending' : 'completed';
-        if (await updateStatusInSupabase(row, next)) {
-          invalidateCache();
-          renderWorkspace(true);
-        }
-      });
-      tr.querySelector('[data-action="delete"]').addEventListener('click', async function () {
-        if (!window.confirm('Delete this request?')) return;
-        if (await deleteInSupabase(row)) {
-          invalidateCache();
-          renderWorkspace(true);
-        }
-      });
+      var viewBtn = tr.querySelector('[data-action="view"]');
+      if (viewBtn) viewBtn.addEventListener('click', function () { openModal(row); });
+      if (viewOnly) return;
+      var toggleBtn = tr.querySelector('[data-action="toggle"]');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', async function () {
+          var next = row.status === 'completed' ? 'pending' : 'completed';
+          if (await updateStatusInSupabase(row, next)) {
+            invalidateCache();
+            renderWorkspace(true);
+          }
+        });
+      }
+      var deleteBtn = tr.querySelector('[data-action="delete"]');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', async function () {
+          if (!window.confirm('Delete this request?')) return;
+          if (await deleteInSupabase(row)) {
+            invalidateCache();
+            renderWorkspace(true);
+          }
+        });
+      }
     });
   }
 
@@ -1639,7 +1702,10 @@
 
   function renderMedical(root, rows, filters) {
     var filtered = filterRows(rows, filters, 'medical');
-    var html = '<div class="admin-page-head"><div><h1>Medical forms</h1><p>Two intake forms only — Nawal\'s Care and Ice Bath Health.</p></div></div>';
+    var viewOnly = isViewOnly();
+    var html = '<div class="admin-page-head"><div><h1>Medical forms</h1><p>' + (viewOnly
+      ? 'View-only access — you can open medical forms, but not change or delete them.'
+      : 'Two intake forms only — Nawal\'s Care and Ice Bath Health.') + '</p></div></div>';
     html += '<div class="admin-retreat-cards is-medical">';
     MEDICAL_CATALOG.forEach(function (item) {
       var count = rows.filter(function (row) { return matchesCatalog(row, item); }).length;
@@ -1647,7 +1713,11 @@
       html += renderCatalogCard(item, count, pending, 'forms');
     });
     html += '</div>';
-    html += renderFilterBar(filters, { status: ['all', 'pending', 'completed'], sources: MEDICAL_SOURCES });
+    html += renderFilterBar(filters, {
+      status: ['all', 'pending', 'completed'],
+      sources: MEDICAL_SOURCES,
+      hideExport: viewOnly,
+    });
     html += renderTable(filtered, 'No medical forms match these filters.');
     root.innerHTML = html;
     bindFilters(root, rows);
@@ -1818,6 +1888,23 @@
     html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar admin-staff-card__avatar--photo"><img src="' + DEVELOPER_AVATAR + '" alt="" width="40" height="40"></span><div><p class="admin-staff-card__name">' + escapeHtml(DEVELOPER_NAME) + '</p><p class="admin-staff-card__meta">mohammad · web developer</p></div><span class="admin-staff-card__badge">Full access</span></div>';
     html += '<p class="admin-staff-card__note">Built-in developer account with the same access as Nawal. It cannot be edited or removed.</p>';
     html += '</article>';
+
+    BUILTIN_STAFF.forEach(function (member) {
+      var perms = Array.isArray(member.permissions) ? member.permissions : [];
+      html += '<article class="admin-staff-card is-locked">';
+      html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar">' + escapeHtml(initials(member.name)) + '</span><div><p class="admin-staff-card__name">' + escapeHtml(member.name) + '</p><p class="admin-staff-card__meta">' + escapeHtml(member.username) + ' · built-in team login</p></div><span class="admin-staff-card__badge">' + (member.viewOnly ? 'View only' : 'Limited') + '</span></div>';
+      html += '<div class="admin-staff-card__perms">';
+      if (!perms.length) {
+        html += '<span class="admin-place-chip">No sections</span>';
+      } else {
+        perms.forEach(function (perm) {
+          html += '<span class="admin-place-chip">' + escapeHtml(permissionLabel(perm)) + '</span>';
+        });
+      }
+      html += '</div>';
+      html += '<p class="admin-staff-card__note">Built-in account. Access is fixed in the system and cannot be edited or removed here.</p>';
+      html += '</article>';
+    });
 
     if (!staff.length) {
       html += '<div class="admin-empty admin-empty--soft"><p class="admin-empty__title">No team members yet</p><p class="admin-empty__hint">Add someone on the left and choose the pages they should see.</p></div>';
@@ -2191,6 +2278,7 @@
           name: staff.name,
           role: 'staff',
           staffId: staff.id,
+          viewOnly: !!staff.viewOnly,
           permissions: staff.permissions || [],
         }, remember);
         window.location.href = firstAllowedPath(currentSession());
