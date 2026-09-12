@@ -788,29 +788,40 @@
   outline-offset: 2px;
 }
 
-/* ---------- 7. Reels grid ---------- */
+/* ---------- 7. Reels carousel ---------- */
 .wr-reels-hint {
   margin: 0.35rem 0 1rem;
   font-size: 0.88rem;
   color: var(--wr-muted);
 }
 
-.wr-reels-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+.wr-reels-carousel {
+  margin-top: 0.15rem;
+}
+
+.wr-carousel__item--reel {
+  flex: 0 0 min(74vw, 14rem);
+  aspect-ratio: 9 / 16;
+  border: 0;
+  background: transparent;
+  padding: 0;
 }
 
 @media (min-width: 720px) {
-  .wr-reels-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .wr-carousel__item--reel {
+    flex-basis: min(42vw, 15rem);
   }
+}
+
+.wr-carousel__item--reel .wr-reel-card {
+  width: 100%;
+  height: 100%;
 }
 
 .wr-reel-card {
   position: relative;
   overflow: hidden;
-  border-radius: 0.85rem;
+  border-radius: 0.9rem;
   border: 1px solid var(--wr-line);
   aspect-ratio: 9 / 16;
   background: var(--wr-night);
