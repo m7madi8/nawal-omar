@@ -105,14 +105,24 @@ export default function Page() {
       <h2 class="wr-h2" data-i18n="retreat_wadi_gallery_title">Moments from Wadi Rum</h2>
       <div class="wr-carousel">
         <div class="wr-carousel__track" id="wadi-carousel-track">
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-11.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt11" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-12.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt12" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-01.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt1" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-13.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt13" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-02.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt2" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-14.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt14" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-03.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt3" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-15.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt15" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-04.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt4" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-16.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt16" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/desert.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt5" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-17.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt17" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/panorama.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt6" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-18.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt18" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/tent.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt7" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-19.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt19" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/camp.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt8" loading="lazy"></figure>
+          <figure class="wr-carousel__item"><img src="/media/wadi-rum/gallery-20.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt20" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/cover.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt9" loading="lazy"></figure>
           <figure class="wr-carousel__item"><img src="/media/wadi-rum/night-bivouac.jpg" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt10" loading="lazy"></figure>
         </div>

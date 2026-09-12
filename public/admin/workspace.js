@@ -198,7 +198,7 @@
     },
   ];
 
-  var MEDICAL_SOURCES = ['mountain-voice-registration', 'ice-bath-health'];
+  var MEDICAL_SOURCES = ['mountain-voice-registration', 'ice-bath-health', 'wadi-rum-registration'];
   var MEDICAL_CATALOG = [
     {
       id: 'mountain-voice',
@@ -218,6 +218,15 @@
       dates: 'Required before the day retreat',
       location: 'Hofit',
       schedule: 'ongoing',
+    },
+    {
+      id: 'wadi-rum-health',
+      name: 'Wadi Rum · Health & Registration',
+      source: 'wadi-rum-registration',
+      image: '/media/wadi-rum/cover.jpg',
+      dates: '22–26 Oct 2027 · health & intake',
+      location: 'Wadi Rum, Jordan',
+      schedule: 'open',
     },
   ];
   var RETREAT_SOURCES = ['wadi-rum-registration', 'zanzibar-retreat-reserve', 'dahab-retreat-reserve'];
@@ -1705,7 +1714,7 @@
     var viewOnly = isViewOnly();
     var html = '<div class="admin-page-head"><div><h1>Medical forms</h1><p>' + (viewOnly
       ? 'View-only access — you can open medical forms, but not change or delete them.'
-      : 'Two intake forms only — Nawal\'s Care and Ice Bath Health.') + '</p></div></div>';
+      : 'Health intake forms — Nawal\'s Care, Ice Bath, and Wadi Rum registration.') + '</p></div></div>';
     html += '<div class="admin-retreat-cards is-medical">';
     MEDICAL_CATALOG.forEach(function (item) {
       var count = rows.filter(function (row) { return matchesCatalog(row, item); }).length;
