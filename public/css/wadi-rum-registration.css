@@ -281,6 +281,16 @@
   text-align: center;
 }
 
+[dir="rtl"] .wadi-reg {
+  font-family: "Scheherazade New", Georgia, serif;
+}
+
+[dir="rtl"] .wadi-reg h1,
+[dir="rtl"] .wadi-reg .section-title,
+[dir="rtl"] .wadi-reg .hero-badge {
+  font-family: Amiri, Georgia, serif;
+}
+
 [dir="rtl"] .wadi-reg .radio-item,
 [dir="rtl"] .wadi-reg .check-item {
   flex-direction: row-reverse;
@@ -288,6 +298,14 @@
 
 [dir="rtl"] .wadi-reg .actions {
   justify-content: flex-start;
+}
+
+[dir="rtl"] .wadi-reg label,
+[dir="rtl"] .wadi-reg .lead,
+[dir="rtl"] .wadi-reg .small-note,
+[dir="rtl"] .wadi-reg .section-sub,
+[dir="rtl"] .wadi-reg .contact {
+  line-height: 1.85;
 }
 
 @keyframes wrFadeIn {

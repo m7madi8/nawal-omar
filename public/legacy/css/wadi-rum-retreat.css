@@ -1,5 +1,23 @@
-/* Wadi Rum retreat — desert palette, self-contained layout */
+/* ============================================================
+   WADI RUM RETREAT — self-contained page styles
+   Desert palette, editorial serif headings, RTL-first.
 
+   Structure:
+   1. Page shell & tokens
+   2. Back link
+   3. Hero
+   4. Section rhythm
+   5. Host / co-host cards
+   6. Carousel (gallery)
+   7. Reels grid
+   8. Feature grid ("why different" / "who is this for")
+   9. Daily program
+   10. Booking / accommodation
+   11. Price row & CTA
+   12. RTL typography overrides
+   ============================================================ */
+
+/* ---------- 1. Page shell & tokens ---------- */
 .wadi-rum-page {
   --wr-sand: #f7f0e6;
   --wr-sand-deep: #ebe0d0;
@@ -11,17 +29,28 @@
   --wr-accent-soft: rgba(184, 107, 58, 0.12);
   --wr-line: rgba(184, 107, 58, 0.22);
   --wr-night: #2a1810;
+
   min-height: 100vh;
   background: var(--wr-sand);
   color: var(--wr-ink);
+  overflow-x: clip;
 }
 
 .wr-container {
   width: min(100%, 68rem);
   margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 1.5rem);
+  padding-inline: clamp(1.25rem, 5vw, 1.75rem);
+  min-width: 0;
 }
 
+/* Full-bleed hero under fixed site header */
+.ny-site .ny-inner > .wr-hero:first-child {
+  width: 100%;
+  max-width: none;
+  margin-top: calc(-1 * var(--header-h, 84px));
+}
+
+/* ---------- 2. Back link ---------- */
 .wr-back {
   display: inline-flex;
   align-items: center;
@@ -38,6 +67,11 @@
   color: var(--wr-ink);
 }
 
+.wr-back:focus-visible {
+  outline: 2px solid var(--wr-accent);
+  outline-offset: 2px;
+}
+
 .wr-back svg {
   width: 1rem;
   height: 1rem;
@@ -46,8 +80,8 @@
 
 .wr-back--hero {
   position: absolute;
-  top: clamp(0.85rem, 3vw, 1.35rem);
-  inset-inline-start: clamp(1rem, 4vw, 1.5rem);
+  top: calc(var(--header-h, 84px) + clamp(0.65rem, 2vw, 1rem));
+  inset-inline-start: max(clamp(1rem, 4vw, 1.5rem), env(safe-area-inset-left));
   z-index: 3;
   margin: 0;
   padding: 0.45rem 0.85rem;
@@ -63,14 +97,48 @@
   background: rgba(42, 24, 16, 0.52);
 }
 
+.wr-back--hero:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Hero ---------- */
+@keyframes wr-hero-ken {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes wr-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .wr-hero {
   position: relative;
   isolation: isolate;
-  min-height: clamp(26rem, 72vh, 40rem);
-  display: grid;
-  align-items: end;
-  overflow: hidden;
-  border-bottom: 1px solid var(--wr-line);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-x: clip;
+  overflow-y: visible;
+  border-bottom: 1px solid rgba(184, 107, 58, 0.18);
+}
+
+@media (min-width: 768px) {
+  .wr-hero {
+    min-height: 100dvh;
+  }
 }
 
 .wr-hero__media {
@@ -83,7 +151,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 42%;
+  object-position: center 38%;
+  transform-origin: center;
+  animation: wr-hero-ken 28s ease-in-out infinite alternate;
 }
 
 .wr-hero__scrim {
@@ -91,130 +161,451 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(42, 24, 16, 0.42) 0%, rgba(42, 24, 16, 0.08) 34%, rgba(42, 24, 16, 0.55) 68%, rgba(42, 24, 16, 0.92) 100%);
+    radial-gradient(ellipse 90% 70% at 50% 100%, rgba(42, 24, 16, 0.88), transparent 68%),
+    linear-gradient(
+      180deg,
+      rgba(42, 24, 16, 0.62) 0%,
+      rgba(42, 24, 16, 0.12) 36%,
+      rgba(42, 24, 16, 0.48) 72%,
+      rgba(42, 24, 16, 0.94) 100%
+    );
 }
 
 .wr-hero__inner {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: clamp(4.5rem, 14vw, 6rem) 0 clamp(2rem, 5vw, 3rem);
+  padding:
+    calc(var(--header-h, 84px) + clamp(2.75rem, 8vw, 4.5rem))
+    0
+    clamp(2.5rem, 6vw, 4.75rem);
 }
 
-.wr-hero__panel {
-  max-width: 36rem;
-  padding: clamp(1.15rem, 3vw, 1.55rem);
-  border: 1px solid rgba(255, 220, 180, 0.22);
-  border-radius: 1.15rem;
-  background: rgba(42, 24, 16, 0.38);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 18px 42px rgba(20, 12, 8, 0.28);
+.wr-hero__layout {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: end;
+  min-width: 0;
+  animation: wr-hero-rise 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.wr-hero__labels {
+@media (min-width: 900px) {
+  .wr-hero__layout {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    gap: clamp(2.5rem, 5vw, 4.5rem) clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .wr-hero__main {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .wr-hero__facts {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: end;
+  }
+
+  .wr-hero__actions {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0;
+  }
+}
+
+.wr-hero__main {
+  max-width: 42rem;
+  min-width: 0;
+  text-align: start;
+}
+
+.wr-hero__eyebrow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 0.85rem;
-}
-
-.wr-hero__badge {
-  display: inline-flex;
-  align-items: center;
-  margin: 0;
-  padding: 0.3rem 0.65rem;
-  border: 1px solid rgba(255, 200, 150, 0.5);
-  border-radius: 999px;
-  background: rgba(184, 107, 58, 0.35);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #fff5eb;
+  gap: 0.65rem;
+  margin: 0 0 1.1rem;
 }
 
 .wr-kicker {
   margin: 0;
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 220, 180, 0.95);
+  color: rgba(255, 220, 180, 0.96);
+  line-height: 1.4;
 }
 
-.wr-title {
+.wr-hero__dot {
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  background: rgba(255, 220, 180, 0.72);
+  flex-shrink: 0;
+}
+
+.wr-hero__year {
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.18em;
+  color: rgba(255, 248, 240, 0.62);
+}
+
+.wr-hero .wr-title {
   margin: 0;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.85rem, 4.8vw, 2.85rem);
+  font-size: clamp(2rem, 5.2vw, 3.25rem);
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   color: #fff9f3;
-  text-wrap: balance;
+  text-wrap: pretty;
+  text-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  max-width: none;
+}
+
+.wr-hero__leads {
+  margin-top: clamp(1.1rem, 2.5vw, 1.45rem);
+  padding-top: clamp(1rem, 2.5vw, 1.25rem);
+  border-top: 1px solid rgba(255, 220, 180, 0.24);
+  max-width: 36rem;
+}
+
+.wr-hero .wr-lead {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 248, 240, 0.94);
+}
+
+.wr-hero .wr-lead--sub {
+  margin-top: 0.65rem;
+  font-size: clamp(0.92rem, 1.8vw, 1rem);
+  line-height: 1.7;
+  color: rgba(255, 248, 240, 0.78);
+}
+
+.wr-hero__actions {
+  margin-top: clamp(1.35rem, 3vw, 1.75rem);
+}
+
+.wr-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  padding: 0.85rem 1.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 249, 243, 0.88);
+  background: rgba(255, 249, 243, 0.96);
+  color: var(--wr-night);
+  font-size: 0.92rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 14px 36px rgba(20, 12, 8, 0.28);
+  transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.wr-hero__cta:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  box-shadow: 0 18px 42px rgba(20, 12, 8, 0.34);
+}
+
+.wr-hero__cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.wr-hero__cta-arrow {
+  transition: transform 220ms ease;
+}
+
+.wr-hero__cta:hover .wr-hero__cta-arrow {
+  transform: translateX(3px);
+}
+
+[dir="rtl"] .wr-hero__cta:hover .wr-hero__cta-arrow {
+  transform: translateX(-3px);
+}
+
+.wr-hero__facts {
+  padding: clamp(0.75rem, 2vw, 1rem) 0;
+  text-align: start;
 }
 
 .wr-hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.wr-hero__chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 235, 210, 0.28);
-  background: rgba(255, 253, 249, 0.1);
-  font-size: 0.8rem;
+@media (min-width: 900px) {
+  .wr-hero__meta {
+    gap: 0;
+    min-width: 13.5rem;
+    padding-inline-start: clamp(1.5rem, 3vw, 2rem);
+    border-inline-start: 1px solid rgba(255, 220, 180, 0.28);
+  }
+}
+
+.wr-hero__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+@media (min-width: 900px) {
+  .wr-hero__fact + .wr-hero__fact {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 220, 180, 0.18);
+  }
+
+  .wr-hero__fact:first-child {
+    padding-top: 0;
+  }
+}
+
+.wr-hero__fact-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: rgba(255, 220, 180, 0.78);
+}
+
+.wr-hero__fact-value {
+  display: block;
+  font-size: clamp(0.88rem, 1.6vw, 0.98rem);
   font-weight: 600;
-  line-height: 1.3;
-  color: rgba(255, 248, 240, 0.92);
+  line-height: 1.45;
+  color: rgba(255, 248, 240, 0.96);
 }
 
-.wr-lead {
-  margin: 1.1rem 0 0;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 235, 210, 0.2);
-  max-width: 34ch;
-  font-size: clamp(0.98rem, 2vw, 1.08rem);
-  line-height: 1.75;
-  color: rgba(255, 248, 240, 0.92);
-}
-
-.wr-lead--sub {
-  margin-top: 0.55rem;
-  padding-top: 0;
-  border-top: 0;
-  max-width: 36ch;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: rgba(255, 248, 240, 0.78);
-}
-
-@media (min-width: 768px) {
-  .wr-hero__panel {
-    max-width: 42rem;
-  }
-
-  .wr-title {
-    max-width: 16ch;
-  }
-}
-
-[dir="rtl"] .wr-hero__panel {
+[dir="rtl"] .wr-hero__main,
+[dir="rtl"] .wr-hero__facts {
   text-align: right;
 }
 
-[dir="rtl"] .wr-lead,
-[dir="rtl"] .wr-lead--sub {
-  font-family: "Scheherazade New", Georgia, serif;
-  line-height: 1.85;
+[dir="rtl"] .wr-hero .wr-kicker,
+[dir="rtl"] .wr-hero .wr-hero__fact-label {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.78rem;
 }
 
+[dir="rtl"] .wr-hero .wr-hero__year {
+  letter-spacing: 0.06em;
+}
+
+[dir="rtl"] .wr-hero .wr-title {
+  font-family: Amiri, Georgia, serif;
+  font-size: clamp(2.15rem, 5.5vw, 3.45rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .wr-hero .wr-lead,
+[dir="rtl"] .wr-hero .wr-lead--sub {
+  font-family: "Scheherazade New", Georgia, serif;
+  line-height: 1.9;
+}
+
+[dir="rtl"] .wr-hero .wr-hero__fact-value {
+  letter-spacing: 0;
+}
+
+.wr-hero h1.split-line,
+.wr-hero h1 .split-char,
+.wr-hero h1 .split-word {
+  display: block;
+  overflow: visible;
+}
+
+/* ---------- Hero — mobile & tablet ---------- */
+@media (max-width: 899px) {
+  .wr-hero {
+    min-height: max(34rem, 78svh);
+    justify-content: flex-end;
+  }
+
+  .wr-hero__media img {
+    animation: none;
+    transform: scale(1.02);
+  }
+
+  .wr-hero__inner {
+    padding-top: calc(var(--header-h, 72px) + 2.85rem);
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    padding-inline:
+      max(1.35rem, env(safe-area-inset-left))
+      max(1.35rem, env(safe-area-inset-right));
+  }
+
+  .wr-hero__layout {
+    gap: 1.35rem;
+    align-items: stretch;
+  }
+
+  .wr-hero__main,
+  .wr-hero__facts,
+  .wr-hero__leads {
+    max-width: none;
+    width: 100%;
+  }
+
+  .wr-hero .wr-title {
+    font-size: clamp(1.75rem, 8.2vw, 2.35rem);
+    line-height: 1.18;
+  }
+
+  [dir="rtl"] .wr-hero .wr-title {
+    font-size: clamp(1.85rem, 8.8vw, 2.55rem);
+    line-height: 1.22;
+  }
+
+  .wr-kicker {
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+  }
+
+  [dir="rtl"] .wr-hero .wr-kicker {
+    font-size: 0.74rem;
+  }
+
+  .wr-hero .wr-lead {
+    font-size: 0.98rem;
+    line-height: 1.72;
+  }
+
+  .wr-hero .wr-lead--sub {
+    font-size: 0.9rem;
+  }
+
+  .wr-hero__cta {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 1rem;
+    font-size: 0.88rem;
+    text-align: center;
+  }
+
+  .wr-hero__facts {
+    width: 100%;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .wr-hero__actions {
+    width: 100%;
+    margin-top: 0.15rem;
+  }
+
+  .wr-hero__meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+    padding: 1rem 1.15rem;
+    border: 1px solid rgba(255, 220, 180, 0.24);
+    border-radius: 1rem;
+    background: rgba(42, 24, 16, 0.42);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(255, 220, 180, 0.08);
+  }
+
+  .wr-hero__fact {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.22rem;
+    padding-block: 0.7rem;
+  }
+
+  .wr-hero__fact:first-child {
+    padding-top: 0;
+  }
+
+  .wr-hero__fact:last-child {
+    padding-bottom: 0;
+  }
+
+  .wr-hero__fact + .wr-hero__fact {
+    border-top: 1px solid rgba(255, 220, 180, 0.16);
+  }
+
+  .wr-hero__fact-label {
+    font-size: 0.72rem;
+    color: rgba(255, 220, 180, 0.82);
+  }
+
+  .wr-hero__fact-value {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: inherit;
+  }
+
+  [dir="rtl"] .wr-hero__fact-value[dir="ltr"] {
+    align-self: flex-end;
+    text-align: left;
+  }
+
+  .wr-back--hero {
+    top: calc(var(--header-h, 72px) + max(0.5rem, env(safe-area-inset-top)));
+    inset-inline-start: max(1.15rem, env(safe-area-inset-left));
+    font-size: 0.82rem;
+  }
+
+  .wr-section {
+    padding-block: clamp(2rem, 6vw, 2.75rem);
+  }
+
+  .wr-booking {
+    padding: 1rem;
+  }
+
+  .wr-cta-panel {
+    padding: 1.15rem;
+    border-radius: 1.15rem;
+  }
+
+  .wr-cta-price-card__line {
+    font-size: clamp(1.15rem, 5vw, 1.45rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .wr-hero__inner {
+    padding-inline:
+      max(1.15rem, env(safe-area-inset-left))
+      max(1.15rem, env(safe-area-inset-right));
+  }
+
+  .wr-hero__meta {
+    padding: 0.9rem 1rem;
+  }
+
+  .wr-hero__eyebrow {
+    gap: 0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wr-hero__media img,
+  .wr-hero__layout {
+    animation: none;
+  }
+}
+
+/* ---------- 4. Section rhythm ---------- */
 .wr-section {
   padding-block: clamp(2.5rem, 5vw, 4rem);
 }
@@ -243,6 +634,13 @@
   padding: clamp(1.1rem, 3vw, 1.5rem);
 }
 
+/* Vertical rhythm between stacked cards inside the same section
+   (e.g. Nawal's host card followed by a co-host card) */
+.wr-card + .wr-card {
+  margin-top: 1.5rem;
+}
+
+/* ---------- 5. Host / co-host cards ---------- */
 .wr-host {
   display: grid;
   gap: 1.25rem;
@@ -292,6 +690,44 @@
   color: var(--wr-muted);
 }
 
+.wr-host__text + .wr-host__text {
+  margin-top: 0.75rem;
+}
+
+/* Co-host social link (e.g. Instagram) */
+.wr-host__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--wr-line);
+  border-radius: 999px;
+  background: var(--wr-accent-soft);
+  color: var(--wr-accent-dark);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.wr-host__social:hover {
+  background: var(--wr-accent);
+  color: #fff9f3;
+}
+
+.wr-host__social:focus-visible {
+  outline: 2px solid var(--wr-accent-dark);
+  outline-offset: 2px;
+}
+
+.wr-host__social svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ---------- 6. Carousel (gallery) ---------- */
 .wr-carousel {
   position: relative;
 }
@@ -347,6 +783,12 @@
   color: var(--wr-ink);
 }
 
+.wr-carousel__btn:focus-visible {
+  outline: 2px solid var(--wr-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- 7. Reels grid ---------- */
 .wr-reels-hint {
   margin: 0.35rem 0 1rem;
   font-size: 0.88rem;
@@ -396,10 +838,16 @@
   background: rgba(42, 24, 16, 0.42);
 }
 
+.wr-reel-playbtn:focus-visible {
+  outline: 2px solid #fff9f3;
+  outline-offset: -3px;
+}
+
 .wr-reel-playbtn[hidden] {
   display: none;
 }
 
+/* ---------- 8. Feature grid ("why different" / "who is this for") ---------- */
 .wr-grid-2 {
   display: grid;
   gap: 0.85rem;
@@ -432,6 +880,7 @@
   color: var(--wr-muted);
 }
 
+/* ---------- 9. Daily program ---------- */
 .wr-program {
   display: grid;
   gap: 0.85rem;
@@ -483,6 +932,7 @@
   color: var(--wr-muted);
 }
 
+/* ---------- 10. Booking / accommodation ---------- */
 .wr-booking {
   border: 1px solid var(--wr-line);
   border-radius: 1.25rem;
@@ -566,19 +1016,147 @@
   color: var(--wr-accent-dark);
 }
 
-.wr-price-row {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1.35rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--wr-line);
+.wr-booking__grid--stays {
+  margin-bottom: 0.85rem;
 }
 
-@media (min-width: 640px) {
-  .wr-price-row {
-    grid-template-columns: 1fr auto;
-    align-items: center;
+.wr-stay-card + .wr-stay-card {
+  margin-top: 0;
+}
+
+.wr-stay-rate {
+  margin: 0 0 0.45rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--wr-accent-dark);
+}
+
+.wr-stay-intro {
+  margin: 0 0 0.65rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--wr-muted);
+}
+
+.wr-stay-includes-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wr-ink);
+}
+
+.wr-includes-block,
+.wr-payment-block {
+  margin-top: 0.85rem;
+}
+
+.wr-includes-list li::before {
+  content: "✓";
+}
+
+.wr-before-lines .wr-host__text,
+.wr-final-lines .wr-host__text {
+  margin: 0.2rem 0;
+}
+
+/* ---------- 11. Final CTA panel ---------- */
+.wr-section--cta {
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.wr-cta-panel {
+  border: 1px solid var(--wr-line);
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(61, 44, 38, 0.08);
+  padding: clamp(1.35rem, 3.5vw, 2rem);
+  text-align: center;
+}
+
+.wr-cta-panel__head {
+  margin-bottom: 1.25rem;
+}
+
+.wr-cta-panel__dates {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.65rem, 4.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--wr-ink);
+}
+
+.wr-cta-panel__place {
+  margin: 0.4rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--wr-accent-dark);
+}
+
+.wr-cta-panel__rooms {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 560px) {
+  .wr-cta-panel__rooms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.wr-cta-price-card {
+  border: 1px solid var(--wr-line);
+  border-radius: 1rem;
+  background: #ffffff;
+  padding: 0.95rem 1rem;
+}
+
+.wr-cta-price-card--premium {
+  border-color: rgba(196, 122, 69, 0.35);
+  background: #ffffff;
+}
+
+.wr-cta-price-card__line {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.35rem, 3.8vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--wr-ink);
+}
+
+.wr-cta-price-card--premium .wr-cta-price-card__line {
+  color: var(--wr-accent-dark);
+}
+
+.wr-cta-price-card__note {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--wr-muted);
+}
+
+.wr-cta-panel__closing {
+  margin: 0 0 1.15rem;
+  max-width: 36rem;
+  margin-inline: auto;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--wr-muted);
+}
+
+.wr-cta-panel__actions {
+  max-width: 28rem;
+  margin-inline: auto;
+}
+
+.wr-cta-panel__btn {
+  min-height: 3.25rem;
+  font-size: 1rem;
+  padding: 0.85rem 1.35rem;
 }
 
 .wr-price-label {
@@ -616,16 +1194,37 @@
   font-weight: 700;
   text-decoration: none;
   box-shadow: 0 10px 24px rgba(143, 82, 48, 0.28);
+  transition: filter 160ms ease;
 }
 
 .wadi-rum-page .dahab-includes-cta.ny-book-btn-primary:hover {
   filter: brightness(1.04);
 }
 
-.wadi-rum-page .ny-book-wa-link {
-  color: var(--wr-accent-dark);
+.wadi-rum-page .dahab-includes-cta.ny-book-btn-primary:focus-visible {
+  outline: 2px solid var(--wr-ink);
+  outline-offset: 2px;
 }
 
+.wadi-rum-page .ny-book-wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--wr-accent-dark);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.wadi-rum-page .ny-book-wa-link:hover {
+  color: var(--wr-ink);
+}
+
+.wadi-rum-page .ny-book-wa-link:focus-visible {
+  outline: 2px solid var(--wr-accent-dark);
+  outline-offset: 2px;
+}
+
+/* ---------- 12. RTL typography overrides ---------- */
 [dir="rtl"] .wr-title,
 [dir="rtl"] .wr-h2,
 [dir="rtl"] .wr-host__name,
@@ -633,7 +1232,9 @@
 [dir="rtl"] .wr-day h3,
 [dir="rtl"] .wr-booking__title,
 [dir="rtl"] .wr-booking__block h4,
-[dir="rtl"] .wr-price-value {
+[dir="rtl"] .wr-price-value,
+[dir="rtl"] .wr-cta-panel__dates,
+[dir="rtl"] .wr-cta-price-card__line {
   font-family: Amiri, Georgia, serif;
 }
 
@@ -641,7 +1242,25 @@
 [dir="rtl"] .wr-lead,
 [dir="rtl"] .wr-feature p,
 [dir="rtl"] .wr-day li,
-[dir="rtl"] .wr-booking__list li {
+[dir="rtl"] .wr-booking__list li,
+[dir="rtl"] .wr-cta-panel__closing {
   font-family: "Scheherazade New", Georgia, serif;
   line-height: 1.8;
+}
+
+/* ---------- Reduced motion (a11y safety net) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .wr-carousel__track {
+    scroll-behavior: auto;
+  }
+
+  .wr-back,
+  .wr-back--hero,
+  .wr-carousel__btn,
+  .wr-reel-playbtn,
+  .wr-host__social,
+  .wadi-rum-page .dahab-includes-cta.ny-book-btn-primary,
+  .wadi-rum-page .ny-book-wa-link {
+    transition: none;
+  }
 }

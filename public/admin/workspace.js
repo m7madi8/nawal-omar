@@ -126,10 +126,10 @@
       name: 'Initial Registration | Wadi Rum Desert Retreat',
       source: 'wadi-rum-registration',
       image: '/media/wadi-rum/cover.jpg',
-      dates: '17–21 Jun 2026',
+      dates: '22–26 Oct 2027',
       location: 'Jordan',
-      startDate: '2026-06-17',
-      endDate: '2026-06-21',
+      startDate: '2027-10-22',
+      endDate: '2027-10-26',
     },
     {
       id: 'zanzibar',

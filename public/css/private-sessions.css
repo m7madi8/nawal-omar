@@ -1,0 +1,497 @@
+/* ============================================================
+   PRIVATE SESSIONS — page + homepage teaser
+   Reuses existing tokens/classes: .section, .container, .btn,
+   .btn--primary, .btn--ghost, .world-cta, .eyebrow, .display-*,
+   .body-l, .editorial-image, .italic, .text-muted, .reveal,
+   .statement, .final-cta — only new ps-/pv- prefixed classes below.
+
+   Changelog vs previous version:
+   - Added .eyebrow--dark (used on the hero over a dark image,
+     was referenced in the HTML but never defined anywhere).
+   - .ps-form__session-option now display:inline-flex so the
+     absolutely-positioned radio input always aligns exactly
+     with its visible <span>, including on wrap.
+   - Added :disabled / [aria-busy] states for the submit button
+     so a "submitting…" state is visually obvious.
+   - Added custom appearance for <select> elements to match the
+     minimal, borderless editorial look instead of the browser
+     default arrow/box.
+   - Added invalid/error field state (border color) tied to
+     aria-invalid, to pair with the existing .ps-form__error text.
+   - Added a disabled-radio state so a fully booked session type
+     can be visually greyed out from the markup alone.
+   - Minor a11y polish: visible focus ring on native selects,
+     reduced-motion guard scoped locally as a safety net.
+   ============================================================ */
+
+/* ---------- Eyebrow variant (dark hero background) ---------- */
+.eyebrow--dark {
+  color: rgba(250, 248, 244, 0.86);
+}
+
+/* ---------- Hero ---------- */
+.ps-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: #faf8f4;
+}
+
+.ps-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.ps-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ps-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 16, 13, 0.15) 0%,
+    rgba(20, 16, 13, 0.55) 78%,
+    rgba(20, 16, 13, 0.72) 100%
+  );
+}
+
+.ps-hero__inner {
+  position: relative;
+  z-index: 1;
+  padding-block-end: clamp(3rem, 6vw, 5.5rem);
+  max-width: 46rem;
+}
+
+.ps-hero__title {
+  margin-block: 0.75rem 1rem;
+}
+
+.ps-hero__title-line {
+  display: block;
+}
+
+.ps-hero__title-line--accent .italic {
+  color: var(--ny-scroll-fill, var(--accent, #6f523e));
+}
+
+.ps-hero__lead {
+  color: rgba(250, 248, 244, 0.86);
+  max-width: 34rem;
+}
+
+.ps-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.btn--ghost-dark {
+  border-color: rgba(250, 248, 244, 0.5);
+  color: #faf8f4;
+}
+
+.btn--ghost-dark:hover {
+  border-color: #faf8f4;
+}
+
+.btn--ghost-dark:focus-visible {
+  outline: 2px solid #faf8f4;
+  outline-offset: 2px;
+}
+
+/* ---------- Intro ---------- */
+.ps-intro {
+  max-width: 44rem;
+}
+
+.ps-intro__title {
+  margin-block: 0.75rem 1rem;
+}
+
+.ps-intro__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+
+/* ---------- Experiences ---------- */
+.ps-experiences__head {
+  max-width: 34rem;
+  margin-block-end: clamp(2rem, 5vw, 3.5rem);
+}
+
+.ps-experiences__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (max-width: 980px) {
+  .ps-experiences__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ps-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.ps-card__media {
+  aspect-ratio: 4 / 5;
+  margin-block-end: 1.25rem;
+}
+
+.ps-card__title {
+  margin-block: 0.35rem 0.6rem;
+}
+
+.ps-card__desc {
+  margin-block-end: 1rem;
+}
+
+.ps-card__details {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  opacity: 0.75;
+}
+
+.ps-card__cta {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: start;
+}
+
+.ps-card__cta:focus-visible {
+  outline: 2px solid var(--accent, #6f523e);
+  outline-offset: 4px;
+}
+
+/* ---------- Why private ---------- */
+.ps-why__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+@media (max-width: 980px) {
+  .ps-why__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ps-why__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.ps-why__list li {
+  border-block-start: 1px solid var(--border, #e8e2dd);
+  padding-block-start: 1.25rem;
+}
+
+.ps-why__num {
+  display: block;
+  font-family: 'Playfair Display', 'Amiri', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  opacity: 0.55;
+  margin-block-end: 0.5rem;
+}
+
+/* ---------- Request form ---------- */
+.ps-request__inner {
+  max-width: 42rem;
+}
+
+.ps-request__head {
+  margin-block-end: clamp(2rem, 4vw, 3rem);
+}
+
+.ps-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ps-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .ps-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ps-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ps-form legend {
+  padding: 0;
+  margin-block-end: 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.ps-form__field label,
+.ps-form__static-label {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+  margin-block-end: 0.5rem;
+}
+
+.ps-form__field input[type='text'],
+.ps-form__field input[type='tel'],
+.ps-form__field input[type='email'],
+.ps-form__field input[type='date'],
+.ps-form__field input[type='time'],
+.ps-form__field select,
+.ps-form__field textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border, #e8e2dd);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  border-radius: 0;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.ps-form__field input:focus,
+.ps-form__field select:focus,
+.ps-form__field textarea:focus {
+  outline: none;
+  border-color: var(--accent, #6f523e);
+}
+
+/* Visible focus fallback for keyboard users on browsers/themes
+   where :focus alone is too subtle against a transparent field */
+.ps-form__field input:focus-visible,
+.ps-form__field select:focus-visible,
+.ps-form__field textarea:focus-visible {
+  outline: 2px solid var(--accent, #6f523e);
+  outline-offset: 2px;
+}
+
+.ps-form__field textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+}
+
+/* Custom select appearance — replaces the native box/arrow so
+   selects match the flat, borderless editorial inputs above */
+.ps-form__field select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.35rem) center,
+    calc(100% - 1rem) center;
+  background-size: 0.4rem 0.4rem;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.ps-form__field select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error state — pairs with the existing .ps-form__error text and
+   is driven by aria-invalid="true" set on the field by JS */
+.ps-form__field input[aria-invalid='true'],
+.ps-form__field select[aria-invalid='true'],
+.ps-form__field textarea[aria-invalid='true'] {
+  border-color: #a3402e;
+}
+
+.ps-form__field--static .ps-form__static-value {
+  display: block;
+  padding: 0.85rem 1rem;
+  border: 1px dashed var(--border, #e8e2dd);
+  font-size: 0.95rem;
+}
+
+.ps-form__sessions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ps-form__session-option {
+  position: relative;
+  display: inline-flex;
+}
+
+.ps-form__session-option input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.ps-form__session-option input:disabled {
+  cursor: not-allowed;
+}
+
+.ps-form__session-option span {
+  display: inline-block;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid var(--border, #e8e2dd);
+  font-size: 0.9rem;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.ps-form__session-option input:checked + span {
+  border-color: var(--accent, #6f523e);
+  background: rgba(111, 82, 62, 0.08);
+}
+
+.ps-form__session-option input:focus-visible + span {
+  outline: 2px solid var(--accent, #6f523e);
+  outline-offset: 2px;
+}
+
+.ps-form__session-option input:disabled + span {
+  opacity: 0.45;
+  border-style: dashed;
+}
+
+.ps-form__error {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: #a3402e;
+}
+
+.ps-form__submit {
+  justify-self: start;
+  position: relative;
+}
+
+.ps-form__submit:disabled,
+.ps-form__submit[aria-busy='true'] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ps-form__status {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.ps-form__status[data-status='error'] {
+  color: #a3402e;
+  opacity: 1;
+}
+
+.ps-form__success {
+  max-width: 30rem;
+  margin-top: 1.5rem;
+}
+
+.ps-form__success h3 {
+  margin-block-end: 0.5rem;
+}
+
+/* ---------- Homepage teaser section ---------- */
+.pv-teaser__head {
+  max-width: 34rem;
+  margin-block-end: clamp(2rem, 4vw, 3rem);
+}
+
+.pv-teaser__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  margin-block-end: clamp(2rem, 4vw, 3rem);
+}
+
+@media (max-width: 980px) {
+  .pv-teaser__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pv-teaser__item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pv-teaser__item:focus-visible {
+  outline: 2px solid var(--accent, #6f523e);
+  outline-offset: 4px;
+}
+
+.pv-teaser__media {
+  aspect-ratio: 3 / 4;
+  margin-block-end: 0.85rem;
+}
+
+.pv-teaser__name {
+  display: block;
+  margin-block-end: 0.25rem;
+}
+
+.pv-teaser__desc {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.pv-teaser__foot {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- Reduced motion (local safety net; primary handling
+   is global via .reveal / GSAP setup) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ps-form__field input,
+  .ps-form__field select,
+  .ps-form__field textarea,
+  .ps-form__session-option span,
+  .btn--ghost-dark,
+  .ps-card__cta,
+  .pv-teaser__item {
+    transition: none;
+  }
+}

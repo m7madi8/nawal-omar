@@ -97,6 +97,7 @@ export default function SplitHeadings() {
 
       headings.forEach((el) => {
         if (!el.textContent.trim()) return;
+        if (el.closest('.wr-hero, .rp-hero, .haifa-hero, .event-sh-hero, .baqa-hero, .ny-world-hero, .hero')) return;
         el.classList.add('is-split');
         const split = new SplitText(el, {
           type: isAr ? 'lines,words' : 'lines,chars',
