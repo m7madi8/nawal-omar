@@ -2408,6 +2408,7 @@ body.nav-open {
 
 .pv__title {
   margin-top: 0.1em;
+  line-height: 1.1;
 }
 
 .pv__lead {
@@ -2520,14 +2521,17 @@ body.nav-open {
     box-shadow: none;
   }
 
-  .worlds-stage .display-xl {
+  .worlds-stage .display-xl,
+  .section--worlds > .world-block.pv .display-xl {
     font-size: clamp(1.7rem, 2.2vw, 2.55rem);
     line-height: 1.05;
     color: var(--white);
   }
 
   .worlds-stage .world-cta,
-  .worlds-stage .rt__cta {
+  .worlds-stage .rt__cta,
+  .section--worlds > .world-block.pv .world-cta,
+  .section--worlds > .world-block.pv .pv__cta {
     min-height: 36px;
     padding: 0.42rem 0.95rem;
     margin-top: 0.55rem;
@@ -2543,14 +2547,17 @@ body.nav-open {
   }
 
   .worlds-stage .world-cta:hover,
-  .worlds-stage .rt__cta:hover {
+  .worlds-stage .rt__cta:hover,
+  .section--worlds > .world-block.pv .world-cta:hover,
+  .section--worlds > .world-block.pv .pv__cta:hover {
     background: rgba(255, 255, 255, 0.14);
     border-color: #fff;
     color: #fff;
     opacity: 1 !important;
   }
 
-  .worlds-stage [class$="__num"] {
+  .worlds-stage [class$="__num"],
+  .section--worlds > .world-block.pv [class$="__num"] {
     position: absolute;
     top: 0.85rem;
     right: 0.95rem;
@@ -2568,7 +2575,8 @@ body.nav-open {
   /* Shared overlay copy: compact band so the photo stays visible. */
   .worlds-stage .xp__col,
   .worlds-stage .yg__text,
-  .worlds-stage .hl__text {
+  .worlds-stage .hl__text,
+  .section--worlds > .world-block.pv .pv__text {
     grid-area: 1 / 1;
     z-index: 2;
     align-self: end;
@@ -2582,7 +2590,8 @@ body.nav-open {
 
   .worlds-stage .xp__col,
   .worlds-stage .yg__text,
-  .worlds-stage .hl__text {
+  .worlds-stage .hl__text,
+  .section--worlds > .world-block.pv .pv__text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -2594,7 +2603,9 @@ body.nav-open {
   .worlds-stage .yg__lead,
   .worlds-stage .rt .eyebrow,
   .worlds-stage .hl .eyebrow,
-  .worlds-stage .hl__lead {
+  .worlds-stage .hl__lead,
+  .section--worlds > .world-block.pv .eyebrow,
+  .section--worlds > .world-block.pv .pv__lead {
     display: none;
   }
 
@@ -2790,6 +2801,66 @@ body.nav-open {
     );
   }
 
+  /* 05 Private Sessions — full-width doorway under the mosaic */
+  .section--worlds {
+    --pv-band-h: calc((min(78vh, 820px) - 0.72rem) / 2);
+  }
+
+  .section--worlds > .world-block.pv {
+    --world-r: 22px;
+    --world-scrim: linear-gradient(
+      180deg,
+      rgba(37, 34, 31, 0) 42%,
+      rgba(37, 34, 31, 0.28) 68%,
+      rgba(37, 34, 31, 0.72) 100%
+    );
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    margin-top: 0.72rem;
+    height: var(--pv-band-h);
+    min-height: var(--pv-band-h);
+    column-gap: 0;
+    align-items: stretch;
+    border-radius: var(--world-r);
+    overflow: hidden;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .section--worlds > .world-block.pv .pv__media {
+    grid-area: 1 / 1;
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    aspect-ratio: auto;
+    margin-inline: 0;
+    border-radius: 0;
+  }
+
+  .section--worlds > .world-block.pv .pv__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+  }
+
+  .section--worlds > .world-block.pv .pv__title {
+    max-width: 14ch;
+  }
+
+  .section--worlds > .world-block.pv .pv__cta {
+    margin-top: 0.55rem;
+    align-self: flex-start;
+  }
+
   .worlds-stage video::-webkit-media-controls,
   .worlds-stage audio::-webkit-media-controls {
     display: none !important;
@@ -2813,12 +2884,20 @@ body.nav-open {
     height: min(88vh, 980px);
     min-height: 640px;
   }
+
+  .section--worlds {
+    --pv-band-h: calc((min(88vh, 980px) - 0.72rem) / 2);
+  }
 }
 
 @media (min-width: 1536px) {
   .worlds-stage {
     height: min(92vh, 1080px);
     min-height: 720px;
+  }
+
+  .section--worlds {
+    --pv-band-h: calc((min(92vh, 1080px) - 0.72rem) / 2);
   }
 }
 
@@ -3564,7 +3643,7 @@ body.nav-open {
     grid-template-rows: auto auto;
     row-gap: 1.25rem;
     max-width: min(100%, 480px);
-    margin-top: clamp(2rem, 5vw, 3rem);
+    margin-inline: auto;
   }
 
   .pv__text {
@@ -3581,11 +3660,24 @@ body.nav-open {
     max-width: 100%;
     margin-inline: 0;
     aspect-ratio: 4 / 5;
+    border-radius: var(--world-r) var(--world-r) 24px var(--world-r);
+    box-shadow: 0 20px 60px rgba(37, 34, 31, 0.06);
   }
 
-  .pv__title,
-  .pv__lead {
+  .pv__num {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .pv__title {
+    color: var(--text-primary);
     max-width: none;
+  }
+
+  .pv__lead {
+    color: var(--text-muted);
+    max-width: none;
+    margin-top: 0.6rem;
   }
 
   .pv__cta,
@@ -3593,7 +3685,18 @@ body.nav-open {
     display: inline-flex;
     width: 100%;
     max-width: 100%;
+    justify-content: center;
     margin-top: 1.25rem;
+    border-color: rgba(139, 107, 82, 0.38);
+    color: var(--text-primary);
+    background: #fff;
+  }
+
+  .pv__cta:hover,
+  .world-block.pv .world-cta:hover {
+    border-color: rgba(139, 107, 82, 0.6);
+    background: rgba(139, 107, 82, 0.1);
+    color: var(--text-primary);
   }
 
 
@@ -4119,6 +4222,10 @@ body.nav-open {
   .pv__title,
   .pv__lead {
     max-width: none;
+  }
+
+  .pv__lead {
+    font-size: 0.98rem;
   }
 
   .yg {
@@ -4770,6 +4877,15 @@ html[dir="rtl"] .sp__ghost-num {
 
   html[dir="rtl"] .worlds-stage .rt {
     border-radius: var(--world-r) var(--world-r) var(--world-r) 16px;
+  }
+
+  html[dir="rtl"] .section--worlds > .world-block.pv .pv__num {
+    right: auto;
+    left: 0.95rem;
+  }
+
+  html[dir="rtl"] .section--worlds > .world-block.pv .pv__media {
+    border-radius: 0;
   }
 }
 
