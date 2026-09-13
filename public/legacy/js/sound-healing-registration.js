@@ -68,10 +68,10 @@
 
       if (submitBtn) submitBtn.disabled = true;
       try {
-        if (!window.nawalCommerceRegistration) {
-          throw new Error("Commerce registration unavailable");
+        if (!window.nawalRetreatRequest) {
+          throw new Error("Registration unavailable");
         }
-        await window.nawalCommerceRegistration.submitEventRegistration({
+        await window.nawalRetreatRequest.submitEventRegistration({
           eventId: EVENT_ID,
           fullName: fullName,
           phone: phone,

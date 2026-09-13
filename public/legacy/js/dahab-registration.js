@@ -2,10 +2,6 @@
  * Dahab retreat booking → Supabase → admin dashboard
  */
 (function () {
-  var SUPABASE_URL = "https://xzxyskufrqansbhsbdkt.supabase.co";
-  var SUPABASE_ANON_KEY = "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph";
-  var SUPABASE_TABLE = "retreat_requests";
-
   function t(key) {
     var lang = (window.nawalI18n && window.nawalI18n.getLang && window.nawalI18n.getLang()) || "ar";
     if (window.nawalI18n && window.nawalI18n.t) return window.nawalI18n.t(lang, key);
@@ -35,39 +31,20 @@
     }
 
     async function submitBooking(fullName, phone) {
-      var now = new Date();
-      var payload = {
-        id: "req-dahab-" + now.getTime(),
-        source: "dahab-retreat-reserve",
-        retreatType: "Dahab Retreat 2026",
-        submittedAt: now.toISOString(),
-        fullName: fullName,
-        phone: phone,
-        age: "",
-        city: "",
-        reason: "Dahab retreat booking request",
-        expectation: "",
-        yogaExperience: "",
-        healthStatus: "",
-        healthDetails: "",
-        activities: [],
-        freeNote: "Booking from retreats/dahab",
-        status: "pending",
-        createdAt: now.toISOString()
-      };
-
-      var res = await fetch(SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: "Bearer " + SUPABASE_ANON_KEY,
-          Prefer: "return=minimal"
-        },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) throw new Error("Dahab booking submit failed");
+      if (!window.nawalRetreatRequest) {
+        throw new Error("Registration unavailable");
+      }
+      return window.nawalRetreatRequest.submit(
+        window.nawalRetreatRequest.buildPayload({
+          idPrefix: "req-dahab",
+          source: "dahab-retreat-reserve",
+          retreatType: "Dahab Retreat 2026",
+          fullName: fullName,
+          phone: phone,
+          reason: "Dahab retreat booking request",
+          freeNote: "Booking from retreats/dahab"
+        })
+      );
     }
 
     scrollTriggers.forEach(function (el) {
@@ -105,19 +82,22 @@
       var fullName = String((form.fullName && form.fullName.value) || "").trim();
       var phone = String((form.phone && form.phone.value) || "").trim();
       if (!fullName || !phone) return;
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
       try {
         await submitBooking(fullName, phone);
         form.reset();
         closeModal();
         if (successBox) {
           successBox.hidden = false;
-          window.setTimeout(function () {
-            successBox.hidden = true;
-          }, 4500);
+          successBox.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       } catch (_err) {
         console.error(_err);
-        alert(t("retreat_form_error"));
+        alert(t("retreat_form_error") || "Sorry, registration failed. Please try again.");
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
   }

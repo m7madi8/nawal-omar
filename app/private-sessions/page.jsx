@@ -35,7 +35,7 @@ export default function PrivateSessionsPage() {
       dir="rtl"
       bodyClassName=""
       styles={['/css/private-sessions.css']}
-      scripts={[]}
+      scripts={[{ src: '/legacy/js/retreat-request-submit.js', attrs: '  ' }]}
       inlineScripts={[PS_INLINE_SCRIPT]}
       currentNav="private-sessions"
       html={`<main id="top" class="ps-page">
