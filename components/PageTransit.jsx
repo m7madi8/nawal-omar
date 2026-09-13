@@ -18,6 +18,7 @@ function isModifiedClick(event) {
 function closeMobileNav() {
   const mobileNav = document.getElementById('mobileNav');
   if (!mobileNav?.classList.contains('is-open')) return;
+  mobileNav.classList.add('is-closing');
   mobileNav.classList.remove('is-open');
   mobileNav.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('nav-open');

@@ -7,6 +7,7 @@ export const SITE = {
   home: "/",
   experiences: "/experiences",
   yoga: "/yoga",
+  privateSessions: "/private-sessions",
   retreats: "/retreats",
   wellbeing: "/health-forms",
   shop: "/",
@@ -18,6 +19,7 @@ export const SITE = {
 export const PRIMARY_NAV = [
   { href: SITE.experiences, label: "التجارب", external: true },
   { href: SITE.yoga, label: "اليوغا", external: true },
+  { href: SITE.privateSessions, label: "جلسات خاصة", external: true },
   { href: SITE.retreats, label: "الرحلات", external: true },
   { href: SITE.wellbeing, label: "العناية", external: true },
   { href: SITE.shop, label: "المتجر", current: true },

@@ -50,20 +50,6 @@ const html = `
             <span class="ny-door__cta" data-en="Open form" data-ar="افتحي الاستمارة">Open form</span>
           </div>
         </a>
-
-        <a href="/register/wadi-rum" class="ny-door reveal reveal-delay-2">
-          <div class="ny-door__media" aria-hidden="true">
-            <img src="/media/wadi-rum/cover.jpg" alt="" width="1600" height="1200" loading="lazy" decoding="async">
-          </div>
-          <div class="ny-door__scrim" aria-hidden="true"></div>
-          <span class="ny-door__num" aria-hidden="true">03</span>
-          <div class="ny-door__copy">
-            <span class="eyebrow" data-en="Wadi Rum Retreat" data-ar="ريتريت وادي رم">Wadi Rum Retreat</span>
-            <h2 class="ny-door__title" data-en="Health &amp; Registration" data-ar="الاستمارة الصحية والتسجيل">Health &amp; Registration</h2>
-            <p class="ny-door__text" data-en="Initial registration and health intake for the Wadi Rum desert retreat." data-ar="التسجيل الأوّلي والاستمارة الصحية لريتريت وادي رم الصحراوي.">Initial registration and health intake for the Wadi Rum desert retreat.</p>
-            <span class="ny-door__cta" data-en="Open form" data-ar="افتحي الاستمارة">Open form</span>
-          </div>
-        </a>
       </div>
     </div>
   </section>

@@ -288,6 +288,12 @@ export default function Page() {
       <p class="wr-host__text" data-i18n="retreat_wadi_registration_text2">After you submit your application, we will contact you for a short phone call to get to know you, understand your expectations, answer your questions, and make sure the experience is right for you.</p>
       <p class="wr-host__text" data-i18n="retreat_wadi_registration_text3">After the call, your place is secured with a non-refundable deposit of 400 ₪.</p>
       <p class="wr-host__text" data-i18n="retreat_wadi_registration_text4">Places are limited — priority goes to confirmed bookings.</p>
+      <div class="wr-register-actions">
+        <a href="/register/wadi-rum" class="wr-register-btn">
+          <span data-i18n="retreat_wadi_open_form">Open registration form</span>
+          <span class="wr-register-btn__arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -338,6 +344,11 @@ export default function Page() {
       </div>
     </div>
   </section>
+
+  <a href="/register/wadi-rum" class="wr-register-float" data-i18n-attr="aria-label:retreat_wadi_open_form_aria">
+    <span data-i18n="retreat_wadi_open_form">Open registration form</span>
+    <span class="wr-register-float__arrow" aria-hidden="true">→</span>
+  </a>
 </main>`}
     />
   );

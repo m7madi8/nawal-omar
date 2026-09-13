@@ -34,6 +34,7 @@
     overview: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg>',
     retreats: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"/><path d="m6 19 5.2-11L14 14l1.6-2.6L21 19"/><path d="M9.5 19 12 14.5"/></svg>',
     events: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="2.2"/><path d="M3.5 9.5h17"/><path d="M8 3v3M16 3v3"/><circle cx="8.2" cy="13.5" r="1"/><circle cx="12" cy="13.5" r="1"/><circle cx="15.8" cy="13.5" r="1"/></svg>',
+    'private-sessions': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.8-3 3.2-4.8 6.5-4.8s5.7 1.8 6.5 4.8"/><path d="M17.2 11.2 19 9.4"/><path d="M19 9.4v2.8"/></svg>',
     community: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><path d="M2.8 19c.7-3 3-4.8 6.2-4.8s5.5 1.8 6.2 4.8"/><circle cx="17" cy="8" r="2.2"/><path d="M15.6 14.4c2.6.3 4.4 2 5 4.6"/></svg>',
     medical: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 5-8.8 10.4-8.8 10.4S3.2 13.6 3.2 8.6a4.6 4.6 0 0 1 8.4-2.6 4.6 4.6 0 0 1 8.4 2.6 4.6 4.6 0 0 1-.2 1"/><path d="M6 11h2.2l1.3-2.4L11 13l1.1-2h2.4"/></svg>',
     content: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h8l4 4v13a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z"/><path d="M14 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 15.5h7M8.5 18h4"/></svg>',
@@ -51,6 +52,7 @@
     { id: 'overview', path: '/admin/overview', label: 'Overview', group: null },
     { id: 'retreats', path: '/admin/retreats', label: 'Retreats', group: 'Bookings' },
     { id: 'events', path: '/admin/events', label: 'Events', group: 'Bookings' },
+    { id: 'private-sessions', path: '/admin/private-sessions', label: 'Private Sessions', group: 'Bookings' },
     { id: 'community', path: '/admin/community', label: 'Community', group: 'People' },
     { id: 'medical', path: '/admin/medical', label: 'Medical forms', group: 'Intake' },
     { id: 'shop', path: '/admin/shop', label: 'Shop', group: 'Commerce' },
@@ -66,6 +68,7 @@
     { id: 'overview', label: 'Overview', hint: 'Dashboard snapshot' },
     { id: 'retreats', label: 'Retreats', hint: 'Retreat reservations' },
     { id: 'events', label: 'Events', hint: 'Events and classes' },
+    { id: 'private-sessions', label: 'Private Sessions', hint: 'Private yoga, sound healing, ice bath' },
     { id: 'community', label: 'Community', hint: 'Returning guests' },
     { id: 'medical', label: 'Medical forms', hint: 'Health intake' },
     { id: 'shop', label: 'Shop', hint: 'Catalog and products' },
@@ -92,7 +95,32 @@
     'feedback-nature-chocolate': 'Feedback · Nature & Chocolate',
     'feedback-ice': 'Feedback · Ice Bath',
     'shop-order': 'Shop order',
+    'private-sessions-page': 'Private Sessions',
   };
+
+  var PRIVATE_SESSION_SOURCE = 'private-sessions-page';
+  var PRIVATE_SESSION_LABELS = {
+    yoga: 'Private Yoga',
+    sound: 'Sound Healing',
+    ice: 'Ice Bath',
+  };
+  var PRIVATE_SESSION_CATALOG = [
+    {
+      id: 'yoga',
+      name: 'Private Yoga',
+      image: '/media/private-sessions/private-yoga.jpg',
+    },
+    {
+      id: 'sound',
+      name: 'Sound Healing',
+      image: '/media/private-sessions/sound-healing.jpg',
+    },
+    {
+      id: 'ice',
+      name: 'Ice Bath',
+      image: '/media/private-sessions/ice-bath.jpg',
+    },
+  ];
 
   var PLACE_BY_SOURCE = {
     'wadi-rum-registration': 'wadi-rum',
@@ -198,7 +226,7 @@
     },
   ];
 
-  var MEDICAL_SOURCES = ['mountain-voice-registration', 'ice-bath-health', 'wadi-rum-registration'];
+  var MEDICAL_SOURCES = ['mountain-voice-registration', 'ice-bath-health'];
   var MEDICAL_CATALOG = [
     {
       id: 'mountain-voice',
@@ -218,15 +246,6 @@
       dates: 'Required before the day retreat',
       location: 'Hofit',
       schedule: 'ongoing',
-    },
-    {
-      id: 'wadi-rum-health',
-      name: 'Wadi Rum · Health & Registration',
-      source: 'wadi-rum-registration',
-      image: '/media/wadi-rum/cover.jpg',
-      dates: '22–26 Oct 2027 · health & intake',
-      location: 'Wadi Rum, Jordan',
-      schedule: 'open',
     },
   ];
   var RETREAT_SOURCES = ['wadi-rum-registration', 'zanzibar-retreat-reserve', 'dahab-retreat-reserve'];
@@ -595,7 +614,69 @@
     return SOURCE_LABELS[source] || source || 'Request';
   }
 
+  function isPrivateSessionRow(row) {
+    return String(row.source || '') === PRIVATE_SESSION_SOURCE;
+  }
+
+  function privateSessionType(row) {
+    var key = String(row.yogaExperience || '').trim();
+    if (PRIVATE_SESSION_LABELS[key]) return key;
+    var label = String(row.retreatType || '').trim().toLowerCase();
+    if (label.indexOf('yoga') !== -1) return 'yoga';
+    if (label.indexOf('sound') !== -1) return 'sound';
+    if (label.indexOf('ice') !== -1) return 'ice';
+    return '';
+  }
+
+  function privateSessionLabel(row) {
+    var key = privateSessionType(row);
+    return PRIVATE_SESSION_LABELS[key] || row.retreatType || 'Private Session';
+  }
+
+  function parseCommerceOrder(row) {
+    var note = row && row.freeNote;
+    if (!note || note === '-') return null;
+    try {
+      var parsed = JSON.parse(note);
+      if (!parsed || typeof parsed !== 'object' || !parsed.commerceOrderId) return null;
+      var firstItem = parsed.items && parsed.items[0] ? parsed.items[0] : {};
+      return {
+        commerceOrderId: parsed.commerceOrderId,
+        commerceType: parsed.commerceType || firstItem.commerceType || '',
+        itemId: firstItem.itemId || '',
+        title: firstItem.title || (row && row.retreatType) || 'Commerce order',
+        quantity: firstItem.quantity || 1,
+        unitPrice: firstItem.unitPrice || parsed.total || 0,
+        currency: parsed.currency || firstItem.currency || '',
+        total: parsed.total || 0,
+        payment: parsed.paymentMethod || (row && row.healthStatus) || '',
+        paid: parsed.paymentStatus === 'paid' || !!(row && row.yogaExperience === 'paid'),
+        metadata: firstItem.metadata || {},
+        items: parsed.items || [],
+      };
+    } catch (err) {
+      return null;
+    }
+  }
+
   function parseShopOrder(row) {
+    var commerce = parseCommerceOrder(row);
+    if (commerce && commerce.commerceType === 'product') {
+      var meta = commerce.metadata || {};
+      return {
+        commerceOrderId: commerce.commerceOrderId,
+        productId: commerce.itemId || meta.productId || '',
+        productName: commerce.title || (row && row.retreatType) || 'Shop order',
+        color: meta.color || '',
+        colorId: meta.colorId || '',
+        qty: commerce.quantity || 1,
+        priceUsd: commerce.unitPrice || 0,
+        amountUsd: commerce.total || commerce.unitPrice || 0,
+        payment: commerce.payment || (row && row.healthStatus) || '',
+        paid: commerce.paid,
+      };
+    }
+
     var note = row && row.freeNote;
     if (note && note !== '-') {
       try {
@@ -1036,7 +1117,14 @@
       if (view === 'medical' && MEDICAL_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'retreats' && RETREAT_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'events' && EVENT_SOURCES.indexOf(row.source) === -1) return false;
+      if (view === 'private-sessions' && !isPrivateSessionRow(row)) return false;
       if ((view === 'shop' || view === 'orders' || view === 'sales') && SHOP_SOURCES.indexOf(row.source) === -1) return false;
+
+      if (view === 'private-sessions') {
+        if (filters.tab === 'yoga' && privateSessionType(row) !== 'yoga') return false;
+        if (filters.tab === 'sound' && privateSessionType(row) !== 'sound') return false;
+        if (filters.tab === 'ice' && privateSessionType(row) !== 'ice') return false;
+      }
 
       if (filters.status !== 'all' && row.status !== filters.status) return false;
       if (filters.source !== 'all' && row.source !== filters.source) return false;
@@ -1145,6 +1233,7 @@
     var medical = rows.filter(function (r) { return MEDICAL_SOURCES.indexOf(r.source) !== -1; });
     var retreats = rows.filter(function (r) { return RETREAT_SOURCES.indexOf(r.source) !== -1; });
     var events = rows.filter(function (r) { return EVENT_SOURCES.indexOf(r.source) !== -1; });
+    var privateSessions = rows.filter(function (r) { return isPrivateSessionRow(r); });
     var shop = rows.filter(function (r) { return SHOP_SOURCES.indexOf(r.source) !== -1; });
     var returning = buildReturningPeople(rows);
 
@@ -1180,6 +1269,8 @@
       retreatsPending: retreats.filter(function (r) { return r.status !== 'completed'; }).length,
       events: events.length,
       eventsPending: events.filter(function (r) { return r.status !== 'completed'; }).length,
+      privateSessions: privateSessions.length,
+      privateSessionsPending: privateSessions.filter(function (r) { return r.status !== 'completed'; }).length,
       shop: shop.length,
       shopPending: shop.filter(function (r) { return r.status !== 'completed'; }).length,
       shopPaid: shop.filter(function (r) { return parseShopOrder(r).paid || r.yogaExperience === 'paid'; }).length,
@@ -1271,6 +1362,14 @@
       html += '</div></div>';
     }
 
+    if (isPrivateSessionRow(item)) {
+      html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Private session</p><div class="admin-modal-grid">';
+      html += modalField('Experience', privateSessionLabel(item));
+      html += modalField('Participants', item.age && item.age !== '-' ? item.age : '-');
+      html += modalField('Message', item.freeNote && item.freeNote !== '-' ? item.freeNote : '-', true);
+      html += '</div></div>';
+    }
+
     html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Contact</p><div class="admin-modal-grid">';
     html += modalField('Full name', item.fullName);
     html += modalField('Phone', item.phone);
@@ -1284,7 +1383,12 @@
       html += '</div></div>';
     }
 
-    if ((item.healthStatus && item.healthStatus !== '-') || (item.healthDetails && item.healthDetails !== '-') || (item.yogaExperience && item.yogaExperience !== '-')) {
+    if (
+      !isPrivateSessionRow(item) &&
+      ((item.healthStatus && item.healthStatus !== '-') ||
+        (item.healthDetails && item.healthDetails !== '-') ||
+        (item.yogaExperience && item.yogaExperience !== '-'))
+    ) {
       html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Health &amp; experience</p><div class="admin-modal-grid">';
       html += modalField('Health status', item.healthStatus);
       html += modalField('Yoga experience', item.yogaExperience);
@@ -1332,6 +1436,8 @@
           badge = '<span class="admin-nav-badge">' + stats.retreatsPending + '</span>';
         } else if (item.id === 'events' && stats.eventsPending > 0) {
           badge = '<span class="admin-nav-badge">' + stats.eventsPending + '</span>';
+        } else if (item.id === 'private-sessions' && stats.privateSessionsPending > 0) {
+          badge = '<span class="admin-nav-badge">' + stats.privateSessionsPending + '</span>';
         } else if (item.id === 'community' && stats.community > 0) {
           badge = '<span class="admin-nav-badge">' + stats.community + '</span>';
         } else if ((item.id === 'orders' || item.id === 'shop' || item.id === 'sales') && stats.shopPending > 0) {
@@ -1411,10 +1517,18 @@
       html += '<td><span class="status-pill ' + (row.status === 'completed' ? 'status-completed' : 'status-pending') + '">' + escapeHtml(row.status) + '</span></td>';
       html += '<td><div class="admin-table__type">';
       var placeId = placeIdForSource(row.source);
-      if (placeId) {
+      var privateType = privateSessionType(row);
+      var privateCatalog = PRIVATE_SESSION_CATALOG.find(function (item) { return item.id === privateType; });
+      if (privateCatalog) {
+        html += '<img class="admin-table__thumb" src="' + privateCatalog.image + '" alt="">';
+      } else if (placeId) {
         html += '<img class="admin-table__thumb" src="' + placeMeta(placeId).image + '" alt="">';
       }
-      html += '<div><div class="admin-table__primary">' + escapeHtml(sourceLabel(row.source)) + '</div><div class="admin-table__sub">' + escapeHtml(row.retreatType || '-') + '</div></div></div></td>';
+      var typePrimary = isPrivateSessionRow(row) ? privateSessionLabel(row) : sourceLabel(row.source);
+      var typeSub = isPrivateSessionRow(row)
+        ? ('Participants: ' + (row.age && row.age !== '-' ? row.age : '—'))
+        : (row.retreatType || '-');
+      html += '<div><div class="admin-table__primary">' + escapeHtml(typePrimary) + '</div><div class="admin-table__sub">' + escapeHtml(typeSub) + '</div></div></div></td>';
       html += '<td><div class="admin-table__person"><span class="admin-table__avatar">' + escapeHtml(initials(row.fullName)) + '</span><div><div class="admin-table__primary">' + escapeHtml(row.fullName) + '</div><div class="admin-table__sub">' + escapeHtml(row.phone) + '</div></div></div></td>';
       html += '<td><div class="admin-row-actions">';
       html += '<button type="button" class="admin-row-btn" data-action="view">View</button>';
@@ -1634,6 +1748,46 @@
     if (exportAll) exportAll.addEventListener('click', function () { exportCsv(filtered); });
   }
 
+  function renderPrivateSessions(root, rows, stats, filters) {
+    var privateRows = rows.filter(function (row) { return isPrivateSessionRow(row); });
+    var filtered = filterRows(privateRows, filters, 'private-sessions');
+    var html = '<div class="admin-page-head"><div><h1>Private Sessions</h1><p>Private yoga, sound healing, and ice bath requests from the website.</p></div><div class="admin-page-actions"><button type="button" class="admin-btn admin-btn--primary" data-action="export-all">Export filtered</button></div></div>';
+
+    html += '<div class="admin-retreat-cards is-events">';
+    PRIVATE_SESSION_CATALOG.forEach(function (item) {
+      var count = privateRows.filter(function (row) { return privateSessionType(row) === item.id; }).length;
+      var pending = privateRows.filter(function (row) {
+        return privateSessionType(row) === item.id && row.status !== 'completed';
+      }).length;
+      html += '<article class="admin-retreat-card"><div class="admin-retreat-card__media"><img src="' + item.image + '" alt="' + escapeHtml(item.name) + '"></div><div class="admin-retreat-card__body"><h3>' + escapeHtml(item.name) + '</h3><p>Private session · up to 10 guests</p><div class="admin-retreat-card__stats"><span>' + count + ' requests</span><span>' + pending + ' pending</span></div></div></article>';
+    });
+    html += '</div>';
+
+    html += '<div class="admin-stats">';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Total requests</p><strong class="admin-stat__value">' + stats.privateSessions + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Pending review</p><strong class="admin-stat__value">' + stats.privateSessionsPending + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Reviewed</p><strong class="admin-stat__value">' + (stats.privateSessions - stats.privateSessionsPending) + '</strong></article>';
+    html += '</div>';
+
+    html += renderFilterBar(filters, {
+      status: ['all', 'pending', 'completed'],
+      tabs: [
+        { value: 'all', label: 'All sessions' },
+        { value: 'yoga', label: 'Private Yoga' },
+        { value: 'sound', label: 'Sound Healing' },
+        { value: 'ice', label: 'Ice Bath' },
+        { value: 'pending', label: 'Pending' },
+        { value: 'completed', label: 'Reviewed' },
+      ],
+    });
+    html += renderTable(filtered, 'No private session requests match these filters.');
+    root.innerHTML = html;
+    bindFilters(root, rows);
+    bindTableActions(root, rows);
+    var exportAll = root.querySelector('[data-action="export-all"]');
+    if (exportAll) exportAll.addEventListener('click', function () { exportCsv(filtered); });
+  }
+
   function renderCommunity(root, rows, stats, filters) {
     var people = buildReturningPeople(rows);
     var q = String(filters.q || '').trim().toLowerCase();
@@ -1714,7 +1868,7 @@
     var viewOnly = isViewOnly();
     var html = '<div class="admin-page-head"><div><h1>Medical forms</h1><p>' + (viewOnly
       ? 'View-only access — you can open medical forms, but not change or delete them.'
-      : 'Health intake forms — Nawal\'s Care, Ice Bath, and Wadi Rum registration.') + '</p></div></div>';
+      : 'Health intake forms — Nawal\'s Care and Ice Bath.') + '</p></div></div>';
     html += '<div class="admin-retreat-cards is-medical">';
     MEDICAL_CATALOG.forEach(function (item) {
       var count = rows.filter(function (row) { return matchesCatalog(row, item); }).length;
@@ -2229,6 +2383,7 @@
       if (view === 'overview') renderOverview(root, rows, stats, filters);
       else if (view === 'retreats') renderRetreats(root, rows, stats, filters);
       else if (view === 'events') renderEvents(root, rows, stats, filters);
+      else if (view === 'private-sessions') renderPrivateSessions(root, rows, stats, filters);
       else if (view === 'community') renderCommunity(root, rows, stats, filters);
       else if (view === 'medical') renderMedical(root, rows, filters);
       else if (view === 'shop') renderShop(root, rows, stats, filters);

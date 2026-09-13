@@ -69,9 +69,14 @@ using (true);
   - `supabaseAnonKey: "YOUR_ANON_KEY"`
   - `supabaseTable: "retreat_requests"`
 
-## 4) Test
+## 4) Commerce tables (orders)
+
+Run the SQL in [`supabase/migrations/001_commerce_orders.sql`](supabase/migrations/001_commerce_orders.sql) to create unified order tables used by products, lessons, retreats, and events.
+
+## 5) Test
 
 - Submit one request from `wadi-rum-registration.html`
 - Check `retreat_requests` table in Supabase
 - Open `dashboard.html` and confirm request appears
 - Test `Mark Completed` and `Delete`
+- Submit an event registration and confirm rows appear in `commerce_orders`, `commerce_order_items`, and `retreat_requests`

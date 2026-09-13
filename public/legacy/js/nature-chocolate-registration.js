@@ -1,10 +1,8 @@
 /**
- * Nature & Chocolate booking → Supabase → admin dashboard
+ * Nature & Chocolate booking → unified commerce checkout → admin dashboard
  */
 (function () {
-  var SUPABASE_URL = "https://xzxyskufrqansbhsbdkt.supabase.co";
-  var SUPABASE_ANON_KEY = "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph";
-  var SUPABASE_TABLE = "retreat_requests";
+  var EVENT_ID = "nature-chocolate";
 
   function t(key) {
     var lang = (window.nawalI18n && window.nawalI18n.getLang && window.nawalI18n.getLang()) || "ar";
@@ -46,44 +44,6 @@
       }, 3800);
     }
 
-    async function submitRegistration(fullName, phone, notes) {
-      var now = new Date();
-      var payload = {
-        id: "req-nc-" + now.getTime(),
-        source: "nature-chocolate-registration",
-        retreatType: "A Day Between Nature & Chocolate · 8.8",
-        submittedAt: now.toISOString(),
-        fullName: fullName,
-        phone: phone,
-        age: "",
-        city: "",
-        reason: notes || "Nature & Chocolate day booking",
-        expectation: "",
-        yogaExperience: "",
-        healthStatus: "",
-        healthDetails: "",
-        activities: [],
-        freeNote: "Booking from events/nature-chocolate",
-        status: "pending",
-        createdAt: now.toISOString()
-      };
-
-      var url = SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE);
-      var res = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: "Bearer " + SUPABASE_ANON_KEY,
-          Prefer: "return=minimal"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) throw new Error("Nature & Chocolate booking submit failed");
-    }
-
     triggers.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.preventDefault();
@@ -108,7 +68,15 @@
 
       if (submitBtn) submitBtn.disabled = true;
       try {
-        await submitRegistration(fullName, phone, notes);
+        if (!window.nawalCommerceRegistration) {
+          throw new Error("Commerce registration unavailable");
+        }
+        await window.nawalCommerceRegistration.submitEventRegistration({
+          eventId: EVENT_ID,
+          fullName: fullName,
+          phone: phone,
+          notes: notes
+        });
         form.reset();
         closeModal();
         showSuccess();

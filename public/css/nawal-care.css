@@ -430,7 +430,7 @@
 [dir="rtl"] .nc-form .form-header h1,
 [dir="rtl"] .nc-form .step-title,
 [dir="rtl"] .nc-form .success-state h2 {
-  font-family: Amiri, Georgia, serif;
+  font-family: var(--font-arabic-display, 'El Messiri', 'Tajawal', sans-serif);
 }
 
 [dir="rtl"] .nc-form .step-panel.active {

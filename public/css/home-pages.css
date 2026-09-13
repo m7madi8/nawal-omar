@@ -680,5 +680,44 @@ html[dir="rtl"] .ny-door__status {
 }
 
 html[dir="rtl"] .ny-empty__title {
-  font-family: Amiri, Georgia, serif;
+  font-family: var(--font-arabic-display);
+  font-weight: 400;
+}
+
+/* Harmonize legacy inner-page headings with the site display pairing */
+.ny-site h1,
+.ny-site h2,
+.ny-site h3,
+.ny-site .event-sh-title,
+.ny-site .event-sh-section-title,
+.ny-site .event-sh-content-title,
+.ny-site .ib-hero__title,
+.ny-site .ib-section__title,
+.ny-site .wr-hero__title,
+.ny-site .wr-section__title,
+.ny-site .haifa-hero h1,
+.ny-site .baqa-hero__title,
+.ny-site .retreats-subheading {
+  font-family: var(--font-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em;
+}
+
+html[dir="rtl"] .ny-site h1,
+html[dir="rtl"] .ny-site h2,
+html[dir="rtl"] .ny-site h3,
+html[dir="rtl"] .ny-site .event-sh-title,
+html[dir="rtl"] .ny-site .event-sh-section-title,
+html[dir="rtl"] .ny-site .event-sh-content-title,
+html[dir="rtl"] .ny-site .ib-hero__title,
+html[dir="rtl"] .ny-site .ib-section__title,
+html[dir="rtl"] .ny-site .wr-hero__title,
+html[dir="rtl"] .ny-site .wr-section__title,
+html[dir="rtl"] .ny-site .haifa-hero h1,
+html[dir="rtl"] .ny-site .baqa-hero__title,
+html[dir="rtl"] .ny-site .retreats-subheading {
+  font-family: var(--font-arabic-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0;
+  line-height: 1.16;
 }

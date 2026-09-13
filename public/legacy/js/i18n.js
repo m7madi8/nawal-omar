@@ -756,6 +756,8 @@
       retreat_wadi_cta_bubbles_name: 'Bubbles Room',
       retreat_wadi_cta_bubbles_amount: '3,850 ₪',
       retreat_wadi_book_now: 'Submit registration request',
+      retreat_wadi_open_form: 'Open registration form',
+      retreat_wadi_open_form_aria: 'Open Wadi Rum registration form',
       retreat_dahab_page_label: 'Dahab Women\'s Retreat 2026',
       retreat_dahab_meta_title: 'Dahab Women\'s Retreat 2026 | Nawal Omar',
       retreat_dahab_meta_desc:
@@ -2184,6 +2186,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_wadi_cta_bubbles_name: 'Bubbles Room',
       retreat_wadi_cta_bubbles_amount: '3,850 ₪',
       retreat_wadi_book_now: 'قدّمي طلب التسجيل',
+      retreat_wadi_open_form: 'افتحي استمارة التسجيل',
+      retreat_wadi_open_form_aria: 'افتحي استمارة تسجيل ريتريت وادي رم',
       retreat_dahab_page_label: 'خلوة دهب النسائية 2026',
       retreat_dahab_meta_title: 'خلوة دهب النسائية 2026 | نوال عمر',
       retreat_dahab_meta_desc:

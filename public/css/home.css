@@ -33,7 +33,7 @@
 
   /* Typography */
   --font-serif:
-    "Cormorant Garamond",
+    "Instrument Serif",
     "Times New Roman",
     serif;
 
@@ -49,9 +49,9 @@
     var(--font-sans);
 
   --font-arabic-display:
-    "Amiri",
+    "El Messiri",
     "Tajawal",
-    serif;
+    sans-serif;
 
   /* Fluid typography */
   --fs-display-xl: clamp(2.8rem, 7.2vw, 7.6rem);
@@ -236,33 +236,34 @@ h4 {
 
 .display-xl {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-size: var(--fs-display-xl);
-  line-height: 0.94;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.012em;
   overflow-wrap: break-word;
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
 .display-l {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-size: var(--fs-display-l);
-  line-height: 0.98;
-  letter-spacing: -0.015em;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
 }
 
 .display-m {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-size: var(--fs-display-m);
-  line-height: 1;
+  line-height: 1.06;
 }
 
 .display-s {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-size: var(--fs-display-s);
-  line-height: 1.05;
+  line-height: 1.1;
 }
 
 .body-l {
@@ -489,6 +490,10 @@ html[dir="rtl"] .split-word {
 
 .hl__media img {
   object-position: center 30%;
+}
+
+.pv__media img {
+  object-position: center 36%;
 }
 
 .intro__image img {
@@ -775,11 +780,11 @@ html[dir="rtl"] .split-word {
   justify-content: center;
 
   min-width: 0;
-  padding: 0.52rem 0.5rem;
+  padding: 0.48rem 0.4rem;
   border-radius: 999px;
 
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
@@ -822,7 +827,7 @@ html[dir="rtl"] .split-word {
 
     transform: translate(-50%, -50%);
 
-    width: min(46rem, calc(100vw - 17rem));
+    width: min(54rem, calc(100vw - 15rem));
 
     padding: 0.32rem;
     border-radius: 999px;
@@ -890,10 +895,17 @@ html[dir="rtl"] .split-word {
 
   visibility: hidden;
   pointer-events: none;
+
+  transition: visibility 0s linear 0.52s;
+}
+
+.mobile-nav.is-open,
+.mobile-nav.is-closing {
+  visibility: visible;
+  transition: visibility 0s linear 0s;
 }
 
 .mobile-nav.is-open {
-  visibility: visible;
   pointer-events: auto;
 }
 
@@ -910,6 +922,12 @@ html[dir="rtl"] .split-word {
 
 .mobile-nav.is-open .mobile-nav__backdrop {
   opacity: 1;
+}
+
+.mobile-nav.is-closing .mobile-nav__backdrop {
+  opacity: 0;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
 }
 
 .mobile-nav__panel {
@@ -940,12 +958,24 @@ html[dir="rtl"] .split-word {
   box-shadow: 0 -24px 64px rgba(0, 0, 0, 0.34);
 
   transform: translateY(110%);
+  opacity: 0;
 
-  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
 }
 
 .mobile-nav.is-open .mobile-nav__panel {
   transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-nav.is-closing .mobile-nav__panel {
+  transform: translateY(110%);
+  opacity: 0;
+  transition:
+    transform 0.48s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.36s ease;
 }
 
 .mobile-nav__handle {
@@ -1144,6 +1174,18 @@ html[dir="rtl"] .split-word {
 .mobile-nav.is-open .mobile-nav__list li:nth-child(3) .mobile-nav__link { animation-delay: 0.24s; }
 .mobile-nav.is-open .mobile-nav__list li:nth-child(4) .mobile-nav__link { animation-delay: 0.3s; }
 .mobile-nav.is-open .mobile-nav__list li:nth-child(5) .mobile-nav__link { animation-delay: 0.36s; }
+.mobile-nav.is-open .mobile-nav__list li:nth-child(6) .mobile-nav__link { animation-delay: 0.42s; }
+
+.mobile-nav.is-closing .mobile-nav__link {
+  animation: mobileNavItemOut 0.34s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.mobile-nav.is-closing .mobile-nav__list li:nth-child(1) .mobile-nav__link { animation-delay: 0s; }
+.mobile-nav.is-closing .mobile-nav__list li:nth-child(2) .mobile-nav__link { animation-delay: 0.04s; }
+.mobile-nav.is-closing .mobile-nav__list li:nth-child(3) .mobile-nav__link { animation-delay: 0.08s; }
+.mobile-nav.is-closing .mobile-nav__list li:nth-child(4) .mobile-nav__link { animation-delay: 0.12s; }
+.mobile-nav.is-closing .mobile-nav__list li:nth-child(5) .mobile-nav__link { animation-delay: 0.16s; }
+.mobile-nav.is-closing .mobile-nav__list li:nth-child(6) .mobile-nav__link { animation-delay: 0.2s; }
 
 @keyframes mobileNavItemIn {
   from {
@@ -1157,13 +1199,29 @@ html[dir="rtl"] .split-word {
   }
 }
 
+@keyframes mobileNavItemOut {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .mobile-nav,
+  .mobile-nav.is-open,
+  .mobile-nav.is-closing,
   .mobile-nav__backdrop,
   .mobile-nav__panel {
     transition: none;
   }
 
-  .mobile-nav.is-open .mobile-nav__link {
+  .mobile-nav.is-open .mobile-nav__link,
+  .mobile-nav.is-closing .mobile-nav__link {
     animation: none;
   }
 }
@@ -1299,10 +1357,15 @@ body.nav-open {
 
 .hero__headline.display-xl {
   font-size: clamp(2.6rem, 5.2vw, 5.4rem);
-  line-height: 1.02;
+  line-height: 1.06;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: manual;
+}
+
+.hero__headline .italic {
+  font-weight: 400;
+  font-style: italic;
 }
 
 .hero__headline-line {
@@ -1761,7 +1824,7 @@ body.nav-open {
   oversized serif headline that only takes up part of the width,
   with the supporting line set apart to its right. Everything below
   is organised as a sequence of editorial chapters, not a card grid —
-  see .world-block variants (.xp / .yg / .rt / .hl / .sp) below,
+  see .world-block variants (.xp / .yg / .rt / .hl / .pv / .sp) below,
   each with its own silhouette and rhythm, but one shared corner
   language and one shared numbering system (see --world-r and the
   __num elements on every variant).
@@ -2303,6 +2366,57 @@ body.nav-open {
 }
 
 .hl__cta {
+  margin-top: var(--space-l);
+}
+
+
+/* ============================================================
+   19c. PRIVATE SESSIONS — 05, editorial spread (mirrors 04)
+   ============================================================ */
+
+.pv {
+  display: grid;
+  grid-template-columns: minmax(0, 0.58fr) minmax(0, 0.42fr);
+  column-gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+
+  max-width: min(100%, 780px);
+  margin-inline: auto;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.pv__text {
+  grid-column: 1;
+  padding-top: clamp(1rem, 4vw, 2.5rem);
+}
+
+.pv__media {
+  grid-column: 2;
+
+  width: var(--card-portrait);
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  min-height: clamp(220px, 42vw, 360px);
+
+  border-radius: var(--world-r) 0 var(--world-r) var(--world-r);
+  overflow: hidden;
+}
+
+.pv__num {
+  display: block;
+}
+
+.pv__title {
+  margin-top: 0.1em;
+}
+
+.pv__lead {
+  max-width: 36ch;
+  margin-top: var(--space-m);
+  line-height: 1.55;
+}
+
+.pv__cta {
   margin-top: var(--space-l);
 }
 
@@ -3444,6 +3558,44 @@ body.nav-open {
     color: var(--text-primary);
   }
 
+  .pv {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 1.25rem;
+    max-width: min(100%, 480px);
+    margin-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  .pv__text {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
+    min-width: 0;
+  }
+
+  .pv__media {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  .pv__title,
+  .pv__lead {
+    max-width: none;
+  }
+
+  .pv__cta,
+  .world-block.pv .world-cta {
+    display: inline-flex;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1.25rem;
+  }
+
 
   /* Health — stack image above copy; reset grid columns so CTA stays visible */
 
@@ -3955,6 +4107,20 @@ body.nav-open {
     margin-top: 1.25rem;
   }
 
+  .pv {
+    max-width: min(100%, 440px);
+    row-gap: 1.5rem;
+  }
+
+  .pv__media {
+    border-radius: 0 48px 48px 48px;
+  }
+
+  .pv__title,
+  .pv__lead {
+    max-width: none;
+  }
+
   .yg {
     max-width: min(100%, 440px);
   }
@@ -4456,7 +4622,13 @@ html[dir="rtl"] .display-l,
 html[dir="rtl"] .display-m,
 html[dir="rtl"] .display-s {
   font-family: var(--font-arabic-display);
+  font-weight: 400;
   letter-spacing: 0;
+  line-height: 1.14;
+}
+
+html[dir="rtl"] .hero__headline.display-xl {
+  line-height: 1.18;
 }
 
 html[dir="rtl"] .eyebrow,
@@ -4554,6 +4726,10 @@ html[dir="rtl"] .hl__media {
   border-radius: var(--world-r) 0 var(--world-r) var(--world-r);
 }
 
+html[dir="rtl"] .pv__media {
+  border-radius: 0 var(--world-r) var(--world-r) var(--world-r);
+}
+
 html[dir="rtl"] .rt {
   border-radius: var(--world-r) var(--world-r) var(--world-r) 24px;
 }
@@ -4625,6 +4801,10 @@ html[dir="rtl"] .xp__enter {
   }
 
   html[dir="rtl"] .hl__media {
+    border-radius: 48px 0 48px 48px;
+  }
+
+  html[dir="rtl"] .pv__media {
     border-radius: 48px 0 48px 48px;
   }
 

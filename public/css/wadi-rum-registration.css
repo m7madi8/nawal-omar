@@ -288,7 +288,7 @@
 [dir="rtl"] .wadi-reg h1,
 [dir="rtl"] .wadi-reg .section-title,
 [dir="rtl"] .wadi-reg .hero-badge {
-  font-family: Amiri, Georgia, serif;
+  font-family: var(--font-arabic-display, 'El Messiri', 'Tajawal', sans-serif);
 }
 
 [dir="rtl"] .wadi-reg .radio-item,
