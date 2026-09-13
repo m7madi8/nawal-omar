@@ -31,7 +31,7 @@ export default function Page() {
           <p class="wr-hero__eyebrow">
             <span class="wr-kicker" data-i18n="retreat_wadi_page_label">Wadi Rum Women Retreat</span>
             <span class="wr-hero__dot" aria-hidden="true"></span>
-            <span class="wr-hero__year">2027</span>
+            <span class="wr-hero__year">2026</span>
           </p>
           <h1 id="wadi-hero-title" class="wr-title" data-i18n="retreat_wadi_page_title">Moonlit Wadi Rum Retreat</h1>
           <div class="wr-hero__leads">
@@ -43,7 +43,7 @@ export default function Page() {
           <ul class="wr-hero__meta">
             <li class="wr-hero__fact">
               <span class="wr-hero__fact-label" data-i18n="retreat_wadi_hero_label_dates">Dates</span>
-              <span class="wr-hero__fact-value" dir="ltr" data-i18n="retreat_wadi_hero_meta_date">22–26.10.2027</span>
+              <span class="wr-hero__fact-value" dir="ltr" data-i18n="retreat_wadi_hero_meta_date">22–26.10.2026</span>
             </li>
             <li class="wr-hero__fact">
               <span class="wr-hero__fact-label" data-i18n="retreat_wadi_hero_label_duration">Duration</span>
@@ -318,7 +318,7 @@ export default function Page() {
     <div class="wr-container">
       <div class="wr-cta-panel">
         <div class="wr-cta-panel__head">
-          <p class="wr-cta-panel__dates" data-i18n="retreat_wadi_price_dates">22–26.10.2027</p>
+          <p class="wr-cta-panel__dates" data-i18n="retreat_wadi_price_dates">22–26.10.2026</p>
           <p class="wr-cta-panel__place" data-i18n="retreat_wadi_price_place">Wadi Rum, Jordan</p>
         </div>
         <div class="wr-cta-panel__rooms" aria-label="Room options">
