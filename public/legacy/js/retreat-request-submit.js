@@ -2,6 +2,8 @@
  * Shared retreat/event booking → Supabase retreat_requests → admin dashboard
  */
 (function (global) {
+  if (global.nawalRetreatRequest) return;
+
   var SUPABASE_URL = "https://xzxyskufrqansbhsbdkt.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph";
   var SUPABASE_TABLE = "retreat_requests";
@@ -63,7 +65,7 @@
     };
   }
 
-  async function submit(payload) {
+  async function submitDirect(payload) {
     var res = await fetch(SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE), {
       method: "POST",
       headers: {
@@ -77,12 +79,59 @@
     });
 
     if (!res.ok) {
-      var err = new Error("Registration submit failed");
+      var detail = await res.text().catch(function () {
+        return "";
+      });
+      var err = new Error(detail || "Registration submit failed");
       err.code = "SUBMIT_FAILED";
+      err.status = res.status;
       throw err;
     }
 
     return { ok: true, id: payload.id };
+  }
+
+  async function submitViaApi(payload) {
+    var res = await fetch("/api/retreat-request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    var data = await res.json().catch(function () {
+      return {};
+    });
+
+    if (!res.ok) {
+      var err = new Error(data.error || "Registration submit failed");
+      err.code = data.code || "SUBMIT_FAILED";
+      err.status = res.status;
+      throw err;
+    }
+
+    return data;
+  }
+
+  async function submit(payload) {
+    try {
+      var result = await submitViaApi(payload);
+      notifySuccess(payload);
+      return result;
+    } catch (apiErr) {
+      console.warn("[nawalRetreatRequest] API submit failed, trying direct Supabase", apiErr);
+      var fallback = await submitDirect(payload);
+      notifySuccess(payload);
+      return fallback;
+    }
+  }
+
+  function notifySuccess(payload) {
+    if (global.nawalThankYou && typeof global.nawalThankYou.show === "function") {
+      global.nawalThankYou.show({ name: payload && payload.fullName });
+    }
   }
 
   async function submitEventRegistration(options) {

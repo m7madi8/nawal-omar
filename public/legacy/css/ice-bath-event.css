@@ -167,61 +167,116 @@ html[dir="rtl"] .ib-page {
   }
 }
 
-.ib-hero__back {
+.ib-hero .ib-hero__back.top-back-link {
   position: absolute;
   top: 1rem;
   inset-inline-start: 1rem;
-  z-index: 5;
+  z-index: 6;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.45rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid rgba(243, 248, 249, 0.28);
-  background: rgba(243, 248, 249, 0.12);
+  border: 1px solid rgba(243, 248, 249, 0.34);
+  background: rgba(19, 42, 50, 0.68);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 18px rgba(19, 42, 50, 0.28);
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #f3f8f9;
   text-decoration: none;
-  transition: background 180ms ease, border-color 180ms ease;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.ib-hero__back:hover {
-  background: rgba(243, 248, 249, 0.22);
-  border-color: rgba(243, 248, 249, 0.45);
+.ib-hero .ib-hero__back.top-back-link svg {
+  color: currentColor;
+}
+
+.ib-hero .ib-hero__back.top-back-link:hover {
+  color: #fff;
+  background: rgba(19, 42, 50, 0.82);
+  border-color: rgba(243, 248, 249, 0.5);
+  box-shadow: 0 6px 22px rgba(19, 42, 50, 0.34);
   opacity: 1;
 }
 
 .ib-hero__inner {
   position: relative;
   z-index: 5;
-  width: min(100%, 40rem);
+  width: min(100%, 42rem);
   margin-inline: auto;
-  padding: 2.5rem 1.25rem 2.75rem;
+  padding: 2.75rem 1.35rem 3rem;
   text-align: center;
 }
 
-.ib-hero__brand {
-  margin: 0 0 0.85rem;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(0.95rem, 2.4vw, 1.1rem);
-  font-weight: 600;
-  letter-spacing: 0.18em;
+.ib-hero__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ib-hero__kicker {
+  display: inline-block;
+  margin: 0;
+  padding: 0.34rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 241, 243, 0.32);
+  background: rgba(19, 42, 50, 0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(232, 241, 243, 0.88);
+  color: rgba(220, 236, 239, 0.95);
+}
+
+.ib-hero__brand {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(0.82rem, 2vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232, 241, 243, 0.82);
 }
 
 .ib-hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
   margin: 0;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.85rem, 6vw, 2.75rem);
+  font-size: clamp(2rem, 7vw, 3rem);
   font-weight: 600;
-  line-height: 1.28;
+  line-height: 1.14;
   color: #f7fbfc;
-  text-wrap: balance;
   text-shadow: 0 2px 28px rgba(0, 0, 0, 0.28);
+}
+
+.ib-hero__title-line {
+  display: block;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+.ib-hero__title-line--soft {
+  font-size: 0.68em;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: rgba(232, 241, 243, 0.9);
 }
 
 .ib-hero__word {
@@ -232,15 +287,72 @@ html[dir="rtl"] .ib-page {
 .ib-hero__divider {
   width: 3rem;
   height: 1px;
-  margin: 1rem auto 1.1rem;
+  margin: 0.85rem auto 1.15rem;
   background: linear-gradient(90deg, transparent, rgba(90, 154, 170, 0.9), transparent);
 }
 
 .ib-hero__meta {
   display: grid;
-  gap: 0.35rem;
-  margin: 0 auto 1.35rem;
-  max-width: 24rem;
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+  margin: 0 auto 1.45rem;
+  max-width: 28rem;
+  text-align: start;
+}
+
+@media (min-width: 520px) {
+  .ib-hero__meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem 0.7rem;
+  }
+}
+
+.ib-hero__meta-item {
+  margin: 0;
+  padding: 0.68rem 0.82rem;
+  border-radius: 0.8rem;
+  background: rgba(19, 42, 50, 0.42);
+  border: 1px solid rgba(232, 241, 243, 0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ib-hero__meta-item--date {
+  grid-column: 1 / -1;
+}
+
+.ib-hero__meta-item--place {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 520px) {
+  .ib-hero__meta-item--place {
+    grid-column: auto;
+  }
+}
+
+.ib-hero__meta-label {
+  margin: 0 0 0.18rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(90, 154, 170, 0.95);
+}
+
+.ib-hero__meta-value {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #f3f8f9;
+}
+
+.ib-hero__meta-item--date .ib-hero__meta-value {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.08rem;
+  letter-spacing: 0.02em;
+  color: #dcecef;
 }
 
 .ib-hero__meta-row {
@@ -257,6 +369,13 @@ html[dir="rtl"] .ib-page {
   font-weight: 600;
   letter-spacing: 0.04em;
   color: #dcecef;
+}
+
+.ib-hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
 }
 
 .ib-hero__cta {
@@ -295,7 +414,7 @@ html[dir="rtl"] .ib-page {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.85rem;
+  margin-top: 0.65rem;
   padding: 0.35rem 0.25rem;
   color: rgba(232, 241, 243, 0.9);
   font-size: 0.88rem;
@@ -1439,6 +1558,8 @@ html[dir="rtl"] .ib-page {
 html[dir="rtl"] .ib-page :is(
   .ib-hero__brand,
   .ib-hero__title,
+  .ib-hero__title-line,
+  .ib-hero__meta-item--date .ib-hero__meta-value,
   .ib-hero__meta-row--date,
   .ib-section-title,
   .ib-intro__title,
@@ -1454,9 +1575,18 @@ html[dir="rtl"] .ib-page :is(
   font-weight: 700;
 }
 
-html[dir="rtl"] .ib-page :is(.ib-kicker, .ib-hero__brand, .ib-stop__time) {
+html[dir="rtl"] .ib-page :is(.ib-kicker, .ib-hero__brand, .ib-hero__meta-label, .ib-stop__time) {
   letter-spacing: 0;
   text-transform: none;
+}
+
+html[dir="rtl"] .ib-page .ib-hero__title-line {
+  max-width: none;
+}
+
+html[dir="rtl"] .ib-page .ib-hero__title-line--soft {
+  font-style: normal;
+  font-weight: 600;
 }
 
 html[dir="rtl"] .ib-page :is(

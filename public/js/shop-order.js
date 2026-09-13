@@ -141,7 +141,9 @@
       }
       if (result.via === 'whatsapp' && result.waUrl) {
         window.open(result.waUrl, '_blank', 'noopener');
-        window.location.href = '/shop/thanks?via=whatsapp';
+      }
+      if (window.nawalThankYou && typeof window.nawalThankYou.show === 'function') {
+        window.nawalThankYou.show({ name: payload.fullName });
         return;
       }
       window.location.href = '/shop/thanks?via=' + encodeURIComponent(result.via || 'cash');

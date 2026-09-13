@@ -136,14 +136,26 @@
 
     /* 1 ── Hero entrance ── */
     var titleEl = document.getElementById('ib-hero-title');
+    var kicker = document.querySelector('.ib-hero__kicker');
     var brand = document.querySelector('.ib-hero__brand');
     var divider = document.querySelector('.ib-hero__divider');
     var meta = document.querySelector('.ib-hero__meta');
+    var heroActions = document.querySelector('.ib-hero__actions');
     var heroCta = document.querySelector('.ib-hero__cta');
 
     function playHeroReveal() {
-      var words = splitTitleWords(titleEl);
+      var titleLines = titleEl ? titleEl.querySelectorAll('.ib-hero__title-line') : [];
+      var words = titleLines.length ? [] : splitTitleWords(titleEl);
       var tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+      if (kicker) {
+        tl.fromTo(
+          kicker,
+          { autoAlpha: 0, y: 14, filter: 'blur(6px)' },
+          { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.8 },
+          0.08
+        );
+      }
 
       if (brand) {
         tl.fromTo(
@@ -154,7 +166,20 @@
         );
       }
 
-      if (words.length) {
+      if (titleLines.length) {
+        tl.fromTo(
+          titleLines,
+          { autoAlpha: 0, y: 22, filter: 'blur(8px)' },
+          {
+            autoAlpha: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 0.95,
+            stagger: 0.14
+          },
+          0.28
+        );
+      } else if (words.length) {
         tl.fromTo(
           words,
           { autoAlpha: 0, y: 22, filter: 'blur(8px)' },
@@ -187,9 +212,10 @@
         );
       }
 
-      if (heroCta) {
+      var ctaTarget = heroActions || heroCta;
+      if (ctaTarget) {
         tl.fromTo(
-          heroCta,
+          ctaTarget,
           { autoAlpha: 0, y: 18, filter: 'blur(6px)' },
           {
             autoAlpha: 1,
@@ -197,7 +223,7 @@
             filter: 'blur(0px)',
             duration: 0.8,
             onComplete: function () {
-              heroCta.classList.add('ib-cta--breathe');
+              if (heroCta) heroCta.classList.add('ib-cta--breathe');
             }
           },
           '-=0.35'
@@ -209,7 +235,11 @@
 
     window.addEventListener('nawal-lang-change', function () {
       if (heroCta) heroCta.classList.remove('ib-cta--breathe');
-      gsap.set([brand, divider, meta, heroCta].filter(Boolean), { clearProps: 'all' });
+      var titleLines = titleEl ? titleEl.querySelectorAll('.ib-hero__title-line') : [];
+      gsap.set(
+        [kicker, brand, divider, meta, heroActions, heroCta].concat(Array.from(titleLines)).filter(Boolean),
+        { clearProps: 'all' }
+      );
       requestAnimationFrame(function () {
         playHeroReveal();
       });

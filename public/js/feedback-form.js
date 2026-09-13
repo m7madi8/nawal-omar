@@ -168,6 +168,9 @@
     if (progress) progress.hidden = true;
     if (shell) shell.hidden = true;
     if (success) success.hidden = false;
+    if (window.nawalThankYou && typeof window.nawalThankYou.show === 'function') {
+      window.nawalThankYou.show({ name: name });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

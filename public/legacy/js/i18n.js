@@ -255,6 +255,8 @@
       events_nc_sold_out_note: 'All spots for this day are fully booked.',
       events_nc_sold_out_aria: 'This event is sold out — booking is closed',
       events_ib_title: 'Day Retreat | Between Calm & Strength',
+      events_ib_hero_title_main: 'Day Retreat',
+      events_ib_hero_title_sub: 'Between Calm & Strength',
       events_ib_kicker: 'Cold exposure',
       events_ib_meta_desc:
         'Day Retreat | Between Calm & Strength — 19.9.2026 · Sat · 09:30–16:00 · Hofit. Yoga, breathwork, ice bath, sauna, lunch, and a flower crown workshop.',
@@ -268,7 +270,7 @@
       events_hf_card_cta: 'Open form',
       events_hf_card_img_alt:
         'Calm cold water and soft ice — cover for the Ice Bath health declaration form',
-      events_ib_date: '19.9.2026 | Saturday',
+      events_ib_date: '19.9.2026 · Saturday',
       events_ib_time: '09:30 – 16:00',
       events_ib_location: 'Hofit complex, Emek Hefer',
       events_ib_venue: 'Hofit complex, Emek Hefer · Hofitkin Pool',
@@ -1685,6 +1687,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       events_nc_sold_out_note: 'جميع الأماكن لهذا اليوم محجوزة بالكامل.',
       events_nc_sold_out_aria: 'هذه الفعالية مكتملة الحجز — التسجيل مغلق',
       events_ib_title: 'ريتريت يوم | بين الهدوء والقوة',
+      events_ib_hero_title_main: 'ريتريت يوم',
+      events_ib_hero_title_sub: 'بين الهدوء والقوة',
       events_ib_kicker: 'تعرّض للبرد',
       events_ib_meta_desc:
         'ريتريت يوم | بين الهدوء والقوة — 19.9.2026 · السبت · 09:30–16:00 · حوفيت. يوغا، تنفّس، حمام ثلج، ساونا، غداء، وورشة طوق ورد.',
@@ -1698,7 +1702,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       events_hf_card_cta: 'افتحي الاستمارة',
       events_hf_card_img_alt:
         'ماء بارد هادئ وجليد ناعم — غلاف استمارة التصريح الصحي لحمام الثلج',
-      events_ib_date: '19.9.2026 | السبت',
+      events_ib_date: '19.9.2026 · السبت',
       events_ib_time: '09:30 – 16:00',
       events_ib_location: 'مجمع حوفيت، وادي حيفر',
       events_ib_venue: 'مجمع حوفيت، وادي حيفر · بركة حوفيتكين',

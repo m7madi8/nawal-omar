@@ -38,6 +38,10 @@
     }
 
     function showSuccess() {
+      if (window.nawalThankYou && typeof window.nawalThankYou.show === "function") {
+        window.nawalThankYou.show();
+        return;
+      }
       success.hidden = false;
       success.classList.remove("is-show");
       window.requestAnimationFrame(function () {

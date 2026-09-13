@@ -32,6 +32,10 @@
     }
 
     function showSuccess() {
+      if (window.nawalThankYou && typeof window.nawalThankYou.show === "function") {
+        window.nawalThankYou.show();
+        return;
+      }
       if (!success) return;
       success.hidden = false;
       success.classList.remove("is-show");
@@ -68,10 +72,13 @@
 
       if (submitBtn) submitBtn.disabled = true;
       try {
-        if (!window.nawalRetreatRequest) {
+        var submitApi =
+          (window.nawalRetreatRequest && window.nawalRetreatRequest.submitEventRegistration) ||
+          (window.nawalCommerceRegistration && window.nawalCommerceRegistration.submitEventRegistration);
+        if (!submitApi) {
           throw new Error("Registration unavailable");
         }
-        await window.nawalRetreatRequest.submitEventRegistration({
+        await submitApi({
           eventId: EVENT_ID,
           fullName: fullName,
           phone: phone,

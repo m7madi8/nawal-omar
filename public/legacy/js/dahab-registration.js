@@ -89,9 +89,11 @@
         await submitBooking(fullName, phone);
         form.reset();
         closeModal();
+        if (window.nawalThankYou && typeof window.nawalThankYou.show === "function") {
+          window.nawalThankYou.show({ name: fullName });
+        }
         if (successBox) {
           successBox.hidden = false;
-          successBox.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       } catch (_err) {
         console.error(_err);

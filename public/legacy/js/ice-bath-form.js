@@ -396,6 +396,9 @@
       form.style.display = "none";
       if (draftStatus) draftStatus.style.display = "none";
       if (successState) successState.classList.add("visible");
+      if (window.nawalThankYou && typeof window.nawalThankYou.show === "function") {
+        window.nawalThankYou.show({ name: fieldValue("fullName") });
+      }
       localStorage.removeItem(storageKey);
     } catch (_err) {
       alert(getLang() === "ar" ? "تعذّر إرسال الاستمارة. حاولي مرة أخرى." : "Failed to send form. Please try again.");
