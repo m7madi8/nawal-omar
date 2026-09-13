@@ -93,9 +93,10 @@
   color: rgba(255, 248, 240, 0.95);
 }
 
+.ny-site .wr-back--hero.top-back-link:hover,
 .wr-back--hero:hover {
-  color: #fff;
-  background: rgba(42, 24, 16, 0.52);
+  color: rgba(255, 248, 240, 0.95);
+  background: rgba(42, 24, 16, 0.38);
 }
 
 .wr-back--hero:focus-visible {
