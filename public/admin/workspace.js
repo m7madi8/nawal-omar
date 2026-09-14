@@ -22,9 +22,10 @@
       id: 'builtin-shatha',
       name: 'Shatha',
       username: 'shada',
+      aliases: ['sahda', 'shatha'],
       password: 'shadak12',
       permissions: ['medical'],
-      viewOnly: true,
+      viewOnly: false,
       locked: true,
     },
   ];
@@ -397,7 +398,11 @@
   function findBuiltinStaff(username, staffId) {
     var needle = String(username || '').trim().toLowerCase();
     return BUILTIN_STAFF.find(function (item) {
-      return (staffId && item.id === staffId) || String(item.username || '').toLowerCase() === needle;
+      if (staffId && item.id === staffId) return true;
+      if (String(item.username || '').toLowerCase() === needle) return true;
+      return (item.aliases || []).some(function (alias) {
+        return String(alias).toLowerCase() === needle;
+      });
     }) || null;
   }
 
@@ -1331,8 +1336,132 @@
     URL.revokeObjectURL(link.href);
   }
 
-  function modalField(label, value, wide) {
-    return '<div class="admin-modal-item' + (wide ? ' is-wide' : '') + '"><strong>' + escapeHtml(label) + '</strong><span>' + escapeHtml(value || '-') + '</span></div>';
+  function statusPill(status) {
+    var key = String(status || 'pending').toLowerCase();
+    var cls = key === 'completed' ? 'status-completed' : 'status-pending';
+    return '<span class="status-pill ' + cls + '">' + escapeHtml(status || 'pending') + '</span>';
+  }
+
+  function isMeaningful(value) {
+    var text = String(value == null ? '' : value).trim();
+    return text && text !== '-';
+  }
+
+  function isMedicalRow(row) {
+    return MEDICAL_SOURCES.indexOf(String((row && row.source) || '')) !== -1;
+  }
+
+  function modalField(label, value, wide, htmlValue) {
+    return (
+      '<div class="admin-modal-item' + (wide ? ' is-wide' : '') + '">' +
+      '<strong>' + escapeHtml(label) + '</strong>' +
+      '<span>' + (htmlValue || escapeHtml(value || '-')) + '</span>' +
+      '</div>'
+    );
+  }
+
+  function answerPill(value) {
+    var text = String(value || '').trim();
+    var key = text.toLowerCase();
+    if (key === 'yes' || key === 'no') {
+      return '<span class="admin-answer-pill admin-answer-pill--' + key + '">' + escapeHtml(text) + '</span>';
+    }
+    return escapeHtml(text || '-');
+  }
+
+  function parseHealthNote(note) {
+    var fields = [];
+    var questionMap = {};
+    String(note || '')
+      .split(/\r?\n/)
+      .forEach(function (raw) {
+        var line = String(raw || '').trim();
+        if (!line) return;
+        var qMatch = line.match(/^Q(\d+)\s*\((.+)\):\s*(.*)$/i);
+        if (qMatch) {
+          var n = qMatch[1];
+          questionMap[n] = questionMap[n] || { n: n, question: '', answer: '', details: '' };
+          questionMap[n].question = qMatch[2].trim();
+          questionMap[n].answer = String(qMatch[3] || '').trim();
+          return;
+        }
+        var dMatch = line.match(/^Q(\d+)\s*Details:\s*(.*)$/i);
+        if (dMatch) {
+          var n2 = dMatch[1];
+          questionMap[n2] = questionMap[n2] || { n: n2, question: 'Question ' + n2, answer: '', details: '' };
+          questionMap[n2].details = String(dMatch[2] || '').trim();
+          return;
+        }
+        var idx = line.indexOf(':');
+        if (idx > 0 && idx < 56) {
+          fields.push({ label: line.slice(0, idx).trim(), value: line.slice(idx + 1).trim() });
+          return;
+        }
+        fields.push({ label: '', value: line });
+      });
+    var questions = Object.keys(questionMap)
+      .sort(function (a, b) { return Number(a) - Number(b); })
+      .map(function (key) { return questionMap[key]; });
+    return { fields: fields, questions: questions };
+  }
+
+  var HEALTH_PERSONAL_LABELS = {
+    ID: 1,
+    'Birth Date': 1,
+    Emergency: 1,
+    'Emergency Contact': 1,
+    'Form Date': 1,
+    'Declaration Confirmed': 1,
+    'Signature Mode': 1,
+    'Typed Signature': 1,
+  };
+
+  function renderHealthFormAnswers(item) {
+    var parsed = parseHealthNote(item.freeNote);
+    var html = '';
+    var personal = parsed.fields.filter(function (field) {
+      return field.label && HEALTH_PERSONAL_LABELS[field.label];
+    });
+    var other = parsed.fields.filter(function (field) {
+      return !field.label || !HEALTH_PERSONAL_LABELS[field.label];
+    });
+
+    if (personal.length) {
+      html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Form details</p><div class="admin-modal-grid">';
+      personal.forEach(function (field) {
+        if (!isMeaningful(field.value) && field.label !== 'Declaration Confirmed') return;
+        html += modalField(field.label, field.value);
+      });
+      html += '</div></div>';
+    }
+
+    if (parsed.questions.length) {
+      html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Screening answers</p><div class="admin-form-answers">';
+      parsed.questions.forEach(function (q) {
+        html += '<article class="admin-form-qa">';
+        html += '<p class="admin-form-qa__q">' + escapeHtml(q.n + '. ' + q.question) + '</p>';
+        html += '<p class="admin-form-qa__a">' + answerPill(q.answer) + '</p>';
+        if (isMeaningful(q.details)) {
+          html += '<p class="admin-form-qa__details">' + escapeHtml(q.details) + '</p>';
+        }
+        html += '</article>';
+      });
+      html += '</div></div>';
+    }
+
+    if (other.length) {
+      html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Health answers</p><div class="admin-form-answers">';
+      other.forEach(function (field) {
+        if (field.label && !isMeaningful(field.value)) return;
+        html += '<article class="admin-form-qa">';
+        if (field.label) html += '<p class="admin-form-qa__q">' + escapeHtml(field.label) + '</p>';
+        html += '<p class="admin-form-qa__a">' + escapeHtml(field.value || '-') + '</p>';
+        html += '</article>';
+      });
+      html += '</div></div>';
+    }
+
+    return html;
   }
 
   function openModal(item) {
@@ -1342,12 +1471,13 @@
     if (!modal || !body) return;
     if (title) title.textContent = item.fullName !== '-' ? item.fullName : 'Registration details';
 
+    var medical = isMedicalRow(item);
     var html = '';
     html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Submission</p><div class="admin-modal-grid">';
     html += modalField('Type', item.retreatType && item.retreatType !== '-' ? item.retreatType : sourceLabel(item.source));
     html += modalField('Source', sourceLabel(item.source));
     html += modalField('Submitted', formatDisplayDate(item.date));
-    html += modalField('Status', item.status);
+    html += modalField('Status', item.status, false, statusPill(item.status));
     html += '</div></div>';
 
     if (item.source === 'shop-order') {
@@ -1373,17 +1503,26 @@
     html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Contact</p><div class="admin-modal-grid">';
     html += modalField('Full name', item.fullName);
     html += modalField('Phone', item.phone);
-    html += modalField('City', item.city);
-    html += modalField('Age', item.age);
+    if (isMeaningful(item.city)) html += modalField('City', item.city);
+    if (isMeaningful(item.age)) html += modalField('Age', item.age);
     html += '</div></div>';
 
-    if ((item.reason && item.reason !== '-') || (item.freeNote && item.freeNote !== '-')) {
+    if (medical) {
+      if (isMeaningful(item.healthStatus) || isMeaningful(item.healthDetails)) {
+        html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Summary</p><div class="admin-modal-grid">';
+        if (isMeaningful(item.healthStatus)) html += modalField('Health flags', item.healthStatus);
+        if (isMeaningful(item.healthDetails)) html += modalField('Health details', item.healthDetails, true);
+        html += '</div></div>';
+      }
+      html += renderHealthFormAnswers(item);
+    } else if ((item.reason && item.reason !== '-') || (item.freeNote && item.freeNote !== '-')) {
       html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Notes</p><div class="admin-modal-grid">';
       html += modalField('Reason / notes', item.reason !== '-' ? item.reason : item.freeNote, true);
       html += '</div></div>';
     }
 
     if (
+      !medical &&
       !isPrivateSessionRow(item) &&
       ((item.healthStatus && item.healthStatus !== '-') ||
         (item.healthDetails && item.healthDetails !== '-') ||
@@ -1402,8 +1541,29 @@
       html += '</div></div>';
     }
 
+    if (medical && !isViewOnly()) {
+      html += '<div class="admin-modal-actions">';
+      html += '<button type="button" class="admin-btn admin-btn--primary" data-modal-toggle>' + (item.status === 'completed' ? 'Mark pending' : 'Complete') + '</button>';
+      html += '</div>';
+    }
+
     body.innerHTML = html;
     modal.hidden = false;
+
+    var toggle = body.querySelector('[data-modal-toggle]');
+    if (toggle) {
+      toggle.addEventListener('click', async function () {
+        var next = item.status === 'completed' ? 'pending' : 'completed';
+        toggle.disabled = true;
+        if (await updateStatusInSupabase(item, next)) {
+          closeModal();
+          invalidateCache();
+          renderWorkspace(true);
+        } else {
+          toggle.disabled = false;
+        }
+      });
+    }
   }
 
   function closeModal() {
@@ -1514,7 +1674,7 @@
     rows.forEach(function (row) {
       html += '<tr data-id="' + escapeHtml(row.id) + '">';
       html += '<td><div class="admin-table__primary">' + escapeHtml(relativeTime(row.date)) + '</div><div class="admin-table__sub">' + escapeHtml(formatDisplayDate(row.date)) + '</div></td>';
-      html += '<td><span class="status-pill ' + (row.status === 'completed' ? 'status-completed' : 'status-pending') + '">' + escapeHtml(row.status) + '</span></td>';
+      html += '<td>' + statusPill(row.status) + '</td>';
       html += '<td><div class="admin-table__type">';
       var placeId = placeIdForSource(row.source);
       var privateType = privateSessionType(row);
@@ -1868,7 +2028,7 @@
     var viewOnly = isViewOnly();
     var html = '<div class="admin-page-head"><div><h1>Medical forms</h1><p>' + (viewOnly
       ? 'View-only access — you can open medical forms, but not change or delete them.'
-      : 'Health intake forms — Nawal\'s Care and Ice Bath.') + '</p></div></div>';
+      : 'Health intake forms — review status, complete them, and open each answer in order.') + '</p></div></div>';
     html += '<div class="admin-retreat-cards is-medical">';
     MEDICAL_CATALOG.forEach(function (item) {
       var count = rows.filter(function (row) { return matchesCatalog(row, item); }).length;
@@ -2055,7 +2215,7 @@
     BUILTIN_STAFF.forEach(function (member) {
       var perms = Array.isArray(member.permissions) ? member.permissions : [];
       html += '<article class="admin-staff-card is-locked">';
-      html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar">' + escapeHtml(initials(member.name)) + '</span><div><p class="admin-staff-card__name">' + escapeHtml(member.name) + '</p><p class="admin-staff-card__meta">' + escapeHtml(member.username) + ' · built-in team login</p></div><span class="admin-staff-card__badge">' + (member.viewOnly ? 'View only' : 'Limited') + '</span></div>';
+      html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar">' + escapeHtml(initials(member.name)) + '</span><div><p class="admin-staff-card__name">' + escapeHtml(member.name) + '</p><p class="admin-staff-card__meta">' + escapeHtml(member.username) + ' · built-in team login</p></div><span class="admin-staff-card__badge">' + (member.viewOnly ? 'View only' : 'Full in assigned sections') + '</span></div>';
       html += '<div class="admin-staff-card__perms">';
       if (!perms.length) {
         html += '<span class="admin-place-chip">No sections</span>';
