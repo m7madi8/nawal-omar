@@ -189,11 +189,15 @@ export default function Page() {
           <article class="wr-booking__block wr-stay-card">
             <div class="wr-stay-gallery" data-stay-gallery data-i18n-attr="aria-label:retreat_wadi_stay1_gallery_label" aria-label="Bubbles room photos">
               <div class="wr-stay-gallery__track" data-stay-track>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0010.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0008.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0009.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0013.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0014.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0001.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0002.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0003.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0004.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0005.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0006.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0007.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0011.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0012.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
               </div>
               <div class="wr-stay-gallery__controls">
                 <button type="button" class="wr-stay-gallery__btn wr-stay-gallery__btn--prev" data-stay-prev hidden data-i18n-attr="aria-label:gallery_prev" aria-label="Previous image">←</button>
@@ -219,15 +223,11 @@ export default function Page() {
           <article class="wr-booking__block wr-stay-card">
             <div class="wr-stay-gallery" data-stay-gallery data-i18n-attr="aria-label:retreat_wadi_stay2_gallery_label" aria-label="Panorama room photos">
               <div class="wr-stay-gallery__track" data-stay-track>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0001.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0002.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0003.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0004.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0005.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0006.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0007.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0011.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
-                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0012.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0010.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0008.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0009.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0013.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0014.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="1200" height="800" loading="lazy" decoding="async"></figure>
               </div>
               <div class="wr-stay-gallery__controls">
                 <button type="button" class="wr-stay-gallery__btn wr-stay-gallery__btn--prev" data-stay-prev hidden data-i18n-attr="aria-label:gallery_prev" aria-label="Previous image">←</button>
@@ -357,14 +357,14 @@ export default function Page() {
         </div>
         <div class="wr-cta-panel__rooms" aria-label="Room options">
           <article class="wr-cta-price-card wr-cta-price-card--premium">
-            <img class="wr-cta-price-card__photo" src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0010.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="800" height="520" loading="lazy" decoding="async">
+            <img class="wr-cta-price-card__photo" src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0001.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="800" height="520" loading="lazy" decoding="async">
             <div class="wr-cta-price-card__copy">
               <p class="wr-cta-price-card__line" data-i18n="retreat_wadi_price_bubbles">Bubbles Room — 3,850 ₪</p>
               <p class="wr-cta-price-card__note" data-i18n="retreat_wadi_cta_per_person">per person · double room</p>
             </div>
           </article>
           <article class="wr-cta-price-card">
-            <img class="wr-cta-price-card__photo" src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0001.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="800" height="520" loading="lazy" decoding="async">
+            <img class="wr-cta-price-card__photo" src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0010.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="800" height="520" loading="lazy" decoding="async">
             <div class="wr-cta-price-card__copy">
               <p class="wr-cta-price-card__line" data-i18n="retreat_wadi_price_panorama">Panorama Room — 3,650 ₪</p>
               <p class="wr-cta-price-card__note" data-i18n="retreat_wadi_cta_per_person">per person · double room</p>
