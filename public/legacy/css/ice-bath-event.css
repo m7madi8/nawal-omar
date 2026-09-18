@@ -1003,6 +1003,53 @@ html[dir="rtl"] .ib-page {
   color: var(--ib-muted);
 }
 
+/* ── Cancellation policy ── */
+.ib-policy {
+  background: color-mix(in srgb, var(--ib-mist) 55%, var(--bg-temp) 45%);
+}
+
+.ib-policy__head {
+  max-width: 36rem;
+  margin: 0 auto 1.35rem;
+  text-align: center;
+}
+
+.ib-policy__list {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+  max-width: 40rem;
+}
+
+.ib-policy__list li {
+  position: relative;
+  padding-inline-start: 1.15rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--ib-ink);
+}
+
+.ib-policy__list li::before {
+  content: "";
+  position: absolute;
+  top: 0.7rem;
+  inset-inline-start: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--ib-accent-soft);
+}
+
+.ib-policy__note {
+  margin: 1.15rem auto 0;
+  max-width: 40rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ib-muted);
+}
+
 /* ── For / Not for ── */
 .ib-audience {
   background: color-mix(in srgb, var(--ib-frost) 80%, var(--bg-temp) 20%);
@@ -1595,7 +1642,9 @@ html[dir="rtl"] .ib-page :is(
   .ib-includes__item,
   .ib-cta__text,
   .ib-why__body,
-  .ib-audience__list li
+  .ib-audience__list li,
+  .ib-policy__list li,
+  .ib-policy__note
 ) {
   line-height: 1.85;
 }
