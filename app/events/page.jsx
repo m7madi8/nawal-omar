@@ -32,24 +32,18 @@ const html = `
           <div class="ny-door__copy">
             <span class="eyebrow" data-en="Event" data-ar="فعالية">Event</span>
             <h2 class="ny-door__title" data-en="Sound Healing" data-ar="العلاج بالصوت">Sound Healing</h2>
-            <p class="ny-door__text" data-en="Friday 25 September · 18:30 · Haifa, Atlit beach — open to everyone." data-ar="الجمعة 25.9 · 18:30 · حيفا، شط عتليت — مناسبة للجميع.">Friday 25 September · 18:30 · Haifa, Atlit beach — open to everyone.</p>
+            <p class="ny-door__text" data-en="Friday 25 September · 18:00 · Haifa, Atlit beach — open to everyone." data-ar="الجمعة 25.9 · 18:00 · حيفا، شط عتليت — مناسبة للجميع.">Friday 25 September · 18:00 · Haifa, Atlit beach — open to everyone.</p>
             <span class="ny-door__cta" data-en="View details" data-ar="عرض التفاصيل">View details</span>
           </div>
         </a>
 
-        <a href="/events/ice-bath" class="ny-door reveal">
-          <div class="ny-door__media" aria-hidden="true">
-            <img src="/media/events/ice-bath/hero.jpg" alt="" width="1600" height="1067" loading="lazy" decoding="async">
-          </div>
-          <div class="ny-door__scrim" aria-hidden="true"></div>
-          <span class="ny-door__num" aria-hidden="true">02</span>
-          <div class="ny-door__copy">
-            <span class="eyebrow" data-en="Event" data-ar="فعالية">Event</span>
-            <h2 class="ny-door__title" data-en="Ice Bath" data-ar="حمام الثلج">Ice Bath</h2>
-            <p class="ny-door__text" data-en="Saturday 19 September · Day retreat — yoga, breathwork, ice bath & sauna in Hofit." data-ar="السبت 19.9 · ريتريت يوم — يوغا، تنفّس، حمام ثلج وساونا في حوفيت.">Saturday 19 September · Day retreat — yoga, breathwork, ice bath & sauna in Hofit.</p>
-            <span class="ny-door__cta" data-en="View details" data-ar="عرض التفاصيل">View details</span>
-          </div>
-        </a>
+        <article class="ny-door" hidden data-event-listing-hidden="ice-bath">
+          <a href="/events/ice-bath">
+            <div class="ny-door__media" aria-hidden="true">
+              <img src="/media/events/ice-bath/hero.jpg" alt="" width="1600" height="1067" loading="lazy" decoding="async">
+            </div>
+          </a>
+        </article>
 
         <article class="ny-door" hidden data-event-listing-hidden="nature-chocolate">
           <a href="/events/nature-chocolate">

@@ -37,19 +37,13 @@ const html = `
           </div>
         </a>
 
-        <a href="/register/ice-bath" class="ny-door reveal reveal-delay-1">
-          <div class="ny-door__media" aria-hidden="true">
-            <img src="/media/events/ice-bath/health-form.jpg" alt="" width="1600" height="1200" loading="lazy" decoding="async">
-          </div>
-          <div class="ny-door__scrim" aria-hidden="true"></div>
-          <span class="ny-door__num" aria-hidden="true">02</span>
-          <div class="ny-door__copy">
-            <span class="eyebrow" data-en="Ice Bath" data-ar="حوض الثلج">Ice Bath</span>
-            <h2 class="ny-door__title" data-en="Health Declaration" data-ar="الإقرار الصحي">Health Declaration</h2>
-            <p class="ny-door__text" data-en="Required health form before joining the Ice Bath day retreat." data-ar="استمارة صحية مطلوبة قبل الانضمام إلى يوم حوض الثلج.">Required health form before joining the Ice Bath day retreat.</p>
-            <span class="ny-door__cta" data-en="Open form" data-ar="افتحي الاستمارة">Open form</span>
-          </div>
-        </a>
+        <article class="ny-door" hidden data-event-listing-hidden="ice-bath-health">
+          <a href="/register/ice-bath">
+            <div class="ny-door__media" aria-hidden="true">
+              <img src="/media/events/ice-bath/health-form.jpg" alt="" width="1600" height="1200" loading="lazy" decoding="async">
+            </div>
+          </a>
+        </article>
       </div>
     </div>
   </section>
