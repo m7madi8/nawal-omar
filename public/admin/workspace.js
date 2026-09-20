@@ -38,6 +38,7 @@
     'private-sessions': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.8-3 3.2-4.8 6.5-4.8s5.7 1.8 6.5 4.8"/><path d="M17.2 11.2 19 9.4"/><path d="M19 9.4v2.8"/></svg>',
     community: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><path d="M2.8 19c.7-3 3-4.8 6.2-4.8s5.5 1.8 6.2 4.8"/><circle cx="17" cy="8" r="2.2"/><path d="M15.6 14.4c2.6.3 4.4 2 5 4.6"/></svg>',
     medical: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 5-8.8 10.4-8.8 10.4S3.2 13.6 3.2 8.6a4.6 4.6 0 0 1 8.4-2.6 4.6 4.6 0 0 1 8.4 2.6 4.6 4.6 0 0 1-.2 1"/><path d="M6 11h2.2l1.3-2.4L11 13l1.1-2h2.4"/></svg>',
+    feedback: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.8l-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 2.8Z"/><path d="M5 19.5h14"/></svg>',
     content: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h8l4 4v13a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z"/><path d="M14 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 15.5h7M8.5 18h4"/></svg>',
     settings: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H4a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H10a1.7 1.7 0 0 0 1-1.6V4a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9V10a1.7 1.7 0 0 0 1.6 1H20a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg>',
     shop: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.2 11.2A2 2 0 0 1 16.8 21H7.2a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8 8V6.5A4 4 0 0 1 12 2.5 4 4 0 0 1 16 6.5V8"/></svg>',
@@ -56,6 +57,7 @@
     { id: 'private-sessions', path: '/admin/private-sessions', label: 'Private Sessions', group: 'Bookings' },
     { id: 'community', path: '/admin/community', label: 'Community', group: 'People' },
     { id: 'medical', path: '/admin/medical', label: 'Medical forms', group: 'Intake' },
+    { id: 'feedback', path: '/admin/feedback', label: 'Feedback', group: 'Intake' },
     { id: 'shop', path: '/admin/shop', label: 'Shop', group: 'Commerce' },
     { id: 'orders', path: '/admin/orders', label: 'Orders', group: 'Commerce' },
     { id: 'sales', path: '/admin/sales', label: 'Sales & profit', group: 'Commerce' },
@@ -72,10 +74,11 @@
     { id: 'private-sessions', label: 'Private Sessions', hint: 'Private yoga, sound healing, ice bath' },
     { id: 'community', label: 'Community', hint: 'Returning guests' },
     { id: 'medical', label: 'Medical forms', hint: 'Health intake' },
+    { id: 'feedback', label: 'Feedback', hint: 'Post-experience evaluations' },
     { id: 'shop', label: 'Shop', hint: 'Catalog and products' },
     { id: 'orders', label: 'Orders', hint: 'Fulfill shop orders' },
     { id: 'sales', label: 'Sales & profit', hint: 'Revenue and profit' },
-    { id: 'content', label: 'Content', hint: 'Feedback and pages' },
+    { id: 'content', label: 'Content', hint: 'Public pages and links' },
   ];
 
   var SOURCE_LABELS = {
@@ -134,6 +137,12 @@
     'yoga-class-request': 'haifa-yoga',
     'sound-healing-registration': 'sound-healing',
     'nature-chocolate-registration': 'nature-chocolate',
+    'feedback-dahab': 'dahab',
+    'feedback-wadi-rum': 'wadi-rum',
+    'feedback-zanzibar': 'zanzibar',
+    'feedback-sound-healing': 'sound-healing',
+    'feedback-nature-chocolate': 'nature-chocolate',
+    'feedback-ice': 'ice-bath',
     'shop-order': 'shop',
   };
 
@@ -264,6 +273,68 @@
     'feedback-sound-healing',
     'feedback-nature-chocolate',
     'feedback-ice',
+  ];
+  var FEEDBACK_CATALOG = [
+    {
+      id: 'dahab',
+      name: 'Dahab Retreat',
+      source: 'feedback-dahab',
+      image: '/media/dahab/cover.jpeg',
+      dates: 'Post-retreat evaluation',
+      location: 'Retreat',
+      formPath: '/feedback/dahab',
+      schedule: 'open',
+    },
+    {
+      id: 'wadi-rum',
+      name: 'Wadi Rum Retreat',
+      source: 'feedback-wadi-rum',
+      image: '/media/wadi-rum/cover.jpg',
+      dates: 'Post-retreat evaluation',
+      location: 'Retreat',
+      formPath: '/feedback/wadi-rum',
+      schedule: 'open',
+    },
+    {
+      id: 'zanzibar',
+      name: 'Zanzibar Retreat',
+      source: 'feedback-zanzibar',
+      image: '/media/zanzibar/NUR-Beach-Hotel---Jambiani.jpg',
+      dates: 'Post-retreat evaluation',
+      location: 'Retreat',
+      formPath: '/feedback/zanzibar',
+      schedule: 'past',
+    },
+    {
+      id: 'sound-healing',
+      name: 'Sound Healing',
+      source: 'feedback-sound-healing',
+      image: '/media/events/sound-healing-01.jpg',
+      dates: 'Post-session evaluation',
+      location: 'Event',
+      formPath: '/feedback/sound-healing',
+      schedule: 'open',
+    },
+    {
+      id: 'nature-chocolate',
+      name: 'Nature & Chocolate',
+      source: 'feedback-nature-chocolate',
+      image: '/media/events/nature-chocolate-hero.jpg',
+      dates: 'Post-event evaluation',
+      location: 'Event',
+      formPath: '/feedback/nature-chocolate',
+      schedule: 'past',
+    },
+    {
+      id: 'ice-bath',
+      name: 'Ice Bath Experience',
+      source: 'feedback-ice',
+      image: '/media/events/ice-bath/hero.jpg',
+      dates: 'Post-experience evaluation',
+      location: 'Event',
+      formPath: '/feedback/ice-bath',
+      schedule: 'open',
+    },
   ];
   var BOOKING_SOURCES = RETREAT_SOURCES.concat(EVENT_SOURCES).concat(MEDICAL_SOURCES).filter(function (source, index, list) {
     return list.indexOf(source) === index;
@@ -1024,7 +1095,7 @@
   }
 
   function findCatalogItemBySource(source) {
-    var catalogs = RETREAT_CATALOG.concat(EVENT_CATALOG).concat(MEDICAL_CATALOG);
+    var catalogs = RETREAT_CATALOG.concat(EVENT_CATALOG).concat(MEDICAL_CATALOG).concat(FEEDBACK_CATALOG);
     for (var i = 0; i < catalogs.length; i += 1) {
       var item = catalogs[i];
       if (item.source === source) return item;
@@ -1120,6 +1191,7 @@
     var q = String(filters.q || '').trim().toLowerCase();
     return rows.filter(function (row) {
       if (view === 'medical' && MEDICAL_SOURCES.indexOf(row.source) === -1) return false;
+      if (view === 'feedback' && FEEDBACK_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'retreats' && RETREAT_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'events' && EVENT_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'private-sessions' && !isPrivateSessionRow(row)) return false;
@@ -1240,6 +1312,7 @@
     var events = rows.filter(function (r) { return EVENT_SOURCES.indexOf(r.source) !== -1; });
     var privateSessions = rows.filter(function (r) { return isPrivateSessionRow(r); });
     var shop = rows.filter(function (r) { return SHOP_SOURCES.indexOf(r.source) !== -1; });
+    var feedback = rows.filter(function (r) { return FEEDBACK_SOURCES.indexOf(r.source) !== -1; });
     var returning = buildReturningPeople(rows);
 
     var byType = {};
@@ -1279,6 +1352,10 @@
       shop: shop.length,
       shopPending: shop.filter(function (r) { return r.status !== 'completed'; }).length,
       shopPaid: shop.filter(function (r) { return parseShopOrder(r).paid || r.yogaExperience === 'paid'; }).length,
+      feedback: feedback.length,
+      feedbackPending: feedback.filter(function (r) { return r.status !== 'completed'; }).length,
+      feedbackWeek: feedback.filter(function (r) { return inRange(r.date, '7d'); }).length,
+      feedbackAvg: feedbackAverageRating(feedback),
       community: returning.length,
       communityPending: returning.filter(function (p) { return p.pending > 0; }).length,
       byType: byType,
@@ -1349,6 +1426,64 @@
 
   function isMedicalRow(row) {
     return MEDICAL_SOURCES.indexOf(String((row && row.source) || '')) !== -1;
+  }
+
+  function isFeedbackRow(row) {
+    return FEEDBACK_SOURCES.indexOf(String((row && row.source) || '')) !== -1;
+  }
+
+  function parseFeedbackNote(note) {
+    var fields = [];
+    String(note || '')
+      .split(/\r?\n/)
+      .forEach(function (raw) {
+        var line = String(raw || '').trim();
+        if (!line) return;
+        var idx = line.indexOf(':');
+        if (idx > 0) {
+          fields.push({ label: line.slice(0, idx).trim(), value: line.slice(idx + 1).trim() });
+          return;
+        }
+        fields.push({ label: '', value: line });
+      });
+    return fields.filter(function (item) { return isMeaningful(item.value); });
+  }
+
+  function parseOverallRatingFromNote(note) {
+    var text = String(note || '');
+    var match = text.match(/التقييم الإجمالي:\s*(\d)\/5/) || text.match(/Overall:\s*(\d)\/5/i);
+    return match ? parseInt(match[1], 10) : null;
+  }
+
+  function feedbackAverageRating(rows) {
+    var ratings = [];
+    rows.forEach(function (row) {
+      var value = parseOverallRatingFromNote(row.freeNote);
+      if (value) ratings.push(value);
+    });
+    if (!ratings.length) return null;
+    var sum = ratings.reduce(function (acc, n) { return acc + n; }, 0);
+    return Math.round((sum / ratings.length) * 10) / 10;
+  }
+
+  function renderFeedbackAnswers(item) {
+    var parsed = parseFeedbackNote(item.freeNote);
+    if (!parsed.length) {
+      return (
+        '<div class="admin-modal-section"><p class="admin-modal-section__title">Feedback responses</p><div class="admin-modal-grid">' +
+        modalField('Responses', item.freeNote && item.freeNote !== '-' ? item.freeNote : '-', true) +
+        '</div></div>'
+      );
+    }
+    var html = '<div class="admin-modal-section"><p class="admin-modal-section__title">Feedback responses</p><div class="admin-form-qa-list">';
+    parsed.forEach(function (field) {
+      html += '<article class="admin-form-qa">';
+      if (field.label) html += '<p class="admin-form-qa__q">' + escapeHtml(field.label) + '</p>';
+      html += '<p class="admin-form-qa__a">' + escapeHtml(field.value) + '</p>';
+      html += '</article>';
+    });
+    html += '</div></div>';
+    return html;
   }
 
   function modalField(label, value, wide, htmlValue) {
@@ -1469,7 +1604,11 @@
     var body = document.getElementById('adminModalBody');
     var title = document.getElementById('adminModalTitle');
     if (!modal || !body) return;
-    if (title) title.textContent = item.fullName !== '-' ? item.fullName : 'Registration details';
+    if (title) {
+      title.textContent = isFeedbackRow(item)
+        ? ('Feedback · ' + (item.fullName !== '-' ? item.fullName : sourceLabel(item.source)))
+        : (item.fullName !== '-' ? item.fullName : 'Registration details');
+    }
 
     var medical = isMedicalRow(item);
     var html = '';
@@ -1515,6 +1654,8 @@
         html += '</div></div>';
       }
       html += renderHealthFormAnswers(item);
+    } else if (isFeedbackRow(item)) {
+      html += renderFeedbackAnswers(item);
     } else if ((item.reason && item.reason !== '-') || (item.freeNote && item.freeNote !== '-')) {
       html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Notes</p><div class="admin-modal-grid">';
       html += modalField('Reason / notes', item.reason !== '-' ? item.reason : item.freeNote, true);
@@ -1592,6 +1733,8 @@
         var badge = '';
         if (item.id === 'medical' && stats.medicalPending > 0) {
           badge = '<span class="admin-nav-badge">' + stats.medicalPending + '</span>';
+        } else if (item.id === 'feedback' && stats.feedbackPending > 0) {
+          badge = '<span class="admin-nav-badge">' + stats.feedbackPending + '</span>';
         } else if (item.id === 'retreats' && stats.retreatsPending > 0) {
           badge = '<span class="admin-nav-badge">' + stats.retreatsPending + '</span>';
         } else if (item.id === 'events' && stats.eventsPending > 0) {
@@ -1687,7 +1830,12 @@
       var typePrimary = isPrivateSessionRow(row) ? privateSessionLabel(row) : sourceLabel(row.source);
       var typeSub = isPrivateSessionRow(row)
         ? ('Participants: ' + (row.age && row.age !== '-' ? row.age : '—'))
-        : (row.retreatType || '-');
+        : isFeedbackRow(row)
+          ? (function () {
+            var rating = parseOverallRatingFromNote(row.freeNote);
+            return rating ? ('Overall rating: ' + rating + '/5') : (row.retreatType || '-');
+          })()
+          : (row.retreatType || '-');
       html += '<div><div class="admin-table__primary">' + escapeHtml(typePrimary) + '</div><div class="admin-table__sub">' + escapeHtml(typeSub) + '</div></div></div></td>';
       html += '<td><div class="admin-table__person"><span class="admin-table__avatar">' + escapeHtml(initials(row.fullName)) + '</span><div><div class="admin-table__primary">' + escapeHtml(row.fullName) + '</div><div class="admin-table__sub">' + escapeHtml(row.phone) + '</div></div></div></td>';
       html += '<td><div class="admin-row-actions">';
@@ -1817,6 +1965,7 @@
     html += '<div class="admin-attention-item"><span>Retreat reservations pending</span><strong>' + stats.retreatsPending + '</strong></div>';
     html += '<div class="admin-attention-item"><span>Events & Haifa yoga pending</span><strong>' + stats.eventsPending + '</strong></div>';
     html += '<div class="admin-attention-item"><span>Shop orders pending</span><strong>' + stats.shopPending + '</strong></div>';
+    html += '<div class="admin-attention-item"><span>Feedback awaiting review</span><strong>' + stats.feedbackPending + '</strong></div>';
     html += '<div class="admin-attention-item"><span>Returning guests</span><strong>' + stats.community + '</strong></div>';
     html += '</div></section></div>';
 
@@ -2047,6 +2196,37 @@
     bindTableActions(root, rows);
   }
 
+  function renderFeedback(root, rows, stats, filters) {
+    var filtered = filterRows(rows, filters, 'feedback');
+    var feedbackRows = rows.filter(function (row) { return FEEDBACK_SOURCES.indexOf(row.source) !== -1; });
+    var avgLabel = stats.feedbackAvg ? stats.feedbackAvg + '/5' : '—';
+    var html = '<div class="admin-page-head"><div><h1>Feedback</h1><p>Post-experience evaluations from retreats and events — ratings, feelings, and messages from participants.</p></div><div class="admin-page-actions"><a href="/feedback" class="admin-btn admin-btn--ghost" target="_blank" rel="noopener">Feedback hub</a><a href="/admin/content" class="admin-btn admin-btn--ghost">Share links</a></div></div>';
+    html += '<div class="admin-stat-row">';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Total responses</p><strong class="admin-stat__value">' + stats.feedback + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Last 7 days</p><strong class="admin-stat__value">' + stats.feedbackWeek + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Awaiting review</p><strong class="admin-stat__value">' + stats.feedbackPending + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Avg. overall rating</p><strong class="admin-stat__value">' + avgLabel + '</strong></article>';
+    html += '</div>';
+    html += '<div class="admin-retreat-cards is-feedback">';
+    FEEDBACK_CATALOG.forEach(function (item) {
+      var count = feedbackRows.filter(function (row) { return row.source === item.source; }).length;
+      var pending = feedbackRows.filter(function (row) { return row.source === item.source && row.status !== 'completed'; }).length;
+      var avg = feedbackAverageRating(feedbackRows.filter(function (row) { return row.source === item.source; }));
+      html += '<article class="admin-retreat-card"><div class="admin-retreat-card__media">' + catalogCardImage(item) + '</div><div class="admin-retreat-card__body"><h3>' + escapeHtml(item.name) + '</h3><p>' + escapeHtml(item.dates) + ' · ' + escapeHtml(item.location) + '</p><div class="admin-retreat-card__stats"><span>' + count + ' responses</span><span>' + (avg ? avg + '/5 avg' : '—') + '</span></div><p class="admin-retreat-card__meta"><span>' + pending + ' to review</span> · <a href="' + escapeHtml(item.formPath) + '" target="_blank" rel="noopener">Open form</a></p></div></article>';
+    });
+    html += '</div>';
+    html += renderFilterBar(filters, {
+      status: ['all', 'pending', 'completed'],
+      sources: FEEDBACK_SOURCES,
+    });
+    html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>All responses</h2><p>Open a row to read ratings and written answers. Mark complete after you have reviewed.</p></div></div>';
+    html += renderTable(filtered, 'No feedback responses match these filters.');
+    html += '</section>';
+    root.innerHTML = html;
+    bindFilters(root, rows);
+    bindTableActions(root, rows);
+  }
+
   function renderSimpleListPage(root, rows, filters, view, title, subtitle, sources, catalog) {
     var filtered = filterRows(rows, filters, view);
     var html = '<div class="admin-page-head"><div><h1>' + escapeHtml(title) + '</h1><p>' + escapeHtml(subtitle) + '</p></div></div>';
@@ -2160,7 +2340,7 @@
   }
 
   function renderContent(root) {
-    root.innerHTML = '<div class="admin-page-head"><div><h1>Content</h1><p>Feedback links hub and future editorial tools.</p></div><div class="admin-page-actions"><a href="/feedback" class="admin-btn admin-btn--primary">Open feedback hub</a></div></div><div class="admin-settings-grid"><article class="admin-settings-card"><h3>' + ICONS.content + ' Feedback pages</h3><p>Share post-experience evaluation links for retreats and events. Responses flow into the admin dashboard via Supabase.</p><p style="margin-top:10px"><a href="/feedback">/feedback</a></p></article><article class="admin-settings-card"><h3>Coming soon</h3><p>Manage homepage highlights, journal posts, and featured experiences from this section.</p></article></div>';
+    root.innerHTML = '<div class="admin-page-head"><div><h1>Content</h1><p>Public links and future editorial tools.</p></div><div class="admin-page-actions"><a href="/feedback" class="admin-btn admin-btn--primary" target="_blank" rel="noopener">Feedback hub</a><a href="/admin/feedback" class="admin-btn admin-btn--ghost">View responses</a></div></div><div class="admin-settings-grid"><article class="admin-settings-card"><h3>' + ICONS.content + ' Feedback pages</h3><p>Share post-experience evaluation links for retreats and events. Participant answers appear in <a href="/admin/feedback">Feedback</a> in the sidebar.</p><p style="margin-top:10px"><a href="/feedback">/feedback</a></p></article><article class="admin-settings-card"><h3>Coming soon</h3><p>Manage homepage highlights, journal posts, and featured experiences from this section.</p></article></div>';
   }
 
   function permissionLabel(id) {
@@ -2546,6 +2726,7 @@
       else if (view === 'private-sessions') renderPrivateSessions(root, rows, stats, filters);
       else if (view === 'community') renderCommunity(root, rows, stats, filters);
       else if (view === 'medical') renderMedical(root, rows, filters);
+      else if (view === 'feedback') renderFeedback(root, rows, stats, filters);
       else if (view === 'shop') renderShop(root, rows, stats, filters);
       else if (view === 'orders') renderOrders(root, rows, stats, filters);
       else if (view === 'sales') renderSales(root, rows, filters);

@@ -993,6 +993,26 @@ svg { display: block; }
   font-weight: 500;
 }
 
+.admin-retreat-card__meta {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--admin-muted);
+}
+
+.admin-retreat-card__meta a {
+  color: var(--admin-sage-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.admin-retreat-card__meta a:hover {
+  text-decoration: underline;
+}
+
+.admin-retreat-cards.is-feedback {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
 .admin-progress-list { display: grid; gap: 11px; margin-bottom: 14px; }
 
 .admin-progress-row {
