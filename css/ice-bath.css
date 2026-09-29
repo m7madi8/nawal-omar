@@ -1,0 +1,572 @@
+/* Ice Bath event cover card + dedicated health form page */
+
+.workshop-card-image-wrap--ice {
+  position: relative;
+  min-height: 12rem;
+  background: linear-gradient(155deg, #1e3a42 0%, #2a555f 42%, #5a9aaa 100%);
+}
+
+.ice-card-visual {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.28), transparent 42%),
+    radial-gradient(circle at 70% 70%, rgba(232, 241, 243, 0.22), transparent 48%),
+    linear-gradient(180deg, transparent 55%, rgba(15, 30, 36, 0.35));
+}
+
+.ice-card-visual::after {
+  content: "Ice Bath";
+  position: absolute;
+  inset-inline-start: 1.15rem;
+  bottom: 1.1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.02em;
+}
+
+[dir="rtl"] .ice-card-visual::after {
+  font-family: Amiri, Georgia, serif;
+  content: "حمام ثلج";
+}
+
+.workshop-card-image-wrap--health {
+  position: relative;
+  min-height: 12rem;
+  background: linear-gradient(155deg, #3d555c 0%, #5a737a 45%, #c4a484 100%);
+}
+
+.health-card-visual {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.22), transparent 40%),
+    linear-gradient(180deg, transparent 50%, rgba(30, 40, 42, 0.4));
+}
+
+.health-card-visual::after {
+  content: "Health Form";
+  position: absolute;
+  inset-inline-start: 1.15rem;
+  bottom: 1.1rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.94);
+  letter-spacing: 0.02em;
+}
+
+[dir="rtl"] .health-card-visual::after {
+  font-family: Amiri, Georgia, serif;
+  content: "استمارة صحية";
+}
+
+.ib-form-page {
+  --ice-ink: #1e3a42;
+  --ice-muted: #5a737a;
+  --ice-accent: #3d7a88;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ice-ink);
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 0%, rgba(61, 122, 136, 0.16), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 90% 100%, rgba(30, 58, 66, 0.1), transparent 50%),
+    linear-gradient(180deg, #eef4f6 0%, #f4f8f9 45%, #faf8f5 100%);
+}
+
+.ib-form-page-shell {
+  width: min(780px, 100%);
+  margin-inline: auto;
+  padding: 1.25rem 1rem 2.5rem;
+}
+
+.ib-form-top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.ib-back-link {
+  color: #2a555f;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.ib-back-link:hover {
+  color: #1e3a42;
+}
+
+.ice-bath-form-card {
+  background: #fffdf9;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(61, 122, 136, 0.2);
+  box-shadow: 0 18px 42px rgba(30, 58, 66, 0.08);
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .ice-bath-form-card {
+    padding: 1.75rem 1.85rem 1.85rem;
+  }
+}
+
+.ice-bath-form-header h1,
+.ice-bath-form-header h2 {
+  margin: 0 0 0.4rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  color: var(--ice-ink, #1e3a42);
+}
+
+.ice-bath-form-header p {
+  margin: 0;
+  color: var(--ice-muted, #5a737a);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.ib-progress-wrap {
+  margin: 1.35rem 0 0.65rem;
+}
+
+.ib-progress-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  color: var(--ice-muted, #5a737a);
+  margin-bottom: 0.5rem;
+}
+
+.ib-progress-bar {
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  background: #e4eef0;
+  overflow: hidden;
+}
+
+.ib-progress-fill {
+  height: 100%;
+  width: 16.66%;
+  background: linear-gradient(90deg, #5a9aaa, #2a555f);
+  border-radius: inherit;
+  transition: width 360ms ease;
+}
+
+.ib-step-viewport {
+  position: relative;
+  min-height: 320px;
+  margin-top: 1rem;
+}
+
+.ib-step-panel {
+  display: none;
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+.ib-step-panel.active {
+  display: block;
+  animation: ibEnterStep 400ms ease both;
+}
+
+.ib-step-panel.leaving {
+  display: block;
+  animation: ibLeaveStep 320ms ease both;
+}
+
+.ib-step-title {
+  margin: 0 0 0.9rem;
+  font-size: 1.1rem;
+  color: #1e3a42;
+  font-weight: 600;
+}
+
+.ib-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.ib-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ib-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ib-field label {
+  font-size: 0.88rem;
+  color: #3d555c;
+  font-weight: 600;
+}
+
+.ib-field input,
+.ib-field select,
+.ib-field textarea {
+  border: 1px solid #d5e2e5;
+  background: #fffdf9;
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+  color: #1e3a42;
+  font-family: inherit;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.ib-field textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.ib-field input:focus,
+.ib-field select:focus,
+.ib-field textarea:focus {
+  outline: none;
+  border-color: #3d7a88;
+  box-shadow: 0 0 0 3px rgba(61, 122, 136, 0.16);
+}
+
+.ib-radio-group,
+.ib-checks {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.ib-radio-group.ib-radio-inline {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ib-radio-group label,
+.ib-checks label {
+  border: 1px solid #d5e2e5;
+  background: #fffdf9;
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-weight: 500;
+  color: #3d555c;
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.ib-declaration {
+  display: grid;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid #d5e2e5;
+  border-radius: 0.95rem;
+  background: #f7fbfc;
+}
+
+.ib-declaration p {
+  margin: 0;
+  color: #2f4b52;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.ib-chapter-label {
+  margin: 0 0 0.35rem;
+  color: #3d7a88;
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.ib-screen-q {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid #e0eaec;
+  border-radius: 0.9rem;
+  background: #fffdf9;
+}
+
+.ib-screen-q-text {
+  margin: 0;
+  color: #2f4b52;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.ib-screen-q-num {
+  color: #3d7a88;
+}
+
+.ib-field .error,
+.ib-checks label.error,
+.ib-radio-group.error {
+  border-color: rgba(190, 90, 90, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(190, 90, 90, 0.12) !important;
+}
+
+.ib-shake {
+  animation: ibShake 340ms ease;
+}
+
+.ib-hint {
+  color: #5a737a;
+  font-size: 0.82rem;
+  margin-top: 0.25rem;
+}
+
+.ib-signature-tools {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.ib-chip {
+  border: 1px solid #d5e2e5;
+  background: #f3f8f9;
+  color: #3d555c;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.86rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ib-chip.active {
+  background: #dcecef;
+  border-color: #a8c8d0;
+  color: #1e3a42;
+}
+
+.ib-signature-canvas-wrap {
+  border: 1px dashed #b7ced4;
+  border-radius: 0.85rem;
+  padding: 0.65rem;
+  background: #f7fbfc;
+}
+
+#ib-signature-canvas {
+  width: 100%;
+  height: 140px;
+  border-radius: 0.6rem;
+  background: #fffdf9;
+  border: 1px solid #d5e2e5;
+  display: block;
+  touch-action: none;
+}
+
+.ib-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.65rem;
+  justify-content: space-between;
+}
+
+.ib-btn {
+  border: 0;
+  border-radius: 0.75rem;
+  padding: 0.7rem 1.15rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.93rem;
+  font-family: inherit;
+  transition: transform 150ms ease, opacity 150ms ease, background-color 150ms ease;
+}
+
+.ib-btn:active {
+  transform: translateY(1px);
+}
+
+.ib-btn.secondary {
+  background: #e8f1f3;
+  color: #2a555f;
+}
+
+.ib-btn.primary {
+  background: #2a555f;
+  color: #fff;
+}
+
+.ib-btn.primary:hover {
+  background: #1e3a42;
+}
+
+.ib-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ib-success-state {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem 0.5rem;
+  animation: ibFadeIn 440ms ease both;
+}
+
+.ib-success-state.visible {
+  display: block;
+}
+
+.ib-checkmark {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  margin: 0 auto 0.9rem;
+  background: #e8f1f3;
+  border: 2px solid #a8c8d0;
+  display: grid;
+  place-items: center;
+  color: #2a555f;
+  font-size: 1.85rem;
+  animation: ibPop 550ms ease;
+}
+
+.ib-success-state h2,
+.ib-success-state h3 {
+  margin: 0 0 0.4rem;
+  color: #1e3a42;
+  font-size: 1.2rem;
+}
+
+.ib-success-state p {
+  margin: 0;
+  color: #5a737a;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.ib-draft-status {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  color: #5a737a;
+  text-align: end;
+}
+
+@keyframes ibEnterStep {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ibLeaveStep {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+}
+
+@keyframes ibShake {
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes ibPop {
+  0% {
+    transform: scale(0.65);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ibFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .ib-grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .ib-step-viewport {
+    min-height: 360px;
+  }
+
+  .ib-actions {
+    flex-direction: column-reverse;
+  }
+
+  .ib-btn {
+    width: 100%;
+  }
+}
+
+[dir="rtl"] .ice-bath-form-header h1,
+[dir="rtl"] .ice-bath-form-header h2 {
+  font-family: Amiri, Georgia, serif;
+}
+
+[dir="rtl"] .ib-step-panel.active {
+  animation-name: ibEnterStepRtl;
+}
+
+[dir="rtl"] .ib-step-panel.leaving {
+  animation-name: ibLeaveStepRtl;
+}
+
+@keyframes ibEnterStepRtl {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ibLeaveStepRtl {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+}

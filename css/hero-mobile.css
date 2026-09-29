@@ -1,0 +1,71 @@
+/* Home hero — mobile-only crossfade slideshow (no white flash between slides) */
+
+.hero-mobile-slideshow {
+  display: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #3e2f2b;
+}
+
+.hero-mobile-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1.35s ease-in-out, transform 6s ease-out;
+  z-index: 1;
+  will-change: opacity, transform;
+}
+
+.hero-mobile-slide.is-active {
+  opacity: 1;
+  z-index: 2;
+  transform: scale(1.09);
+}
+
+.hero-mobile-slide.is-crossfading {
+  z-index: 3;
+}
+
+@media (max-width: 767px) {
+  .hero-mobile-slideshow {
+    display: block;
+  }
+
+  .hero-bg--desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-mobile-slideshow {
+    display: none !important;
+  }
+}
+
+.hero-luxury--await-loader .hero-mobile-slide {
+  transition: none;
+  opacity: 0;
+  transform: scale(1.06);
+}
+
+.hero-luxury--await-loader .hero-mobile-slide--1 {
+  opacity: 1;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mobile-slide {
+    transition: none;
+    transform: scale(1.05);
+  }
+
+  .hero-mobile-slide.is-active {
+    transform: scale(1.05);
+  }
+}

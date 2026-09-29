@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nawal Omar</title>
+  <link rel="stylesheet" href="css/rtl.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;600;700&family=Scheherazade+New:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #d6bfa9;
+      --color-secondary: #5a4632;
+      --color-accent: #a67c52;
+      --color-background: #ffffff;
+      --color-text: #000000;
+      --color-gray: #f5f5f5;
+      --bg-body: var(--color-background);
+      --bg-elevated: var(--color-gray);
+      --text-main: var(--color-text);
+      --text-soft: var(--color-secondary);
+      --border-soft: var(--color-primary);
+      --glass: rgba(255, 255, 255, 0.5);
+      --glass-border: rgba(214, 191, 169, 0.3);
+      --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-out-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      color: var(--text-main);
+      background: var(--bg-body);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ----- Loader with Logo ----- */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, var(--bg-body) 0%, var(--color-gray) 40%, var(--color-primary) 100%);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-logo {
+      position: relative;
+      z-index: 1;
+      width: auto;
+      height: 120px;
+      max-width: 280px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+      animation: logoFadeIn 1s ease-out forwards, logoBreath 3s ease-in-out 1s infinite;
+      opacity: 0;
+    }
+
+    @keyframes logoFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes logoBreath {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.02);
+        opacity: 0.95;
+      }
+    }
+
+    .loader-ripple {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(214, 191, 169, 0.2);
+      animation: ripple 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .loader-ripple:nth-child(2) { animation-delay: 0.5s; }
+    .loader-ripple:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes ripple {
+      0%, 100% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 0.25;
+      }
+    }
+
+    .loader-text {
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      opacity: 0;
+      animation: textFadeIn 0.8s ease-out 0.5s forwards;
+    }
+
+    @keyframes textFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 0.7;
+        transform: translateY(0);
+      }
+    }
+
+    /* ----- Ambient background ----- */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-gradient {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 120% 80% at 50% 0%, rgba(214, 191, 169, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 80% 80%, rgba(166, 124, 82, 0.1) 0%, transparent 45%),
+        radial-gradient(ellipse 60% 80% at 20% 60%, rgba(214, 191, 169, 0.12) 0%, transparent 45%);
+      animation: gradient-breath 8s ease-in-out infinite;
+    }
+
+    @keyframes gradient-breath {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.02); }
+    }
+
+    .ambient-particles {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(214, 191, 169, 0.3) 1px, transparent 0),
+        radial-gradient(1.5px 1.5px at 60% 70%, rgba(214, 191, 169, 0.3) 1px, transparent 0),
+        radial-gradient(1px 1px at 40% 80%, rgba(166, 124, 82, 0.25) 1px, transparent 0),
+        radial-gradient(1.5px 1.5px at 85% 20%, rgba(214, 191, 169, 0.3) 1px, transparent 0),
+        radial-gradient(1px 1px at 10% 50%, rgba(166, 124, 82, 0.2) 1px, transparent 0);
+      background-size: 200% 200%;
+      animation: particles-float 20s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes particles-float {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+
+    .ambient-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30vh;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23d6bfa9' fill-opacity='0.08' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,138.7C672,128,768,160,864,165.3C960,171,1056,149,1152,138.7C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom center;
+      background-size: cover;
+      opacity: 0.7;
+    }
+
+    /* ----- Main content ----- */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 1.5rem;
+      padding-top: max(2.5rem, env(safe-area-inset-top));
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+
+    /* ----- Hero — مدمج بدون ارتفاع ثابت كبير ----- */
+    .hero {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.75rem 0 1.25rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-avatar-wrap {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .hero-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 
+        0 8px 32px rgba(90, 70, 50, 0.1),
+        0 2px 8px rgba(214, 191, 169, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.6);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 8vw, 2.5rem);
+      font-weight: 500;
+      color: var(--text-main);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out-smooth) 0.3s forwards;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.9rem, 4vw, 1.05rem);
+      font-weight: 300;
+      color: var(--text-soft);
+      letter-spacing: 0.1em;
+      max-width: 90%;
+      line-height: 1.55;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease-out-smooth) 0.5s forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ----- Cards container — عمود واحد متجاوب ----- */
+    .cards-wrap {
+      width: 100%;
+      max-width: 320px;
+      margin: 1rem auto 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.6rem;
+    }
+
+    /* روابط بتصميم أنيق — مساحة لمس كبيرة للهاتف */
+    .link-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 1rem 1.35rem;
+      min-height: 52px;
+      min-width: 200px;
+      border-radius: 999px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(245, 245, 245, 0.5) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(214, 191, 169, 0.3);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      overflow: hidden;
+      opacity: 0;
+      animation: cardReveal 0.85s var(--ease-out-smooth) forwards;
+      transition: transform 0.45s var(--ease-soft), box-shadow 0.45s var(--ease-soft),
+                  border-color 0.4s var(--ease-soft), background 0.4s var(--ease-soft);
+      box-shadow: 0 4px 24px rgba(92, 83, 72, 0.06);
+    }
+
+    /* توهج داخلي خفيف عند الـ hover */
+    .link-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.45s var(--ease-soft);
+      pointer-events: none;
+    }
+
+    /* خط لمعان ناعم يمر على الكارت */
+    .link-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: left 0.6s var(--ease-soft);
+      pointer-events: none;
+    }
+
+    .link-card:hover {
+      transform: scale(1.03) translateY(-2px);
+      box-shadow: 0 16px 48px rgba(90, 70, 50, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+      border-color: rgba(214, 191, 169, 0.5);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(245, 245, 245, 0.65) 100%);
+    }
+
+    .link-card:hover::before {
+      opacity: 1;
+    }
+
+    .link-card:hover::after {
+      left: 100%;
+    }
+
+    .link-card:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(214, 191, 169, 0.4), 0 12px 40px rgba(90, 70, 50, 0.1);
+    }
+
+    .link-card:active {
+      transform: scale(0.98) translateY(0);
+      transition-duration: 0.2s;
+    }
+
+    .link-card:nth-child(1) { animation-delay: 0.4s; }
+    .link-card:nth-child(2) { animation-delay: 0.5s; }
+    .link-card:nth-child(3) { animation-delay: 0.6s; }
+    .link-card:nth-child(4) { animation-delay: 0.7s; }
+    .link-card:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* أيقونة الروابط — حركة وتلوين ناعم */
+    .link-card-icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-soft);
+      transition: color 0.4s var(--ease-soft), transform 0.4s var(--ease-soft);
+    }
+
+    .link-card:hover .link-card-icon {
+      color: var(--color-accent);
+      transform: scale(1.08);
+    }
+
+    .link-card-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .link-card-label {
+      flex: 1;
+      text-align: left;
+      min-width: 0;
+      transition: letter-spacing 0.4s var(--ease-soft), color 0.4s var(--ease-soft);
+    }
+
+    .link-card:hover .link-card-label {
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+    }
+
+    /* ----- CTA: Register for Retreat ----- */
+    .cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out-smooth) 1s forwards;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      min-height: 48px;
+      border-radius: 999px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      background: linear-gradient(135deg, var(--color-secondary) 0%, rgba(90, 70, 50, 0.9) 100%);
+      color: var(--bg-body);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 20px rgba(90, 70, 50, 0.2);
+      transition: transform 0.35s var(--ease-soft), box-shadow 0.35s var(--ease-soft);
+    }
+
+    .cta:hover,
+    .cta:focus {
+      transform: scale(1.02) translateY(-1px);
+      box-shadow: 0 8px 28px rgba(90, 70, 50, 0.25);
+      outline: none;
+    }
+
+    .cta:active {
+      transform: scale(0.98) translateY(0);
+    }
+
+    .cta.cta-retreat {
+      background: linear-gradient(135deg, var(--color-accent) 0%, rgba(166, 124, 82, 0.9) 100%);
+      box-shadow: 0 4px 20px rgba(166, 124, 82, 0.25);
+    }
+    .cta.cta-retreat:hover,
+    .cta.cta-retreat:focus {
+      box-shadow: 0 8px 28px rgba(166, 124, 82, 0.3);
+    }
+
+    /* ----- الفوتر قصير ومدمج ----- */
+    .scroll-section {
+      padding: 1.25rem 1rem 1rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .scroll-section-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-soft);
+      max-width: 280px;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .scroll-section-quote.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-section-sub {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+    }
+
+    .scroll-section-sub.visible {
+      opacity: 0.55;
+      transform: translateY(0);
+    }
+
+    /* ----- Footer ----- */
+    .page-footer {
+      width: 100%;
+      padding: 1.25rem 1rem;
+      padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+      text-align: center;
+      border-top: 1px solid rgba(214, 191, 169, 0.25);
+      background: linear-gradient(to bottom, transparent, rgba(245, 245, 245, 0.5));
+    }
+
+    .page-footer-text {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
+
+    .page-footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 380px) {
+      .page { padding: 0.75rem; }
+      .hero-avatar { width: 88px; height: 88px; }
+      .cards-wrap { gap: 0.5rem; }
+      .link-card { min-height: 48px; padding: 0.85rem 1.1rem; font-size: 0.9rem; }
+      .cta { min-height: 46px; font-size: 0.9rem; }
+    }
+
+    @media (min-width: 480px) {
+      .page { padding: 1.25rem 1.5rem; }
+      .cards-wrap { max-width: 360px; gap: 0.65rem; }
+      .cta-wrap { max-width: 360px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Calm loading animation with Logo -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ripple"></div>
+    <div class="loader-ripple"></div>
+    <div class="loader-ripple"></div>
+    <img src="public/media/brand/logo.png" alt="Nawal Omar Yoga" class="loader-logo" />
+    <span class="loader-text" data-i18n="nawal_loader">Breathe</span>
+  </div>
+
+  <!-- Ambient background -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-gradient"></div>
+    <div class="ambient-particles"></div>
+    <div class="ambient-wave"></div>
+  </div>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-avatar-wrap">
+        <img class="hero-avatar" src="public/media/brand/nawal-avatar.jpeg" alt="Nawal" width="120" height="120">
+      </div>
+      <h1 class="hero-name">Nawal</h1>
+      <p class="hero-tagline" data-i18n="nawal_tagline">A quiet space for your inner light</p>
+
+      <div class="cards-wrap">
+        <a href="https://www.instagram.com/nawal_aom" class="link-card" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <span class="link-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </span>
+          <span class="link-card-label">Instagram</span>
+        </a>
+        <a href="https://m7madi8.github.io/nawal-1/" class="link-card" target="_blank" rel="noopener noreferrer" aria-label="Portfolio">
+          <span class="link-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </span>
+          <span class="link-card-label">Website</span>
+        </a>
+        <a href="https://chat.whatsapp.com/GoHoJCDBm2vAs5SdcqUfta" class="link-card" target="_blank" rel="noopener noreferrer" aria-label="Haifa Group WhatsApp">
+          <span class="link-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </span>
+          <span class="link-card-label" data-i18n="nawal_haifa">Haifa Yoga</span>
+        </a>
+      </div>
+
+      <div class="cta-wrap">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4To7DCungUsnGoFQzzeygEchsTFFVG3wxT4G-EJk5jSfXjQ/viewform" class="cta cta-retreat" target="_blank" rel="noopener noreferrer" data-i18n="nawal_register">Register for Retreat</a>
+      </div>
+    </section>
+
+    <section class="scroll-section" id="connect" aria-label="Connect">
+      <p class="scroll-section-quote" data-i18n="nawal_quote">"Inhale the future, exhale the past."</p>
+      <p class="scroll-section-sub" data-i18n="nawal_connect">Connect with presence</p>
+    </section>
+
+    <footer class="page-footer" role="contentinfo">
+      <p class="page-footer-text" data-i18n="nawal_footer">Mindfulness · Yoga · Calm</p>
+      <p class="page-footer-name">Nawal</p>
+    </footer>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script>
+    (function () {
+      var loader = document.getElementById('loader');
+      function hideLoader() {
+        if (!loader) return;
+        loader.classList.add('hidden');
+        window.removeEventListener('load', hideLoader);
+      }
+      if (document.readyState === 'complete') {
+        setTimeout(hideLoader, 600);
+      } else {
+        window.addEventListener('load', function () {
+          setTimeout(hideLoader, 600);
+        });
+      }
+
+      // Soft scroll reveal: fade and move up when section enters viewport
+      var section = document.getElementById('connect');
+      var quote = section && section.querySelector('.scroll-section-quote');
+      var sub = section && section.querySelector('.scroll-section-sub');
+      if (!section || !quote) return;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            quote.classList.add('visible');
+            if (sub) sub.classList.add('visible');
+          }
+        });
+      }, { rootMargin: '0px 0px -15% 0px', threshold: 0.1 });
+      observer.observe(section);
+    })();
+  </script>
+</body>
+</html>

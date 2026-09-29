@@ -1,0 +1,933 @@
+/* Dahab conversion sections — hero, proof, includes grid, urgency, final CTA */
+
+:root {
+  --dahab-accent: #825a3a;
+  --dahab-accent-dark: #6b4a32;
+  --dahab-accent-soft: rgba(130, 90, 58, 0.12);
+  --dahab-cream: #faf8f5;
+  --dahab-warm: #fdf6ee;
+  --dahab-muted: rgba(62, 47, 43, 0.62);
+  --dahab-text: rgba(62, 47, 43, 0.92);
+}
+
+/* ── Hero ── */
+.dahab-cv-hero {
+  background: var(--dahab-cream);
+  padding: 1.25rem 0 3.5rem;
+}
+
+.dahab-cv-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 40%);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.dahab-cv-hero-copy > * {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: dahabCvHeroIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.dahab-cv-hero-copy > *:nth-child(1) { animation-delay: 0s; }
+.dahab-cv-hero-copy > *:nth-child(2) { animation-delay: 0.1s; }
+.dahab-cv-hero-copy > *:nth-child(3) { animation-delay: 0.2s; }
+.dahab-cv-hero-copy > *:nth-child(4) { animation-delay: 0.3s; }
+.dahab-cv-hero-copy > *:nth-child(5) { animation-delay: 0.4s; }
+.dahab-cv-hero-copy > *:nth-child(6) { animation-delay: 0.5s; }
+.dahab-cv-hero-copy > *:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes dahabCvHeroIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dahab-cv-badge {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--dahab-accent-soft);
+  border: 1px solid rgba(185, 137, 95, 0.35);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--dahab-accent);
+}
+
+.dahab-cv-title {
+  margin: 0 0 0.85rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--dahab-text);
+}
+
+.dahab-cv-hero-dates {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0 0 1.15rem;
+  padding: 0.7rem 1.15rem 0.7rem 0.9rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, rgba(255, 253, 249, 0.98), rgba(253, 246, 238, 0.96));
+  border: 1px solid rgba(185, 137, 95, 0.34);
+  box-shadow:
+    0 4px 20px rgba(130, 90, 58, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.dahab-cv-hero-dates-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  border-radius: 0.7rem;
+  background: var(--dahab-accent-soft);
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  color: var(--dahab-accent);
+}
+
+.dahab-cv-hero-dates-body {
+  min-width: 0;
+}
+
+.dahab-cv-hero-dates-range {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: var(--dahab-text);
+}
+
+.dahab-cv-hero-dates-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dahab-accent);
+}
+
+.dahab-cv-hero-dates-sep {
+  opacity: 0.55;
+}
+
+[dir="rtl"] .dahab-cv-hero-dates-meta {
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.dahab-cv-subtitle {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--dahab-muted);
+  max-width: 28rem;
+}
+
+.dahab-cv-price-tiers {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 0 1.35rem;
+}
+
+.dahab-cv-price-tier {
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--dahab-text);
+  overflow-wrap: break-word;
+}
+
+.dahab-cv-price-tier--sold {
+  font-size: clamp(0.92rem, 2.2vw, 1.02rem);
+  font-weight: 500;
+  color: var(--dahab-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(130, 90, 58, 0.35);
+}
+
+.dahab-cv-price-tier--current {
+  font-size: clamp(1.1rem, 2.8vw, 1.28rem);
+  font-weight: 700;
+  color: var(--dahab-accent-dark);
+}
+
+.dahab-cv-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.65rem;
+  margin: 0 0 1.35rem;
+}
+
+.dahab-cv-price-current {
+  font-size: clamp(1.65rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--dahab-text);
+}
+
+.dahab-cv-price-unit {
+  font-size: 0.9rem;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-price-old {
+  font-size: 1.1rem;
+  color: rgba(62, 47, 43, 0.45);
+  text-decoration: line-through;
+}
+
+.dahab-cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.dahab-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 200ms ease, background 200ms ease, border-color 200ms ease;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.dahab-cv-btn--primary {
+  background: var(--dahab-accent);
+  border: 1px solid var(--dahab-accent-dark);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(130, 90, 58, 0.22);
+}
+
+.dahab-cv-btn--primary:hover {
+  transform: scale(1.02);
+  background: var(--dahab-accent-dark);
+}
+
+.dahab-cv-btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(62, 47, 43, 0.22);
+  color: var(--dahab-text);
+}
+
+.dahab-cv-btn--ghost:hover {
+  transform: scale(1.02);
+  border-color: var(--dahab-accent);
+  color: var(--dahab-accent-dark);
+}
+
+.dahab-cv-trust {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-hero-media {
+  margin: 0;
+  opacity: 0;
+  animation: dahabCvHeroIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+.dahab-cv-hero-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 50px rgba(62, 47, 43, 0.14);
+}
+
+/* ── Social proof ── */
+.dahab-cv-proof {
+  background: #fff;
+  border-block: 1px solid rgba(185, 137, 95, 0.16);
+  padding: 2rem 0;
+}
+
+.dahab-cv-proof-label {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-proof-slider {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.dahab-cv-proof-stage {
+  overflow: hidden;
+  width: 100%;
+  direction: ltr;
+  touch-action: pan-y;
+  cursor: grab;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.dahab-cv-proof-stage.is-held {
+  cursor: grabbing;
+}
+
+.dahab-cv-proof-stage.is-held .dahab-cv-proof-grid {
+  transition-duration: 0s;
+}
+
+.dahab-cv-proof-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.dahab-cv-proof-card {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 0 0.25rem;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  max-height: none;
+  overflow: visible;
+  opacity: 1;
+  transform: none;
+}
+
+.dahab-cv-proof-slider:not(.in-view) .dahab-cv-proof-card {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dahab-cv-proof-slider.in-view .dahab-cv-proof-card {
+  opacity: 1;
+  transform: none;
+}
+
+.dahab-cv-proof-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.dahab-cv-proof-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(130, 90, 58, 0.22);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.dahab-cv-proof-dot.is-active {
+  background: var(--dahab-accent);
+  transform: scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dahab-cv-proof-stage {
+    overflow: visible;
+  }
+
+  .dahab-cv-proof-grid {
+    flex-direction: column;
+    gap: 2rem;
+    transform: none !important;
+  }
+
+  .dahab-cv-proof-card {
+    flex: none;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .dahab-cv-proof-dots {
+    display: none;
+  }
+}
+
+.dahab-cv-proof-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.dahab-cv-proof-avatar {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(130, 90, 58, 0.18), rgba(185, 137, 95, 0.22));
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dahab-accent-dark);
+}
+
+.dahab-cv-proof-photo {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid rgba(185, 137, 95, 0.28);
+}
+
+.dahab-cv-proof-name {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--dahab-accent-dark);
+}
+
+.dahab-cv-proof-country {
+  margin: 0.1rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-proof-quote {
+  margin: 0 auto 0.65rem;
+  max-width: 100%;
+  font-size: 0.9375rem;
+  line-height: 1.85;
+  color: rgba(62, 47, 43, 0.82);
+  white-space: pre-line;
+  text-align: start;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.dahab-cv-stars {
+  margin: 0;
+  text-align: center;
+  color: #d4a017;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+/* ── Includes icon grid ── */
+.dahab-cv-includes {
+  padding: 3rem 0 3.5rem;
+  background: #fff;
+}
+
+.dahab-cv-includes-title {
+  margin: 0 0 0.5rem;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  color: var(--dahab-text);
+}
+
+.dahab-cv-includes-sub {
+  margin: 0 auto 2rem;
+  max-width: 34rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-includes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dahab-cv-inc-card {
+  padding: 1.25rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(185, 137, 95, 0.16);
+  background: #fff;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.dahab-cv-inc-card.in-view {
+  animation: dahabCvCardIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.dahab-cv-inc-card:nth-child(1) { animation-delay: 0s; }
+.dahab-cv-inc-card:nth-child(2) { animation-delay: 0.08s; }
+.dahab-cv-inc-card:nth-child(3) { animation-delay: 0.16s; }
+.dahab-cv-inc-card:nth-child(4) { animation-delay: 0.24s; }
+.dahab-cv-inc-card:nth-child(5) { animation-delay: 0.32s; }
+.dahab-cv-inc-card:nth-child(6) { animation-delay: 0.4s; }
+.dahab-cv-inc-card:nth-child(7) { animation-delay: 0.48s; }
+.dahab-cv-inc-card:nth-child(8) { animation-delay: 0.56s; }
+
+@keyframes dahabCvCardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dahab-cv-inc-card:hover {
+  border-color: var(--dahab-accent);
+  box-shadow: 0 8px 24px rgba(130, 90, 58, 0.08);
+}
+
+.dahab-cv-inc-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--dahab-accent);
+}
+
+.dahab-cv-inc-card {
+  text-align: center;
+}
+
+.dahab-cv-inc-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--dahab-text);
+}
+
+.dahab-cv-inc-desc {
+  margin: 0.45rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--dahab-muted);
+}
+
+/* ── Urgency ── */
+.dahab-cv-urgency {
+  background: var(--dahab-warm);
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.dahab-cv-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.dahab-cv-cd-box {
+  min-width: 4.5rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(185, 137, 95, 0.22);
+  background: #fff;
+}
+
+.dahab-cv-cd-num {
+  display: block;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--dahab-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.dahab-cv-cd-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.6875rem;
+  color: var(--dahab-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dahab-cv-progress-wrap {
+  max-width: 22rem;
+  margin: 0 auto 1rem;
+  text-align: start;
+}
+
+.dahab-cv-progress-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.45rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--dahab-accent-dark);
+}
+
+.dahab-cv-progress-bar {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(62, 47, 43, 0.08);
+  overflow: hidden;
+}
+
+.dahab-cv-progress-fill {
+  display: block;
+  height: 100%;
+  width: 25%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--dahab-accent), #b9896f);
+  transition: width 1s ease;
+}
+
+.dahab-cv-urgency-note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--dahab-muted);
+}
+
+/* ── Final CTA ── */
+.dahab-cv-final {
+  padding: 3.5rem 0 4rem;
+  background: #fff;
+}
+
+.dahab-cv-final-inner {
+  max-width: 35rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dahab-cv-final-title {
+  margin: 0 0 0.85rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  color: var(--dahab-text);
+}
+
+.dahab-cv-final-text {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-final-card {
+  margin-bottom: 1.25rem;
+  padding: 1.5rem;
+  border: 2px solid var(--dahab-accent);
+  border-radius: 16px;
+  text-align: start;
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dahab-cv-final-card.in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dahab-cv-final-price-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-final-prices {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.dahab-cv-final-price-tier {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--dahab-text);
+}
+
+.dahab-cv-final-price-tier.dahab-cv-price-tier--sold {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--dahab-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(130, 90, 58, 0.35);
+}
+
+.dahab-cv-final-price-tier.dahab-cv-price-tier--current {
+  font-size: 1.45rem;
+  color: var(--dahab-accent-dark);
+}
+
+.dahab-cv-final-price {
+  margin: 0 0 0.25rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dahab-text);
+}
+
+.dahab-cv-final-price-note {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  color: var(--dahab-muted);
+}
+
+.dahab-cv-final-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.dahab-cv-final-list li {
+  position: relative;
+  padding-inline-start: 1.35rem;
+  font-size: 0.8125rem;
+  color: rgba(62, 47, 43, 0.78);
+}
+
+.dahab-cv-final-list li::before {
+  content: "✓";
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--dahab-accent);
+  font-weight: 700;
+}
+
+.dahab-cv-final-btn {
+  width: 100%;
+  min-height: 3.25rem;
+  margin-bottom: 0.85rem;
+  font-size: 1rem;
+}
+
+.dahab-cv-final-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--dahab-accent-dark);
+  text-decoration: none;
+}
+
+.dahab-cv-final-wa:hover {
+  text-decoration: underline;
+}
+
+.dahab-cv-final-wa svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* RTL typography */
+[dir="rtl"] .dahab-cv-title,
+[dir="rtl"] .dahab-cv-includes-title,
+[dir="rtl"] .dahab-cv-final-title {
+  font-family: 'Tajawal', sans-serif;
+}
+
+[dir="rtl"] .dahab-cv-subtitle,
+[dir="rtl"] .dahab-cv-proof-quote,
+[dir="rtl"] .dahab-cv-inc-desc,
+[dir="rtl"] .dahab-cv-final-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+[dir="rtl"] .dahab-cv-proof-quote {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .dahab-cv-proof-head {
+  direction: rtl;
+}
+
+@media (max-width: 900px) {
+  .dahab-cv-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dahab-cv-hero-media {
+    order: -1;
+    max-width: 16rem;
+    margin-inline: auto;
+  }
+
+  .dahab-cv-includes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .dahab-cv-includes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .dahab-cv-inc-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .dahab-cv-inc-title {
+    font-size: 0.875rem;
+  }
+
+  .dahab-cv-inc-desc {
+    font-size: 0.75rem;
+    line-height: 1.55;
+  }
+
+  .dahab-cv-actions {
+    flex-direction: column;
+  }
+
+  .dahab-cv-btn {
+    width: 100%;
+  }
+
+  .dahab-cv-countdown {
+    gap: 0.5rem;
+  }
+
+  .dahab-cv-cd-box {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dahab-cv-hero-copy > *,
+  .dahab-cv-hero-media,
+  .dahab-cv-proof-card,
+  .dahab-cv-inc-card,
+  .dahab-cv-final-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Arabic: Tajawal across the full Dahab page */
+html[dir="rtl"] .dahab-page {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 500;
+}
+
+html[dir="rtl"] .dahab-page [class*="dahab-"] {
+  font-family: 'Tajawal', sans-serif;
+}
+
+html[dir="rtl"] .dahab-page :is(
+  .dahab-cv-title,
+  .dahab-cv-hero-dates-range,
+  .dahab-cv-includes-title,
+  .dahab-cv-final-title,
+  .dahab-cv-inc-title,
+  .dahab26-day-title,
+  .dahab26-hero-title,
+  .dahab26-guide-title,
+  .dahab26-retreat-name,
+  .dahab-final-title,
+  .dahab-final-spotlight-title,
+  .dahab-gallery-title,
+  .dahab-soul-h3,
+  .dahab-soul-statement,
+  .dahab-hero-title,
+  .dahab-hero-portrait-name,
+  .dahab-soul-nawal-name
+) {
+  font-weight: 700;
+}
+
+/* RTL: reset letter-spacing so Arabic words do not stick together */
+html[dir="rtl"] .dahab-page :is(
+  .dahab-cv-badge,
+  .dahab-cv-hero-dates-meta,
+  .dahab-cv-proof-label,
+  .dahab-cv-cd-label,
+  .dahab-cv-progress-head,
+  .dahab-cv-final-price-label,
+  .dahab-cv-stars,
+  .dahab26-day-chip
+) {
+  letter-spacing: 0;
+  text-transform: none;
+  word-spacing: normal;
+}
+
+html[dir="rtl"] .dahab-page :is(
+  .dahab-cv-subtitle,
+  .dahab-cv-price-tier,
+  .dahab-cv-trust,
+  .dahab-cv-includes-sub,
+  .dahab-cv-inc-desc,
+  .dahab-soul-lead,
+  .dahab-soul-invite,
+  .dahab-soul-spots-label,
+  .dahab-soul-faq-item summary,
+  .dahab-soul-faq-item p,
+  .dahab-soul-cancel-list li,
+  .dahab-soul-cancel-note,
+  .dahab26-place,
+  .dahab26-slot-text,
+  .dahab-cv-proof-quote,
+  .dahab-cv-final-text,
+  .dahab-cv-final-price-note,
+  .dahab-cv-final-list li,
+  .dahab-cv-urgency-note
+) {
+  letter-spacing: 0;
+  word-spacing: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-height: 1.75;
+}
+
+html[dir="rtl"] .dahab-soul-opening .dahab-soul-spots-label {
+  margin: 0.75rem 0 0 !important;
+  font-family: 'Tajawal', sans-serif !important;
+  font-size: clamp(1rem, 2.8vw, 1.25rem) !important;
+  font-weight: 700 !important;
+}

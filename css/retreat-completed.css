@@ -1,0 +1,129 @@
+/* Hide hero badge row until retreat is completed (class set on <html>) */
+html:not(.retreat-page--completed) #dahab-hero-badge-slot {
+  display: none;
+}
+
+/* Completed retreat: badge, disabled CTA, read-only form — calm premium tone */
+
+.retreat-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(95, 78, 62, 0.72);
+  background: rgba(158, 132, 108, 0.14);
+  border: 1px solid rgba(158, 132, 108, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.retreat-status-badge--inline {
+  margin-top: 0;
+  margin-inline-start: 0.5rem;
+  vertical-align: middle;
+}
+
+.dahab-goal-chips .retreat-status-badge {
+  margin-top: 0.5rem;
+}
+
+.dahab-registration-completed {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(166, 124, 82, 0.18);
+}
+
+.dahab-registration-closed-note {
+  margin: 0 0 0.85rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(100, 78, 58, 0.65);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.dahab-book-form--readonly {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 30rem;
+  opacity: 0.92;
+}
+
+.dahab-book-form--readonly .dahab-book-input:disabled {
+  cursor: not-allowed;
+  background: rgba(248, 241, 232, 0.65);
+  color: rgba(80, 62, 48, 0.55);
+  border-color: rgba(166, 124, 82, 0.22);
+}
+
+.dahab-includes-cta.dahab-includes-cta--disabled,
+button.dahab-includes-cta:disabled {
+  cursor: not-allowed;
+  transform: none;
+  filter: grayscale(0.15) brightness(1.02);
+  opacity: 0.55;
+  box-shadow: none;
+  background: linear-gradient(180deg, #c4b09a 0%, #a89888 100%);
+  border-color: rgba(130, 118, 108, 0.45);
+  pointer-events: none;
+}
+
+.dahab-includes-cta.dahab-includes-cta--disabled:hover,
+button.dahab-includes-cta:disabled:hover {
+  transform: none;
+  filter: grayscale(0.15) brightness(1.02);
+}
+
+.retreat-list-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(95, 78, 62, 0.75);
+  background: rgba(158, 132, 108, 0.16);
+  border: 1px solid rgba(158, 132, 108, 0.26);
+  margin-inline-start: 0.45rem;
+  vertical-align: middle;
+}
+
+.workshop-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+}
+
+.retreat-card--past .workshop-card-image-wrap {
+  opacity: 0.94;
+}
+
+.retreats-subheading {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-text, #3e2f2b);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.retreats-past-band {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(166, 124, 82, 0.2);
+}
+
+@media (min-width: 640px) {
+  .retreats-past-band {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+  }
+}
