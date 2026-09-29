@@ -1,6 +1,7 @@
 /* ── Haifa Yoga — clean layout, site brown & beige ── */
 
-.haifa-page {
+.haifa-page,
+.haifa-main {
   --hf-ink: #5a4632;
   --hf-text: rgba(90, 70, 50, 0.92);
   --hf-muted: rgba(90, 70, 50, 0.62);
@@ -14,12 +15,17 @@
   --hf-accent-dark: #825a3a;
   --hf-primary: #d6bfa9;
   --hf-max: 68rem;
+}
+
+.haifa-page {
   background: var(--hf-page);
   color: var(--hf-text);
 }
 
 .haifa-main {
   min-height: 100vh;
+  background: var(--hf-page);
+  color: var(--hf-text);
 }
 
 .haifa-hero {
@@ -633,6 +639,34 @@
   box-shadow: none;
 }
 
+/* home.css resets `button { background: none; border: 0 }` on Next (.ny-site) */
+.ny-site .haifa-main button.haifa-btn {
+  border: 1px solid transparent;
+}
+
+.ny-site .haifa-main button.haifa-btn--primary {
+  background: var(--hf-accent-dark);
+  border-color: var(--hf-accent-dark);
+  color: #fffdf9;
+}
+
+.ny-site .haifa-main button.haifa-btn--ghost {
+  background: var(--hf-surface);
+  border-color: var(--hf-line-strong);
+  color: var(--hf-accent-dark);
+}
+
+.ny-site .haifa-main a.haifa-btn {
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.ny-site .haifa-main a.haifa-btn--primary {
+  background: var(--hf-accent-dark);
+  border-color: var(--hf-accent-dark);
+  color: #fffdf9;
+}
+
 .haifa-btn--primary:hover {
   background: var(--hf-ink);
   border-color: var(--hf-ink);
@@ -733,11 +767,37 @@
   padding-top: 0.15rem;
   border-top: none;
   text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.haifa-join .haifa-btn {
-  margin-top: 0.9rem;
-  width: 100%;
+.haifa-join .haifa-btn,
+.haifa-join-btn {
+  margin-top: 0.75rem;
+  width: auto;
+  max-width: 100%;
+  align-self: flex-start;
+  padding: 0.58rem 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-align: start;
+  text-decoration: none;
+}
+
+@media (max-width: 479px) {
+  .haifa-join .haifa-btn,
+  .haifa-join-btn {
+    align-self: stretch;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.haifa-join-btn__icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
 }
 
 .haifa-join-text {

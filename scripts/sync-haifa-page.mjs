@@ -7,11 +7,13 @@ const htmlFile = path.join(root, 'workshops/haifa.html');
 const pagePath = path.join(root, 'app/workshops/haifa/page.jsx');
 
 const html = fs.readFileSync(htmlFile, 'utf8');
-const m = html.match(/<main class="haifa-main">([\s\S]*?)<\/main>/);
-if (!m) throw new Error('main not found in workshops/haifa.html');
+const mainMatch = html.match(/<main class="haifa-main">([\s\S]*?)<\/main>/);
+if (!mainMatch) throw new Error('main not found in workshops/haifa.html');
 
-let main = `<main class="haifa-main ny-inner">${m[1]}</main>`;
+let main = `<main class="haifa-main ny-inner">${mainMatch[1]}</main>`;
 main = main.replace(/\.\.\/public\/media\//g, '/media/');
+
+main = main.replace(/href="\.\.\/index\.html#programs"/g, 'href="/yoga"');
 
 let page = fs.readFileSync(pagePath, 'utf8');
 page = page.replace(/html=\{[\s\S]*?\}\s*\/>/, `html={${JSON.stringify(main)}}\n    />`);
