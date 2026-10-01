@@ -294,13 +294,13 @@
 
   var sticky = document.querySelector("[data-wr-sticky]");
   var hero = document.querySelector(".wr-hero");
-  var finalCta = document.querySelector(".wr-section--cta");
+  var ctaZones = document.querySelectorAll("[data-sticky-hide]");
   if (sticky && hero && "IntersectionObserver" in window) {
     var heroVisible = true;
-    var finalVisible = false;
+    var visibleZones = new Set();
 
     function updateSticky() {
-      sticky.classList.toggle("is-visible", !heroVisible && !finalVisible);
+      sticky.classList.toggle("is-visible", !heroVisible && visibleZones.size === 0);
     }
 
     new IntersectionObserver(function (entries) {
@@ -308,12 +308,16 @@
       updateSticky();
     }, { rootMargin: "0px 0px -35% 0px" }).observe(hero);
 
-    if (finalCta) {
-      new IntersectionObserver(function (entries) {
-        finalVisible = entries[0].isIntersecting;
-        updateSticky();
-      }, { threshold: 0.25 }).observe(finalCta);
-    }
+    var zoneObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) visibleZones.add(entry.target);
+        else visibleZones.delete(entry.target);
+      });
+      updateSticky();
+    }, { threshold: 0.25 });
+    ctaZones.forEach(function (zone) {
+      zoneObserver.observe(zone);
+    });
   } else if (sticky) {
     sticky.classList.add("is-visible");
   }

@@ -41,19 +41,19 @@ const staySlides = (folder, ids, altKey) => ids.map(
 
 const riskLine = (loc) => `<p class="wr-risk"><span data-i18n="retreat_wadi_risk_line">Sending a request is free and non-binding — your place is confirmed after a short call with a 400 ₪ deposit.</span> <a class="wr-risk__link" href="#wr-faq-policy" data-track-cta="policy" data-track-loc="${loc}" data-i18n="retreat_wadi_policy_link">Payment &amp; cancellation terms</a></p>`;
 
-const ctaBlock = (loc, lineKey, lineText) => `<div class="wr-inline-cta">
+const ctaBlock = (loc, { lineKey, lineText, whatsapp = false, risk = false } = {}) => `<div class="wr-inline-cta" data-sticky-hide>
         ${lineKey ? `<p class="wr-inline-cta__line" data-i18n="${lineKey}">${lineText}</p>` : ''}
         <div class="wr-inline-cta__buttons">
           <a href="/register/wadi-rum" class="wr-register-btn" data-track-cta="book" data-track-loc="${loc}">
             <span data-i18n="retreat_wadi_book_now">Reserve your spot</span>
             <span class="wr-register-btn__arrow" aria-hidden="true">→</span>
           </a>
-          <a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-inline-cta__wa" data-i18n-attr="href:retreat_wadi_wa_href" data-track-cta="whatsapp" data-track-loc="${loc}">
+          ${whatsapp ? `<a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-inline-cta__wa" data-i18n-attr="href:retreat_wadi_wa_href" data-track-cta="whatsapp" data-track-loc="${loc}">
             ${waIcon(16)}
             <span data-i18n="retreat_wadi_ask_wa">Ask on WhatsApp</span>
-          </a>
+          </a>` : ''}
         </div>
-        ${riskLine(loc)}
+        ${risk ? riskLine(loc) : ''}
       </div>`;
 
 const DAYS = [
@@ -286,7 +286,7 @@ export default function Page() {
         <article class="wr-feature"><h3 data-i18n="retreat_wadi_forwhom_4_title">4. You want a women\'s experience with depth and belonging.</h3><p data-i18n="retreat_wadi_forwhom_4_text">A place where you don\'t need to prove anything, compare yourself to anyone, or be a certain image.</p></article>
         <article class="wr-feature"><h3 data-i18n="retreat_wadi_forwhom_5_title">5. You want to give yourself an experience that stays with you.</h3><p data-i18n="retreat_wadi_forwhom_5_text">Not just a trip or a holiday — but days of adventure, laughter, nature, women, movement, calm, and real space for you.</p></article>
       </div>
-      ${ctaBlock('forwhom', 'retreat_wadi_forwhom_cta', 'Recognised yourself in one of these? The next step is simple.')}
+      ${ctaBlock('forwhom', { lineKey: 'retreat_wadi_forwhom_cta', lineText: 'Recognised yourself in one of these? The next step is simple.' })}
     </div>
   </section>
 
@@ -383,7 +383,6 @@ export default function Page() {
       <div class="wr-program wr-acc" id="wr-program-acc" data-acc>
         ${programDays}
       </div>
-      ${ctaBlock('program')}
     </div>
   </section>
 
@@ -486,7 +485,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        ${ctaBlock('offer')}
+        ${ctaBlock('offer', { whatsapp: true, risk: true })}
       </div>
     </div>
   </section>
@@ -528,12 +527,11 @@ export default function Page() {
           </div>
         </li>
       </ol>
-      <div class="wr-register-actions">
+      <div class="wr-register-actions" data-sticky-hide>
         <a href="/register/wadi-rum" class="wr-register-btn" data-track-cta="book" data-track-loc="steps">
           <span data-i18n="retreat_wadi_open_form">Open registration form</span>
           <span class="wr-register-btn__arrow" aria-hidden="true">→</span>
         </a>
-        ${riskLine('steps')}
       </div>
     </div>
   </section>
@@ -567,7 +565,7 @@ export default function Page() {
   </section>
 
   <!-- FINAL CTA -->
-  <section id="wr-book" class="wr-section wr-section--cta">
+  <section id="wr-book" class="wr-section wr-section--cta" data-sticky-hide>
     <div class="wr-container">
       <div class="wr-cta-panel">
         <div class="wr-cta-panel__head">
