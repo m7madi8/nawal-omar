@@ -24,14 +24,19 @@ const REELS = [
 const BUBBLES_PHOTOS = ['0001', '0002', '0003', '0004', '0005', '0006', '0007', '0011', '0012'];
 const PANORAMA_PHOTOS = ['0010', '0008', '0009', '0013', '0014'];
 
+/* Widths must be in Next's default deviceSizes/imageSizes or /_next/image rejects them. */
+const optimized = (src, w) => `/_next/image?url=${encodeURIComponent(src)}&amp;w=${w}&amp;q=75`;
+const srcset = (src, widths) => widths.map((w) => `${optimized(src, w)} ${w}w`).join(', ');
+const img = (src, widths, sizes) => `src="${optimized(src, widths[widths.length - 1])}" srcset="${srcset(src, widths)}" sizes="${sizes}"`;
+
 const galleryItems = GALLERY.map(
-  ([file, n]) => `<figure class="wr-carousel__item"><img src="/media/wadi-rum/${file}" alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt${n}" loading="lazy"></figure>`,
+  ([file, n]) => `<figure class="wr-carousel__item"><img ${img(`/media/wadi-rum/${file}`, [384, 640], '(min-width: 720px) 18rem, 82vw')} alt="" data-i18n-attr="alt:retreat_wadi_gallery_alt${n}" width="640" height="800" loading="lazy" decoding="async"></figure>`,
 ).join('\n          ');
 const reelItems = REELS.map(
-  ([file, poster, n]) => `<figure class="wr-carousel__item wr-carousel__item--reel"><div class="wr-reel-card"><video class="wr-reel-video" src="/media/wadi-rum/${file}" poster="/media/wadi-rum/${poster}" muted playsinline loop preload="metadata" data-i18n-attr="aria-label:retreat_wadi_reel_aria_${n}"></video><button type="button" class="wr-reel-playbtn" data-i18n-attr="aria-label:retreat_wadi_reel_play">${PLAY_ICON}</button></div></figure>`,
+  ([file, poster, n]) => `<figure class="wr-carousel__item wr-carousel__item--reel"><div class="wr-reel-card"><video class="wr-reel-video" src="/media/wadi-rum/${file}" poster="${optimized(`/media/wadi-rum/${poster}`, 640)}" muted playsinline loop preload="none" width="360" height="640" data-i18n-attr="aria-label:retreat_wadi_reel_aria_${n}"></video><button type="button" class="wr-reel-playbtn" data-i18n-attr="aria-label:retreat_wadi_reel_play">${PLAY_ICON}</button></div></figure>`,
 ).join('\n          ');
 const staySlides = (folder, ids, altKey) => ids.map(
-  (id) => `<figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/${folder}/shahrazadluxury-20260914-${id}.jpg" alt="" data-i18n-attr="alt:${altKey}" width="1200" height="800" loading="lazy" decoding="async"></figure>`,
+  (id) => `<figure class="wr-stay-gallery__slide"><img ${img(`/media/wadi-rum/${folder}/shahrazadluxury-20260914-${id}.jpg`, [640, 828, 1200], '(min-width: 860px) 32rem, 90vw')} alt="" data-i18n-attr="alt:${altKey}" width="1200" height="800" loading="lazy" decoding="async"></figure>`,
 ).join('\n                ');
 
 const riskLine = (loc) => `<p class="wr-risk"><span data-i18n="retreat_wadi_risk_line">Sending a request is free and non-binding — your place is confirmed after a short call with a 400 ₪ deposit.</span> <a class="wr-risk__link" href="#wr-faq-policy" data-track-cta="policy" data-track-loc="${loc}" data-i18n="retreat_wadi_policy_link">Payment &amp; cancellation terms</a></p>`;
@@ -190,7 +195,7 @@ export default function Page() {
   <!-- 1. HERO -->
   <section class="wr-hero" aria-labelledby="wadi-hero-title">
     <div class="wr-hero__media" aria-hidden="true">
-      <img src="/media/wadi-rum/cover.jpg" alt="" width="1600" height="1200" fetchpriority="high" decoding="async">
+      <img ${img('/media/wadi-rum/cover.jpg', [640, 828, 1200, 1920], '100vw')} alt="" width="1600" height="1200" fetchpriority="high" decoding="async">
     </div>
     <div class="wr-hero__scrim" aria-hidden="true"></div>
     <a href="/retreats" class="wr-back wr-back--hero top-back-link" aria-label="Back">
@@ -250,8 +255,8 @@ export default function Page() {
     <div class="wr-container wr-trust__inner">
       <a class="wr-trust__hosts" href="#wr-about" data-track-cta="hosts" data-track-loc="trust">
         <span class="wr-trust__avatars" aria-hidden="true">
-          <img src="/media/home/portrait.jpg" alt="" width="96" height="96" decoding="async">
-          <img src="/media/wadi-rum/israa.jpeg" alt="" width="96" height="96" decoding="async">
+          <img src="${optimized('/media/home/portrait.jpg', 96)}" alt="" width="96" height="96" decoding="async">
+          <img src="${optimized('/media/wadi-rum/israa.jpeg', 96)}" alt="" width="96" height="96" decoding="async">
         </span>
         <span class="wr-trust__names">
           <span class="wr-trust__host"><strong data-i18n="retreat_wadi_about_nawal_name">Nawal Omar</strong> · <span data-i18n="retreat_wadi_about_nawal_role">Nurse and Vinyasa Yoga Teacher</span></span>
@@ -338,7 +343,7 @@ export default function Page() {
       </div>
       <article class="wr-host wr-card">
         <div class="wr-host__media">
-          <img src="/media/home/portrait.jpg" alt="Nawal Omar" data-i18n-attr="alt:retreat_wadi_about_nawal_name" loading="lazy">
+          <img ${img('/media/home/portrait.jpg', [384, 640], '(min-width: 720px) 11rem, 90vw')} alt="Nawal Omar" data-i18n-attr="alt:retreat_wadi_about_nawal_name" width="640" height="640" loading="lazy" decoding="async">
         </div>
         <div class="wr-host__copy">
           <h3 class="wr-host__name" data-i18n="retreat_wadi_about_nawal_name">Nawal Omar</h3>
@@ -348,7 +353,7 @@ export default function Page() {
       </article>
       <article class="wr-host wr-card">
         <div class="wr-host__media">
-          <img src="/media/wadi-rum/israa.jpeg" alt="Esraa Taye" data-i18n-attr="alt:retreat_wadi_about_esraa_name" loading="lazy">
+          <img ${img('/media/wadi-rum/israa.jpeg', [384, 640], '(min-width: 720px) 11rem, 90vw')} alt="Esraa Taye" data-i18n-attr="alt:retreat_wadi_about_esraa_name" width="640" height="640" loading="lazy" decoding="async">
         </div>
         <div class="wr-host__copy">
           <h3 class="wr-host__name" data-i18n="retreat_wadi_about_esraa_name">Esraa Taye</h3>
@@ -571,14 +576,14 @@ export default function Page() {
         </div>
         <div class="wr-cta-panel__rooms" data-i18n-attr="aria-label:retreat_wadi_rooms_aria" aria-label="Room options">
           <article class="wr-cta-price-card wr-cta-price-card--premium">
-            <img class="wr-cta-price-card__photo" src="/media/wadi-rum/bubbles/shahrazadluxury-20260914-0001.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="800" height="520" loading="lazy" decoding="async">
+            <img class="wr-cta-price-card__photo" ${img('/media/wadi-rum/bubbles/shahrazadluxury-20260914-0001.jpg', [384, 640], '(min-width: 560px) 20rem, 90vw')} alt="" data-i18n-attr="alt:retreat_wadi_stay1_photo_alt" width="800" height="520" loading="lazy" decoding="async">
             <div class="wr-cta-price-card__copy">
               <p class="wr-cta-price-card__line" data-i18n="retreat_wadi_price_bubbles">Bubbles Room — 3,850 ₪</p>
               <p class="wr-cta-price-card__note" data-i18n="retreat_wadi_cta_per_person">per person · double room</p>
             </div>
           </article>
           <article class="wr-cta-price-card">
-            <img class="wr-cta-price-card__photo" src="/media/wadi-rum/panorama/shahrazadluxury-20260914-0010.jpg" alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="800" height="520" loading="lazy" decoding="async">
+            <img class="wr-cta-price-card__photo" ${img('/media/wadi-rum/panorama/shahrazadluxury-20260914-0010.jpg', [384, 640], '(min-width: 560px) 20rem, 90vw')} alt="" data-i18n-attr="alt:retreat_wadi_stay2_photo_alt" width="800" height="520" loading="lazy" decoding="async">
             <div class="wr-cta-price-card__copy">
               <p class="wr-cta-price-card__line" data-i18n="retreat_wadi_price_panorama">Panorama Room — 3,650 ₪</p>
               <p class="wr-cta-price-card__note" data-i18n="retreat_wadi_cta_per_person">per person · double room</p>

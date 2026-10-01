@@ -678,6 +678,10 @@
   padding: clamp(1.1rem, 3vw, 1.5rem);
 }
 
+.wr-container.wr-card {
+  width: min(calc(100% - 2 * clamp(1rem, 4vw, 1.75rem)), 68rem);
+}
+
 /* Vertical rhythm between stacked cards inside the same section
    (e.g. Nawal's host card followed by a co-host card) */
 .wr-card + .wr-card {
