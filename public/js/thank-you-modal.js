@@ -215,7 +215,7 @@
     if (!global.fetch || global.fetch.__nyThankYou) return;
     var nativeFetch = global.fetch.bind(global);
     function wrappedFetch(input, init) {
-      var tracked = isTrackedSubmit(input, init);
+      var tracked = isTrackedSubmit(input, init) && !document.querySelector('[data-ny-thanks="off"]');
       var name = tracked ? readName(input, init) : "";
       return nativeFetch(input, init).then(function (res) {
         if (!tracked || !res.ok) return res;

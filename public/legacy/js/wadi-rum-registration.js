@@ -422,8 +422,11 @@
       createdAt: now.toISOString()
     };
 
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = controller ? setTimeout(function () { controller.abort(); }, 20000) : 0;
     var res = await fetch(supabaseUrl + "/rest/v1/" + encodeURIComponent(table), {
       method: "POST",
+      signal: controller ? controller.signal : undefined,
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -432,26 +435,87 @@
         "Prefer": "return=representation"
       },
       body: JSON.stringify([payload])
-    });
+    }).finally(function () { clearTimeout(timer); });
     if (!res.ok) {
       var errTxt = await res.text().catch(function () { return ""; });
       throw new Error(errTxt || "Supabase request failed");
     }
   }
 
+  /* ---------- Sending, success, failure ---------- */
+  var failEl = document.getElementById("regFail");
+  var failWa = document.getElementById("regFailWa");
+  var okWa = document.getElementById("regOkWa");
+  var okTitle = document.getElementById("okTitle");
+  var WA_BASE = failWa.getAttribute("href").split("?")[0];
+  var sending = false;
+  var successName = "";
+
+  function waHref(msgKey, name) {
+    return WA_BASE + "?text=" + encodeURIComponent(t(msgKey, { name: name }));
+  }
+
+  function setSending(on) {
+    sending = on;
+    form.setAttribute("aria-busy", on ? "true" : "false");
+    [submitBtn, prevBtn].concat(Array.prototype.slice.call(failEl.querySelectorAll("button"))).forEach(function (btn) {
+      if (on) btn.setAttribute("aria-disabled", "true");
+      else btn.removeAttribute("aria-disabled");
+    });
+    submitBtn.setAttribute("data-t", on ? "sending" : "submit");
+    submitBtn.textContent = t(submitBtn.getAttribute("data-t"));
+  }
+
+  function renderSuccessTitle() {
+    okTitle.textContent = successName ? t("successTitleNamed", { name: successName }) : t("successTitle");
+  }
+
+  function showSuccess() {
+    successName = firstName();
+    okWa.setAttribute("href", waHref("waOk", value("fullName")));
+    form.hidden = true;
+    progress.hidden = true;
+    failEl.hidden = true;
+    okMsg.hidden = false;
+    renderSuccessTitle();
+    form.reset();
+    okMsg.scrollIntoView({ block: "center" });
+    okMsg.focus({ preventScroll: true });
+  }
+
+  function showFail() {
+    failWa.setAttribute("href", waHref("waFail", value("fullName")));
+    failEl.hidden = false;
+    submitBtn.hidden = true;
+    failEl.scrollIntoView({ block: "center" });
+    failEl.focus({ preventScroll: true });
+  }
+
+  prevBtn.addEventListener("click", function (e) {
+    if (sending) e.stopImmediatePropagation();
+  }, true);
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    if (sending) return;
     if (current < TOTAL) { goNext(); return; }
     if (!validateSteps(TOTAL)) return;
+    failEl.hidden = true;
+    submitBtn.hidden = false;
+    setSending(true);
     try {
       await sendToSupabase();
-      form.hidden = true;
-      progress.hidden = true;
-      okMsg.hidden = false;
-      form.reset();
+      setSending(false);
+      showSuccess();
     } catch (_err) {
-      document.getElementById("regFail").hidden = false;
+      setSending(false);
+      showFail();
     }
+  });
+
+  document.addEventListener("wr-reg:lang", function () {
+    if (!okMsg.hidden) renderSuccessTitle();
+    if (sending) submitBtn.textContent = t("sending");
   });
 
   /* ---------- Language ---------- */
