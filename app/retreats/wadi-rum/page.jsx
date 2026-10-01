@@ -244,7 +244,7 @@ export default function Page() {
               <span data-i18n="retreat_wadi_ask_wa">Ask on WhatsApp</span>
             </a>
           </div>
-          <p class="wr-hero__urgency" data-i18n="retreat_wadi_hero_urgency">Small women’s group · limited spots</p>
+          <p class="wr-hero__urgency"><span data-i18n="retreat_wadi_hero_urgency">Small women’s group · limited spots</span><span class="wr-hero__sep" aria-hidden="true"> · </span><strong class="wr-spots" data-i18n="retreat_wadi_spots_left">About 10 spots left</strong></p>
         </div>
       </div>
     </div>
@@ -365,6 +365,51 @@ export default function Page() {
           </a>
         </div>
       </article>
+    </div>
+  </section>
+
+  <!-- 6b. VOICES (participant messages) -->
+  <section id="wr-voices" class="wr-section">
+    <div class="wr-container">
+      <div class="wr-section__head">
+        <h2 class="wr-h2" data-i18n="retreat_wadi_voices_title">In their words</h2>
+        <p class="wr-section__lead" data-i18n="retreat_wadi_voices_sub">From messages participants sent after the previous retreat</p>
+      </div>
+      <div class="wr-voices">
+        <figure class="wr-voice">
+          <blockquote class="wr-voice__quote">
+            <p class="wr-voice__hl" data-i18n="retreat_wadi_voice1_highlight">Each one of you left a beautiful mark on my heart.</p>
+            <details class="wr-voice__more" data-track-id="voice1">
+              <summary data-i18n="retreat_wadi_voice_read_more">Read the full message</summary>
+              <p class="wr-host__text" data-i18n="retreat_wadi_voice1_text">My dearest ❤️ I honestly don’t know how to describe how special this time was because of you…</p>
+            </details>
+          </blockquote>
+          <figcaption class="wr-voice__author" data-i18n="retreat_wadi_voice_author">Participant · previous retreat</figcaption>
+        </figure>
+        <figure class="wr-voice">
+          <blockquote class="wr-voice__quote">
+            <p class="wr-voice__hl" data-i18n="retreat_wadi_voice2_highlight">From today I have a second, big family.</p>
+            <details class="wr-voice__more" data-track-id="voice2">
+              <summary data-i18n="retreat_wadi_voice_read_more">Read the full message</summary>
+              <p class="wr-host__text" data-i18n="retreat_wadi_voice2_text">Thank you, girls, for the holding, optimism, joy, calm and support…</p>
+            </details>
+          </blockquote>
+          <figcaption class="wr-voice__author" data-i18n="retreat_wadi_voice_author">Participant · previous retreat</figcaption>
+        </figure>
+        <figure class="wr-voice">
+          <blockquote class="wr-voice__quote">
+            <p class="wr-voice__hl" data-i18n="retreat_wadi_voice3_highlight">Thank you for creating a safe, beautiful space, with so much love.</p>
+            <details class="wr-voice__more" data-track-id="voice3">
+              <summary data-i18n="retreat_wadi_voice_read_more">Read the full message</summary>
+              <p class="wr-voice__to" data-i18n="retreat_wadi_voice3_to_nawal">To Nawal 🤍</p>
+              <p class="wr-host__text" data-i18n="retreat_wadi_voice3_text_nawal">Thank you for creating a safe, beautiful space with so much love…</p>
+              <p class="wr-voice__to" data-i18n="retreat_wadi_voice3_to_esraa">To Esraa ❤️</p>
+              <p class="wr-host__text" data-i18n="retreat_wadi_voice3_text_esraa">Your presence alone is ease and safety…</p>
+            </details>
+          </blockquote>
+          <figcaption class="wr-voice__author" data-i18n="retreat_wadi_voice_author">Participant · previous retreat</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -571,6 +616,7 @@ export default function Page() {
         <div class="wr-cta-panel__head">
           <p class="wr-cta-panel__dates" dir="ltr" data-i18n="retreat_wadi_price_dates">22–26.10.2026</p>
           <p class="wr-cta-panel__place" data-i18n="retreat_wadi_price_place">Wadi Rum, Jordan</p>
+          <p class="wr-cta-panel__spots"><span class="wr-cta-panel__spots-dot" aria-hidden="true"></span><span data-i18n="retreat_wadi_spots_left">About 10 spots left</span></p>
         </div>
         <div class="wr-cta-panel__rooms" data-i18n-attr="aria-label:retreat_wadi_rooms_aria" aria-label="Room options">
           <article class="wr-cta-price-card wr-cta-price-card--premium">
@@ -588,6 +634,10 @@ export default function Page() {
             </div>
           </article>
         </div>
+        <blockquote class="wr-cta-quote">
+          <p data-i18n="retreat_wadi_voice2_highlight">From today I have a second, big family.</p>
+          <cite data-i18n="retreat_wadi_voice_author">Participant · previous retreat</cite>
+        </blockquote>
         <p class="wr-cta-panel__closing" data-i18n="retreat_wadi_final_text3">If, as you read this, you felt: "I need this space"… maybe that is enough of a sign to ask about it.</p>
         <div class="ny-book-actions wr-cta-panel__actions">
           <a href="/register/wadi-rum" class="dahab-includes-cta ny-book-btn-primary wr-cta-panel__btn" data-track-cta="book" data-track-loc="final"><span data-i18n="retreat_wadi_book_now">Submit registration request</span><span aria-hidden="true">→</span></a>

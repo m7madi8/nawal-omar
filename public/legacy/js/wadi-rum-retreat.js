@@ -31,6 +31,12 @@
     else track("wr_faq_open", { question: id, source: event.detail.source });
   });
 
+  document.querySelectorAll(".wr-voice__more").forEach(function (details) {
+    details.addEventListener("toggle", function () {
+      if (details.open) track("wr_testimonial_open", { id: details.getAttribute("data-track-id") });
+    });
+  });
+
   (function scrollDepth() {
     var marks = [25, 50, 75, 100];
     var sent = {};
