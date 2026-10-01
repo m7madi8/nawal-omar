@@ -1563,6 +1563,162 @@
   outline-offset: 2px;
 }
 
+/* ---------- 11b. Sales structure: leads, groups, steps, FAQ ---------- */
+.wr-section__lead {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1rem, 2.2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--wr-accent-dark);
+}
+
+.wr-h3 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.35rem);
+  font-weight: 600;
+  color: var(--wr-ink);
+}
+
+.wr-gallery-photos {
+  margin-top: 1rem;
+}
+
+.wr-gallery-reels {
+  margin-top: clamp(1.5rem, 4vw, 2rem);
+  padding-top: clamp(1.25rem, 3vw, 1.5rem);
+  border-top: 1px solid var(--wr-line);
+}
+
+.wr-forwhom .wr-feature h3 {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.wr-includes-groups {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .wr-includes-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.wr-includes-group {
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.9rem;
+  background: var(--wr-accent-soft);
+}
+
+.wr-includes-group__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--wr-ink);
+}
+
+.wr-includes-group__icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.wr-includes-group .wr-booking__list li {
+  margin: 0.25rem 0;
+}
+
+.wr-before {
+  margin-top: 1rem;
+  padding: 0.95rem 1.05rem;
+  border-inline-start: 3px solid var(--wr-accent);
+  border-radius: 0.75rem;
+  background: var(--wr-accent-soft);
+}
+
+.wr-before__title {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--wr-accent-dark);
+}
+
+.wr-steps {
+  display: grid;
+  gap: 1rem;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.wr-step {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.wr-step__num {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #c47a45 0%, #a35f34 100%);
+  color: #fff9f3;
+  font-weight: 750;
+  font-size: 1rem;
+}
+
+.wr-step__title {
+  margin: 0.35rem 0 0.35rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.08rem;
+  color: var(--wr-ink);
+}
+
+.wr-faq {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.wr-faq__item {
+  border: 1px solid var(--wr-line);
+  border-radius: 1rem;
+  background: var(--wr-surface);
+  scroll-margin-top: calc(var(--header-h, 84px) + 1rem);
+}
+
+.wr-faq__q {
+  margin: 0;
+  padding: 1rem 1.05rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.02rem;
+  color: var(--wr-ink);
+}
+
+.wr-faq__a {
+  padding: 0 1.05rem 1rem;
+}
+
+.wr-faq__link {
+  display: inline-flex;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--wr-accent-dark);
+}
+
+#wr-includes,
+#wr-about,
+#wr-steps,
+#wr-program {
+  scroll-margin-top: calc(var(--header-h, 84px) + 1rem);
+}
+
 /* ---------- 12. RTL typography overrides ---------- */
 [dir="rtl"] .wr-title,
 [dir="rtl"] .wr-h2,
@@ -1573,7 +1729,10 @@
 [dir="rtl"] .wr-booking__block h4,
 [dir="rtl"] .wr-price-value,
 [dir="rtl"] .wr-cta-panel__dates,
-[dir="rtl"] .wr-cta-price-card__line {
+[dir="rtl"] .wr-cta-price-card__line,
+[dir="rtl"] .wr-h3,
+[dir="rtl"] .wr-step__title,
+[dir="rtl"] .wr-faq__q {
   font-family: Amiri, Georgia, serif;
 }
 

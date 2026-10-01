@@ -34,8 +34,23 @@ function loadTranslations(rel) {
   return sandbox.__translations;
 }
 
-function snapshot() {
-  const page = fs.readFileSync(path.join(root, pageRel), 'utf8');
+function normalizeLiteral(text) {
+  return text.replace(/\\'/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+}
+
+async function readPage(src) {
+  if (/^https?:\/\//.test(src)) {
+    const res = await fetch(src);
+    if (!res.ok) throw new Error(`${src} responded ${res.status}`);
+    const html = await res.text();
+    const main = html.match(/<main[\s\S]*<\/main>/i);
+    return main ? main[0] : html;
+  }
+  return fs.readFileSync(path.join(root, src), 'utf8');
+}
+
+async function snapshot() {
+  const page = await readPage(pageRel);
   const t = loadTranslations(i18nRel);
   const keys = new Map();
   for (const m of page.matchAll(/data-i18n="([^"]+)"/g)) keys.set(m[1], (keys.get(m[1]) || 0) + 1);
@@ -49,7 +64,7 @@ function snapshot() {
   const literals = new Set();
   const html = page.replace(/<svg[\s\S]*?<\/svg>/g, '');
   for (const m of html.matchAll(/>([^<>{}]+)</g)) {
-    const text = m[1].replace(/\s+/g, ' ').trim();
+    const text = normalizeLiteral(m[1]);
     if (text && /[\p{L}\p{N}]/u.test(text)) literals.add(text);
   }
 
@@ -60,7 +75,7 @@ function snapshot() {
   return { page: pageRel, keyCount: keys.size, keys: entries, literals: [...literals].sort() };
 }
 
-const current = snapshot();
+const current = await snapshot();
 
 if (!baselineRel) {
   fs.writeFileSync(path.join(root, outRel), JSON.stringify(current, null, 2));
@@ -81,11 +96,16 @@ for (const [key, val] of Object.entries(base.keys)) {
   if (now.ar !== val.ar) changed.push(`${key} [ar]`);
 }
 const added = Object.keys(current.keys).filter((k) => !base.keys[k]);
-const missingLiterals = base.literals.filter((l) => !current.literals.includes(l));
+const currentLiterals = new Set(current.literals.map(normalizeLiteral));
+const missingLiterals = base.literals.filter((l) => !currentLiterals.has(normalizeLiteral(l)));
+const untranslated = Object.entries(current.keys)
+  .filter(([, v]) => v.en == null || v.ar == null)
+  .map(([k, v]) => `${k}${v.en == null ? ' [en]' : ''}${v.ar == null ? ' [ar]' : ''}`);
 
 console.log(`Baseline keys: ${base.keyCount} | Current keys: ${current.keyCount}`);
 console.log(`Removed keys (${removed.length}):`, removed.join(', ') || '-');
 console.log(`Changed values (${changed.length}):`, changed.join(', ') || '-');
 console.log(`Missing literal strings (${missingLiterals.length}):`, missingLiterals.join(' | ') || '-');
 console.log(`New keys (${added.length}):`, added.join(', ') || '-');
-process.exit(removed.length || changed.length ? 1 : 0);
+console.log(`Keys missing a translation (${untranslated.length}):`, untranslated.join(', ') || '-');
+process.exit(removed.length || changed.length || untranslated.length ? 1 : 0);
