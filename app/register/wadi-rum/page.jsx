@@ -5,6 +5,196 @@ export const metadata = {
   "description": "Initial registration form for Wadi Rum desert retreat."
 };
 
+const WA_NUMBER = '972522496366';
+
+const err = (key) => `<p class="field-error" id="err-${key}" data-err-for="${key}" hidden></p>`;
+const optional = '<span class="field-optional" data-t="optional">(optional)</span>';
+
+const choice = (kind, name, value, key, text, required) =>
+  `<label class="${kind}-item"><span class="choice-text" data-t="${key}">${text}</span><input class="choice-control" type="${kind === 'radio' ? 'radio' : 'checkbox'}" name="${name}" value="${value}"${required ? ' required' : ''}></label>`;
+
+const ACTIVITIES = [
+  ['yoga-breath', 'a1', 'Yoga &amp; breathwork'],
+  ['reflective-writing', 'a2', 'Reflective writing'],
+  ['sound-healing', 'a3', 'Sound Healing'],
+  ['desert-fire-rituals', 'a4', 'Desert &amp; fire rituals'],
+  ['meditative-walk', 'a5', 'Meditative walk'],
+  ['sharing-circles', 'a6', 'Sharing circles'],
+  ['star-nights', 'a7', 'Nights under stars'],
+];
+
+const STEPS = [
+  ['1', 'stepName1', 'Contact'],
+  ['2', 'stepName2', 'About you'],
+  ['3', 'stepName3', 'Your experience'],
+];
+
+const html = `
+  <main class="wadi-reg ny-inner">
+    <div class="wadi-reg-top">
+      <a class="back-link" href="/retreats/wadi-rum" data-t="backLink">Back to retreat</a>
+    </div>
+    <section class="card">
+      <span class="hero-badge" data-t="badge">🌙 Wadi Rum Retreat</span>
+      <h1 data-t="title">Initial Registration | Wadi Rum Desert Retreat</h1>
+      <p class="lead" data-t="lead1">This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.</p>
+      <p class="lead" data-t="lead2">Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.</p>
+      <div class="small-note">
+        <bdi data-t="note">Wadi Rum Retreat – SHARAZAD CAMP</bdi>
+        <span class="small-note__sep" aria-hidden="true">·</span>
+        <bdi dir="ltr">22–26.10.2026</bdi>
+        <span class="small-note__sep" aria-hidden="true">·</span>
+        <bdi data-t="noteDuration">5 days - 4 nights</bdi>
+      </div>
+      <ul class="reg-prices" aria-label="Prices" data-t-attr="aria-label:pricesAria">
+        <li data-t="pricePanorama">Panorama Room — 3,650 ₪</li>
+        <li data-t="priceBubbles">Bubbles Room — 3,850 ₪</li>
+      </ul>
+
+      <div class="reg-progress" id="regProgress" hidden>
+        <p class="reg-progress__label" id="regStepLabel" aria-live="polite"></p>
+        <ol class="reg-progress__bar">
+          ${STEPS.map(([n, key, text]) => `<li data-step-dot="${n}"><span class="reg-progress__num" aria-hidden="true">${n}</span><span class="reg-progress__name" data-t="${key}">${text}</span></li>`).join('')}
+        </ol>
+      </div>
+
+      <form id="wadiRegForm" data-supabase-url="https://xzxyskufrqansbhsbdkt.supabase.co" data-supabase-anon-key="sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph" data-supabase-table="retreat_requests" data-ny-thanks="off" novalidate>
+        <p class="reg-required-note" data-t="requiredNote">All fields are required unless marked optional.</p>
+
+        <div class="reg-hp" aria-hidden="true">
+          <label for="regWebsite">Website</label>
+          <input id="regWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <fieldset class="form-section reg-step" data-step="1" aria-labelledby="stepTitle1">
+          <h2 class="section-title" id="stepTitle1" tabindex="-1" data-t="secBasic">Basic Information</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="fullName" data-t="fullName">Full Name</label>
+              <input id="fullName" name="الاسم الكامل" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" required aria-describedby="err-fullName">
+              ${err('fullName')}
+            </div>
+            <div class="field">
+              <label for="phone" data-t="phone">Phone Number (WhatsApp)</label>
+              <p class="field-hint" id="hint-phone" data-t="phoneHint">With country code, e.g. +972 or +970</p>
+              <input id="phone" name="رقم الهاتف" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" enterkeyhint="next" required aria-describedby="hint-phone err-phone">
+              ${err('phone')}
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section reg-step" data-step="2" aria-labelledby="stepTitle2">
+          <h2 class="section-title" id="stepTitle2" tabindex="-1" data-t="secAbout">A little about you</h2>
+          <div class="grid two">
+            <div class="field">
+              <label for="age" data-t="age">Age</label>
+              <input id="age" name="العمر" type="text" inputmode="numeric" autocomplete="off" dir="ltr" data-min="16" maxlength="3" enterkeyhint="next" required aria-describedby="err-age">
+              ${err('age')}
+            </div>
+            <div class="field">
+              <label for="city"><span data-t="city">City</span> ${optional}</label>
+              <input id="city" name="مكان السكن" type="text" autocomplete="address-level2" enterkeyhint="next">
+            </div>
+          </div>
+          <h3 class="section-subtitle" data-t="secIntent">Your Intention</h3>
+          <p class="section-sub" data-t="secIntentSub">Write freely. There is no right or wrong answer.</p>
+          <div class="grid">
+            <div class="field">
+              <label for="reason"><span data-t="reason">What made you interested in this retreat?</span> ${optional}</label>
+              <textarea id="reason" name="دافع الاهتمام بالريتريت"></textarea>
+            </div>
+            <div class="field">
+              <label for="expectation"><span data-t="expectation">What do you hope to receive from this experience?</span> ${optional}</label>
+              <textarea id="expectation" name="التوقع من التجربة"></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section reg-step" data-step="3" aria-labelledby="stepTitle3">
+          <h2 class="section-title" id="stepTitle3" tabindex="-1" data-t="secHealth">Physical &amp; Mental Background</h2>
+          <div class="grid">
+            <fieldset class="choice-group" id="grp-yoga" aria-describedby="err-yoga">
+              <legend data-t="yogaExp">Do you have previous experience with yoga or meditation?</legend>
+              <div class="radio-grid">
+                ${choice('radio', 'خبرة يوغا/تأمل', 'no-first-time', 'y1', 'No, this is my first time', true)}
+                ${choice('radio', 'خبرة يوغا/تأمل', 'yes-basic', 'y2', 'Yes, basic experience', true)}
+                ${choice('radio', 'خبرة يوغا/تأمل', 'yes-regular', 'y3', 'Yes, I practice regularly', true)}
+              </div>
+              ${err('yoga')}
+            </fieldset>
+            <fieldset class="choice-group" id="grp-health" aria-describedby="err-health">
+              <legend data-t="healthQ">Do you currently have a physical condition we should know about?</legend>
+              <div class="radio-grid radio-grid--inline">
+                ${choice('radio', 'حالة صحية حالية', 'no', 'no', 'No', true)}
+                ${choice('radio', 'حالة صحية حالية', 'yes', 'yes', 'Yes', true)}
+              </div>
+              ${err('health')}
+            </fieldset>
+            <div class="field">
+              <label for="healthDetails"><span data-t="healthDetails">Additional details</span> ${optional}</label>
+              <textarea id="healthDetails" name="تفاصيل صحية إضافية"></textarea>
+            </div>
+          </div>
+
+          <h3 class="section-subtitle" data-t="secActivities">Activities &amp; Experience</h3>
+          <fieldset class="choice-group" id="grp-activities" aria-describedby="hint-activities err-activities">
+            <legend data-t="activitiesLabel">Which activities interest you most?</legend>
+            <p class="field-hint" id="hint-activities" data-t="activitiesHint">You can choose more than one.</p>
+            <div class="check-grid">
+              ${ACTIVITIES.map(([value, key, text]) => choice('check', 'اهتمامات الأنشطة', value, key, text, false)).join('')}
+            </div>
+            ${err('activities')}
+          </fieldset>
+
+          <div class="grid reg-gap-top">
+            <div class="field">
+              <label for="freeNote"><span data-t="freeNote">Anything else you would like to share?</span> ${optional}</label>
+              <textarea id="freeNote" name="ملاحظات إضافية"></textarea>
+            </div>
+          </div>
+
+          <div class="reg-assure">
+            <p><strong data-t="nextTitle">What happens next?</strong> <span data-t="nextText">We'll have a short getting-to-know-you call, then you secure your place with a first deposit of 400 ₪ (bank transfer or Bit).</span></p>
+            <p><span data-t="riskText">Sending a request is free and non-binding.</span> <a href="/retreats/wadi-rum#wr-faq-policy" data-t="policyLink">Payment &amp; cancellation terms</a></p>
+            <p class="reg-assure__privacy" data-t="privacy">We only use your details to contact you about the retreat.</p>
+          </div>
+
+          <div class="reg-fail" id="regFail" role="alert" tabindex="-1" hidden>
+            <p class="reg-fail__title" data-t="failTitle">The request didn't go through this time</p>
+            <p data-t="failText">Your details are still here. Try again, or message us on WhatsApp and we'll continue from there.</p>
+            <div class="reg-fail__actions">
+              <button type="submit" class="reg-btn reg-btn--ghost" data-t="failRetry">Try again</button>
+              <a class="reg-btn reg-btn--wa" id="regFailWa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener noreferrer" data-t="failWhatsapp">Message us on WhatsApp</a>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="reg-form-status" id="regFormStatus" role="status" aria-live="polite"></p>
+
+        <div class="actions reg-nav">
+          <button type="button" class="reg-btn reg-btn--ghost" data-step-prev hidden data-t="prev">Back</button>
+          <button type="button" class="reg-btn" data-step-next data-t="next">Next</button>
+          <button type="submit" class="reg-btn" data-submit data-t="submit">Send my request — free, no commitment</button>
+        </div>
+      </form>
+
+      <div id="okMsg" class="ok reg-success" role="status" tabindex="-1" hidden>
+        <p class="reg-success__title" id="okTitle" data-t="successTitle">Your request arrived, thank you</p>
+        <p data-t="successText">We'll get in touch soon for a short getting-to-know-you call. After that, you secure your place with a first deposit of 400 ₪.</p>
+        <div class="reg-success__actions">
+          <a class="reg-btn reg-btn--ghost" href="/retreats/wadi-rum" data-t="successBack">Back to the retreat page</a>
+          <a class="reg-btn reg-btn--wa" id="regOkWa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener noreferrer" data-t="successWhatsapp">Questions? Message us on WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="contact" id="contactBox">
+        <span data-t="contactLead">For questions:</span>
+        <a href="tel:+${WA_NUMBER}" dir="ltr">052-249-6366</a>
+      </div>
+    </section>
+  </main>
+`;
+
 export default function Page() {
   return (
     <LegacyPage
@@ -12,10 +202,9 @@ export default function Page() {
       dir="ltr"
       bodyClassName=""
       styles={["/css/wadi-rum-registration.css"]}
-      currentNav="health-forms"
-      scripts={[]}
-      inlineScripts={["\r\n    (function () {\r\n      const form = document.getElementById(\"wadiRegForm\");\r\n      const okMsg = document.getElementById(\"okMsg\");\r\n      const translations = {\r\n        en: {\r\n          badge: \"🌙 Wadi Rum Retreat\",\r\n          backLink: \"← Back to retreat\",\r\n          title: \"Initial Registration | Wadi Rum Desert Retreat\",\r\n          lead1: \"This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.\",\r\n          lead2: \"Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.\",\r\n          note: \"Wadi Rum Retreat – SHARAZAD CAMP | 22–26.10.2026 | 5 days - 4 nights\",\r\n          secBasic: \"Basic Information\",\r\n          fullName: \"1) Full Name *\",\r\n          phone: \"2) Phone Number (WhatsApp) *\",\r\n          email: \"\",\r\n          age: \"4) Age *\",\r\n          city: \"5) City *\",\r\n          secIntent: \"Your Intention\",\r\n          secIntentSub: \"Write freely. There is no right or wrong answer.\",\r\n          reason: \"6) What made you interested in this retreat? *\",\r\n          expectation: \"7) What do you hope to receive from this experience?\",\r\n          secHealth: \"Physical & Mental Background\",\r\n          yogaExp: \"8) Do you have previous experience with yoga or meditation? *\",\r\n          y1: \"No, this is my first time\",\r\n          y2: \"Yes, basic experience\",\r\n          y3: \"Yes, I practice regularly\",\r\n          healthQ: \"9) Do you currently have a physical condition we should know about? *\",\r\n          no: \"No\",\r\n          yes: \"Yes\",\r\n          healthDetails: \"Additional details (optional)\",\r\n          secActivities: \"Activities & Experience\",\r\n          activitiesLabel: \"11) Which activities interest you most? * (You can choose more than one)\",\r\n          a1: \"Yoga & breathwork\",\r\n          a2: \"Reflective writing\",\r\n          a3: \"Sound Healing\",\r\n          a4: \"Desert & fire rituals\",\r\n          a5: \"Meditative walk\",\r\n          a6: \"Sharing circles\",\r\n          a7: \"Nights under stars\",\r\n          freeNote: \"15) Anything else you would like to share?\",\r\n          submit: \"Submit Initial Registration\",\r\n          successMsg: \"Form submitted successfully. We will contact you soon.\",\r\n          contact: \"For questions:\\n📞 052-249-6366\",\r\n          checkError: \"Please select at least one activity.\",\r\n          submitError: \"Something went wrong while sending. Please try again.\"\r\n        },\r\n        ar: {\r\n          badge: \"🌙 ريتريت وادي رم\",\r\n          backLink: \"← العودة للريتريت\",\r\n          title: \"التسجيل الأوّلي | ريتريت الصحراء – وادي رم\",\r\n          lead1: \"هذا النموذج مخصّص للتسجيل الأوّلي. العدد محدود (حتى 20 مشاركة)، وسيتم التواصل معكِ بعد تعبئة النموذج لتأكيد التفاصيل.\",\r\n          lead2: \"ريتريت وادي رم هو مسار رجوع: لجسمك، لنَفَسك، وللمساحة الهادئة داخلك. التفاصيل الكاملة موجودة في صفحة الريتريت.\",\r\n          note: \"ريتريت وادي رم – SHARAZAD CAMP | 22–26.10.2026 | 5 أيام - 4 ليالي\",\r\n          secBasic: \"البيانات الأساسية\",\r\n          fullName: \"1) الاسم الكامل *\",\r\n          phone: \"2) رقم الهاتف (واتساب) *\",\r\n          email: \"\",\r\n          age: \"4) العمر *\",\r\n          city: \"5) مكان السكن *\",\r\n          secIntent: \"الهدف من المشاركة\",\r\n          secIntentSub: \"اكتبي بحرية، لا يوجد جواب صحيح أو خاطئ.\",\r\n          reason: \"6) ما الذي دفعكِ للاهتمام بهذا الريتريت؟ *\",\r\n          expectation: \"7) ما الذي تتمنين أن تحصلي عليه من هذه التجربة؟\",\r\n          secHealth: \"الخلفية الجسدية والنفسية\",\r\n          yogaExp: \"8) هل لديكِ تجربة سابقة في اليوغا أو التأمل؟ *\",\r\n          y1: \"لا، هذه تجربتي الأولى\",\r\n          y2: \"نعم، تجربة بسيطة\",\r\n          y3: \"نعم، أمارس بشكل منتظم\",\r\n          healthQ: \"9) هل تعانين من حالة صحية جسدية يجب أن نعرفها؟ *\",\r\n          no: \"لا\",\r\n          yes: \"نعم\",\r\n          healthDetails: \"تفاصيل إضافية (اختياري)\",\r\n          secActivities: \"الأنشطة والتجربة\",\r\n          activitiesLabel: \"11) أي من الأنشطة التالية تثير اهتمامك أكثر؟ * (يمكن اختيار أكثر من خيار)\",\r\n          a1: \"يوغا وتنفس\",\r\n          a2: \"كتابة تأملية\",\r\n          a3: \"Sound Healing\",\r\n          a4: \"طقوس الصحراء والنار\",\r\n          a5: \"المشي التأملي\",\r\n          a6: \"دوائر مشاركة\",\r\n          a7: \"السهرات تحت النجوم\",\r\n          freeNote: \"15) أي شيء إضافي تحبين مشاركته معنا؟\",\r\n          submit: \"إرسال التسجيل الأوّلي\",\r\n          successMsg: \"تم إرسال النموذج بنجاح. سنتواصل معكِ قريبًا.\",\r\n          contact: \"لأي سؤال أو استفسار:\\n📞 052-249-6366\",\r\n          checkError: \"يرجى اختيار نشاط واحد على الأقل.\",\r\n          submitError: \"حصل خطأ أثناء الإرسال. حاولي مرة أخرى.\"\r\n        }\r\n      };\r\n      function readLang() {\r\n        try {\r\n          var stored = localStorage.getItem(\"nawal-lang\");\r\n          if (stored === \"ar\" || stored === \"en\") return stored;\r\n        } catch (_e) {}\r\n        var docLang = document.documentElement.getAttribute(\"lang\");\r\n        return docLang === \"en\" ? \"en\" : \"ar\";\r\n      }\r\n      let currentLang = readLang();\r\n\r\n      function t(k) { return translations[currentLang][k] || k; }\r\n      function applyLang() {\r\n        document.documentElement.lang = currentLang;\r\n        document.documentElement.dir = currentLang === \"ar\" ? \"rtl\" : \"ltr\";\r\n        try { localStorage.setItem(\"nawal-lang\", currentLang); } catch (_e) {}\r\n        document.title = currentLang === \"ar\" ? \"التسجيل الأوّلي | ريتريت وادي رم\" : \"Initial Registration | Wadi Rum Desert Retreat\";\r\n        document.querySelectorAll(\"[data-t]\").forEach((el) => { el.textContent = t(el.getAttribute(\"data-t\")); });\r\n        const contactBox = document.getElementById(\"contactBox\");\r\n        if (contactBox) contactBox.innerHTML = t(\"contact\").replace(/\\n/g, \"<br>\");\r\n      }\r\n      function setLang(lang) {\r\n        if (lang !== \"ar\" && lang !== \"en\") return;\r\n        currentLang = lang;\r\n        applyLang();\r\n      }\r\n\r\n      function hasActivityChecked() {\r\n        return Array.from(form.querySelectorAll('input[name=\"اهتمامات الأنشطة\"]')).some((c) => c.checked);\r\n      }\r\n\r\n      async function sendToSupabase() {\r\n        const supabaseUrl = (form.getAttribute(\"data-supabase-url\") || \"\").trim().replace(/\\/+$/, \"\");\r\n        const supabaseKey = (form.getAttribute(\"data-supabase-anon-key\") || \"\").trim();\r\n        const table = (form.getAttribute(\"data-supabase-table\") || \"retreat_requests\").trim();\r\n        if (!supabaseUrl || !supabaseKey || !table) {\r\n          throw new Error(\"Missing Supabase config\");\r\n        }\r\n\r\n        const now = new Date();\r\n        const payload = {\r\n          id: \"req-\" + now.getTime(),\r\n          source: \"wadi-rum-registration\",\r\n          retreatType: \"Initial Registration | Wadi Rum Desert Retreat\",\r\n          submittedAt: now.toISOString(),\r\n          fullName: (form.querySelector(\"#fullName\").value || \"\").trim(),\r\n          phone: (form.querySelector(\"#phone\").value || \"\").trim(),\r\n          age: (form.querySelector(\"#age\").value || \"\").trim(),\r\n          city: (form.querySelector(\"#city\").value || \"\").trim(),\r\n          reason: (form.querySelector(\"#reason\").value || \"\").trim(),\r\n          expectation: (form.querySelector(\"#expectation\").value || \"\").trim(),\r\n          yogaExperience: (form.querySelector('input[name=\"خبرة يوغا/تأمل\"]:checked') || {}).value || \"\",\r\n          healthStatus: (form.querySelector('input[name=\"حالة صحية حالية\"]:checked') || {}).value || \"\",\r\n          healthDetails: (form.querySelector(\"#healthDetails\").value || \"\").trim(),\r\n          activities: Array.from(form.querySelectorAll('input[name=\"اهتمامات الأنشطة\"]:checked')).map((x) => x.value),\r\n          freeNote: (form.querySelector(\"#freeNote\").value || \"\").trim(),\r\n          status: \"pending\",\r\n          createdAt: now.toISOString()\r\n        };\r\n\r\n        const res = await fetch(`${supabaseUrl}/rest/v1/${encodeURIComponent(table)}`, {\r\n          method: \"POST\",\r\n          headers: {\r\n            \"Content-Type\": \"application/json\",\r\n            \"Accept\": \"application/json\",\r\n            \"apikey\": supabaseKey,\r\n            \"Authorization\": `Bearer ${supabaseKey}`,\r\n            \"Prefer\": \"return=representation\"\r\n          },\r\n          body: JSON.stringify([payload])\r\n        });\r\n\r\n        if (!res.ok) {\r\n          const errTxt = await res.text().catch(() => \"\");\r\n          throw new Error(errTxt || \"Supabase request failed\");\r\n        }\r\n      }\r\n\r\n      form.addEventListener(\"submit\", async function (e) {\r\n        e.preventDefault();\r\n        if (!form.checkValidity()) {\r\n          form.reportValidity();\r\n          return;\r\n        }\r\n        if (!hasActivityChecked()) {\r\n          alert(t(\"checkError\"));\r\n          return;\r\n        }\r\n        try {\r\n          await sendToSupabase();\r\n          okMsg.classList.add(\"visible\");\r\n          if (window.nawalThankYou) window.nawalThankYou.show({ name: (form.fullName && form.fullName.value) || \"\" });\r\n          form.reset();\r\n        } catch (_err) {\r\n          alert(t(\"submitError\"));\r\n        }\r\n      });\r\n\r\n      document.addEventListener(\"click\", function (e) {\r\n        var btn = e.target.closest(\"[data-lang-set]\");\r\n        if (!btn) return;\r\n        setLang(btn.getAttribute(\"data-lang-set\") === \"ar\" ? \"ar\" : \"en\");\r\n      });\r\n      document.addEventListener(\"nawal:langchange\", function (e) {\r\n        if (e.detail && e.detail.lang) setLang(e.detail.lang);\r\n      });\r\n      window.addEventListener(\"nawal-lang-change\", function (e) {\r\n        if (e.detail && e.detail.lang) setLang(e.detail.lang);\r\n      });\r\n\r\n      applyLang();\r\n    })();\r\n  "]}
-      html={"\r\n  <main class=\"wadi-reg ny-inner\">\r\n    <div class=\"wadi-reg-top\">\r\n      <a class=\"back-link\" href=\"/retreats/wadi-rum\" data-t=\"backLink\">← Back to retreat</a>\r\n    </div>\r\n    <section class=\"card\">\r\n      <span class=\"hero-badge\" data-t=\"badge\">🌙 Wadi Rum Retreat</span>\r\n      <h1 data-t=\"title\">Initial Registration | Wadi Rum Desert Retreat</h1>\r\n      <p class=\"lead\" data-t=\"lead1\">This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.</p>\r\n      <p class=\"lead\" data-t=\"lead2\">Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.</p>\r\n      <div class=\"small-note\" data-t=\"note\">Wadi Rum Retreat – SHARAZAD CAMP | 22–26.10.2026 | 5 days - 4 nights</div>\r\n\r\n      <form id=\"wadiRegForm\" data-supabase-url=\"https://xzxyskufrqansbhsbdkt.supabase.co\" data-supabase-anon-key=\"sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph\" data-supabase-table=\"retreat_requests\" novalidate>\r\n        <div class=\"form-section\">\r\n          <h2 class=\"section-title\" data-t=\"secBasic\">Basic Information</h2>\r\n          <div class=\"grid two\">\r\n            <div>\r\n              <label for=\"fullName\" data-t=\"fullName\">1) Full Name *</label>\r\n              <input id=\"fullName\" name=\"الاسم الكامل\" required>\r\n            </div>\r\n            <div>\r\n              <label for=\"phone\" data-t=\"phone\">2) Phone Number (WhatsApp) *</label>\r\n              <input id=\"phone\" name=\"رقم الهاتف\" type=\"tel\" required>\r\n            </div>\r\n            <div>\r\n              <label for=\"age\" data-t=\"age\">4) Age *</label>\r\n              <input id=\"age\" name=\"العمر\" type=\"number\" min=\"16\" required>\r\n            </div>\r\n            <div>\r\n              <label for=\"city\" data-t=\"city\">5) City *</label>\r\n              <input id=\"city\" name=\"مكان السكن\" required>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-section\">\r\n          <h2 class=\"section-title\" data-t=\"secIntent\">Your Intention</h2>\r\n          <p class=\"section-sub\" data-t=\"secIntentSub\">Write freely. There is no right or wrong answer.</p>\r\n          <div class=\"grid\">\r\n            <div>\r\n              <label for=\"reason\" data-t=\"reason\">6) What made you interested in this retreat? *</label>\r\n              <textarea id=\"reason\" name=\"دافع الاهتمام بالريتريت\" required></textarea>\r\n            </div>\r\n            <div>\r\n              <label for=\"expectation\" data-t=\"expectation\">7) What do you hope to receive from this experience?</label>\r\n              <textarea id=\"expectation\" name=\"التوقع من التجربة\"></textarea>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-section\">\r\n          <h2 class=\"section-title\" data-t=\"secHealth\">Physical & Mental Background</h2>\r\n          <div class=\"grid two\">\r\n            <div>\r\n              <label data-t=\"yogaExp\">8) Do you have previous experience with yoga or meditation? *</label>\r\n              <div class=\"radio-grid\">\r\n                <label class=\"radio-item\"><span class=\"choice-text\" data-t=\"y1\">No, this is my first time</span><input class=\"choice-control\" type=\"radio\" name=\"خبرة يوغا/تأمل\" value=\"no-first-time\" required></label>\r\n                <label class=\"radio-item\"><span class=\"choice-text\" data-t=\"y2\">Yes, basic experience</span><input class=\"choice-control\" type=\"radio\" name=\"خبرة يوغا/تأمل\" value=\"yes-basic\" required></label>\r\n                <label class=\"radio-item\"><span class=\"choice-text\" data-t=\"y3\">Yes, I practice regularly</span><input class=\"choice-control\" type=\"radio\" name=\"خبرة يوغا/تأمل\" value=\"yes-regular\" required></label>\r\n              </div>\r\n            </div>\r\n            <div>\r\n              <label data-t=\"healthQ\">9) Do you currently have a physical condition we should know about? *</label>\r\n              <div class=\"radio-grid\">\r\n                <label class=\"radio-item\"><span class=\"choice-text\" data-t=\"no\">No</span><input class=\"choice-control\" type=\"radio\" name=\"حالة صحية حالية\" value=\"no\" required></label>\r\n                <label class=\"radio-item\"><span class=\"choice-text\" data-t=\"yes\">Yes</span><input class=\"choice-control\" type=\"radio\" name=\"حالة صحية حالية\" value=\"yes\" required></label>\r\n              </div>\r\n              <label for=\"healthDetails\" style=\"margin-top:8px;\" data-t=\"healthDetails\">Additional details (optional)</label>\r\n              <textarea id=\"healthDetails\" name=\"تفاصيل صحية إضافية\"></textarea>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-section\">\r\n          <h2 class=\"section-title\" data-t=\"secActivities\">Activities & Experience</h2>\r\n          <label data-t=\"activitiesLabel\">11) Which activities interest you most? * (You can choose more than one)</label>\r\n          <div class=\"check-grid\">\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a1\">Yoga & breathwork</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"yoga-breath\"></label>\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a2\">Reflective writing</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"reflective-writing\"></label>\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a3\">Sound Healing</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"sound-healing\"></label>\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a4\">Desert & fire rituals</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"desert-fire-rituals\"></label>\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a5\">Meditative walk</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"meditative-walk\"></label>\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a6\">Sharing circles</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"sharing-circles\"></label>\r\n            <label class=\"check-item\"><span class=\"choice-text\" data-t=\"a7\">Nights under stars</span><input class=\"choice-control\" type=\"checkbox\" name=\"اهتمامات الأنشطة\" value=\"star-nights\"></label>\r\n          </div>\r\n\r\n          <div class=\"grid\" style=\"margin-top:10px;\">\r\n            <div>\r\n              <label for=\"freeNote\" data-t=\"freeNote\">15) Anything else you would like to share?</label>\r\n              <textarea id=\"freeNote\" name=\"ملاحظات إضافية\"></textarea>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"actions\">\r\n          <button type=\"submit\" data-t=\"submit\">Submit Initial Registration</button>\r\n        </div>\r\n        <div id=\"okMsg\" class=\"ok\" data-t=\"successMsg\">Form submitted successfully. We will contact you soon.</div>\r\n      </form>\r\n\r\n      <div class=\"contact\" id=\"contactBox\">\r\n        لأي سؤال أو استفسار:<br>\r\n        📞 052-249-6366\r\n      </div>\r\n    </section>\r\n  </main>\r\n\r\n  \r\n"}
+      currentNav="retreats"
+      scripts={[{ src: '/legacy/js/wadi-rum-registration.js' }]}
+      html={html}
     />
   );
 }
