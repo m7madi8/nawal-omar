@@ -172,8 +172,8 @@
 .wadi-reg input:focus,
 .wadi-reg textarea:focus {
   outline: none;
-  border-color: var(--wr-accent-soft);
-  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.14);
+  border-color: var(--wr-accent);
+  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.28);
 }
 
 .wadi-reg .radio-grid,
