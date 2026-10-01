@@ -3,6 +3,36 @@
   if (!form || form.getAttribute("data-bound") === "1") return;
   form.setAttribute("data-bound", "1");
 
+  // TODO(analytics): no provider is installed yet. Events are forwarded to
+  // GTM (dataLayer), gtag, Microsoft Clarity or Meta Pixel as soon as one is
+  // added, and are always buffered in window.wrEvents.
+  // Never put personal data (name, phone, answers) in event params.
+  window.wrEvents = window.wrEvents || [];
+  function track(name, params) {
+    var payload = Object.assign({ form: "wadi-rum-registration" }, params || {});
+    window.wrEvents.push({ event: name, params: payload, at: Date.now() });
+    try {
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: name }, payload));
+      if (typeof window.gtag === "function") window.gtag("event", name, payload);
+      if (typeof window.clarity === "function") window.clarity("event", name);
+      if (typeof window.fbq === "function") window.fbq("trackCustom", name, payload);
+    } catch (e) {
+      /* analytics must never break the form */
+    }
+  }
+
+  function utmParams() {
+    var out = {};
+    try {
+      var params = new URLSearchParams(window.location.search);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(function (key) {
+        var v = params.get(key);
+        if (v) out[key] = v.slice(0, 100);
+      });
+    } catch (_e) {}
+    return out;
+  }
+
   var okMsg = document.getElementById("okMsg");
   var progress = document.getElementById("regProgress");
   var stepLabel = document.getElementById("regStepLabel");
@@ -338,6 +368,9 @@
       setStatus("");
       return true;
     }
+    invalid.forEach(function (key) {
+      track("form_validation_error", { field: key, step: RULES[key].step });
+    });
     var firstStep = RULES[invalid[0]].step;
     var onStep = invalid.filter(function (key) { return RULES[key].step === firstStep; });
     if (firstStep !== current) showStep(firstStep, false);
@@ -376,10 +409,14 @@
 
   function goNext() {
     if (!validateSteps(current)) return;
+    track("form_step_complete", { step: current });
     showStep(Math.min(current + 1, TOTAL), true);
   }
 
-  prevBtn.addEventListener("click", function () { showStep(Math.max(current - 1, 1), true); });
+  prevBtn.addEventListener("click", function () {
+    track("form_step_back", { from: current });
+    showStep(Math.max(current - 1, 1), true);
+  });
   nextBtn.addEventListener("click", goNext);
 
   /* ---------- Submit (payload shape must stay identical: admin dashboard + Supabase columns depend on it) ---------- */
@@ -506,10 +543,12 @@
     e.preventDefault();
     if (sending) return;
     if (current < TOTAL) { goNext(); return; }
+    track("form_submit_attempt");
     if (!validateSteps(TOTAL)) return;
     failEl.hidden = true;
     submitBtn.hidden = false;
     if (looksLikeBot()) {
+      track("form_spam_blocked");
       showSuccess();
       return;
     }
@@ -517,12 +556,28 @@
     try {
       await sendToSupabase();
       setSending(false);
+      track("form_step_complete", { step: TOTAL });
+      track("form_submit_success");
       showSuccess();
-    } catch (_err) {
+    } catch (err) {
       setSending(false);
+      var reason = err && err.name === "AbortError" ? "timeout" : err instanceof TypeError ? "network" : "server";
+      track("form_submit_fail", { reason: reason });
       showFail();
     }
   });
+
+  failWa.addEventListener("click", function () { track("form_whatsapp_fallback_click", { location: "fail" }); });
+  okWa.addEventListener("click", function () { track("form_whatsapp_click", { location: "success" }); });
+
+  var started = false;
+  function markStarted() {
+    if (started) return;
+    started = true;
+    track("form_start");
+  }
+  form.addEventListener("input", markStarted);
+  form.addEventListener("change", markStarted);
 
   document.addEventListener("wr-reg:lang", function () {
     if (!okMsg.hidden) renderSuccessTitle();
@@ -545,4 +600,5 @@
   progress.hidden = false;
   showStep(1, false);
   applyLang();
+  track("form_view", Object.assign({ lang: currentLang }, utmParams()));
 })();
