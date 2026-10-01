@@ -45,14 +45,10 @@
 
   var translations = {
     en: {
-      badge: "🌙 Wadi Rum Retreat",
       backLink: "Back to retreat",
       title: "Initial Registration | Wadi Rum Desert Retreat",
       lead1: "This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.",
-      lead2: "Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.",
-      note: "Wadi Rum Retreat – SHARAZAD CAMP",
       noteDuration: "5 days - 4 nights",
-      pricesAria: "Prices",
       pricePanorama: "Panorama Room — 3,650 ₪",
       priceBubbles: "Bubbles Room — 3,850 ₪",
       stepName1: "Contact",
@@ -126,14 +122,10 @@
       docTitle: "Initial Registration | Wadi Rum Desert Retreat"
     },
     ar: {
-      badge: "🌙 ريتريت وادي رم",
       backLink: "الرجوع للريتريت",
       title: "التسجيل الأوّلي | ريتريت الصحراء – وادي رم",
       lead1: "هاي استمارة تسجيل أوّلي. العدد محدود (لحد 20 مشاركة)، وبعد ما تبعتيها منحكي معكِ لنأكّد التفاصيل.",
-      lead2: "ريتريت وادي رم هو طريق رجوع: لجسمك، لنَفَسك، وللمساحة الهادية جوّاكِ. كل التفاصيل موجودة بصفحة الريتريت.",
-      note: "ريتريت وادي رم – SHARAZAD CAMP",
       noteDuration: "5 أيام - 4 ليالي",
-      pricesAria: "الأسعار",
       pricePanorama: "غرفة بانوراما — 3,650 ₪",
       priceBubbles: "غرفة بابلز — 3,850 ₪",
       stepName1: "التواصل",

@@ -35,21 +35,22 @@ const html = `
       <a class="back-link" href="/retreats/wadi-rum" data-t="backLink">Back to retreat</a>
     </div>
     <section class="card">
-      <span class="hero-badge" data-t="badge">🌙 Wadi Rum Retreat</span>
       <h1 data-t="title">Initial Registration | Wadi Rum Desert Retreat</h1>
       <p class="lead" data-t="lead1">This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.</p>
-      <p class="lead" data-t="lead2">Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.</p>
-      <div class="small-note">
-        <bdi data-t="note">Wadi Rum Retreat – SHARAZAD CAMP</bdi>
-        <span class="small-note__sep" aria-hidden="true">·</span>
-        <bdi dir="ltr">22–26.10.2026</bdi>
-        <span class="small-note__sep" aria-hidden="true">·</span>
-        <bdi data-t="noteDuration">5 days - 4 nights</bdi>
+      <div class="reg-summary">
+        <p class="reg-summary__row">
+          <bdi dir="ltr">22–26.10.2026</bdi>
+          <span class="reg-summary__sep" aria-hidden="true">·</span>
+          <bdi data-t="noteDuration">5 days - 4 nights</bdi>
+          <span class="reg-summary__sep" aria-hidden="true">·</span>
+          <bdi>SHARAZAD CAMP</bdi>
+        </p>
+        <p class="reg-summary__row reg-summary__row--prices">
+          <bdi data-t="pricePanorama">Panorama Room — 3,650 ₪</bdi>
+          <span class="reg-summary__sep" aria-hidden="true">·</span>
+          <bdi data-t="priceBubbles">Bubbles Room — 3,850 ₪</bdi>
+        </p>
       </div>
-      <ul class="reg-prices" aria-label="Prices" data-t-attr="aria-label:pricesAria">
-        <li data-t="pricePanorama">Panorama Room — 3,650 ₪</li>
-        <li data-t="priceBubbles">Bubbles Room — 3,850 ₪</li>
-      </ul>
 
       <div class="reg-progress" id="regProgress" hidden>
         <p class="reg-progress__label" id="regStepLabel" aria-live="polite"></p>
