@@ -164,6 +164,76 @@
     updateNav();
   });
 
+  function setItemOpen(item, open, source) {
+    var trigger = item.querySelector(".wr-acc__trigger");
+    var panel = item.querySelector(".wr-acc__panel");
+    if (!trigger || !panel) return;
+    var wasOpen = item.classList.contains("is-open");
+    item.classList.toggle("is-open", open);
+    trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) panel.removeAttribute("inert");
+    else panel.setAttribute("inert", "");
+    if (open && !wasOpen && source) {
+      document.dispatchEvent(new CustomEvent("wr:acc-open", {
+        detail: { id: item.getAttribute("data-track-id") || item.id, source: source }
+      }));
+    }
+  }
+
+  function syncToggleAll(group) {
+    var button = document.querySelector('[data-acc-toggle-all="' + group.id + '"]');
+    if (!button) return;
+    var items = group.querySelectorAll("[data-acc-item]");
+    var allOpen = Array.prototype.every.call(items, function (item) {
+      return item.classList.contains("is-open");
+    });
+    button.setAttribute("aria-expanded", allOpen ? "true" : "false");
+    button.querySelector('[data-acc-label="expand"]').hidden = allOpen;
+    button.querySelector('[data-acc-label="collapse"]').hidden = !allOpen;
+  }
+
+  document.querySelectorAll("[data-acc]").forEach(function (group) {
+    group.classList.add("is-enhanced");
+    group.querySelectorAll("[data-acc-item]").forEach(function (item) {
+      setItemOpen(item, item.classList.contains("is-open"));
+      var trigger = item.querySelector(".wr-acc__trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", function () {
+        setItemOpen(item, !item.classList.contains("is-open"), "click");
+        syncToggleAll(group);
+      });
+    });
+    syncToggleAll(group);
+  });
+
+  document.querySelectorAll("[data-acc-toggle-all]").forEach(function (button) {
+    var group = document.getElementById(button.getAttribute("data-acc-toggle-all"));
+    if (!group) return;
+    button.addEventListener("click", function () {
+      var open = button.getAttribute("aria-expanded") !== "true";
+      group.querySelectorAll("[data-acc-item]").forEach(function (item) {
+        setItemOpen(item, open, open ? "expand_all" : null);
+      });
+      syncToggleAll(group);
+    });
+  });
+
+  function openFromHash(hash) {
+    if (!hash || hash.length < 2) return;
+    var target = document.getElementById(decodeURIComponent(hash.slice(1)));
+    var item = target && target.closest("[data-acc-item]");
+    if (!item) return;
+    setItemOpen(item, true, "link");
+    var group = item.closest("[data-acc]");
+    if (group) syncToggleAll(group);
+  }
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest('a[href^="#"]');
+    if (link) openFromHash(link.getAttribute("href"));
+  });
+  openFromHash(window.location.hash);
+
   var sticky = document.querySelector("[data-wr-sticky]");
   var hero = document.querySelector(".wr-hero");
   var finalCta = document.querySelector(".wr-section--cta");

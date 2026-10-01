@@ -34,6 +34,131 @@ const staySlides = (folder, ids, altKey) => ids.map(
   (id) => `<figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/${folder}/shahrazadluxury-20260914-${id}.jpg" alt="" data-i18n-attr="alt:${altKey}" width="1200" height="800" loading="lazy" decoding="async"></figure>`,
 ).join('\n                ');
 
+const DAYS = [
+  {
+    chip: 'Day 01',
+    title: 'Arrival &amp; intention setting',
+    summary: 'Border pick-up, a stop in Al-Salt and a Bedouin welcome dinner',
+    items: [
+      'Meet at Beit Shean crossing and transfer to Wadi Rum.',
+      'A stop in Al-Salt, including breakfast at a balcony restaurant.',
+      'Warm Bedouin welcome and traditional dinner.',
+      'Deep introductions and intention workshop.',
+      'Light breath session and calm night under stars.',
+    ],
+  },
+  {
+    chip: 'Day 02',
+    title: 'Desert power day',
+    summary: 'Sunrise yoga, sound healing and stargazing',
+    items: [
+      'Sunrise yoga focused on root and pelvis.',
+      'Breathwork, healthy breakfast, and a deep workshop session.',
+      'Silent reflection + journaling and sound healing session.',
+      'Star meditation and telescope workshop.',
+    ],
+  },
+  {
+    chip: 'Day 03',
+    title: 'Inner and outer journey',
+    summary: 'Heart-opening yoga, a jeep tour and sunset yoga',
+    items: [
+      'Heart-opening yoga + guided meditation.',
+      'Power cards and emotional writing.',
+      'Jeep desert tour in Wadi Rum.',
+      'Sunset yoga with light acro for trust and balance.',
+    ],
+  },
+  {
+    chip: 'Day 04',
+    title: 'Integration and transformation',
+    summary: 'Feminine-energy yoga, a camel ride and the closing circle',
+    items: [
+      'Deep morning yoga to integrate feminine energy.',
+      'Second workshop session and personal rest time.',
+      'Camel ride and deep closing sound healing.',
+      'Light celebration and retreat closing circle.',
+    ],
+  },
+  {
+    chip: 'Day 05',
+    title: 'Farewell and anchoring',
+    summary: 'Closing breakfast and the journey home',
+    items: [
+      'Closing breakfast and intention anchoring circle.',
+      'Desert farewell and return with renewed energy.',
+    ],
+  },
+];
+
+const PROGRAM_PANEL_IDS = DAYS.map((_, i) => `wr-day${i + 1}-panel`).join(' ');
+
+const accItem = ({ id, open, itemClass = '', track, heading, panel }) => `<div class="wr-acc__item${itemClass ? ` ${itemClass}` : ''}${open ? ' is-open' : ''}" id="${id}" data-acc-item data-track-id="${track}">
+          <h3 class="wr-acc__heading">
+            <button type="button" class="wr-acc__trigger" id="${id}-btn" aria-expanded="${open}" aria-controls="${id}-panel">
+              ${heading}
+              <span class="wr-acc__icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="wr-acc__panel" id="${id}-panel" role="region" aria-labelledby="${id}-btn">
+            <div class="wr-acc__inner">
+              ${panel}
+            </div>
+          </div>
+        </div>`;
+
+const programDays = DAYS.map((day, i) => {
+  const n = i + 1;
+  return accItem({
+    id: `wr-day${n}`,
+    open: n === 1,
+    itemClass: 'wr-day',
+    track: `day${n}`,
+    heading: `<span class="wr-day__chip" data-i18n="retreat_wadi_day${n}_chip">${day.chip}</span>
+              <span class="wr-acc__label">
+                <span class="wr-day__title" data-i18n="retreat_wadi_day${n}_title">${day.title}</span>
+                <span class="wr-day__summary" data-i18n="retreat_wadi_day${n}_summary">${day.summary}</span>
+              </span>`,
+    panel: `<ul>${day.items.map((text, j) => `<li data-i18n="retreat_wadi_day${n}_b${j + 1}">${text}</li>`).join('')}</ul>`,
+  });
+}).join('\n        ');
+
+const faqItems = [
+  accItem({
+    id: 'wr-faq-includes',
+    track: 'faq_includes',
+    heading: '<span class="wr-acc__label wr-faq__q" data-i18n="retreat_wadi_faq_q_includes">What does the price include?</span>',
+    panel: `<p class="wr-host__text" data-i18n="retreat_wadi_faq_a_includes">Four nights’ stay, daily breakfast and dinner plus 3 lunches, transfers to and from the border crossing, and every activity and workshop in the programme.</p>
+              <a class="wr-faq__link" href="#wr-includes" data-i18n="retreat_wadi_faq_includes_link">See the full list</a>`,
+  }),
+  accItem({
+    id: 'wr-faq-meet',
+    track: 'faq_meet',
+    heading: '<span class="wr-acc__label wr-faq__q" data-i18n="retreat_wadi_faq_q_meet">Where do we meet?</span>',
+    panel: '<p class="wr-host__text" data-i18n="retreat_wadi_faq_a_meet">At the Beit Shean crossing — transfers to Wadi Rum and back are included in the price.</p>',
+  }),
+  accItem({
+    id: 'wr-faq-secure',
+    track: 'faq_secure',
+    heading: '<span class="wr-acc__label wr-faq__q" data-i18n="retreat_wadi_faq_q_secure">How do I secure my place?</span>',
+    panel: '<p class="wr-host__text" data-i18n="retreat_wadi_faq_a_secure">After the short call, with a first deposit of 400 ₪ by bank transfer or Bit.</p>',
+  }),
+  accItem({
+    id: 'wr-faq-policy',
+    track: 'faq_policy',
+    heading: '<span class="wr-acc__label wr-faq__q" data-i18n="retreat_wadi_payment_title">Payment and cancellation policy</span>',
+    panel: `<ul class="wr-booking__list">
+                <li data-i18n="retreat_wadi_policy_1">A non-refundable first deposit of 400 ILS confirms booking.</li>
+                <li data-i18n="retreat_wadi_policy_2">Remaining amount is due before the retreat date — exact date to be confirmed.</li>
+                <li data-i18n="retreat_wadi_policy_3">Available methods: bank transfer or Bit.</li>
+                <li data-i18n="retreat_wadi_policy_4">Please send transfer proof image to confirm your booking.</li>
+                <li data-i18n="retreat_wadi_policy_5">Seats are limited and priority is for first confirmed bookings.</li>
+                <li data-i18n="retreat_wadi_policy_6">Cancellation within 14 days of retreat date is non-refundable.</li>
+                <li data-i18n="retreat_wadi_policy_7">No-show is non-refundable. Booking transfer is allowed if you find a replacement.</li>
+              </ul>`,
+  }),
+].join('\n        ');
+
 export default function Page() {
   return (
     <LegacyPage
@@ -204,12 +329,14 @@ export default function Page() {
       <div class="wr-section__head">
         <h2 class="wr-h2" data-i18n="retreat_wadi_program_title">Full program</h2>
       </div>
-      <div class="wr-program">
-        <article class="wr-day"><div class="wr-day__head"><span class="wr-day__chip" data-i18n="retreat_wadi_day1_chip">Day 01</span><h3 data-i18n="retreat_wadi_day1_title">Arrival &amp; intention setting</h3></div><ul><li data-i18n="retreat_wadi_day1_b1">Meet at Beit Shean crossing and transfer to Wadi Rum.</li><li data-i18n="retreat_wadi_day1_b2">A stop in Al-Salt, including breakfast at a balcony restaurant.</li><li data-i18n="retreat_wadi_day1_b3">Warm Bedouin welcome and traditional dinner.</li><li data-i18n="retreat_wadi_day1_b4">Deep introductions and intention workshop.</li><li data-i18n="retreat_wadi_day1_b5">Light breath session and calm night under stars.</li></ul></article>
-        <article class="wr-day"><div class="wr-day__head"><span class="wr-day__chip" data-i18n="retreat_wadi_day2_chip">Day 02</span><h3 data-i18n="retreat_wadi_day2_title">Desert power day</h3></div><ul><li data-i18n="retreat_wadi_day2_b1">Sunrise yoga focused on root and pelvis.</li><li data-i18n="retreat_wadi_day2_b2">Breathwork, healthy breakfast, and a deep workshop session.</li><li data-i18n="retreat_wadi_day2_b3">Silent reflection + journaling and sound healing session.</li><li data-i18n="retreat_wadi_day2_b4">Star meditation and telescope workshop.</li></ul></article>
-        <article class="wr-day"><div class="wr-day__head"><span class="wr-day__chip" data-i18n="retreat_wadi_day3_chip">Day 03</span><h3 data-i18n="retreat_wadi_day3_title">Inner and outer journey</h3></div><ul><li data-i18n="retreat_wadi_day3_b1">Heart-opening yoga + guided meditation.</li><li data-i18n="retreat_wadi_day3_b2">Power cards and emotional writing.</li><li data-i18n="retreat_wadi_day3_b3">Jeep desert tour in Wadi Rum.</li><li data-i18n="retreat_wadi_day3_b4">Sunset yoga with light acro for trust and balance.</li></ul></article>
-        <article class="wr-day"><div class="wr-day__head"><span class="wr-day__chip" data-i18n="retreat_wadi_day4_chip">Day 04</span><h3 data-i18n="retreat_wadi_day4_title">Integration and transformation</h3></div><ul><li data-i18n="retreat_wadi_day4_b1">Deep morning yoga to integrate feminine energy.</li><li data-i18n="retreat_wadi_day4_b2">Second workshop session and personal rest time.</li><li data-i18n="retreat_wadi_day4_b3">Camel ride and deep closing sound healing.</li><li data-i18n="retreat_wadi_day4_b4">Light celebration and retreat closing circle.</li></ul></article>
-        <article class="wr-day"><div class="wr-day__head"><span class="wr-day__chip" data-i18n="retreat_wadi_day5_chip">Day 05</span><h3 data-i18n="retreat_wadi_day5_title">Farewell and anchoring</h3></div><ul><li data-i18n="retreat_wadi_day5_b1">Closing breakfast and intention anchoring circle.</li><li data-i18n="retreat_wadi_day5_b2">Desert farewell and return with renewed energy.</li></ul></article>
+      <div class="wr-acc-toolbar">
+        <button type="button" class="wr-acc-toggle-all" data-acc-toggle-all="wr-program-acc" aria-controls="${PROGRAM_PANEL_IDS}">
+          <span data-acc-label="expand" data-i18n="retreat_wadi_program_expand_all">Open all days</span>
+          <span data-acc-label="collapse" data-i18n="retreat_wadi_program_collapse_all" hidden>Close all days</span>
+        </button>
+      </div>
+      <div class="wr-program wr-acc" id="wr-program-acc" data-acc>
+        ${programDays}
       </div>
     </div>
   </section>
@@ -366,40 +493,8 @@ export default function Page() {
       <div class="wr-section__head">
         <h2 class="wr-h2" data-i18n="retreat_wadi_faq_title">Questions before you book</h2>
       </div>
-      <div class="wr-faq">
-        <div class="wr-faq__item">
-          <h3 class="wr-faq__q" data-i18n="retreat_wadi_faq_q_includes">What does the price include?</h3>
-          <div class="wr-faq__a">
-            <p class="wr-host__text" data-i18n="retreat_wadi_faq_a_includes">4 nights' stay, daily breakfast and dinner plus 3 lunches, transfers to and from the border crossing, and every activity and workshop in the programme.</p>
-            <a class="wr-faq__link" href="#wr-includes" data-i18n="retreat_wadi_faq_includes_link">See the full list</a>
-          </div>
-        </div>
-        <div class="wr-faq__item">
-          <h3 class="wr-faq__q" data-i18n="retreat_wadi_faq_q_meet">Where do we meet?</h3>
-          <div class="wr-faq__a">
-            <p class="wr-host__text" data-i18n="retreat_wadi_faq_a_meet">At the Beit Shean crossing — transfers to Wadi Rum and back are included in the price.</p>
-          </div>
-        </div>
-        <div class="wr-faq__item">
-          <h3 class="wr-faq__q" data-i18n="retreat_wadi_faq_q_secure">How do I secure my place?</h3>
-          <div class="wr-faq__a">
-            <p class="wr-host__text" data-i18n="retreat_wadi_faq_a_secure">After the short call, with a first deposit of 400 ₪ by bank transfer or Bit.</p>
-          </div>
-        </div>
-        <div id="wr-faq-policy" class="wr-faq__item">
-          <h3 class="wr-faq__q" data-i18n="retreat_wadi_payment_title">Payment and cancellation policy</h3>
-          <div class="wr-faq__a">
-            <ul class="wr-booking__list">
-              <li data-i18n="retreat_wadi_policy_1">A non-refundable first deposit of 400 ILS confirms booking.</li>
-              <li data-i18n="retreat_wadi_policy_2">Remaining amount is due before the retreat date — exact date to be confirmed.</li>
-              <li data-i18n="retreat_wadi_policy_3">Available methods: bank transfer or Bit.</li>
-              <li data-i18n="retreat_wadi_policy_4">Please send transfer proof image to confirm your booking.</li>
-              <li data-i18n="retreat_wadi_policy_5">Seats are limited and priority is for first confirmed bookings.</li>
-              <li data-i18n="retreat_wadi_policy_6">Cancellation within 14 days of retreat date is non-refundable.</li>
-              <li data-i18n="retreat_wadi_policy_7">No-show is non-refundable. Booking transfer is allowed if you find a replacement.</li>
-            </ul>
-          </div>
-        </div>
+      <div class="wr-faq wr-acc" data-acc>
+        ${faqItems}
       </div>
     </div>
   </section>

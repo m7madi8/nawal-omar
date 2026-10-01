@@ -1680,28 +1680,186 @@
   color: var(--wr-ink);
 }
 
-.wr-faq {
+/* Accordion (program days + FAQ). Without JS every panel stays open. */
+.wr-acc {
   display: grid;
   gap: 0.65rem;
 }
 
-.wr-faq__item {
+.wr-acc__item,
+.wr-acc__item.wr-day {
+  padding: 0;
   border: 1px solid var(--wr-line);
   border-radius: 1rem;
   background: var(--wr-surface);
   scroll-margin-top: calc(var(--header-h, 84px) + 1rem);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
-.wr-faq__q {
+.wr-acc__item.is-open {
+  border-color: rgba(184, 107, 58, 0.4);
+  box-shadow: 0 10px 26px rgba(61, 44, 38, 0.07);
+}
+
+.wr-acc__heading {
   margin: 0;
-  padding: 1rem 1.05rem;
+  font: inherit;
+}
+
+.wr-acc__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.95rem 1.05rem;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: var(--wr-ink);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.wr-acc__trigger:focus-visible {
+  outline: 2px solid var(--wr-accent);
+  outline-offset: -2px;
+}
+
+.wr-acc__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.wr-acc__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: var(--wr-accent-soft);
+}
+
+.wr-acc__icon::before,
+.wr-acc__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.7rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--wr-accent-dark);
+  transform: translate(-50%, -50%);
+  transition: transform 240ms ease;
+}
+
+.wr-acc__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.wr-acc__item.is-open .wr-acc__icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.wr-acc__panel {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.wr-acc__inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 1.05rem 1.05rem;
+}
+
+.wr-acc.is-enhanced .wr-acc__panel {
+  transition: grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+}
+
+.wr-acc.is-enhanced .wr-acc__item:not(.is-open) .wr-acc__panel {
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 280ms;
+}
+
+.wr-acc.is-enhanced .wr-acc__item:not(.is-open) .wr-acc__inner {
+  padding-bottom: 0;
+}
+
+.wr-day__title {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
   color: var(--wr-ink);
 }
 
-.wr-faq__a {
-  padding: 0 1.05rem 1rem;
+.wr-day__summary {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--wr-muted);
+}
+
+.wr-acc__item.wr-day .wr-day__chip {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+
+.wr-acc__item.wr-day ul {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--wr-line);
+}
+
+.wr-acc-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: -0.5rem 0 0.75rem;
+}
+
+.wr-acc-toggle-all {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--wr-line);
+  border-radius: 999px;
+  background: var(--wr-surface);
+  color: var(--wr-accent-dark);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wr-acc-toggle-all:hover {
+  background: var(--wr-accent-soft);
+}
+
+.wr-acc-toggle-all:focus-visible {
+  outline: 2px solid var(--wr-accent);
+  outline-offset: 2px;
+}
+
+.wr-faq__q {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--wr-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wr-acc.is-enhanced .wr-acc__panel,
+  .wr-acc.is-enhanced .wr-acc__item:not(.is-open) .wr-acc__panel,
+  .wr-acc__icon::before,
+  .wr-acc__icon::after {
+    transition: none;
+  }
 }
 
 .wr-faq__link {
@@ -1732,7 +1890,8 @@
 [dir="rtl"] .wr-cta-price-card__line,
 [dir="rtl"] .wr-h3,
 [dir="rtl"] .wr-step__title,
-[dir="rtl"] .wr-faq__q {
+[dir="rtl"] .wr-faq__q,
+[dir="rtl"] .wr-day__title {
   font-family: Amiri, Georgia, serif;
 }
 
