@@ -7,7 +7,7 @@ export const metadata = {
 
 const WA_NUMBER = '972522496366';
 
-const err = (key) => `<p class="field-error" id="err-${key}" data-err-for="${key}" hidden></p>`;
+const err = (key) => `<p class="field-error" id="err-${key}" aria-live="polite"></p>`;
 const optional = '<span class="field-optional" data-t="optional">(optional)</span>';
 
 const choice = (kind, name, value, key, text, required) =>

@@ -257,17 +257,125 @@
     }
   }
 
-  function stepIsValid(n) {
-    var step = steps[n - 1];
-    var ok = true;
-    step.querySelectorAll("input,textarea").forEach(function (el) {
-      if (ok && !el.checkValidity()) { el.reportValidity(); ok = false; }
-    });
-    return ok;
+  /* ---------- Validation ---------- */
+  var statusEl = document.getElementById("regFormStatus");
+
+  function value(id) {
+    return (form.querySelector("#" + id).value || "").trim();
+  }
+  function groupInputs(name) {
+    return Array.prototype.slice.call(form.querySelectorAll('input[name="' + name + '"]'));
+  }
+  function groupChecked(name) {
+    return groupInputs(name).some(function (input) { return input.checked; });
   }
 
+  var RULES = {
+    fullName: { step: 1, check: function () { return value("fullName") ? "" : "errName"; } },
+    phone: {
+      step: 1,
+      check: function () {
+        if (!value("phone")) return "errPhone";
+        return /^\+?\d{9,15}$/.test(normalizePhone(value("phone"))) ? "" : "errPhoneFormat";
+      }
+    },
+    age: {
+      step: 2,
+      check: function () {
+        var raw = toLatinDigits(value("age"));
+        if (!raw) return "errAge";
+        var age = Number(raw);
+        var min = Number(form.querySelector("#age").getAttribute("data-min")) || 0;
+        return /^\d{1,3}$/.test(raw) && age >= min && age <= 120 ? "" : "errAgeFormat";
+      }
+    },
+    yoga: { step: 3, group: "خبرة يوغا/تأمل", check: function () { return groupChecked("خبرة يوغا/تأمل") ? "" : "errYoga"; } },
+    health: { step: 3, group: "حالة صحية حالية", check: function () { return groupChecked("حالة صحية حالية") ? "" : "errHealth"; } },
+    activities: { step: 3, group: "اهتمامات الأنشطة", check: function () { return groupChecked("اهتمامات الأنشطة") ? "" : "errActivities"; } }
+  };
+
+  function focusTarget(key) {
+    var rule = RULES[key];
+    return rule.group ? groupInputs(rule.group)[0] : form.querySelector("#" + key);
+  }
+
+  function setFieldError(key, errKey) {
+    var rule = RULES[key];
+    var errEl = document.getElementById("err-" + key);
+    var invalid = errKey ? "true" : null;
+    var targets = rule.group ? groupInputs(rule.group).concat(document.getElementById("grp-" + key)) : [form.querySelector("#" + key)];
+    targets.forEach(function (el) {
+      if (invalid) el.setAttribute("aria-invalid", invalid);
+      else el.removeAttribute("aria-invalid");
+    });
+    errEl.setAttribute("data-msg", errKey || "");
+    var text = errKey ? t(errKey) : "";
+    if (errEl.textContent !== text) errEl.textContent = text;
+  }
+
+  function validateField(key) {
+    var errKey = RULES[key].check();
+    setFieldError(key, errKey);
+    if (!errKey && statusEl.getAttribute("data-msg") && !Object.keys(RULES).some(hasError)) setStatus("");
+    return !errKey;
+  }
+
+  function hasError(key) {
+    return !!document.getElementById("err-" + key).getAttribute("data-msg");
+  }
+
+  function setStatus(msgKey, vars) {
+    statusEl.setAttribute("data-msg", msgKey || "");
+    statusEl.setAttribute("data-vars", vars ? JSON.stringify(vars) : "");
+    statusEl.textContent = msgKey ? t(msgKey, vars) : "";
+  }
+
+  function validateSteps(upTo) {
+    var invalid = Object.keys(RULES).filter(function (key) {
+      return RULES[key].step <= upTo && !validateField(key);
+    });
+    if (!invalid.length) {
+      setStatus("");
+      return true;
+    }
+    var firstStep = RULES[invalid[0]].step;
+    var onStep = invalid.filter(function (key) { return RULES[key].step === firstStep; });
+    if (firstStep !== current) showStep(firstStep, false);
+    setStatus(onStep.length === 1 ? "errSummaryOne" : "errSummaryMany", { n: onStep.length });
+    var target = focusTarget(onStep[0]);
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ block: "center" });
+    return false;
+  }
+
+  Object.keys(RULES).forEach(function (key) {
+    var rule = RULES[key];
+    if (rule.group) {
+      groupInputs(rule.group).forEach(function (input) {
+        input.addEventListener("change", function () { if (hasError(key)) validateField(key); });
+      });
+      return;
+    }
+    var input = form.querySelector("#" + key);
+    input.addEventListener("blur", function () {
+      if (value(key) || hasError(key)) validateField(key);
+    });
+    input.addEventListener("input", function () {
+      if (hasError(key)) validateField(key);
+    });
+  });
+
+  document.addEventListener("wr-reg:lang", function () {
+    form.querySelectorAll(".field-error[data-msg]").forEach(function (el) {
+      var msg = el.getAttribute("data-msg");
+      el.textContent = msg ? t(msg) : "";
+    });
+    var statusMsg = statusEl.getAttribute("data-msg");
+    if (statusMsg) statusEl.textContent = t(statusMsg, JSON.parse(statusEl.getAttribute("data-vars") || "null"));
+  });
+
   function goNext() {
-    if (!stepIsValid(current)) return;
+    if (!validateSteps(current)) return;
     showStep(Math.min(current + 1, TOTAL), true);
   }
 
@@ -334,7 +442,7 @@
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     if (current < TOTAL) { goNext(); return; }
-    if (!stepIsValid(current)) return;
+    if (!validateSteps(TOTAL)) return;
     try {
       await sendToSupabase();
       form.hidden = true;

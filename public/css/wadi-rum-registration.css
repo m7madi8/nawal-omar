@@ -538,6 +538,10 @@
   color: #a2412b;
 }
 
+.wadi-reg .field-error:empty {
+  display: none;
+}
+
 .wadi-reg .field-error::before {
   content: "!";
   display: inline-grid;
