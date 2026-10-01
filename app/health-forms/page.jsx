@@ -37,13 +37,47 @@ const html = `
           </div>
         </a>
 
-        <article class="ny-door" hidden data-event-listing-hidden="ice-bath-health">
-          <a href="/register/ice-bath">
-            <div class="ny-door__media" aria-hidden="true">
-              <img src="/media/events/ice-bath/health-form.jpg" alt="" width="1600" height="1200" loading="lazy" decoding="async">
-            </div>
-          </a>
-        </article>
+        <a href="/register/ice-bath" class="ny-door reveal reveal-delay-1">
+          <div class="ny-door__media" aria-hidden="true">
+            <img src="/media/events/ice-bath/health-form.jpg" alt="" width="1600" height="1200" loading="lazy" decoding="async">
+          </div>
+          <div class="ny-door__scrim" aria-hidden="true"></div>
+          <span class="ny-door__num" aria-hidden="true">02</span>
+          <div class="ny-door__copy">
+            <span class="eyebrow" data-en="Ice Bath" data-ar="حوض الثلج">Ice Bath</span>
+            <h2 class="ny-door__title" data-en="Health Declaration" data-ar="الإقرار الصحي">Health Declaration</h2>
+            <p class="ny-door__text" data-en="Required health form before joining the Ice Bath day retreat." data-ar="استمارة صحية مطلوبة قبل الانضمام إلى يوم حوض الثلج.">Required health form before joining the Ice Bath day retreat.</p>
+            <span class="ny-door__cta" data-en="Open form" data-ar="افتحي الاستمارة">Open form</span>
+          </div>
+        </a>
+
+        <a href="/register/wadi-rum" class="ny-door reveal reveal-delay-2">
+          <div class="ny-door__media" aria-hidden="true">
+            <img src="/media/wadi-rum/desert.jpg" alt="" width="1600" height="1067" loading="lazy" decoding="async">
+          </div>
+          <div class="ny-door__scrim" aria-hidden="true"></div>
+          <span class="ny-door__num" aria-hidden="true">03</span>
+          <div class="ny-door__copy">
+            <span class="eyebrow" data-en="Wadi Rum Retreat" data-ar="ريتريت وادي رم">Wadi Rum Retreat</span>
+            <h2 class="ny-door__title" data-en="Registration" data-ar="استمارة التسجيل">Registration</h2>
+            <p class="ny-door__text" data-en="Initial registration for the desert retreat — free and non-binding." data-ar="تسجيل أوّلي لريتريت الصحراء — مجاني وبدون التزام.">Initial registration for the desert retreat — free and non-binding.</p>
+            <span class="ny-door__cta" data-en="Open form" data-ar="افتحي الاستمارة">Open form</span>
+          </div>
+        </a>
+
+        <a href="/feedback" class="ny-door reveal reveal-delay-3">
+          <div class="ny-door__media" aria-hidden="true">
+            <img src="/media/events/ice-bath/closing-moment.jpg" alt="" width="1600" height="1067" loading="lazy" decoding="async">
+          </div>
+          <div class="ny-door__scrim" aria-hidden="true"></div>
+          <span class="ny-door__num" aria-hidden="true">04</span>
+          <div class="ny-door__copy">
+            <span class="eyebrow" data-en="After the experience" data-ar="بعد التجربة">After the experience</span>
+            <h2 class="ny-door__title" data-en="Feedback" data-ar="استمارات التقييم">Feedback</h2>
+            <p class="ny-door__text" data-en="Share how your retreat or event felt — every retreat and event in one place." data-ar="شاركينا كيف كانت تجربتك — كل الريتريتات والفعاليات بمكان واحد.">Share how your retreat or event felt — every retreat and event in one place.</p>
+            <span class="ny-door__cta" data-en="Open forms" data-ar="افتحي الاستمارات">Open forms</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>

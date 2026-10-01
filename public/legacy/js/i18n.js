@@ -383,6 +383,7 @@
       events_ib_img_flower_alt: 'Hands weaving a natural flower crown with soft pastel blooms',
       events_ib_img_closing_alt: 'Hands crafting a natural flower crown — a quiet keepsake from the day',
       events_ib_back_events: '← Back to day retreat',
+      events_ib_back_care: '← Back to Wellbeing',
       events_ib_form_meta: 'Ice Bath health declaration form with Nawal Omar.',
       events_ib_lead:
         'A guided cold-exposure experience — not just a physical challenge, but deep training in breath, presence, and nervous-system regulation.',
@@ -1845,6 +1846,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       events_ib_img_flower_alt: 'يدان تنسجان تاج زهور طبيعي بألوان باستيل ناعمة',
       events_ib_img_closing_alt: 'يدان تصنعان تاج زهور طبيعي — ذكرى هادئة من اليوم',
       events_ib_back_events: '← العودة لصفحة الريتريت',
+      events_ib_back_care: '→ الرجوع للعناية',
       events_ib_form_meta: 'استمارة صحية لتجربة Ice Bath مع نوال عمر.',
       events_ib_lead:
         'تجربة موجّهة للتعرّض للبرد — ليست تحديًا جسديًا فقط، بل تدريب عميق على التنفّس والحضور وتنظيم الجهاز العصبي.',
