@@ -450,6 +450,13 @@
   var WA_BASE = failWa.getAttribute("href").split("?")[0];
   var sending = false;
   var successName = "";
+  var honeypot = document.getElementById("regWebsite");
+  var MIN_FILL_MS = 3000;
+  var viewedAt = Date.now();
+
+  function looksLikeBot() {
+    return !!honeypot.value || Date.now() - viewedAt < MIN_FILL_MS;
+  }
 
   function waHref(msgKey, name) {
     return WA_BASE + "?text=" + encodeURIComponent(t(msgKey, { name: name }));
@@ -502,6 +509,10 @@
     if (!validateSteps(TOTAL)) return;
     failEl.hidden = true;
     submitBtn.hidden = false;
+    if (looksLikeBot()) {
+      showSuccess();
+      return;
+    }
     setSending(true);
     try {
       await sendToSupabase();
