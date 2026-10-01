@@ -1,0 +1,1286 @@
+{
+  "page": "http://localhost:3000/retreats/wadi-rum",
+  "keyCount": 219,
+  "keys": {
+    "back": {
+      "uses": 1,
+      "en": "Back",
+      "ar": "رجوع"
+    },
+    "booking_wa_aria": {
+      "uses": 1,
+      "en": "Contact us on WhatsApp",
+      "ar": "تواصلي معنا عبر واتساب"
+    },
+    "booking_wa_or": {
+      "uses": 1,
+      "en": "Or contact us on WhatsApp",
+      "ar": "أو تواصلي معنا على واتساب"
+    },
+    "gallery_next": {
+      "uses": 4,
+      "en": "Next image",
+      "ar": "الصورة التالية"
+    },
+    "gallery_prev": {
+      "uses": 4,
+      "en": "Previous image",
+      "ar": "الصورة السابقة"
+    },
+    "retreat_wadi_about_esraa_name": {
+      "uses": 3,
+      "en": "Esraa Taye",
+      "ar": "إسراء تايه"
+    },
+    "retreat_wadi_about_esraa_role": {
+      "uses": 2,
+      "en": "Psychotherapist & content creator",
+      "ar": "معالجة نفسية وصانعة محتوى"
+    },
+    "retreat_wadi_about_esraa_text": {
+      "uses": 1,
+      "en": "A psychotherapist and content creator specializing in nervous system understanding, relationship dynamics, and emotional wound healing. She supports individuals, couples, and mothers on their path toward emotional balance, regulation, and a safer relationship with self and others.",
+      "ar": "معالجة نفسية وصانعة محتوى متخصصة في فهم الجهاز العصبي، ديناميكيات العلاقات، وتشافي الجروح العاطفية. ترافق الأفراد، الأزواج، والأمهات في رحلتهم نحو التوازن النفسي، تنظيم المشاعر، وبناء علاقة أكثر أمانًا مع الذات والآخر."
+    },
+    "retreat_wadi_about_nawal_name": {
+      "uses": 3,
+      "en": "Nawal Omar",
+      "ar": "نوال عمر"
+    },
+    "retreat_wadi_about_nawal_role": {
+      "uses": 2,
+      "en": "Nurse and Vinyasa Yoga Teacher",
+      "ar": "ممرضة ومعلمة يوغا ڤينياسا"
+    },
+    "retreat_wadi_about_nawal_text": {
+      "uses": 1,
+      "en": "I blend science with body awareness and spiritual practice, creating safe spaces for women to return to their bodies, heal the pelvis, calm the nervous system, and release old patterns that no longer serve them. This retreat is a natural extension of my message.",
+      "ar": "أدمج بين العلم والوعي الجسدي والروحاني. أخلق مساحات آمنة للنساء للعودة إلى أجسادهن، لشفاء الحوض، لتهدئة الجهاز العصبي، وللتحرر من أنماط قديمة لا تخدمهن. هذا الريتريت هو امتداد طبيعي لرسالتي."
+    },
+    "retreat_wadi_about_title": {
+      "uses": 1,
+      "en": "Who am I?",
+      "ar": "من أنا؟"
+    },
+    "retreat_wadi_accommodation_sub": {
+      "uses": 1,
+      "en": "Choose your room — the price covers the whole programme",
+      "ar": "اختاري غرفتك — السعر شامل البرنامج كامل"
+    },
+    "retreat_wadi_accommodation_title": {
+      "uses": 1,
+      "en": "Accommodation",
+      "ar": "الإقامة"
+    },
+    "retreat_wadi_ask_wa": {
+      "uses": 4,
+      "en": "Ask on WhatsApp",
+      "ar": "اسألي على واتساب"
+    },
+    "retreat_wadi_before_line1": {
+      "uses": 1,
+      "en": "You don’t need to practice yoga.",
+      "ar": "مش لازم تكوني بتمارسي يوغا."
+    },
+    "retreat_wadi_before_line2": {
+      "uses": 1,
+      "en": "You don’t need to be flexible.",
+      "ar": "مش لازم تكوني مرنة."
+    },
+    "retreat_wadi_before_line3": {
+      "uses": 1,
+      "en": "And you don’t need to be going through something “difficult” to deserve space for yourself.",
+      "ar": "ومش لازم تكوني عم تمرّي بإشي «صعب» حتى تستحقي مساحة لنفسك."
+    },
+    "retreat_wadi_before_line4": {
+      "uses": 1,
+      "en": "It’s enough that you feel the time has come to choose yourself a little more.",
+      "ar": "بكفي إنك حاسّة إنو إجا الوقت تختاري نفسك أكثر شوي."
+    },
+    "retreat_wadi_before_title": {
+      "uses": 1,
+      "en": "Before you register…",
+      "ar": "قبل ما تسجّلي…"
+    },
+    "retreat_wadi_book_now": {
+      "uses": 6,
+      "en": "Reserve your spot",
+      "ar": "احجزي مكانك"
+    },
+    "retreat_wadi_cta_per_person": {
+      "uses": 2,
+      "en": "per person · double room",
+      "ar": "للشخص · غرفة زوجية"
+    },
+    "retreat_wadi_day1_b1": {
+      "uses": 1,
+      "en": "Meet at Beit Shean crossing and transfer to Wadi Rum.",
+      "ar": "لقاء عند معبر بيت شان والانطلاق نحو وادي رم."
+    },
+    "retreat_wadi_day1_b2": {
+      "uses": 1,
+      "en": "A stop in Al-Salt, including breakfast at a balcony restaurant.",
+      "ar": "توقّف في السلط مع فطور في مطعم على شرفة مطلّة."
+    },
+    "retreat_wadi_day1_b3": {
+      "uses": 1,
+      "en": "Warm Bedouin welcome and traditional dinner.",
+      "ar": "استقبال بدوي دافئ + عشاء صحراوي تقليدي."
+    },
+    "retreat_wadi_day1_b4": {
+      "uses": 1,
+      "en": "Deep introductions and intention workshop.",
+      "ar": "ورشة تعارف عميقة وبناء نوايا."
+    },
+    "retreat_wadi_day1_b5": {
+      "uses": 1,
+      "en": "Light breath session and calm night under stars.",
+      "ar": "جلسة تنفس خفيفة + سهرة هادئة تحت النجوم."
+    },
+    "retreat_wadi_day1_chip": {
+      "uses": 1,
+      "en": "Day 01",
+      "ar": "اليوم 01"
+    },
+    "retreat_wadi_day1_summary": {
+      "uses": 1,
+      "en": "Border pick-up, a stop in Al-Salt and a Bedouin welcome dinner",
+      "ar": "استقبال من المعبر، محطة بالسلط، وعشاء ترحيب بدوي"
+    },
+    "retreat_wadi_day1_title": {
+      "uses": 1,
+      "en": "Arrival & intention setting",
+      "ar": "الوصول وبناء النية"
+    },
+    "retreat_wadi_day2_b1": {
+      "uses": 1,
+      "en": "Sunrise yoga focused on root and pelvis.",
+      "ar": "يوغا الشروق بتركيز على الجذر والحوض."
+    },
+    "retreat_wadi_day2_b2": {
+      "uses": 1,
+      "en": "Breathwork, healthy breakfast, and a deep workshop session.",
+      "ar": "تمارين تنفّس + إفطار صحي + ورشة عميقة."
+    },
+    "retreat_wadi_day2_b3": {
+      "uses": 1,
+      "en": "Silent reflection + journaling and sound healing session.",
+      "ar": "تأمل صامت + كتابة داخلية + ساوند هيلينغ."
+    },
+    "retreat_wadi_day2_b4": {
+      "uses": 1,
+      "en": "Star meditation and telescope workshop.",
+      "ar": "تأمل نجوم + ورشة تلسكوب."
+    },
+    "retreat_wadi_day2_chip": {
+      "uses": 1,
+      "en": "Day 02",
+      "ar": "اليوم 02"
+    },
+    "retreat_wadi_day2_summary": {
+      "uses": 1,
+      "en": "Sunrise yoga, sound healing and stargazing",
+      "ar": "يوغا الشروق، ساوند هيلينغ، وتأمّل النجوم"
+    },
+    "retreat_wadi_day2_title": {
+      "uses": 1,
+      "en": "Desert power day",
+      "ar": "قوة الصحراء"
+    },
+    "retreat_wadi_day3_b1": {
+      "uses": 1,
+      "en": "Heart-opening yoga + guided meditation.",
+      "ar": "يوغا فتح القلب والحوض + تأمل موجه."
+    },
+    "retreat_wadi_day3_b2": {
+      "uses": 1,
+      "en": "Power cards and emotional writing.",
+      "ar": "بطاقات القوة + كتابة عاطفية."
+    },
+    "retreat_wadi_day3_b3": {
+      "uses": 1,
+      "en": "Jeep desert tour in Wadi Rum.",
+      "ar": "جولة جيبات في صحراء وادي رم."
+    },
+    "retreat_wadi_day3_b4": {
+      "uses": 1,
+      "en": "Sunset yoga with light acro for trust and balance.",
+      "ar": "يوغا الغروب + أكرو يوغا خفيفة للتوازن والثقة."
+    },
+    "retreat_wadi_day3_chip": {
+      "uses": 1,
+      "en": "Day 03",
+      "ar": "اليوم 03"
+    },
+    "retreat_wadi_day3_summary": {
+      "uses": 1,
+      "en": "Heart-opening yoga, a jeep tour and sunset yoga",
+      "ar": "يوغا فتح القلب، جولة جيب، ويوغا الغروب"
+    },
+    "retreat_wadi_day3_title": {
+      "uses": 1,
+      "en": "Inner and outer journey",
+      "ar": "رحلة الداخل والخارج"
+    },
+    "retreat_wadi_day4_b1": {
+      "uses": 1,
+      "en": "Deep morning yoga to integrate feminine energy.",
+      "ar": "يوغا صباحية عميقة لدمج الطاقة الأنثوية."
+    },
+    "retreat_wadi_day4_b2": {
+      "uses": 1,
+      "en": "Second workshop session and personal rest time.",
+      "ar": "ورشة ثانية + وقت شخصي للراحة."
+    },
+    "retreat_wadi_day4_b3": {
+      "uses": 1,
+      "en": "Camel ride and deep closing sound healing.",
+      "ar": "ركوب جمال + ساوند هيلينغ عميق لإغلاق الدوائر."
+    },
+    "retreat_wadi_day4_b4": {
+      "uses": 1,
+      "en": "Light celebration and retreat closing circle.",
+      "ar": "حفلة خفيفة + إغلاق دائرة الريتريت."
+    },
+    "retreat_wadi_day4_chip": {
+      "uses": 1,
+      "en": "Day 04",
+      "ar": "اليوم 04"
+    },
+    "retreat_wadi_day4_summary": {
+      "uses": 1,
+      "en": "Feminine-energy yoga, a camel ride and the closing circle",
+      "ar": "يوغا الطاقة الأنثوية، ركوب الجمال، ودائرة الختام"
+    },
+    "retreat_wadi_day4_title": {
+      "uses": 1,
+      "en": "Integration and transformation",
+      "ar": "الاندماج والتحوّل"
+    },
+    "retreat_wadi_day5_b1": {
+      "uses": 1,
+      "en": "Closing breakfast and intention anchoring circle.",
+      "ar": "فطور الختام + دائرة تثبيت النوايا."
+    },
+    "retreat_wadi_day5_b2": {
+      "uses": 1,
+      "en": "Desert farewell and return with renewed energy.",
+      "ar": "وداع الصحراء والرجوع بطاقة جديدة."
+    },
+    "retreat_wadi_day5_chip": {
+      "uses": 1,
+      "en": "Day 05",
+      "ar": "اليوم 05"
+    },
+    "retreat_wadi_day5_summary": {
+      "uses": 1,
+      "en": "Closing breakfast and the journey home",
+      "ar": "فطور الختام والعودة"
+    },
+    "retreat_wadi_day5_title": {
+      "uses": 1,
+      "en": "Farewell and anchoring",
+      "ar": "وداع وتثبيت التحوّل"
+    },
+    "retreat_wadi_esraa_instagram_aria": {
+      "uses": 1,
+      "en": "Esraa Taye on Instagram",
+      "ar": "إسراء تايه على إنستغرام"
+    },
+    "retreat_wadi_esraa_instagram_label": {
+      "uses": 1,
+      "en": "Follow @esraa_therapy on Instagram",
+      "ar": "تابعي @esraa_therapy على إنستغرام"
+    },
+    "retreat_wadi_faq_a_includes": {
+      "uses": 1,
+      "en": "Four nights’ stay, daily breakfast and dinner plus 3 lunches, transfers to and from the border crossing, and every activity and workshop in the programme.",
+      "ar": "الإقامة 4 ليالٍ، فطور وعشا يوميًا و3 وجبات غدا، المواصلات من وإلى المعبر، وكل الأنشطة والورشات بالبرنامج."
+    },
+    "retreat_wadi_faq_a_meet": {
+      "uses": 1,
+      "en": "At the Beit Shean crossing — transfers to Wadi Rum and back are included in the price.",
+      "ar": "عند معبر بيت شان — والمواصلات لوادي رم وبالرجعة شاملة بالسعر."
+    },
+    "retreat_wadi_faq_a_secure": {
+      "uses": 1,
+      "en": "After the short call, with a first deposit of 400 ₪ by bank transfer or Bit.",
+      "ar": "بعد المكالمة القصيرة، بدفعة أولى 400 ₪ بتحويل بنكي أو Bit."
+    },
+    "retreat_wadi_faq_includes_link": {
+      "uses": 1,
+      "en": "See the full list",
+      "ar": "القائمة الكاملة"
+    },
+    "retreat_wadi_faq_q_includes": {
+      "uses": 1,
+      "en": "What does the price include?",
+      "ar": "شو بيشمل السعر؟"
+    },
+    "retreat_wadi_faq_q_meet": {
+      "uses": 1,
+      "en": "Where do we meet?",
+      "ar": "وين بنلتقي؟"
+    },
+    "retreat_wadi_faq_q_secure": {
+      "uses": 1,
+      "en": "How do I secure my place?",
+      "ar": "كيف بثبّت مكاني؟"
+    },
+    "retreat_wadi_faq_title": {
+      "uses": 1,
+      "en": "Questions before you book",
+      "ar": "أسئلة قبل الحجز"
+    },
+    "retreat_wadi_final_line1": {
+      "uses": 1,
+      "en": "Maybe you don’t need to escape your life.",
+      "ar": "يمكن ما بتحتاجي تهربي من حياتك."
+    },
+    "retreat_wadi_final_line2": {
+      "uses": 1,
+      "en": "Maybe you just need to step away for five days,",
+      "ar": "يمكن بس محتاجة تبعدي خمس أيام،"
+    },
+    "retreat_wadi_final_line3": {
+      "uses": 1,
+      "en": "breathe,",
+      "ar": "تتنفّسي،"
+    },
+    "retreat_wadi_final_line4": {
+      "uses": 1,
+      "en": "move,",
+      "ar": "تتحرّكي،"
+    },
+    "retreat_wadi_final_line5": {
+      "uses": 1,
+      "en": "listen to yourself,",
+      "ar": "تسمعي حالك،"
+    },
+    "retreat_wadi_final_line6": {
+      "uses": 1,
+      "en": "and remember who you are beyond all the roles you carry every day.",
+      "ar": "وتتذكري مين أنتِ ورا كل الأدوار اللي بتحمليها كل يوم."
+    },
+    "retreat_wadi_final_text2": {
+      "uses": 1,
+      "en": "Wadi Rum is not a promise that it will change your life. It is a space that may help you see clearly what you want to change in it.",
+      "ar": "وادي رم مش وعد إنو رح يغيّر حياتك. هو مساحة ممكن تساعدك تشوفي بوضوح شو بدك تغيّري فيها."
+    },
+    "retreat_wadi_final_text3": {
+      "uses": 1,
+      "en": "If, as you read this, you felt: “I need this space”… maybe that is enough of a sign to ask about it.",
+      "ar": "إذا وإنتِ عم تقرأي حسّيتِ: «أنا محتاجة هالمساحة»… يمكن هاد كافي كإشارة إنك تسألي عنها."
+    },
+    "retreat_wadi_final_title": {
+      "uses": 1,
+      "en": "A final word",
+      "ar": "كلمة أخيرة"
+    },
+    "retreat_wadi_forwhom_1_text": {
+      "uses": 1,
+      "en": "Not because you are weak, but because you have been running between work, people, responsibilities and expectations — and you need space where you come first.",
+      "ar": "مش لأنك ضعيفة، بل لأنك عم تركضي بين الشغل، الناس، المسؤوليات والتوقعات — ومحتاجة مساحة تكوني فيها أنتِ أولًا."
+    },
+    "retreat_wadi_forwhom_1_title": {
+      "uses": 1,
+      "en": "1. You feel you need to pause.",
+      "ar": "1. حاسّة إنك بحاجة توقفي شوي."
+    },
+    "retreat_wadi_forwhom_2_text": {
+      "uses": 1,
+      "en": "And you want to hear it again through movement, breath and silence — instead of living only from your head.",
+      "ar": "وبدك ترجعي تسمعيه من جديد من خلال الحركة، التنفّس والصمت — بدل ما تعيشي بس من راسك."
+    },
+    "retreat_wadi_forwhom_2_title": {
+      "uses": 1,
+      "en": "2. You feel distant from your body and yourself.",
+      "ar": "2. حاسّة إنك بعيدة عن جسمك وعن نفسك."
+    },
+    "retreat_wadi_forwhom_3_text": {
+      "uses": 1,
+      "en": "A decision, a relationship, a beginning, an ending, a big question — or even an inner feeling that the old version of you no longer fits.",
+      "ar": "قرار، علاقة، بداية، نهاية، سؤال كبير — أو حتى شعور داخلي إنو النسخة القديمة منك ما عادت تناسبك."
+    },
+    "retreat_wadi_forwhom_3_title": {
+      "uses": 1,
+      "en": "3. You are in a transition or change.",
+      "ar": "3. عم تمرّي بمرحلة انتقال أو تغيير."
+    },
+    "retreat_wadi_forwhom_4_text": {
+      "uses": 1,
+      "en": "A place where you don’t need to prove anything, compare yourself to anyone, or be a certain image.",
+      "ar": "مكان ما بتحتاجي فيه تثبتي إشي، أو تقارني حالك بحدا، أو تكوني بصورة معيّنة."
+    },
+    "retreat_wadi_forwhom_4_title": {
+      "uses": 1,
+      "en": "4. You want a women’s experience with depth and belonging.",
+      "ar": "4. بدك تجربة نسائية فيها عمق وانتماء."
+    },
+    "retreat_wadi_forwhom_5_text": {
+      "uses": 1,
+      "en": "Not just a trip or a holiday — but days of adventure, laughter, nature, women, movement, calm, and real space for you.",
+      "ar": "مش بس رحلة أو إجازة — بل أيام فيها مغامرة، ضحك، طبيعة، نساء، حركة، هدوء، ومساحة حقيقية إلك."
+    },
+    "retreat_wadi_forwhom_5_title": {
+      "uses": 1,
+      "en": "5. You want to give yourself an experience that stays with you.",
+      "ar": "5. بدك تهدي نفسك تجربة بتضل معك."
+    },
+    "retreat_wadi_forwhom_cta": {
+      "uses": 1,
+      "en": "Recognised yourself in one of these? The next step is simple.",
+      "ar": "شفتي حالك بوحدة منهن؟ الخطوة الجاية بسيطة."
+    },
+    "retreat_wadi_forwhom_intro": {
+      "uses": 1,
+      "en": "This retreat is for you if:",
+      "ar": "هذا الريتريت لكِ إذا:"
+    },
+    "retreat_wadi_forwhom_title": {
+      "uses": 1,
+      "en": "Who is this retreat for?",
+      "ar": "لمن هذا الريتريت؟"
+    },
+    "retreat_wadi_gallery_alt1": {
+      "uses": 1,
+      "en": "Wadi Rum moment",
+      "ar": "لحظة من وادي رم"
+    },
+    "retreat_wadi_gallery_alt10": {
+      "uses": 1,
+      "en": "Night bivouac in Wadi Rum",
+      "ar": "مبيت ليلي في وادي رم"
+    },
+    "retreat_wadi_gallery_alt11": {
+      "uses": 1,
+      "en": "Women practicing yoga in the Wadi Rum desert",
+      "ar": "نساء يمارسن اليوغا في صحراء وادي رم"
+    },
+    "retreat_wadi_gallery_alt12": {
+      "uses": 1,
+      "en": "Retreat moment among the red dunes",
+      "ar": "لحظة من الريتريت بين الكثبان الحمراء"
+    },
+    "retreat_wadi_gallery_alt13": {
+      "uses": 1,
+      "en": "Group gathering in the desert",
+      "ar": "لقاء جماعي في الصحراء"
+    },
+    "retreat_wadi_gallery_alt14": {
+      "uses": 1,
+      "en": "Wadi Rum rock formations",
+      "ar": "تشكيلات صخرية في وادي رم"
+    },
+    "retreat_wadi_gallery_alt15": {
+      "uses": 1,
+      "en": "Calm moment in the desert",
+      "ar": "لحظة هدوء في الصحراء"
+    },
+    "retreat_wadi_gallery_alt16": {
+      "uses": 1,
+      "en": "Women’s circle in Wadi Rum",
+      "ar": "دائرة نسائية في وادي رم"
+    },
+    "retreat_wadi_gallery_alt17": {
+      "uses": 1,
+      "en": "Desert light at golden hour",
+      "ar": "ضوء الصحراء وقت الغروب"
+    },
+    "retreat_wadi_gallery_alt18": {
+      "uses": 1,
+      "en": "Retreat participants in the desert",
+      "ar": "مشاركات الريتريت في الصحراء"
+    },
+    "retreat_wadi_gallery_alt19": {
+      "uses": 1,
+      "en": "Wadi Rum landscape",
+      "ar": "مشهد من وادي رم"
+    },
+    "retreat_wadi_gallery_alt2": {
+      "uses": 1,
+      "en": "Wadi Rum dunes",
+      "ar": "رمال وادي رم"
+    },
+    "retreat_wadi_gallery_alt20": {
+      "uses": 1,
+      "en": "Evening in the desert camp",
+      "ar": "مساء في المخيم الصحراوي"
+    },
+    "retreat_wadi_gallery_alt3": {
+      "uses": 1,
+      "en": "Desert sunrise",
+      "ar": "شروق في الصحراء"
+    },
+    "retreat_wadi_gallery_alt4": {
+      "uses": 1,
+      "en": "Women circle in retreat",
+      "ar": "دائرة نسائية في الريتريت"
+    },
+    "retreat_wadi_gallery_alt5": {
+      "uses": 1,
+      "en": "Night stars in desert",
+      "ar": "نجوم الليل في الصحراء"
+    },
+    "retreat_wadi_gallery_alt6": {
+      "uses": 1,
+      "en": "Wadi Rum panorama",
+      "ar": "بانوراما وادي رم"
+    },
+    "retreat_wadi_gallery_alt7": {
+      "uses": 1,
+      "en": "Desert tent camp",
+      "ar": "مخيم خيام في الصحراء"
+    },
+    "retreat_wadi_gallery_alt8": {
+      "uses": 1,
+      "en": "Desert camp",
+      "ar": "مخيم صحراوي"
+    },
+    "retreat_wadi_gallery_alt9": {
+      "uses": 1,
+      "en": "Wadi Rum portrait moment",
+      "ar": "لحظة بورتريه في وادي رم"
+    },
+    "retreat_wadi_gallery_title": {
+      "uses": 1,
+      "en": "Moments from Wadi Rum",
+      "ar": "لحظات من ريتريت وادي رم"
+    },
+    "retreat_wadi_hero_facts_aria": {
+      "uses": 1,
+      "en": "Retreat details",
+      "ar": "تفاصيل الريتريت"
+    },
+    "retreat_wadi_hero_label_dates": {
+      "uses": 1,
+      "en": "Dates",
+      "ar": "التاريخ"
+    },
+    "retreat_wadi_hero_label_duration": {
+      "uses": 1,
+      "en": "Duration",
+      "ar": "المدة"
+    },
+    "retreat_wadi_hero_label_place": {
+      "uses": 1,
+      "en": "Location",
+      "ar": "المكان"
+    },
+    "retreat_wadi_hero_meta_date": {
+      "uses": 1,
+      "en": "22–26.10.2026",
+      "ar": "22–26.10.2026"
+    },
+    "retreat_wadi_hero_meta_duration": {
+      "uses": 1,
+      "en": "5 days · 4 nights",
+      "ar": "5 أيام · 4 ليالٍ"
+    },
+    "retreat_wadi_hero_meta_place": {
+      "uses": 1,
+      "en": "Wadi Rum, Jordan",
+      "ar": "وادي رم، الأردن"
+    },
+    "retreat_wadi_hero_price": {
+      "uses": 1,
+      "en": "From 3,650 ₪ · accommodation, meals & transfers included",
+      "ar": "ابتداءً من 3,650 ₪ · شامل الإقامة والوجبات والمواصلات"
+    },
+    "retreat_wadi_hero_urgency": {
+      "uses": 1,
+      "en": "Small women’s group · limited spots",
+      "ar": "مجموعة نسائية صغيرة · الأماكن محدودة"
+    },
+    "retreat_wadi_inc1": {
+      "uses": 1,
+      "en": "5 days and 4 nights accommodation",
+      "ar": "إقامة 5 أيام و4 ليالٍ"
+    },
+    "retreat_wadi_inc10": {
+      "uses": 1,
+      "en": "Meditation",
+      "ar": "تأمل"
+    },
+    "retreat_wadi_inc11": {
+      "uses": 1,
+      "en": "Two deep workshops",
+      "ar": "ورشتان عميقتان"
+    },
+    "retreat_wadi_inc12": {
+      "uses": 1,
+      "en": "Sound healing",
+      "ar": "ساوند هيلينغ"
+    },
+    "retreat_wadi_inc13": {
+      "uses": 1,
+      "en": "Women’s circles and sharing spaces",
+      "ar": "دوائر نسائية ومساحات مشاركة"
+    },
+    "retreat_wadi_inc14": {
+      "uses": 1,
+      "en": "Support and guidance throughout the experience",
+      "ar": "دعم ومرافقة طوال التجربة"
+    },
+    "retreat_wadi_inc15": {
+      "uses": 1,
+      "en": "Professional photography to document the journey",
+      "ar": "تصوير احترافي لتوثيق الرحلة"
+    },
+    "retreat_wadi_inc2": {
+      "uses": 1,
+      "en": "Daily breakfast and dinner",
+      "ar": "فطور وعشاء يوميًا"
+    },
+    "retreat_wadi_inc3": {
+      "uses": 1,
+      "en": "3 lunches",
+      "ar": "3 وجبات غداء"
+    },
+    "retreat_wadi_inc4": {
+      "uses": 1,
+      "en": "Transfers to and from the border crossing",
+      "ar": "مواصلات من وإلى المعبر"
+    },
+    "retreat_wadi_inc5": {
+      "uses": 1,
+      "en": "Jeep tour in Wadi Rum",
+      "ar": "جولة جيبات في وادي رم"
+    },
+    "retreat_wadi_inc6": {
+      "uses": 1,
+      "en": "Camel ride",
+      "ar": "ركوب الجمال"
+    },
+    "retreat_wadi_inc7": {
+      "uses": 1,
+      "en": "Telescope workshop",
+      "ar": "ورشة تلسكوب"
+    },
+    "retreat_wadi_inc8": {
+      "uses": 1,
+      "en": "Daily yoga",
+      "ar": "يوغا يومية"
+    },
+    "retreat_wadi_inc9": {
+      "uses": 1,
+      "en": "Breathwork",
+      "ar": "تمارين تنفّس"
+    },
+    "retreat_wadi_includes_g1": {
+      "uses": 1,
+      "en": "Stay & meals",
+      "ar": "الإقامة والأكل"
+    },
+    "retreat_wadi_includes_g2": {
+      "uses": 1,
+      "en": "Transfers & adventures",
+      "ar": "المواصلات والمغامرات"
+    },
+    "retreat_wadi_includes_g3": {
+      "uses": 1,
+      "en": "Daily practice",
+      "ar": "الممارسات اليومية"
+    },
+    "retreat_wadi_includes_g4": {
+      "uses": 1,
+      "en": "Circle & support",
+      "ar": "الدائرة والمرافقة"
+    },
+    "retreat_wadi_includes_title": {
+      "uses": 1,
+      "en": "Price includes",
+      "ar": "يشمل السعر"
+    },
+    "retreat_wadi_open_form": {
+      "uses": 1,
+      "en": "Open registration form",
+      "ar": "افتحي نموذج التسجيل"
+    },
+    "retreat_wadi_page_intro": {
+      "uses": 1,
+      "en": "A journey into the depth of the soul — where the desert meets the sky.",
+      "ar": "رحلة إلى عمق الروح — حيث تلتقي الصحراء بالسماء."
+    },
+    "retreat_wadi_page_intro2": {
+      "uses": 1,
+      "en": "Yoga, breathwork, sound healing & women’s circle under the stars.",
+      "ar": "يوغا، تنفّس عميق، ساوند هيلينغ ودائرة نسائية تحت النجوم."
+    },
+    "retreat_wadi_page_label": {
+      "uses": 1,
+      "en": "Wadi Rum Women Retreat",
+      "ar": "ريتريت وادي رم للنساء"
+    },
+    "retreat_wadi_page_title": {
+      "uses": 1,
+      "en": "Moonlit Wadi Rum Retreat",
+      "ar": "ريتريت وادي رم ضوء القمر"
+    },
+    "retreat_wadi_payment_title": {
+      "uses": 1,
+      "en": "Payment and cancellation policy",
+      "ar": "الدفع وسياسة الإلغاء"
+    },
+    "retreat_wadi_policy_1": {
+      "uses": 1,
+      "en": "A non-refundable first deposit of 400 ILS confirms booking.",
+      "ar": "يتم تثبيت الحجز بدفعة أولى غير مستردة بقيمة 400 شيكل."
+    },
+    "retreat_wadi_policy_2": {
+      "uses": 1,
+      "en": "Remaining amount is due before the retreat date — exact date to be confirmed.",
+      "ar": "المبلغ المتبقي يُدفع قبل موعد الريتريت — يُحدَّد التاريخ الدقيق لاحقًا."
+    },
+    "retreat_wadi_policy_3": {
+      "uses": 1,
+      "en": "Available methods: bank transfer or Bit.",
+      "ar": "طرق الدفع المتاحة: تحويل بنكي أو Bit."
+    },
+    "retreat_wadi_policy_4": {
+      "uses": 1,
+      "en": "Please send transfer proof image to confirm your booking.",
+      "ar": "يرجى إرسال صورة التحويل لتأكيد الحجز رسميًا."
+    },
+    "retreat_wadi_policy_5": {
+      "uses": 1,
+      "en": "Seats are limited and priority is for first confirmed bookings.",
+      "ar": "عدد الأماكن محدود والأولوية لأول من يثبت حجزه."
+    },
+    "retreat_wadi_policy_6": {
+      "uses": 1,
+      "en": "Cancellation within 14 days of retreat date is non-refundable.",
+      "ar": "في حال الإلغاء قبل 14 يوم من موعد الريتريت لا يتم استرجاع أي مبلغ."
+    },
+    "retreat_wadi_policy_7": {
+      "uses": 1,
+      "en": "No-show is non-refundable. Booking transfer is allowed if you find a replacement.",
+      "ar": "في حال عدم الحضور لا يوجد استرجاع. يمكن تحويل الحجز لمشاركة أخرى عند إيجاد بديلة."
+    },
+    "retreat_wadi_policy_link": {
+      "uses": 5,
+      "en": "Payment & cancellation terms",
+      "ar": "شروط الدفع والإلغاء"
+    },
+    "retreat_wadi_price_bubbles": {
+      "uses": 1,
+      "en": "Bubbles Room — 3,850 ₪",
+      "ar": "غرفة بابلز — 3,850 ₪"
+    },
+    "retreat_wadi_price_dates": {
+      "uses": 1,
+      "en": "22–26.10.2026",
+      "ar": "22–26.10.2026"
+    },
+    "retreat_wadi_price_panorama": {
+      "uses": 1,
+      "en": "Panorama Room — 3,650 ₪",
+      "ar": "غرفة بانوراما — 3,650 ₪"
+    },
+    "retreat_wadi_price_place": {
+      "uses": 1,
+      "en": "Wadi Rum, Jordan",
+      "ar": "وادي رم، الأردن"
+    },
+    "retreat_wadi_program_collapse_all": {
+      "uses": 1,
+      "en": "Close all days",
+      "ar": "سكّري كل الأيام"
+    },
+    "retreat_wadi_program_expand_all": {
+      "uses": 1,
+      "en": "Open all days",
+      "ar": "افتحي كل الأيام"
+    },
+    "retreat_wadi_program_title": {
+      "uses": 1,
+      "en": "Full program",
+      "ar": "البرنامج الكامل"
+    },
+    "retreat_wadi_reel_aria_1": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reel 1",
+      "ar": "ريل وادي رم 1"
+    },
+    "retreat_wadi_reel_aria_2": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reel 2",
+      "ar": "ريل وادي رم 2"
+    },
+    "retreat_wadi_reel_aria_3": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reel 3",
+      "ar": "ريل وادي رم 3"
+    },
+    "retreat_wadi_reel_aria_4": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reel 4",
+      "ar": "ريل وادي رم 4"
+    },
+    "retreat_wadi_reel_aria_5": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reel 5",
+      "ar": "ريل وادي رم 5"
+    },
+    "retreat_wadi_reel_aria_6": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reel 6",
+      "ar": "ريل وادي رم 6"
+    },
+    "retreat_wadi_reel_play": {
+      "uses": 6,
+      "en": "Play reel",
+      "ar": "تشغيل الريل"
+    },
+    "retreat_wadi_reels_hint": {
+      "uses": 1,
+      "en": "Swipe sideways and tap play.",
+      "ar": "مرري أفقيًا واضغطي تشغيل."
+    },
+    "retreat_wadi_reels_label": {
+      "uses": 1,
+      "en": "Wadi Rum retreat reels",
+      "ar": "ريلز ريتريت وادي رم"
+    },
+    "retreat_wadi_reels_title": {
+      "uses": 1,
+      "en": "Reels from the retreat",
+      "ar": "قسم الفيديوهات (الريلز)"
+    },
+    "retreat_wadi_registration_text1": {
+      "uses": 1,
+      "en": "Because this retreat is built around a small women’s group and a close, deep experience, final registration is not automatic.",
+      "ar": "لأن هذا الريتريت مبني على مجموعة نسائية صغيرة وتجربة قريبة وعميقة، التسجيل النهائي مش تلقائي."
+    },
+    "retreat_wadi_registration_text2": {
+      "uses": 1,
+      "en": "After you submit your application, we will contact you for a short phone call to get to know you, understand your expectations, answer your questions, and make sure the experience is right for you.",
+      "ar": "بعد ما تبعتي طلبك، رح نتواصل معك لمكالمة قصيرة نتعرّف فيها عليكِ، نفهم توقعاتك، نجاوب على أسئلتك، ونتأكد إنو التجربة مناسبة إلك."
+    },
+    "retreat_wadi_registration_text3": {
+      "uses": 1,
+      "en": "After the call, your place is secured with a non-refundable deposit of 400 ₪.",
+      "ar": "بعد المكالمة، يتم تثبيت مكانك بدفعة أولى غير مستردة بقيمة 400 ₪."
+    },
+    "retreat_wadi_registration_text4": {
+      "uses": 1,
+      "en": "Places are limited — priority goes to confirmed bookings.",
+      "ar": "الأماكن محدودة — والأولوية للحجوزات المثبّتة."
+    },
+    "retreat_wadi_registration_title": {
+      "uses": 1,
+      "en": "Registration & securing your place",
+      "ar": "التسجيل وتثبيت مكانك"
+    },
+    "retreat_wadi_risk_line": {
+      "uses": 5,
+      "en": "Sending a request is free and non-binding — your place is confirmed after a short call with a 400 ₪ deposit.",
+      "ar": "إرسال الطلب مجاني وبدون التزام — المكان بيتثبّت بعد مكالمة قصيرة بدفعة 400 ₪."
+    },
+    "retreat_wadi_rooms_aria": {
+      "uses": 1,
+      "en": "Room options",
+      "ar": "خيارات الغرف"
+    },
+    "retreat_wadi_stay1_b1": {
+      "uses": 1,
+      "en": "Luxury circular Bubble design",
+      "ar": "تصميم بابل دائري فاخر"
+    },
+    "retreat_wadi_stay1_b2": {
+      "uses": 1,
+      "en": "Air conditioning",
+      "ar": "تكييف"
+    },
+    "retreat_wadi_stay1_b3": {
+      "uses": 1,
+      "en": "Private bathroom",
+      "ar": "حمام خاص"
+    },
+    "retreat_wadi_stay1_b4": {
+      "uses": 2,
+      "en": "Full privacy",
+      "ar": "خصوصية كاملة"
+    },
+    "retreat_wadi_stay1_b5": {
+      "uses": 1,
+      "en": "Comfortable beds",
+      "ar": "أسرّة مريحة"
+    },
+    "retreat_wadi_stay1_b6": {
+      "uses": 1,
+      "en": "Private outdoor sitting area",
+      "ar": "جلسة خارجية خاصة"
+    },
+    "retreat_wadi_stay1_gallery_label": {
+      "uses": 1,
+      "en": "Bubbles room photos",
+      "ar": "صور غرفة بابلز"
+    },
+    "retreat_wadi_stay1_heading": {
+      "uses": 1,
+      "en": "🫧 BUBBLES ROOM",
+      "ar": "🫧 غرفة بابلز"
+    },
+    "retreat_wadi_stay1_includes_label": {
+      "uses": 1,
+      "en": "The room includes:",
+      "ar": "الغرفة تشمل:"
+    },
+    "retreat_wadi_stay1_intro": {
+      "uses": 1,
+      "en": "A unique experience sleeping in the heart of the desert, under the sky.",
+      "ar": "تجربة فريدة للنوم في قلب الصحراء، تحت السماء."
+    },
+    "retreat_wadi_stay1_photo_alt": {
+      "uses": 10,
+      "en": "Bubbles room in the Wadi Rum desert",
+      "ar": "غرفة بابلز في صحراء وادي رم"
+    },
+    "retreat_wadi_stay1_rate": {
+      "uses": 1,
+      "en": "3,850 ₪ per person | double room",
+      "ar": "3,850 ₪ للشخص | غرفة زوجية"
+    },
+    "retreat_wadi_stay2_b1": {
+      "uses": 2,
+      "en": "Panoramic view",
+      "ar": "إطلالة بانورامية"
+    },
+    "retreat_wadi_stay2_b2": {
+      "uses": 1,
+      "en": "Air conditioning",
+      "ar": "تكييف"
+    },
+    "retreat_wadi_stay2_b3": {
+      "uses": 1,
+      "en": "Private bathroom",
+      "ar": "حمام خاص"
+    },
+    "retreat_wadi_stay2_b4": {
+      "uses": 1,
+      "en": "Comfortable beds",
+      "ar": "أسرّة مريحة"
+    },
+    "retreat_wadi_stay2_b5": {
+      "uses": 1,
+      "en": "A calm, comfortable stay experience",
+      "ar": "تجربة إقامة هادئة ومريحة"
+    },
+    "retreat_wadi_stay2_gallery_label": {
+      "uses": 1,
+      "en": "Panorama room photos",
+      "ar": "صور غرفة بانوراما"
+    },
+    "retreat_wadi_stay2_heading": {
+      "uses": 1,
+      "en": "🏜️ PANORAMA ROOM",
+      "ar": "🏜️ غرفة بانوراما"
+    },
+    "retreat_wadi_stay2_includes_label": {
+      "uses": 1,
+      "en": "Includes:",
+      "ar": "تشمل:"
+    },
+    "retreat_wadi_stay2_intro": {
+      "uses": 1,
+      "en": "A spacious room with an open view over the Wadi Rum desert.",
+      "ar": "غرفة واسعة بإطلالة مفتوحة على صحراء وادي رم."
+    },
+    "retreat_wadi_stay2_photo_alt": {
+      "uses": 6,
+      "en": "Panorama room overlooking the Wadi Rum desert",
+      "ar": "غرفة بانوراما بإطلالة على صحراء وادي رم"
+    },
+    "retreat_wadi_stay2_rate": {
+      "uses": 1,
+      "en": "3,650 ₪ per person | double room",
+      "ar": "3,650 ₪ للشخص | غرفة زوجية"
+    },
+    "retreat_wadi_steps_1_title": {
+      "uses": 1,
+      "en": "Send your request",
+      "ar": "ابعتي طلبك"
+    },
+    "retreat_wadi_steps_2_title": {
+      "uses": 1,
+      "en": "A short getting-to-know-you call",
+      "ar": "مكالمة تعارف قصيرة"
+    },
+    "retreat_wadi_steps_3_title": {
+      "uses": 1,
+      "en": "Secure your place",
+      "ar": "ثبّتي مكانك"
+    },
+    "retreat_wadi_sticky_from": {
+      "uses": 1,
+      "en": "From",
+      "ar": "ابتداءً من"
+    },
+    "retreat_wadi_trust_aria": {
+      "uses": 1,
+      "en": "Who is guiding you",
+      "ar": "مين بترافقك"
+    },
+    "retreat_wadi_trust_group": {
+      "uses": 1,
+      "en": "women max per group",
+      "ar": "مشاركة كحد أقصى"
+    },
+    "retreat_wadi_trust_more": {
+      "uses": 1,
+      "en": "Meet your guides",
+      "ar": "تعرّفي على المرافِقات"
+    },
+    "retreat_wadi_trust_trainees": {
+      "uses": 1,
+      "en": "trained with Nawal",
+      "ar": "تدرّبوا مع نوال"
+    },
+    "retreat_wadi_trust_years": {
+      "uses": 1,
+      "en": "years of teaching",
+      "ar": "سنوات خبرة"
+    },
+    "retreat_wadi_wa_href": {
+      "uses": 5,
+      "en": "https://wa.me/972522496366?text=Hi%20Nawal%2C%20I%27m%20interested%20in%20the%20Wadi%20Rum%20retreat%20(22%E2%80%9326.10).%20Could%20you%20tell%20me%20more%3F",
+      "ar": "https://wa.me/972522496366?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D9%86%D9%88%D8%A7%D9%84%D8%8C%20%D9%85%D9%87%D8%AA%D9%85%D8%A9%20%D8%A8%D8%B1%D9%8A%D8%AA%D8%B1%D9%8A%D8%AA%20%D9%88%D8%A7%D8%AF%D9%8A%20%D8%B1%D9%85%20(22%E2%80%9326.10).%20%D8%A8%D8%AD%D8%A8%20%D8%A3%D8%B9%D8%B1%D9%81%20%D8%AA%D9%81%D8%A7%D8%B5%D9%8A%D9%84%20%D8%A3%D9%83%D8%AB%D8%B1%20%F0%9F%8C%99"
+    },
+    "retreat_wadi_wa_short": {
+      "uses": 1,
+      "en": "WhatsApp",
+      "ar": "واتساب"
+    },
+    "retreat_wadi_why_1_text": {
+      "uses": 1,
+      "en": "Desert silence calms overthinking and brings you back to your roots and grounding.",
+      "ar": "صمت الصحراء يهدّئ التفكير الزائد ويعيدكِ للجذر والثبات."
+    },
+    "retreat_wadi_why_1_title": {
+      "uses": 1,
+      "en": "1) The desert returns you to yourself",
+      "ar": "1) الصحراء تردّكِ لنفسك"
+    },
+    "retreat_wadi_why_2_text": {
+      "uses": 1,
+      "en": "A space without judgment or comparison. Women supporting women with awareness and love.",
+      "ar": "مساحة بلا حكم وبلا مقارنة. نساء يدعمن بعضهن بوعي ومحبة."
+    },
+    "retreat_wadi_why_2_title": {
+      "uses": 1,
+      "en": "2) The women circle heals",
+      "ar": "2) الدائرة النسائية تشفي"
+    },
+    "retreat_wadi_why_3_text": {
+      "uses": 1,
+      "en": "Daily yoga, deep breathwork, and sound healing to restore inner balance.",
+      "ar": "يوغا يومية، تنفّس عميق، وساوند هيلينغ لإعادة التوازن الداخلي."
+    },
+    "retreat_wadi_why_3_title": {
+      "uses": 1,
+      "en": "3) The body is released",
+      "ar": "3) الجسد يتحرر"
+    },
+    "retreat_wadi_why_4_text": {
+      "uses": 1,
+      "en": "Under Wadi Rum stars, we release old patterns and return lighter, clearer, and more aligned.",
+      "ar": "تحت نجوم وادي رم نترك الأنماط القديمة ونرجع أخفّ وأنقى وأوضح."
+    },
+    "retreat_wadi_why_4_title": {
+      "uses": 1,
+      "en": "4) A true release ritual",
+      "ar": "4) طقس تحرر حقيقي"
+    },
+    "retreat_wadi_why_title": {
+      "uses": 1,
+      "en": "Why this retreat is different?",
+      "ar": "لماذا هذا الريتريت مختلف؟"
+    }
+  },
+  "literals": [
+    "1",
+    "1) The desert returns you to yourself",
+    "1. You feel you need to pause.",
+    "2",
+    "2) The women circle heals",
+    "2,000+",
+    "2. You feel distant from your body and yourself.",
+    "20",
+    "2026",
+    "22–26.10.2026",
+    "3",
+    "3 lunches",
+    "3) The body is released",
+    "3,650 ₪",
+    "3,650 ₪ per person | double room",
+    "3,850 ₪ per person | double room",
+    "3. You are in a transition or change.",
+    "4) A true release ritual",
+    "4. You want a women's experience with depth and belonging.",
+    "5 days and 4 nights accommodation",
+    "5 days · 4 nights",
+    "5. You want to give yourself an experience that stays with you.",
+    "7+",
+    "A calm, comfortable stay experience",
+    "A decision, a relationship, a beginning, an ending, a big question — or even an inner feeling that the old version of you no longer fits.",
+    "A final word",
+    "A journey into the depth of the soul — where the desert meets the sky.",
+    "A non-refundable first deposit of 400 ILS confirms booking.",
+    "A place where you don't need to prove anything, compare yourself to anyone, or be a certain image.",
+    "A psychotherapist and content creator specializing in nervous system understanding, relationship dynamics, and emotional wound healing. She supports individuals, couples, and mothers on their path toward emotional balance, regulation, and a safer relationship with self and others.",
+    "A short getting-to-know-you call",
+    "A space without judgment or comparison. Women supporting women with awareness and love.",
+    "A spacious room with an open view over the Wadi Rum desert.",
+    "A stop in Al-Salt, including breakfast at a balcony restaurant.",
+    "A unique experience sleeping in the heart of the desert, under the sky.",
+    "Accommodation",
+    "After the call, your place is secured with a non-refundable deposit of 400 ₪.",
+    "After the short call, with a first deposit of 400 ₪ by bank transfer or Bit.",
+    "After you submit your application, we will contact you for a short phone call to get to know you, understand your expectations, answer your questions, and make sure the experience is right for you.",
+    "Air conditioning",
+    "And you don't need to be going through something \"difficult\" to deserve space for yourself.",
+    "And you want to hear it again through movement, breath and silence — instead of living only from your head.",
+    "Arrival & intention setting",
+    "Ask on WhatsApp",
+    "At the Beit Shean crossing — transfers to Wadi Rum and back are included in the price.",
+    "Available methods: bank transfer or Bit.",
+    "Back",
+    "Because this retreat is built around a small women's group and a close, deep experience, final registration is not automatic.",
+    "Before you register…",
+    "Border pick-up, a stop in Al-Salt and a Bedouin welcome dinner",
+    "Breathwork",
+    "Breathwork, healthy breakfast, and a deep workshop session.",
+    "Bubbles Room — 3,850 ₪",
+    "Camel Ride",
+    "Camel ride and deep closing sound healing.",
+    "Cancellation within 14 days of retreat date is non-refundable.",
+    "Choose your room — the price covers the whole programme",
+    "Circle & support",
+    "Close all days",
+    "Closing breakfast and intention anchoring circle.",
+    "Closing breakfast and the journey home",
+    "Comfortable beds",
+    "Daily Yoga",
+    "Daily breakfast and dinner",
+    "Daily practice",
+    "Daily yoga, deep breathwork, and sound healing to restore inner balance.",
+    "Dates",
+    "Day 01",
+    "Day 02",
+    "Day 03",
+    "Day 04",
+    "Day 05",
+    "Deep introductions and intention workshop.",
+    "Deep morning yoga to integrate feminine energy.",
+    "Desert farewell and return with renewed energy.",
+    "Desert power day",
+    "Desert silence calms overthinking and brings you back to your roots and grounding.",
+    "Duration",
+    "Esraa Taye",
+    "Farewell and anchoring",
+    "Feminine-energy yoga, a camel ride and the closing circle",
+    "Follow @esraa_therapy on Instagram",
+    "Four nights’ stay, daily breakfast and dinner plus 3 lunches, transfers to and from the border crossing, and every activity and workshop in the programme.",
+    "From",
+    "From 3,650 ₪ · accommodation, meals & transfers included",
+    "Full privacy",
+    "Full program",
+    "Heart-opening yoga + guided meditation.",
+    "Heart-opening yoga, a jeep tour and sunset yoga",
+    "How do I secure my place?",
+    "I blend science with body awareness and spiritual practice, creating safe spaces for women to return to their bodies, heal the pelvis, calm the nervous system, and release old patterns that no longer serve them. This retreat is a natural extension of my message.",
+    "If, as you read this, you felt: \"I need this space\"… maybe that is enough of a sign to ask about it.",
+    "Includes:",
+    "Inner and outer journey",
+    "Integration and transformation",
+    "It's enough that you feel the time has come to choose yourself a little more.",
+    "Jeep Tour in Wadi Rum",
+    "Jeep desert tour in Wadi Rum.",
+    "Light breath session and calm night under stars.",
+    "Light celebration and retreat closing circle.",
+    "Location",
+    "Luxury circular Bubble design",
+    "Maybe you don't need to escape your life.",
+    "Maybe you just need to step away for five days,",
+    "Meditation",
+    "Meet at Beit Shean crossing and transfer to Wadi Rum.",
+    "Meet your guides",
+    "Moments from Wadi Rum",
+    "Moonlit Wadi Rum Retreat",
+    "Nawal Omar",
+    "No-show is non-refundable. Booking transfer is allowed if you find a replacement.",
+    "Not because you are weak, but because you have been running between work, people, responsibilities and expectations — and you need space where you come first.",
+    "Not just a trip or a holiday — but days of adventure, laughter, nature, women, movement, calm, and real space for you.",
+    "Nurse and Vinyasa Yoga Teacher",
+    "Open all days",
+    "Open registration form",
+    "Or contact us on WhatsApp",
+    "Panorama Room — 3,650 ₪",
+    "Panoramic view",
+    "Payment & cancellation terms",
+    "Payment and cancellation policy",
+    "Places are limited — priority goes to confirmed bookings.",
+    "Please send transfer proof image to confirm your booking.",
+    "Power cards and emotional writing.",
+    "Price includes",
+    "Private bathroom",
+    "Private outdoor sitting area",
+    "Professional photography to document the journey",
+    "Psychotherapist & content creator",
+    "Questions before you book",
+    "Recognised yourself in one of these? The next step is simple.",
+    "Reels from the retreat",
+    "Registration & securing your place",
+    "Remaining amount is due before the retreat date — exact date to be confirmed.",
+    "Reserve your spot",
+    "Seats are limited and priority is for first confirmed bookings.",
+    "Second workshop session and personal rest time.",
+    "Secure your place",
+    "See the full list",
+    "Send your request",
+    "Sending a request is free and non-binding — your place is confirmed after a short call with a 400 ₪ deposit.",
+    "Silent reflection + journaling and sound healing session.",
+    "Small women’s group · limited spots",
+    "Sound Healing",
+    "Star meditation and telescope workshop.",
+    "Stay & meals",
+    "Submit registration request",
+    "Sunrise yoga focused on root and pelvis.",
+    "Sunrise yoga, sound healing and stargazing",
+    "Sunset yoga with light acro for trust and balance.",
+    "Support and guidance throughout the experience",
+    "Swipe sideways and tap play.",
+    "Telescope Workshop",
+    "The room includes:",
+    "This retreat is for you if:",
+    "Transfers & adventures",
+    "Transfers to and from the border crossing",
+    "Two deep workshops",
+    "Under Wadi Rum stars, we release old patterns and return lighter, clearer, and more aligned.",
+    "Wadi Rum Women Retreat",
+    "Wadi Rum is not a promise that it will change your life. It is a space that may help you see clearly what you want to change in it.",
+    "Wadi Rum, Jordan",
+    "Warm Bedouin welcome and traditional dinner.",
+    "What does the price include?",
+    "WhatsApp",
+    "Where do we meet?",
+    "Who am I?",
+    "Who is this retreat for?",
+    "Why this retreat is different?",
+    "Women's circles and sharing spaces",
+    "Yoga, breathwork, sound healing & women’s circle under the stars.",
+    "You don't need to be flexible.",
+    "You don't need to practice yoga.",
+    "and remember who you are beyond all the roles you carry every day.",
+    "breathe,",
+    "listen to yourself,",
+    "move,",
+    "per person · double room",
+    "trained with Nawal",
+    "women max per group",
+    "years of teaching",
+    "🏜️ PANORAMA ROOM",
+    "🫧 BUBBLES ROOM"
+  ]
+}

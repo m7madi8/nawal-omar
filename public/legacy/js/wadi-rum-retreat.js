@@ -1,4 +1,62 @@
 (function () {
+  // TODO(analytics): no provider is installed yet. Events are forwarded to
+  // GTM (dataLayer), gtag, Microsoft Clarity or Meta Pixel as soon as one is
+  // added to the site, and are always buffered in window.wrEvents.
+  window.wrEvents = window.wrEvents || [];
+  function track(name, params) {
+    var payload = params || {};
+    window.wrEvents.push({ event: name, params: payload, at: Date.now() });
+    try {
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: name }, payload));
+      if (typeof window.gtag === "function") window.gtag("event", name, payload);
+      if (typeof window.clarity === "function") window.clarity("event", name);
+      if (typeof window.fbq === "function") window.fbq("trackCustom", name, payload);
+    } catch (e) {
+      /* analytics must never break the page */
+    }
+  }
+
+  document.addEventListener("click", function (event) {
+    var el = event.target.closest("[data-track-cta]");
+    if (!el) return;
+    track("wr_cta_click", {
+      cta: el.getAttribute("data-track-cta"),
+      location: el.getAttribute("data-track-loc") || "unknown"
+    });
+  });
+
+  document.addEventListener("wr:acc-open", function (event) {
+    var id = event.detail.id || "";
+    if (id.indexOf("day") === 0) track("wr_program_day_open", { day: id, source: event.detail.source });
+    else track("wr_faq_open", { question: id, source: event.detail.source });
+  });
+
+  (function scrollDepth() {
+    var marks = [25, 50, 75, 100];
+    var sent = {};
+    var ticking = false;
+    function check() {
+      ticking = false;
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? (window.scrollY / max) * 100 : 100;
+      marks.forEach(function (m) {
+        if (!sent[m] && pct >= m - 0.5) {
+          sent[m] = true;
+          track("wr_scroll_depth", { percent: m });
+        }
+      });
+      if (sent[100]) window.removeEventListener("scroll", onScroll);
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(check);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+  })();
+
   function bindCarousel(track, prev, next, onNavigate) {
     if (!track || !prev || !next) return;
 

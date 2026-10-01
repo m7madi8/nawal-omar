@@ -235,11 +235,11 @@ export default function Page() {
         <div class="wr-hero__actions">
           <p class="wr-hero__price" data-i18n="retreat_wadi_hero_price">From 3,650 ₪ · accommodation, meals &amp; transfers included</p>
           <div class="wr-hero__buttons">
-            <a href="/register/wadi-rum" class="wr-hero__cta">
+            <a href="/register/wadi-rum" class="wr-hero__cta" data-track-cta="book" data-track-loc="hero">
               <span data-i18n="retreat_wadi_book_now">Reserve your spot</span>
               <span class="wr-hero__cta-arrow" aria-hidden="true">→</span>
             </a>
-            <a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-hero__cta wr-hero__cta--wa" data-i18n-attr="href:retreat_wadi_wa_href">
+            <a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-hero__cta wr-hero__cta--wa" data-i18n-attr="href:retreat_wadi_wa_href" data-track-cta="whatsapp" data-track-loc="hero">
               ${waIcon(18)}
               <span data-i18n="retreat_wadi_ask_wa">Ask on WhatsApp</span>
             </a>
@@ -571,7 +571,7 @@ export default function Page() {
     <div class="wr-container">
       <div class="wr-cta-panel">
         <div class="wr-cta-panel__head">
-          <p class="wr-cta-panel__dates" data-i18n="retreat_wadi_price_dates">22–26.10.2026</p>
+          <p class="wr-cta-panel__dates" dir="ltr" data-i18n="retreat_wadi_price_dates">22–26.10.2026</p>
           <p class="wr-cta-panel__place" data-i18n="retreat_wadi_price_place">Wadi Rum, Jordan</p>
         </div>
         <div class="wr-cta-panel__rooms" data-i18n-attr="aria-label:retreat_wadi_rooms_aria" aria-label="Room options">
@@ -610,11 +610,11 @@ export default function Page() {
       <span class="wr-sticky__label" data-i18n="retreat_wadi_sticky_from">From</span>
       <strong class="wr-sticky__amount" dir="ltr">3,650 ₪</strong>
     </div>
-    <a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-sticky__wa" data-i18n-attr="href:retreat_wadi_wa_href">
+    <a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-sticky__wa" data-i18n-attr="href:retreat_wadi_wa_href" data-track-cta="whatsapp" data-track-loc="sticky">
       ${waIcon(18)}
       <span data-i18n="retreat_wadi_wa_short">WhatsApp</span>
     </a>
-    <a href="/register/wadi-rum" class="wr-sticky__cta">
+    <a href="/register/wadi-rum" class="wr-sticky__cta" data-track-cta="book" data-track-loc="sticky">
       <span data-i18n="retreat_wadi_book_now">Reserve your spot</span>
     </a>
   </div>
