@@ -34,6 +34,23 @@ const staySlides = (folder, ids, altKey) => ids.map(
   (id) => `<figure class="wr-stay-gallery__slide"><img src="/media/wadi-rum/${folder}/shahrazadluxury-20260914-${id}.jpg" alt="" data-i18n-attr="alt:${altKey}" width="1200" height="800" loading="lazy" decoding="async"></figure>`,
 ).join('\n                ');
 
+const riskLine = (loc) => `<p class="wr-risk"><span data-i18n="retreat_wadi_risk_line">Sending a request is free and non-binding — your place is confirmed after a short call with a 400 ₪ deposit.</span> <a class="wr-risk__link" href="#wr-faq-policy" data-track-cta="policy" data-track-loc="${loc}" data-i18n="retreat_wadi_policy_link">Payment &amp; cancellation terms</a></p>`;
+
+const ctaBlock = (loc, lineKey, lineText) => `<div class="wr-inline-cta">
+        ${lineKey ? `<p class="wr-inline-cta__line" data-i18n="${lineKey}">${lineText}</p>` : ''}
+        <div class="wr-inline-cta__buttons">
+          <a href="/register/wadi-rum" class="wr-register-btn" data-track-cta="book" data-track-loc="${loc}">
+            <span data-i18n="retreat_wadi_book_now">Reserve your spot</span>
+            <span class="wr-register-btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="${WA_HREF}" target="_blank" rel="noopener noreferrer" class="wr-inline-cta__wa" data-i18n-attr="href:retreat_wadi_wa_href" data-track-cta="whatsapp" data-track-loc="${loc}">
+            ${waIcon(16)}
+            <span data-i18n="retreat_wadi_ask_wa">Ask on WhatsApp</span>
+          </a>
+        </div>
+        ${riskLine(loc)}
+      </div>`;
+
 const DAYS = [
   {
     chip: 'Day 01',
@@ -228,6 +245,28 @@ export default function Page() {
     </div>
   </section>
 
+  <!-- 2. TRUST STRIP -->
+  <section class="wr-trust" data-i18n-attr="aria-label:retreat_wadi_trust_aria" aria-label="Who is guiding you">
+    <div class="wr-container wr-trust__inner">
+      <a class="wr-trust__hosts" href="#wr-about" data-track-cta="hosts" data-track-loc="trust">
+        <span class="wr-trust__avatars" aria-hidden="true">
+          <img src="/media/home/portrait.jpg" alt="" width="96" height="96" decoding="async">
+          <img src="/media/wadi-rum/israa.jpeg" alt="" width="96" height="96" decoding="async">
+        </span>
+        <span class="wr-trust__names">
+          <span class="wr-trust__host"><strong data-i18n="retreat_wadi_about_nawal_name">Nawal Omar</strong> · <span data-i18n="retreat_wadi_about_nawal_role">Nurse and Vinyasa Yoga Teacher</span></span>
+          <span class="wr-trust__host"><strong data-i18n="retreat_wadi_about_esraa_name">Esraa Taye</strong> · <span data-i18n="retreat_wadi_about_esraa_role">Psychotherapist &amp; content creator</span></span>
+          <span class="wr-trust__more" data-i18n="retreat_wadi_trust_more">Meet your guides</span>
+        </span>
+      </a>
+      <ul class="wr-trust__stats">
+        <li class="wr-trust__stat"><strong dir="ltr">2,000+</strong><span data-i18n="retreat_wadi_trust_trainees">trained with Nawal</span></li>
+        <li class="wr-trust__stat"><strong dir="ltr">7+</strong><span data-i18n="retreat_wadi_trust_years">years of teaching</span></li>
+        <li class="wr-trust__stat"><strong dir="ltr">20</strong><span data-i18n="retreat_wadi_trust_group">women max per group</span></li>
+      </ul>
+    </div>
+  </section>
+
   <!-- 3. WHO IS THIS RETREAT FOR -->
   <section id="wr-forwhom" class="wr-section">
     <div class="wr-container">
@@ -242,6 +281,7 @@ export default function Page() {
         <article class="wr-feature"><h3 data-i18n="retreat_wadi_forwhom_4_title">4. You want a women\'s experience with depth and belonging.</h3><p data-i18n="retreat_wadi_forwhom_4_text">A place where you don\'t need to prove anything, compare yourself to anyone, or be a certain image.</p></article>
         <article class="wr-feature"><h3 data-i18n="retreat_wadi_forwhom_5_title">5. You want to give yourself an experience that stays with you.</h3><p data-i18n="retreat_wadi_forwhom_5_text">Not just a trip or a holiday — but days of adventure, laughter, nature, women, movement, calm, and real space for you.</p></article>
       </div>
+      ${ctaBlock('forwhom', 'retreat_wadi_forwhom_cta', 'Recognised yourself in one of these? The next step is simple.')}
     </div>
   </section>
 
@@ -338,6 +378,7 @@ export default function Page() {
       <div class="wr-program wr-acc" id="wr-program-acc" data-acc>
         ${programDays}
       </div>
+      ${ctaBlock('program')}
     </div>
   </section>
 
@@ -346,8 +387,10 @@ export default function Page() {
     <div class="wr-container">
       <div class="wr-booking">
         <h2 class="wr-booking__title" data-i18n="retreat_wadi_accommodation_title">Accommodation</h2>
+        <p class="wr-booking__sub" data-i18n="retreat_wadi_accommodation_sub">Choose your room — the price covers the whole programme</p>
         <div class="wr-booking__grid wr-booking__grid--stays">
           <article class="wr-booking__block wr-stay-card">
+            <span class="wr-stay-badge" data-i18n="retreat_wadi_stay1_b4">Full privacy</span>
             <div class="wr-stay-gallery" data-stay-gallery data-i18n-attr="aria-label:retreat_wadi_stay1_gallery_label" aria-label="Bubbles room photos">
               <div class="wr-stay-gallery__track" data-stay-track>
                 ${staySlides('bubbles', BUBBLES_PHOTOS, 'retreat_wadi_stay1_photo_alt')}
@@ -373,6 +416,7 @@ export default function Page() {
             </div>
           </article>
           <article class="wr-booking__block wr-stay-card">
+            <span class="wr-stay-badge wr-stay-badge--soft" data-i18n="retreat_wadi_stay2_b1">Panoramic view</span>
             <div class="wr-stay-gallery" data-stay-gallery data-i18n-attr="aria-label:retreat_wadi_stay2_gallery_label" aria-label="Panorama room photos">
               <div class="wr-stay-gallery__track" data-stay-track>
                 ${staySlides('panorama', PANORAMA_PHOTOS, 'retreat_wadi_stay2_photo_alt')}
@@ -437,6 +481,7 @@ export default function Page() {
             </div>
           </div>
         </div>
+        ${ctaBlock('offer')}
       </div>
     </div>
   </section>
@@ -479,10 +524,11 @@ export default function Page() {
         </li>
       </ol>
       <div class="wr-register-actions">
-        <a href="/register/wadi-rum" class="wr-register-btn">
+        <a href="/register/wadi-rum" class="wr-register-btn" data-track-cta="book" data-track-loc="steps">
           <span data-i18n="retreat_wadi_open_form">Open registration form</span>
           <span class="wr-register-btn__arrow" aria-hidden="true">→</span>
         </a>
+        ${riskLine('steps')}
       </div>
     </div>
   </section>
@@ -541,13 +587,14 @@ export default function Page() {
         </div>
         <p class="wr-cta-panel__closing" data-i18n="retreat_wadi_final_text3">If, as you read this, you felt: "I need this space"… maybe that is enough of a sign to ask about it.</p>
         <div class="ny-book-actions wr-cta-panel__actions">
-          <a href="/register/wadi-rum" class="dahab-includes-cta ny-book-btn-primary wr-cta-panel__btn"><span data-i18n="retreat_wadi_book_now">Submit registration request</span><span aria-hidden="true">→</span></a>
+          <a href="/register/wadi-rum" class="dahab-includes-cta ny-book-btn-primary wr-cta-panel__btn" data-track-cta="book" data-track-loc="final"><span data-i18n="retreat_wadi_book_now">Submit registration request</span><span aria-hidden="true">→</span></a>
           <div class="ny-book-alt">
-            <a href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" class="ny-book-wa-link" data-i18n-attr="aria-label:booking_wa_aria">
+            <a href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" class="ny-book-wa-link" data-i18n-attr="aria-label:booking_wa_aria" data-track-cta="whatsapp" data-track-loc="final">
               ${waIcon(16)}
               <span data-i18n="booking_wa_or">Or contact us on WhatsApp</span>
             </a>
           </div>
+          ${riskLine('final')}
         </div>
       </div>
     </div>

@@ -1549,6 +1549,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  min-height: 2.75rem;
+  padding-inline: 0.5rem;
   color: var(--wr-accent-dark);
   text-decoration: none;
   transition: color 160ms ease;
@@ -1678,6 +1680,238 @@
   font-family: "Playfair Display", Georgia, serif;
   font-size: 1.08rem;
   color: var(--wr-ink);
+}
+
+/* Trust strip under the hero */
+.wr-trust {
+  padding-block: clamp(1rem, 3vw, 1.35rem);
+  background: var(--wr-surface);
+  border-bottom: 1px solid var(--wr-line);
+}
+
+.wr-trust__inner {
+  display: grid;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+@media (min-width: 860px) {
+  .wr-trust__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+  }
+}
+
+.wr-trust__hosts {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wr-trust__avatars {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.wr-trust__avatars img {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid var(--wr-surface);
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: center 30%;
+  box-shadow: 0 4px 12px rgba(61, 44, 38, 0.12);
+}
+
+.wr-trust__avatars img + img {
+  margin-inline-start: -0.7rem;
+}
+
+.wr-trust__names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--wr-muted);
+}
+
+.wr-trust__host strong {
+  color: var(--wr-ink);
+  font-weight: 700;
+}
+
+.wr-trust__more {
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--wr-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wr-trust__hosts:focus-visible {
+  outline: 2px solid var(--wr-accent);
+  outline-offset: 4px;
+  border-radius: 0.75rem;
+}
+
+.wr-trust__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.75rem 0 0;
+  list-style: none;
+  border-top: 1px solid var(--wr-line);
+}
+
+@media (min-width: 860px) {
+  .wr-trust__stats {
+    gap: 1.75rem;
+    padding: 0;
+    border-top: 0;
+  }
+}
+
+.wr-trust__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.1rem;
+}
+
+.wr-trust__stat strong {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--wr-accent-dark);
+}
+
+.wr-trust__stat span {
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: var(--wr-muted);
+}
+
+/* Repeated booking block + reassurance line */
+.wr-inline-cta {
+  margin-top: clamp(1.35rem, 3vw, 1.75rem);
+  padding-top: clamp(1.1rem, 3vw, 1.35rem);
+  border-top: 1px solid var(--wr-line);
+}
+
+.wr-inline-cta__line {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1rem, 2.3vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--wr-ink);
+}
+
+.wr-inline-cta__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.wr-inline-cta__wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--wr-line);
+  border-radius: 999px;
+  background: var(--wr-surface);
+  color: var(--wr-accent-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 160ms ease;
+}
+
+.wr-inline-cta__wa:hover {
+  background: var(--wr-accent-soft);
+}
+
+.wr-inline-cta__wa:focus-visible {
+  outline: 2px solid var(--wr-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 559px) {
+  .wr-inline-cta__buttons > a {
+    flex: 1 1 100%;
+  }
+}
+
+.wr-risk {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--wr-muted);
+}
+
+.wr-risk__link {
+  display: inline-block;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
+  font-weight: 700;
+  color: var(--wr-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wr-risk__link::after {
+  content: " →";
+}
+
+[dir="rtl"] .wr-risk__link::after {
+  content: " ←";
+}
+
+.wr-cta-panel .wr-risk {
+  text-align: center;
+}
+
+.wr-booking__sub {
+  margin: -0.85rem 0 1.15rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--wr-accent-dark);
+}
+
+.wr-stay-card {
+  position: relative;
+}
+
+.wr-stay-badge {
+  position: absolute;
+  top: 1.25rem;
+  inset-inline-start: 1.25rem;
+  z-index: 2;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #c47a45 0%, #a35f34 100%);
+  color: #fff9f3;
+  font-size: 0.74rem;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(42, 24, 16, 0.25);
+  pointer-events: none;
+}
+
+.wr-stay-badge--soft {
+  background: rgba(255, 253, 249, 0.92);
+  color: var(--wr-accent-dark);
 }
 
 /* Accordion (program days + FAQ). Without JS every panel stays open. */
@@ -1891,7 +2125,8 @@
 [dir="rtl"] .wr-h3,
 [dir="rtl"] .wr-step__title,
 [dir="rtl"] .wr-faq__q,
-[dir="rtl"] .wr-day__title {
+[dir="rtl"] .wr-day__title,
+[dir="rtl"] .wr-trust__stat strong {
   font-family: Amiri, Georgia, serif;
 }
 
