@@ -163,4 +163,30 @@
     window.addEventListener("resize", updateNav);
     updateNav();
   });
+
+  var sticky = document.querySelector("[data-wr-sticky]");
+  var hero = document.querySelector(".wr-hero");
+  var finalCta = document.querySelector(".wr-section--cta");
+  if (sticky && hero && "IntersectionObserver" in window) {
+    var heroVisible = true;
+    var finalVisible = false;
+
+    function updateSticky() {
+      sticky.classList.toggle("is-visible", !heroVisible && !finalVisible);
+    }
+
+    new IntersectionObserver(function (entries) {
+      heroVisible = entries[0].isIntersecting;
+      updateSticky();
+    }, { rootMargin: "0px 0px -35% 0px" }).observe(hero);
+
+    if (finalCta) {
+      new IntersectionObserver(function (entries) {
+        finalVisible = entries[0].isIntersecting;
+        updateSticky();
+      }, { threshold: 0.25 }).observe(finalCta);
+    }
+  } else if (sticky) {
+    sticky.classList.add("is-visible");
+  }
 })();
