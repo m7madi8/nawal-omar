@@ -39,6 +39,7 @@
     community: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><path d="M2.8 19c.7-3 3-4.8 6.2-4.8s5.5 1.8 6.2 4.8"/><circle cx="17" cy="8" r="2.2"/><path d="M15.6 14.4c2.6.3 4.4 2 5 4.6"/></svg>',
     medical: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 5-8.8 10.4-8.8 10.4S3.2 13.6 3.2 8.6a4.6 4.6 0 0 1 8.4-2.6 4.6 4.6 0 0 1 8.4 2.6 4.6 4.6 0 0 1-.2 1"/><path d="M6 11h2.2l1.3-2.4L11 13l1.1-2h2.4"/></svg>',
     feedback: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.8l-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 2.8Z"/><path d="M5 19.5h14"/></svg>',
+    analytics: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16V10"/><path d="M12 16V7"/><path d="M16 16v-5"/><path d="M20 16v-8"/></svg>',
     content: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h8l4 4v13a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z"/><path d="M14 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 15.5h7M8.5 18h4"/></svg>',
     settings: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H4a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H10a1.7 1.7 0 0 0 1-1.6V4a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9V10a1.7 1.7 0 0 0 1.6 1H20a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg>',
     shop: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.2 11.2A2 2 0 0 1 16.8 21H7.2a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8 8V6.5A4 4 0 0 1 12 2.5 4 4 0 0 1 16 6.5V8"/></svg>',
@@ -58,6 +59,7 @@
     { id: 'community', path: '/admin/community', label: 'Community', group: 'People' },
     { id: 'medical', path: '/admin/medical', label: 'Medical forms', group: 'Intake' },
     { id: 'feedback', path: '/admin/feedback', label: 'Feedback', group: 'Intake' },
+    { id: 'analytics', path: '/admin/analytics', label: 'Analytics', group: 'Workspace' },
     { id: 'shop', path: '/admin/shop', label: 'Shop', group: 'Commerce' },
     { id: 'orders', path: '/admin/orders', label: 'Orders', group: 'Commerce' },
     { id: 'sales', path: '/admin/sales', label: 'Sales & profit', group: 'Commerce' },
@@ -75,6 +77,7 @@
     { id: 'community', label: 'Community', hint: 'Returning guests' },
     { id: 'medical', label: 'Medical forms', hint: 'Health intake' },
     { id: 'feedback', label: 'Feedback', hint: 'Post-experience evaluations' },
+    { id: 'analytics', label: 'Analytics', hint: 'Page views and form drop-offs' },
     { id: 'shop', label: 'Shop', hint: 'Catalog and products' },
     { id: 'orders', label: 'Orders', hint: 'Fulfill shop orders' },
     { id: 'sales', label: 'Sales & profit', hint: 'Revenue and profit' },
@@ -2671,6 +2674,129 @@
     }
   }
 
+  var FORM_ANALYTICS_LABELS = {
+    'wadi-rum-registration': 'Wadi Rum registration',
+    'sound-healing-registration': 'Sound Healing booking',
+    'ice-bath-registration': 'Ice Bath day retreat booking',
+    'ice-bath-health': 'Ice Bath health form',
+    'dahab-retreat-reserve': 'Dahab retreat booking',
+    'zanzibar-retreat-reserve': 'Zanzibar retreat booking',
+    'mountain-voice-registration': "Nawal's Care form",
+    'private-sessions': 'Private sessions request',
+    feedback: 'Feedback form',
+  };
+
+  function analyticsFormLabel(formId) {
+    return FORM_ANALYTICS_LABELS[formId] || formId || 'Form';
+  }
+
+  function analyticsRange() {
+    try {
+      return localStorage.getItem('nawal-admin-an-range') || '7d';
+    } catch (_e) {
+      return '7d';
+    }
+  }
+
+  function setAnalyticsRange(range) {
+    try {
+      localStorage.setItem('nawal-admin-an-range', range);
+    } catch (_e) {}
+  }
+
+  async function fetchAnalyticsSummary(range) {
+    var res = await fetch('/api/analytics?range=' + encodeURIComponent(range || '7d'), {
+      headers: { Accept: 'application/json' },
+    });
+    var data = await res.json().catch(function () { return {}; });
+    if (!res.ok && !data.totals) throw new Error(data.error || 'Failed to load analytics');
+    return data;
+  }
+
+  function renderAnalytics(root) {
+    var range = analyticsRange();
+    root.innerHTML = '<div class="admin-page-head"><div><h1>Analytics</h1><p>Page views and who opened a form then left without finishing.</p></div></div><div class="admin-skeleton"><div class="admin-skeleton-block is-row" style="height:48px;max-width:280px"></div><div class="admin-skeleton__stats"><div class="admin-skeleton-block is-stat"></div><div class="admin-skeleton-block is-stat"></div><div class="admin-skeleton-block is-stat"></div><div class="admin-skeleton-block is-stat"></div></div></div>';
+
+    fetchAnalyticsSummary(range)
+      .then(function (data) {
+        var totals = data.totals || {};
+        var pages = data.pages || [];
+        var forms = data.forms || [];
+        var maxViews = Math.max.apply(null, pages.map(function (p) { return p.views; }).concat([1]));
+        var html = '';
+
+        html += '<div class="admin-page-head"><div><h1>Analytics</h1><p>First-party tracking — no Google Analytics. Counts unique page views per browser session.</p></div>';
+        html += '<div class="admin-page-actions"><div class="admin-seg" role="group" aria-label="Date range">';
+        [['7d', '7 days'], ['30d', '30 days'], ['90d', '90 days']].forEach(function (item) {
+          html += '<button type="button" class="admin-seg__btn' + (range === item[0] ? ' is-active' : '') + '" data-an-range="' + item[0] + '">' + item[1] + '</button>';
+        });
+        html += '</div><button type="button" class="admin-btn" data-an-refresh>' + ICONS.refresh + ' Refresh</button></div></div>';
+
+        if (data.code === 'TABLE_MISSING' || data.error) {
+          html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Setup needed</h2><p>Run the SQL migration once in Supabase, then refresh this page.</p></div></div>';
+          html += '<p class="admin-muted">File: <code>supabase/migrations/002_site_analytics.sql</code></p>';
+          if (data.error) html += '<p class="admin-muted">' + escapeHtml(data.error) + '</p>';
+          html += '</section>';
+        }
+
+        html += '<div class="admin-stats">';
+        [
+          ['Page views', totals.pageViews || 0, 'Across all public pages', ICONS.analytics, ''],
+          ['Forms opened', totals.formViews || 0, 'Form page shown', ICONS.content, ''],
+          ['Started filling', totals.formStarts || 0, 'Typed or chose an answer', ICONS.events, 'is-sand'],
+          ['Left unfinished', totals.leftWithoutSubmit || 0, 'Started but did not submit', ICONS.medical, 'is-rust'],
+        ].forEach(function (item) {
+          html += '<article class="admin-stat"><div class="admin-stat__top"><p class="admin-stat__label">' + item[0] + '</p><span class="admin-stat__icon ' + item[4] + '">' + item[3] + '</span></div><strong class="admin-stat__value">' + item[1] + '</strong><p class="admin-stat__meta">' + item[2] + '</p></article>';
+        });
+        html += '</div>';
+
+        html += '<div class="admin-grid-2">';
+        html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Visits by page</h2><p>Most viewed paths in this range</p></div></div><div class="admin-bars">';
+        if (!pages.length) {
+          html += '<p class="admin-muted">No page views yet. Open the public site once, then refresh.</p>';
+        }
+        pages.slice(0, 20).forEach(function (row) {
+          html += '<div class="admin-bar-row"><span title="' + escapeHtml(row.path) + '">' + escapeHtml(row.path) + '</span><div class="admin-bar-track"><div class="admin-bar-fill" style="width:' + Math.round((row.views / maxViews) * 100) + '%"></div></div><span class="admin-bar-count">' + row.views + '</span></div>';
+        });
+        html += '</div></section>';
+
+        html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Forms · started then left</h2><p>Opened → started → submitted / left</p></div></div>';
+        if (!forms.length) {
+          html += '<p class="admin-muted">No form activity yet.</p>';
+        } else {
+          html += '<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Form</th><th>Opened</th><th>Started</th><th>Submitted</th><th>Left</th><th>Drop %</th></tr></thead><tbody>';
+          forms.forEach(function (row) {
+            html += '<tr><td><strong>' + escapeHtml(analyticsFormLabel(row.formId)) + '</strong><div class="admin-muted">' + escapeHtml(row.path || '') + '</div></td>';
+            html += '<td>' + row.views + '</td><td>' + row.starts + '</td><td>' + row.completes + '</td>';
+            html += '<td><strong>' + row.leftWithoutSubmit + '</strong></td><td>' + row.dropRate + '%</td></tr>';
+          });
+          html += '</tbody></table></div>';
+        }
+        html += '</section></div>';
+
+        html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>How to read this</h2></div></div>';
+        html += '<div class="admin-attention">';
+        html += '<div class="admin-attention-item"><span>Opened</span><strong>Saw the form</strong></div>';
+        html += '<div class="admin-attention-item"><span>Started</span><strong>Began typing / selecting</strong></div>';
+        html += '<div class="admin-attention-item"><span>Submitted</span><strong>Finished successfully</strong></div>';
+        html += '<div class="admin-attention-item"><span>Left</span><strong>Started − submitted</strong></div>';
+        html += '</div></section>';
+
+        root.innerHTML = html;
+        root.querySelectorAll('[data-an-range]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            setAnalyticsRange(btn.getAttribute('data-an-range'));
+            renderAnalytics(root);
+          });
+        });
+        var refresh = root.querySelector('[data-an-refresh]');
+        if (refresh) refresh.addEventListener('click', function () { renderAnalytics(root); });
+      })
+      .catch(function (err) {
+        root.innerHTML = renderEmptyState(err.message || 'Could not load analytics.');
+      });
+  }
+
   function renderSettings(root) {
     var connected = !!SUPABASE_URL;
     var session = currentSession();
@@ -2727,6 +2853,7 @@
       else if (view === 'community') renderCommunity(root, rows, stats, filters);
       else if (view === 'medical') renderMedical(root, rows, filters);
       else if (view === 'feedback') renderFeedback(root, rows, stats, filters);
+      else if (view === 'analytics') renderAnalytics(root);
       else if (view === 'shop') renderShop(root, rows, stats, filters);
       else if (view === 'orders') renderOrders(root, rows, stats, filters);
       else if (view === 'sales') renderSales(root, rows, filters);

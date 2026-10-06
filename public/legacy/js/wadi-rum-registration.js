@@ -550,6 +550,9 @@
       setSending(false);
       track("form_step_complete", { step: TOTAL });
       track("form_submit_success");
+      if (window.nawalAnalytics && typeof window.nawalAnalytics.markComplete === "function") {
+        window.nawalAnalytics.markComplete("wadi-rum-registration");
+      }
       showSuccess();
     } catch (err) {
       setSending(false);

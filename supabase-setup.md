@@ -80,3 +80,9 @@ Run the SQL in [`supabase/migrations/001_commerce_orders.sql`](supabase/migratio
 - Open `dashboard.html` and confirm request appears
 - Test `Mark Completed` and `Delete`
 - Submit an event registration and confirm rows appear in `commerce_orders`, `commerce_order_items`, and `retreat_requests`
+
+## 6) Site analytics (page views + form funnel)
+
+Run [`supabase/migrations/002_site_analytics.sql`](supabase/migrations/002_site_analytics.sql) in the Supabase SQL Editor.
+
+This creates `site_analytics` for first-party tracking (no Google Analytics). Public pages send events to `/api/analytics`. The admin **Analytics** page shows visits by URL and forms started then left unfinished.

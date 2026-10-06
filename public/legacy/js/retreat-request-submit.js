@@ -129,6 +129,9 @@
   }
 
   function notifySuccess(payload) {
+    if (global.nawalAnalytics && typeof global.nawalAnalytics.markComplete === "function") {
+      global.nawalAnalytics.markComplete((payload && payload.source) || "retreat-request");
+    }
     if (global.nawalThankYou && typeof global.nawalThankYou.show === "function") {
       global.nawalThankYou.show({ name: payload && payload.fullName });
     }

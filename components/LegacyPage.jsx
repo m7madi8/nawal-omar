@@ -100,11 +100,12 @@ export default function LegacyPage({
         <link key={href} rel="stylesheet" href={href} />
       ))}
       <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
-      {(isAdmin ? filteredScripts : [{ src: '/js/thank-you-modal.js' }, ...filteredScripts]).map(
-        (script, index) => (
+      {(isAdmin
+        ? filteredScripts
+        : [{ src: '/js/thank-you-modal.js' }, { src: '/js/site-analytics.js' }, ...filteredScripts]
+      ).map((script, index) => (
           <Script key={script.src + index} src={script.src} strategy="afterInteractive" />
-        ),
-      )}
+      ))}
       {bootScripts.map((code, index) => (
         <Script key={index} id={`legacy-inline-${index}`} strategy="afterInteractive">
           {code}
