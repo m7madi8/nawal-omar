@@ -17,7 +17,7 @@ async function thanksPath(result) {
     if (commerceType === 'lesson' || commerceType === 'event') {
       return `${bookingBackPath(commerceType, itemId)}?payment=failed`;
     }
-    return '/register/wadi-rum/pay?payment=failed';
+    return '/register/wadi-rum?payment=failed';
   }
 
   if (!result.orderId) {

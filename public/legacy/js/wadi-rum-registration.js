@@ -47,7 +47,7 @@
     en: {
       backLink: "Back to retreat",
       title: "Initial Registration | Wadi Rum Desert Retreat",
-      lead1: "This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.",
+      lead1: "Complete your details and pay the 400 ₪ deposit in one step to secure your place. Limited to 20 participants.",
       noteDuration: "5 days - 4 nights",
       pricePanorama: "Panorama Room — 3,650 ₪",
       priceBubbles: "Bubbles Room — 3,850 ₪",
@@ -89,14 +89,16 @@
       a7: "Nights under stars",
       freeNote: "Anything else you would like to share?",
       nextTitle: "What happens next?",
-      nextText: "We'll have a short getting-to-know-you call, then you secure your place with a first deposit of 400 ₪ (bank transfer or Bit).",
-      riskText: "Sending a request is free and non-binding.",
+      nextText: "After you pay the deposit, you'll get a confirmation page with your receipt. We'll call you shortly to welcome you to the retreat.",
+      paymentUnavailable: "Secure card payment is temporarily unavailable. Please try again later or contact us on WhatsApp.",
+      paymentRetry: "Your details were saved, but payment didn't open. Tap the button below to try the secure payment again.",
+      retryPay: "Continue to payment",
       policyLink: "Payment & cancellation terms",
       privacy: "We only use your details to contact you about the retreat.",
       prev: "Back",
       next: "Next",
-      submit: "Send my request — free, no commitment",
       submitWithPay: "Register & pay 400 ₪ deposit securely",
+      submitClosed: "Booking unavailable — card payment offline",
       sending: "Sending…",
       failTitle: "The request didn't go through this time",
       failText: "Your details are still here. Try again, or message us on WhatsApp and we'll continue from there.",
@@ -125,7 +127,7 @@
     ar: {
       backLink: "الرجوع للريتريت",
       title: "التسجيل الأوّلي | ريتريت الصحراء – وادي رم",
-      lead1: "هاي استمارة تسجيل أوّلي. العدد محدود (لحد 20 مشاركة)، وبعد ما تبعتيها منحكي معكِ لنأكّد التفاصيل.",
+      lead1: "عبّي التفاصيل وادفعي عربون 400 ₪ بخطوة واحدة لتثبيت مكانك. العدد محدود (20 مشاركة).",
       noteDuration: "5 أيام - 4 ليالي",
       pricePanorama: "غرفة بانوراما — 3,650 ₪",
       priceBubbles: "غرفة بابلز — 3,850 ₪",
@@ -167,14 +169,16 @@
       a7: "السهرات تحت النجوم",
       freeNote: "في إشي كمان حابّة تشاركينا فيه؟",
       nextTitle: "شو بصير بعد ما تبعتي؟",
-      nextText: "منحكي معكِ مكالمة تعارف قصيرة، وبعدها بتثبّتي مكانك بدفعة أولى 400 ₪ (تحويل بنكي أو Bit).",
-      riskText: "إرسال الطلب مجاني وبدون التزام.",
+      nextText: "بعد دفع العربون بتظهر صفحة تأكيد مع إيصال. رح نتصل معكِ قريباً للترحيب بالريتريت.",
+      paymentUnavailable: "الدفع بالبطاقة غير متاح حالياً. جرّبي لاحقاً أو تواصلي معنا على واتساب.",
+      paymentRetry: "تم حفظ بياناتك، بس الدفع ما فتح. اضغطي الزر لإكمال الدفع الآمن.",
+      retryPay: "متابعة للدفع",
       policyLink: "شروط الدفع والإلغاء",
       privacy: "منستعمل معلوماتك بس عشان نتواصل معكِ بخصوص الريتريت.",
       prev: "رجوع",
       next: "التالي",
-      submit: "ابعتي الطلب — مجاني وبدون التزام",
       submitWithPay: "سجّلي وادفعي عربون 400 ₪ بأمان",
+      submitClosed: "الحجز غير متاح — الدفع بالبطاقة متوقف",
       sending: "عم نبعت…",
       failTitle: "الطلب ما وصل هالمرة",
       failText: "معلوماتك لسّا محفوظة هون. جرّبي كمان مرة، أو ابعتيلنا واتساب ومنكمّل من هناك.",
@@ -501,25 +505,19 @@
       if (on) btn.setAttribute("aria-disabled", "true");
       else btn.removeAttribute("aria-disabled");
     });
-    submitBtn.setAttribute("data-t", on ? "sending" : "submit");
+    var idleKey = form.getAttribute("data-pay-retry") === "1" ? "retryPay" : "submitWithPay";
+    submitBtn.setAttribute("data-t", on ? "sending" : idleKey);
     submitBtn.textContent = t(submitBtn.getAttribute("data-t"));
   }
 
-  function renderSuccessTitle() {
-    okTitle.textContent = successName ? t("successTitleNamed", { name: successName }) : t("successTitle");
-  }
-
-  function showSuccess() {
-    successName = firstName();
-    okWa.setAttribute("href", waHref("waOk", value("fullName")));
-    form.hidden = true;
-    progress.hidden = true;
-    failEl.hidden = true;
-    okMsg.hidden = false;
-    renderSuccessTitle();
-    form.reset();
-    okMsg.scrollIntoView({ block: "center" });
-    okMsg.focus({ preventScroll: true });
+  function showPaymentRetry(saved) {
+    window.__wadiRumPayRetry = saved;
+    form.setAttribute("data-pay-retry", "1");
+    setStatus("paymentRetry");
+    submitBtn.hidden = false;
+    submitBtn.setAttribute("data-t", "retryPay");
+    submitBtn.textContent = t("retryPay");
+    submitBtn.scrollIntoView({ block: "center" });
   }
 
   function showFail() {
@@ -542,13 +540,36 @@
     if (!validateSteps(TOTAL)) return;
     failEl.hidden = true;
     submitBtn.hidden = false;
+
+    if (form.getAttribute("data-pay-retry") === "1" && window.__wadiRumPayRetry && window.wadiRumDepositPay) {
+      setSending(true);
+      try {
+        var retryOk = await window.wadiRumDepositPay.startCheckout(
+          window.__wadiRumPayRetry,
+          statusEl,
+          submitBtn
+        );
+        if (!retryOk) setStatus("paymentRetry");
+      } finally {
+        setSending(false);
+      }
+      return;
+    }
+
     if (looksLikeBot()) {
       track("form_spam_blocked");
-      showSuccess();
       return;
     }
     setSending(true);
     try {
+      if (window.wadiRumDepositPay && typeof window.wadiRumDepositPay.loadPaymentOptions === "function") {
+        await window.wadiRumDepositPay.loadPaymentOptions();
+        if (!window.wadiRumDepositPay.isCardCheckoutAvailable()) {
+          setSending(false);
+          setStatus("paymentUnavailable");
+          return;
+        }
+      }
       var saved = await sendToSupabase();
       setSending(false);
       track("form_step_complete", { step: TOTAL });
@@ -564,25 +585,24 @@
           requestId: saved.id
         });
         if (typeof window.wadiRumDepositPay.startCheckout === "function") {
-          await window.wadiRumDepositPay.loadPaymentOptions();
-          if (window.wadiRumDepositPay.isCardCheckoutAvailable()) {
-            setSending(true);
-            var redirected = await window.wadiRumDepositPay.startCheckout(
-              {
-                fullName: saved.fullName,
-                phone: saved.phone,
-                email: "",
-                requestId: saved.id
-              },
-              statusEl,
-              submitBtn
-            );
-            setSending(false);
-            if (redirected) return;
-          }
+          setSending(true);
+          var redirected = await window.wadiRumDepositPay.startCheckout(
+            {
+              fullName: saved.fullName,
+              phone: saved.phone,
+              email: "",
+              requestId: saved.id
+            },
+            statusEl,
+            submitBtn
+          );
+          setSending(false);
+          if (redirected) return;
+          showPaymentRetry(saved);
+          return;
         }
       }
-      showSuccess();
+      setStatus("paymentUnavailable");
     } catch (err) {
       setSending(false);
       var reason = err && err.name === "AbortError" ? "timeout" : err instanceof TypeError ? "network" : "server";
@@ -592,7 +612,7 @@
   });
 
   failWa.addEventListener("click", function () { track("form_whatsapp_fallback_click", { location: "fail" }); });
-  okWa.addEventListener("click", function () { track("form_whatsapp_click", { location: "success" }); });
+  if (okWa) okWa.addEventListener("click", function () { track("form_whatsapp_click", { location: "success" }); });
 
   var started = false;
   function markStarted() {
@@ -604,8 +624,10 @@
   form.addEventListener("change", markStarted);
 
   document.addEventListener("wr-reg:lang", function () {
-    if (!okMsg.hidden) renderSuccessTitle();
     if (sending) submitBtn.textContent = t("sending");
+    else submitBtn.textContent = t(submitBtn.getAttribute("data-t") || "submitWithPay");
+    var statusMsg = statusEl.getAttribute("data-msg");
+    if (statusMsg) statusEl.textContent = t(statusMsg, JSON.parse(statusEl.getAttribute("data-vars") || "null"));
   });
 
   /* ---------- Language ---------- */
@@ -622,7 +644,7 @@
 
   window.wadiRumRegRefreshSubmit = function () {
     if (sending) return;
-    submitBtn.textContent = t(submitBtn.getAttribute("data-t") || "submit");
+    submitBtn.textContent = t(submitBtn.getAttribute("data-t") || "submitWithPay");
   };
 
   form.classList.add("is-stepped");

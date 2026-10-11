@@ -36,7 +36,7 @@ const html = `
     </div>
     <section class="card">
       <h1 data-t="title">Initial Registration | Wadi Rum Desert Retreat</h1>
-      <p class="lead" data-t="lead1">This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.</p>
+      <p class="lead" data-t="lead1">Complete your details and pay the 400 ₪ deposit in one step to secure your place. Limited to 20 participants.</p>
       <div class="reg-summary">
         <p class="reg-summary__row">
           <bdi dir="ltr">22–26.10.2026</bdi>
@@ -155,8 +155,8 @@ const html = `
           </div>
 
           <div class="reg-assure">
-            <p><strong data-t="nextTitle">What happens next?</strong> <span data-t="nextText">We'll have a short getting-to-know-you call, then you secure your place with a first deposit of 400 ₪ (bank transfer or Bit).</span></p>
-            <p><span data-t="riskText">Sending a request is free and non-binding.</span> <a href="/retreats/wadi-rum#wr-faq-policy" data-t="policyLink">Payment &amp; cancellation terms</a></p>
+            <p><strong data-t="nextTitle">What happens next?</strong> <span data-t="nextText">After you pay the deposit, you'll be redirected to a confirmation page with your receipt. We'll call you shortly to welcome you to the retreat.</span></p>
+            <p><a href="/retreats/wadi-rum#wr-faq-policy" data-t="policyLink">Payment &amp; cancellation terms</a></p>
             <p class="reg-assure__privacy" data-t="privacy">We only use your details to contact you about the retreat.</p>
           </div>
 
@@ -175,19 +175,11 @@ const html = `
         <div class="actions reg-nav">
           <button type="button" class="reg-btn reg-btn--ghost" data-step-prev hidden data-t="prev">Back</button>
           <button type="button" class="reg-btn" data-step-next data-t="next">Next</button>
-          <button type="submit" class="reg-btn" data-submit data-t="submit">Send my request — free, no commitment</button>
+          <button type="submit" class="reg-btn" data-submit data-t="submitWithPay">Register &amp; pay 400 ₪ deposit securely</button>
         </div>
       </form>
 
-      <div id="okMsg" class="ok reg-success" role="status" tabindex="-1" hidden>
-        <p class="reg-success__title" id="okTitle" data-t="successTitle">Your request arrived, thank you</p>
-        <p data-t="successText">We'll get in touch soon for a short getting-to-know-you call. After that, you secure your place with a first deposit of 400 ₪.</p>
-        <div class="reg-success__actions reg-success__actions--stack">
-          <a class="reg-btn reg-btn--deposit" href="/register/wadi-rum/pay?registered=1" data-i18n="retreat_wadi_checkout_pay_btn">Pay 400 ₪ securely</a>
-          <a class="reg-btn reg-btn--ghost" href="/retreats/wadi-rum" data-t="successBack">Back to the retreat page</a>
-          <a class="reg-btn reg-btn--wa" id="regOkWa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener noreferrer" data-t="successWhatsapp">Questions? Message us on WhatsApp</a>
-        </div>
-      </div>
+      <div id="okMsg" class="ok reg-success" role="status" tabindex="-1" hidden aria-hidden="true"></div>
 
       <div class="contact" id="contactBox">
         <span data-t="contactLead">For questions:</span>

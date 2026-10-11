@@ -100,9 +100,13 @@
     function updateSubmitLabel() {
       if (!submitBtn) return;
       var span = submitBtn.querySelector("span") || submitBtn;
-      var payEl = form.querySelector('input[name="eventPayment"]:checked');
-      var payMethod = payEl ? payEl.value : "manual";
-      var key = payMethod === "hyp" && paymentOptions.hyp ? "event_pay_submit" : cfg.submitLabelKey || "events_sh_register_confirm";
+      var tierInput = form.querySelector('input[name="eventPriceTier"]:checked');
+      var tierId = tierInput ? tierInput.value : selectedTier;
+      var lineAmount = tierAmount(eventId, tierId);
+      var key =
+        lineAmount > 0 && paymentOptions.hyp
+          ? "event_pay_submit"
+          : cfg.submitLabelKey || "events_sh_register_confirm";
       span.setAttribute("data-i18n", key);
       span.textContent = t(key);
     }
@@ -134,26 +138,20 @@
           "</strong></p>";
       }
 
-      if (amount > 0 && paymentOptions.hyp) {
-        html += '<p class="event-pay-label">' + t("haifa_pay_title") + "</p>";
-        html +=
-          '<label class="event-pay-option"><input type="radio" name="eventPayment" value="hyp"' +
-          (cardDefault ? " checked" : "") +
-          "> " +
-          t("haifa_pay_card") +
-          "</label>";
+      if (amount > 0) {
+        if (paymentOptions.hyp) {
+          html += '<p class="event-pay-label">' + t("haifa_pay_title") + "</p>";
+          html +=
+            '<input type="hidden" name="eventPayment" value="hyp">' +
+            '<p class="event-pay-option event-pay-option--card">' +
+            t("haifa_pay_card") +
+            "</p>";
+          html += '<p class="event-pay-hint">' + t("haifa_pay_online_hint") + "</p>";
+        } else {
+          html +=
+            '<p class="event-pay-hint is-error">' + t("haifa_pay_card_unavailable") + "</p>";
+        }
       }
-
-      html +=
-        '<label class="event-pay-option"><input type="radio" name="eventPayment" value="manual"' +
-        (cardDefault ? "" : " checked") +
-        "> " +
-        t("haifa_pay_manual") +
-        "</label>";
-      html +=
-        '<p class="event-pay-hint">' +
-        t(paymentOptions.hypLive ? "haifa_pay_online_hint" : "haifa_pay_manual_hint") +
-        "</p>";
       paymentSection.innerHTML = html;
 
       paymentSection.querySelectorAll('input[name="eventPayment"]').forEach(function (input) {
@@ -326,12 +324,16 @@
       var tierInput = form.querySelector('input[name="eventPriceTier"]:checked');
       selectedTier = tierInput ? tierInput.value : selectedTier;
       var amount = tierAmount(eventId, selectedTier);
-      var payEl = form.querySelector('input[name="eventPayment"]:checked');
-      var payMethod = payEl ? payEl.value : "manual";
+      var payEl = form.querySelector('input[name="eventPayment"]');
+      var payMethod = payEl ? payEl.value : amount > 0 ? "hyp" : "manual";
 
       if (submitBtn) submitBtn.disabled = true;
       try {
-        if (payMethod === "hyp" && amount > 0 && paymentOptions.hyp) {
+        if (amount > 0) {
+          if (!paymentOptions.hyp) {
+            alert(t("haifa_pay_card_unavailable"));
+            return;
+          }
           await startOnlineCheckout(fullName, phone, notes);
           return;
         }
@@ -340,13 +342,6 @@
         form.reset();
         closeModal();
         showSuccess(t(cfg.successMessageKey || "events_sh_register_success"));
-
-        if (amount > 0) {
-          var openWa = global.confirm(t("haifa_pay_open_whatsapp_confirm"));
-          if (openWa) {
-            global.open(whatsappManualUrl(fullName, phone, amount), "_blank", "noopener,noreferrer");
-          }
-        }
       } catch (err) {
         console.error(err);
         if (err.code === "COMMERCE_DB_NOT_READY") {

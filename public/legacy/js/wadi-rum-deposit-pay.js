@@ -121,11 +121,8 @@
   function refreshRegistrationSubmitLabel() {
     var submitBtn = document.querySelector('#wadiRegForm [data-submit]');
     if (!submitBtn || submitBtn.getAttribute('data-t') === 'sending') return;
-    if (cardCheckoutAvailable()) {
-      submitBtn.setAttribute('data-t', 'submitWithPay');
-    } else {
-      submitBtn.setAttribute('data-t', 'submit');
-    }
+    submitBtn.setAttribute('data-t', cardCheckoutAvailable() ? 'submitWithPay' : 'submitClosed');
+    submitBtn.disabled = !cardCheckoutAvailable();
     if (typeof window.wadiRumRegRefreshSubmit === 'function') {
       window.wadiRumRegRefreshSubmit();
     }
@@ -171,7 +168,7 @@
             email: customer.email || '',
             city: '',
           },
-          cancelUrl: '/register/wadi-rum/pay?payment=failed',
+          cancelUrl: '/register/wadi-rum?payment=failed',
         }),
       });
 
@@ -256,8 +253,19 @@
       .replace(/"/g, '&quot;');
   }
 
+  function initRegisterPage() {
+    var regStatus = document.getElementById('regFormStatus');
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('payment') === 'failed' && regStatus) {
+      setStatus(regStatus, t('retreat_wadi_checkout_failed_banner'), true);
+    }
+  }
+
   function init() {
     loadPaymentOptions();
+    if (document.getElementById('wadiRegForm')) {
+      initRegisterPage();
+    }
     if (document.getElementById('wrc-pay-btn')) {
       setupCheckoutPage();
     }
@@ -265,7 +273,7 @@
       if (btn.getAttribute('data-bound') === '1') return;
       btn.setAttribute('data-bound', '1');
       btn.addEventListener('click', function () {
-        window.location.href = '/register/wadi-rum/pay';
+        window.location.href = '/register/wadi-rum';
       });
     });
   }
@@ -283,7 +291,7 @@
       } catch (_e) {}
     },
     goToCheckout: function () {
-      window.location.href = '/register/wadi-rum/pay?registered=1';
+      window.location.href = '/register/wadi-rum';
     },
     startCheckout: startCheckout,
     isCardCheckoutAvailable: cardCheckoutAvailable,

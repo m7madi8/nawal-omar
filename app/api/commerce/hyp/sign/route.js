@@ -105,7 +105,7 @@ export async function POST(request) {
       paymentKind,
       description: catalogItem.title?.en,
       successUrl: returnBase,
-      cancelUrl: `${origin}/register/wadi-rum/pay?payment=failed`,
+      cancelUrl: `${origin}/register/wadi-rum?payment=failed`,
     });
 
     return Response.json({
