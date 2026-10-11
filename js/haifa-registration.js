@@ -121,7 +121,7 @@
           '<label class="haifa-pay-option"><input type="radio" name="haifaPayment" value="hyp"' +
           (cardDefault ? " checked" : "") +
           "> " +
-          t(paymentOptions.demo ? "haifa_pay_card_demo" : "haifa_pay_card") +
+          t("haifa_pay_card") +
           "</label>";
       }
       html +=
@@ -255,12 +255,11 @@
 
     function handleReturnQuery() {
       var params = new URLSearchParams(window.location.search);
-      if (params.get("payment") === "success" && params.get("order")) {
-        showSuccess(t("haifa_register_paid_success"));
-        if (window.history && window.history.replaceState) {
-          window.history.replaceState({}, "", window.location.pathname);
-        }
-      } else if (params.get("payment") === "failed") {
+      if (params.get("order") && params.get("token")) {
+        window.location.replace("/payment/thanks?" + params.toString());
+        return;
+      }
+      if (params.get("payment") === "failed") {
         showSuccess(t("haifa_register_payment_failed"));
       }
     }

@@ -1,48 +1,30 @@
 import { confirmHypPayFromRedirect } from '@/lib/commerce/payment';
 import { extractRedirectQueryFromUrl } from '@/lib/commerce/payment/hyp-pay/redirect';
-import { getEvent } from '@/lib/commerce/catalog/events';
 import { getOrder, siteUrlFromRequest } from '@/lib/commerce/orders';
 import { bookingAccessToken } from '@/lib/commerce/booking-access';
-
-function eventPagePath(itemId) {
-  const event = itemId ? getEvent(itemId) : null;
-  return event?.metadata?.pagePath || '/events';
-}
+import { bookingBackPath, paymentThanksUrl } from '@/lib/commerce/thanks-path';
 
 async function thanksPath(result) {
   const order = result.orderId ? await getOrder(result.orderId) : null;
   const commerceType = order?.metadata?.commerceType || '';
   const itemId = order?.metadata?.itemId || '';
+  const phone = order?.customer?.phone || '';
 
   if (!result.paid) {
-    if (commerceType === 'lesson' && itemId === 'haifa-yoga') {
-      return '/workshops/haifa?payment=failed';
+    if (result.orderId) {
+      return paymentThanksUrl(result.orderId, phone, { failed: true });
     }
-    if (commerceType === 'event' && itemId) {
-      return `${eventPagePath(itemId)}?payment=failed`;
+    if (commerceType === 'lesson' || commerceType === 'event') {
+      return `${bookingBackPath(commerceType, itemId)}?payment=failed`;
     }
     return '/register/wadi-rum/pay?payment=failed';
   }
 
   if (!result.orderId) {
-    if (commerceType === 'lesson') return '/workshops/haifa?payment=success';
-    if (commerceType === 'event' && itemId) {
-      return `${eventPagePath(itemId)}?payment=success`;
-    }
-    return '/register/wadi-rum/thanks';
+    return '/payment/thanks?payment=pending';
   }
 
-  const token = bookingAccessToken(result.orderId, order?.customer?.phone || '');
-  const qs = new URLSearchParams({ order: result.orderId, payment: 'success' });
-  if (token) qs.set('token', token);
-
-  if (commerceType === 'lesson' && itemId === 'haifa-yoga') {
-    return `/workshops/haifa?${qs.toString()}`;
-  }
-  if (commerceType === 'event' && itemId) {
-    return `${eventPagePath(itemId)}?${qs.toString()}`;
-  }
-  return `/register/wadi-rum/thanks?${qs.toString()}`;
+  return paymentThanksUrl(result.orderId, phone);
 }
 
 /**

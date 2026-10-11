@@ -84,6 +84,17 @@
       waBtn.href = data.whatsappUrl;
     }
     if (waHint) waHint.hidden = false;
+
+    try {
+      var autoKey = 'nawal.thanks.done.' + data.orderId;
+      if (sessionStorage.getItem(autoKey) !== '1' && pdfBtn && pdfBtn.href && data.whatsappUrl) {
+        sessionStorage.setItem(autoKey, '1');
+        pdfBtn.click();
+        window.setTimeout(function () {
+          window.open(data.whatsappUrl, '_blank', 'noopener,noreferrer');
+        }, 900);
+      }
+    } catch (_e) {}
   }
 
   async function load() {

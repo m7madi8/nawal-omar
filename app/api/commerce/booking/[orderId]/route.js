@@ -4,6 +4,7 @@ import { paymentSummary } from '@/lib/commerce/financials';
 import { whatsappFromOrder } from '@/lib/commerce/whatsapp-messages';
 import { listReceiptsForOrder } from '@/lib/commerce/receipts';
 import { PAYMENT_STATUS } from '@/lib/commerce/constants';
+import { bookingBackPath } from '@/lib/commerce/thanks-path';
 
 export async function GET(request, { params }) {
   const orderId = String(params.orderId || '').trim();
@@ -13,6 +14,7 @@ export async function GET(request, { params }) {
 
   const url = new URL(request.url);
   const token = String(url.searchParams.get('token') || '').trim();
+  const lang = String(url.searchParams.get('lang') || 'ar').trim() === 'en' ? 'en' : 'ar';
   const order = await getOrder(orderId);
   if (!order) {
     return Response.json({ error: 'Not found' }, { status: 404 });
@@ -32,9 +34,20 @@ export async function GET(request, { params }) {
     summary.paymentStatus === PAYMENT_STATUS.PARTIALLY_PAID;
   const receipts = paid ? await listReceiptsForOrder(orderId) : [];
 
+  const commerceType = order.metadata?.commerceType || items[0]?.commerce_type || '';
+  const itemId = order.metadata?.itemId || items[0]?.item_id || '';
+  const accessToken = bookingAccessToken(orderId, phone);
+  const pdfUrl =
+    paid && accessToken
+      ? `/api/commerce/receipt/${encodeURIComponent(orderId)}?token=${encodeURIComponent(accessToken)}`
+      : null;
+
   return Response.json({
     ok: true,
     orderId,
+    commerceType,
+    itemId,
+    backPath: bookingBackPath(commerceType, itemId),
     bookingReference: order.metadata?.bookingReference || order.booking_reference,
     bookingStatus: order.metadata?.bookingStatus,
     paymentStatus: summary.paymentStatus,
@@ -52,7 +65,8 @@ export async function GET(request, { params }) {
       amount: r.amount,
       createdAt: r.created_at,
     })),
-    whatsappUrl: paid ? whatsappFromOrder(order, items) : null,
-    accessToken: bookingAccessToken(orderId, phone),
+    pdfUrl,
+    whatsappUrl: paid ? whatsappFromOrder(order, items, lang) : null,
+    accessToken,
   });
 }

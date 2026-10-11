@@ -3,23 +3,17 @@
   var ITEM_ID = 'wadi-rum';
   var STORAGE_KEY = 'nawal.wadiRum.depositCustomer';
 
+  var paymentState = {
+    hypLive: false,
+    loaded: false,
+  };
+
   function t(key) {
     if (window.nawalI18n && typeof window.nawalI18n.t === 'function') {
       var text = window.nawalI18n.t(key);
       if (text) return text;
     }
     return key;
-  }
-
-  function supabaseConfig() {
-    var el = document.getElementById('wrc-supabase-config');
-    if (!el) return null;
-    return {
-      url: (el.getAttribute('data-url') || '').replace(/\/+$/, ''),
-      key: (el.getAttribute('data-key') || '').trim(),
-      ordersTable: el.getAttribute('data-orders-table') || 'commerce_orders',
-      itemsTable: el.getAttribute('data-items-table') || 'commerce_order_items',
-    };
   }
 
   function normalizePhone(value) {
@@ -90,8 +84,11 @@
     if (code === 'HYP_DISABLED' || code === 'PAYMENT_NOT_CONFIGURED') {
       return t('retreat_wadi_checkout_hyp_off');
     }
-    if (code === 'COMMERCE_DB_NOT_READY') {
+    if (code === 'COMMERCE_DB_NOT_READY' || code === 'COMMERCE_DB_SCHEMA') {
       return t('retreat_wadi_checkout_db_setup');
+    }
+    if (code === 'COMMERCE_DB_NETWORK') {
+      return t('retreat_wadi_checkout_network_error');
     }
     if (code === 'HYP_NETWORK' || code === 'HYP_SIGN_FAILED') {
       return t('retreat_wadi_checkout_gateway_error');
@@ -101,92 +98,53 @@
     return t('retreat_wadi_deposit_error_generic');
   }
 
-  async function supabasePost(cfg, table, rows) {
-    var res = await fetch(cfg.url + '/rest/v1/' + encodeURIComponent(table), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        apikey: cfg.key,
-        Authorization: 'Bearer ' + cfg.key,
-        Prefer: 'return=representation',
-      },
-      body: JSON.stringify(rows),
-    });
-    var text = await res.text();
-    var data;
+  function cardCheckoutAvailable() {
+    return paymentState.loaded && paymentState.hypLive;
+  }
+
+  async function loadPaymentOptions() {
+    if (paymentState.loaded) return paymentState;
     try {
-      data = text ? JSON.parse(text) : null;
+      var res = await fetch('/api/commerce/payment-options', {
+        headers: { Accept: 'application/json' },
+      });
+      var data = await res.json().catch(function () { return {}; });
+      paymentState.hypLive = !!data.hypLive;
     } catch (_e) {
-      data = { message: text };
+      paymentState.hypLive = false;
     }
-    if (!res.ok) {
-      var msg = (data && data.message) || text || 'Database error';
-      if (String(msg).indexOf('PGRST205') !== -1 || String(msg).indexOf('Could not find the table') !== -1) {
-        var err = new Error('COMMERCE_DB_NOT_READY');
-        err.code = 'COMMERCE_DB_NOT_READY';
-        throw err;
-      }
-      throw new Error(msg);
-    }
-    return Array.isArray(data) ? data[0] : data;
+    paymentState.loaded = true;
+    refreshRegistrationSubmitLabel();
+    return paymentState;
   }
 
-  async function createOrderInBrowser(customer) {
-    var cfg = supabaseConfig();
-    if (!cfg || !cfg.url || !cfg.key) {
-      throw new Error('Missing Supabase config');
+  function refreshRegistrationSubmitLabel() {
+    var submitBtn = document.querySelector('#wadiRegForm [data-submit]');
+    if (!submitBtn || submitBtn.getAttribute('data-t') === 'sending') return;
+    if (cardCheckoutAvailable()) {
+      submitBtn.setAttribute('data-t', 'submitWithPay');
+    } else {
+      submitBtn.setAttribute('data-t', 'submit');
     }
-    var now = new Date().toISOString();
-    var orderId = 'ord-wadi-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
-    var order = {
-      id: orderId,
-      status: 'pending',
-      payment_status: 'pending',
-      payment_method: 'hyp',
-      currency: 'ILS',
-      subtotal: 3650,
-      total: 3650,
-      customer: {
-        fullName: customer.fullName,
-        phone: customer.phone,
-        email: customer.email || '',
-        city: '',
-      },
-      metadata: {
-        commerceType: 'retreat',
-        itemId: ITEM_ID,
-        paymentKind: 'deposit',
-        chargeAmount: DEPOSIT_ILS,
-        amountDue: 3650,
-        retreatRequestId: customer.requestId || '',
-        legacySource: 'wadi-rum-registration',
-      },
-      created_at: now,
-      updated_at: now,
-    };
-    var item = {
-      id: 'oi-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-      order_id: orderId,
-      commerce_type: 'retreat',
-      item_id: ITEM_ID,
-      title: 'Wadi Rum Desert Retreat',
-      quantity: 1,
-      unit_price: 3650,
-      currency: 'ILS',
-      metadata: { paymentKind: 'deposit', chargeAmount: DEPOSIT_ILS },
-      created_at: now,
-    };
-    await supabasePost(cfg, cfg.ordersTable, [order]);
-    await supabasePost(cfg, cfg.itemsTable, [item]);
-    return orderId;
+    if (typeof window.wadiRumRegRefreshSubmit === 'function') {
+      window.wadiRumRegRefreshSubmit();
+    }
   }
 
+  /**
+   * @returns {Promise<boolean>} true when redirecting to payment gateway
+   */
   async function startCheckout(customer, statusEl, btn) {
     var errMsg = validateCustomer(customer);
     if (errMsg) {
       setStatus(statusEl, errMsg, true);
-      return;
+      return false;
+    }
+
+    await loadPaymentOptions();
+    if (!cardCheckoutAvailable()) {
+      setStatus(statusEl, t('retreat_wadi_checkout_hyp_off'), true);
+      return false;
     }
 
     setStatus(statusEl, t('retreat_wadi_deposit_processing'), false);
@@ -196,45 +154,37 @@
     }
 
     try {
-      var orderId;
-      try {
-        orderId = await createOrderInBrowser(customer);
-      } catch (dbErr) {
-        if (dbErr.code === 'COMMERCE_DB_NOT_READY') {
-          setStatus(statusEl, t('retreat_wadi_checkout_db_setup'), true);
-          return;
-        }
-        setStatus(statusEl, t('retreat_wadi_checkout_db_error'), true);
-        return;
-      }
-
-      var res = await fetch('/api/commerce/hyp/sign', {
+      var notes = customer.requestId ? 'Registration request ' + customer.requestId : '';
+      var res = await fetch('/api/commerce/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           commerceType: 'retreat',
           itemId: ITEM_ID,
-          orderId: orderId,
+          payment: 'hyp',
           depositAmount: DEPOSIT_ILS,
-          chargeAmount: DEPOSIT_ILS,
-          paymentKind: 'deposit',
           retreatRequestId: customer.requestId || '',
+          notes: notes,
           customer: {
             fullName: customer.fullName,
             phone: customer.phone,
             email: customer.email || '',
+            city: '',
           },
+          cancelUrl: '/register/wadi-rum/pay?payment=failed',
         }),
       });
 
       var data = await res.json().catch(function () { return {}; });
       if (!res.ok || !data.url) {
         setStatus(statusEl, mapApiError(data, res.ok), true);
-        return;
+        return false;
       }
       window.location.href = data.url;
+      return true;
     } catch (_e) {
       setStatus(statusEl, t('retreat_wadi_checkout_network_error'), true);
+      return false;
     } finally {
       if (btn && !document.hidden) {
         btn.disabled = false;
@@ -289,6 +239,13 @@
       if (!customer) return;
       startCheckout(customer, statusEl, btn);
     });
+
+    loadPaymentOptions().then(function () {
+      if (!cardCheckoutAvailable() && btn) {
+        btn.disabled = true;
+        setStatus(statusEl, t('retreat_wadi_checkout_hyp_off'), true);
+      }
+    });
   }
 
   function escapeHtml(str) {
@@ -300,6 +257,7 @@
   }
 
   function init() {
+    loadPaymentOptions();
     if (document.getElementById('wrc-pay-btn')) {
       setupCheckoutPage();
     }
@@ -327,5 +285,8 @@
     goToCheckout: function () {
       window.location.href = '/register/wadi-rum/pay?registered=1';
     },
+    startCheckout: startCheckout,
+    isCardCheckoutAvailable: cardCheckoutAvailable,
+    loadPaymentOptions: loadPaymentOptions,
   };
 })();

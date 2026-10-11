@@ -8,19 +8,8 @@ export const metadata = {
 const COVER = '/media/wadi-rum/cover.jpg';
 const WA = 'https://wa.me/972522496366?text=Hi%20Nawal%2C%20I%20want%20to%20pay%20the%20400%20ILS%20deposit%20for%20Wadi%20Rum%20retreat%20by%20bank%20transfer%20or%20Bit.';
 
-const SUPABASE_URL = 'https://xzxyskufrqansbhsbdkt.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph';
-
 const html = `
   <main class="wrc-page ny-inner">
-    <div
-      id="wrc-supabase-config"
-      hidden
-      data-url="${SUPABASE_URL}"
-      data-key="${SUPABASE_KEY}"
-      data-orders-table="commerce_orders"
-      data-items-table="commerce_order_items"
-    ></div>
     <div class="wrc-top">
       <a class="wrc-back" href="/retreats/wadi-rum" data-i18n="retreat_wadi_checkout_back">← Back to retreat</a>
     </div>

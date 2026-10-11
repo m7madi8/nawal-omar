@@ -56,17 +56,17 @@ Send `depositAmount` (or `chargeAmount`) less than line total. Metadata stores `
 |---------|------|----------|
 | Haifa Yoga | `/workshops/haifa` | `commerceType: lesson`, `itemId: haifa-yoga` |
 | Events | `/events/sound-healing`, etc. | `commerceType: event`, `itemId` from catalog |
+| Wadi Rum retreat | `/register/wadi-rum` | `commerceType: retreat`, `itemId: wadi-rum`, `depositAmount: 400` |
 
 When `HYP_PAYMENTS_ENABLED=true` and terminal credentials are set, `GET /api/commerce/payment-options` returns `hypLive: true` and the UI defaults to **secure card payment** (Bit/bank remains secondary).
 
 **`.env.local` checklist**
 
-1. `PAYMENT_DEMO_MODE=false`
-2. `HYP_PAYMENTS_ENABLED=true`
-3. `HYP_TERMINAL_ID`, `HYP_API_KEY`, `HYP_API_PASSP` from Hyp Portal
-4. `HYP_RETURN_URL=https://<your-domain>/api/payment/hyp/return` (same URL in Hyp Portal success page)
-5. `NEXT_PUBLIC_SITE_URL=https://<your-domain>`
-6. `BOOKING_ACCESS_SECRET` — long random string (signed return links)
+1. `HYP_PAYMENTS_ENABLED=true`
+2. `HYP_TERMINAL_ID`, `HYP_API_KEY`, `HYP_API_PASSP` from Hyp Portal
+3. `HYP_RETURN_URL=https://<your-domain>/api/payment/hyp/return` (same URL in Hyp Portal success page)
+4. `NEXT_PUBLIC_SITE_URL=https://<your-domain>`
+5. `BOOKING_ACCESS_SECRET` — long random string (signed return links)
 
 Supabase: run migrations `001`, `003`, `004` (minimum for checkout + receipts).
 
@@ -90,8 +90,4 @@ API base URL stays `https://pay.hyp.co.il/p/`.
 
 ## Development without Hyp
 
-Default checkout methods (`manual`, `whatsapp`, `cash`) are unchanged.
-
-**Trial / demo card flow:** set `PAYMENT_DEMO_MODE=true` in `.env.local` (blocked on production unless `PAYMENT_DEMO_ALLOW_PRODUCTION=true`). Checkout with `payment: "hyp"` redirects to `/payment/demo` instead of Hyp; `POST /api/payment/demo/confirm` records a fake `demo-{orderId}` transaction and marks the order paid like a real gateway success. `GET /api/commerce/payment-options` returns `demo: true` and `hyp: true` so UIs can show the card option.
-
-Without demo mode or Hyp credentials, choosing `hyp` returns `503` / `HYP_DISABLED`.
+Default checkout methods (`manual`, `whatsapp`, `cash`) are unchanged. Card checkout (`payment: hyp`) requires live Hyp credentials; otherwise the API returns `503` / `HYP_DISABLED`. There is no demo or mock card charge in this project.

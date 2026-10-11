@@ -14,28 +14,13 @@
 
   function redirectAfterSuccess(data) {
     var type = data && data.commerceType;
-    var itemId = data && data.itemId;
-    var qs = new URLSearchParams({ payment: 'success', order: orderId });
+    var qs = new URLSearchParams({ order: orderId });
     if (token) qs.set('token', token);
-    if (type === 'lesson' && itemId === 'haifa-yoga') {
-      window.location.href = '/workshops/haifa?' + qs.toString();
-      return;
-    }
     if (type === 'retreat') {
       window.location.href = '/register/wadi-rum/thanks?' + qs.toString();
       return;
     }
-    if (type === 'event' && itemId) {
-      var eventPaths = {
-        'sound-healing': '/events/sound-healing',
-        'nature-chocolate': '/events/nature-chocolate',
-        'ice-bath': '/events/ice-bath',
-      };
-      var base = eventPaths[itemId] || '/events';
-      window.location.href = base + '?' + qs.toString();
-      return;
-    }
-    window.location.href = '/?' + qs.toString();
+    window.location.href = '/payment/thanks?' + qs.toString();
   }
 
   if (!orderId || !token) {

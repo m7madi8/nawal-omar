@@ -1,5 +1,5 @@
 /**
- * Event booking: price tier + card (Hyp/demo) or manual + WhatsApp.
+ * Event booking: price tier + card (Hyp) or manual + WhatsApp.
  * Call nawalEventCheckout.boot({ ... }) from each event page script.
  */
 (function (global) {
@@ -20,7 +20,7 @@
     ],
   };
 
-  var paymentOptions = { hyp: false, demo: false };
+  var paymentOptions = { hyp: false, hypLive: false };
 
   function t(key) {
     if (global.nawalI18n && typeof global.nawalI18n.t === "function") {
@@ -140,7 +140,7 @@
           '<label class="event-pay-option"><input type="radio" name="eventPayment" value="hyp"' +
           (cardDefault ? " checked" : "") +
           "> " +
-          t(paymentOptions.demo ? "haifa_pay_card_demo" : "haifa_pay_card") +
+          t("haifa_pay_card") +
           "</label>";
       }
 
@@ -184,8 +184,8 @@
       btn.type = "button";
       btn.id = cfg.payButtonId;
       btn.className = cfg.payButtonClass || "ny-book-btn-primary event-pay-panel-btn";
-      btn.setAttribute("data-i18n", paymentOptions.demo ? "event_pay_btn_demo" : "event_pay_btn");
-      btn.textContent = t(paymentOptions.demo ? "event_pay_btn_demo" : "event_pay_btn");
+      btn.setAttribute("data-i18n", "event_pay_btn");
+      btn.textContent = t("event_pay_btn");
       var registerBtn = anchor.querySelector(cfg.triggerSelector.split(",")[0].trim()) || triggers[0];
       if (registerBtn && registerBtn.parentNode === anchor) {
         registerBtn.insertAdjacentElement("beforebegin", btn);
@@ -290,12 +290,11 @@
 
     function handleReturnQuery() {
       var params = new URLSearchParams(global.location.search);
-      if (params.get("payment") === "success" && params.get("order")) {
-        showSuccess(t("event_register_paid_success"));
-        if (global.history && global.history.replaceState) {
-          global.history.replaceState({}, "", cfg.returnPath || global.location.pathname);
-        }
-      } else if (params.get("payment") === "failed") {
+      if (params.get("order") && params.get("token")) {
+        global.location.replace("/payment/thanks?" + params.toString());
+        return;
+      }
+      if (params.get("payment") === "failed") {
         showSuccess(t("event_register_payment_failed"));
       }
     }

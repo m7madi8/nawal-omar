@@ -96,6 +96,7 @@
       prev: "Back",
       next: "Next",
       submit: "Send my request — free, no commitment",
+      submitWithPay: "Register & pay 400 ₪ deposit securely",
       sending: "Sending…",
       failTitle: "The request didn't go through this time",
       failText: "Your details are still here. Try again, or message us on WhatsApp and we'll continue from there.",
@@ -173,6 +174,7 @@
       prev: "رجوع",
       next: "التالي",
       submit: "ابعتي الطلب — مجاني وبدون التزام",
+      submitWithPay: "سجّلي وادفعي عربون 400 ₪ بأمان",
       sending: "عم نبعت…",
       failTitle: "الطلب ما وصل هالمرة",
       failText: "معلوماتك لسّا محفوظة هون. جرّبي كمان مرة، أو ابعتيلنا واتساب ومنكمّل من هناك.",
@@ -561,9 +563,23 @@
           email: "",
           requestId: saved.id
         });
-        if (typeof window.wadiRumDepositPay.goToCheckout === "function") {
-          window.wadiRumDepositPay.goToCheckout();
-          return;
+        if (typeof window.wadiRumDepositPay.startCheckout === "function") {
+          await window.wadiRumDepositPay.loadPaymentOptions();
+          if (window.wadiRumDepositPay.isCardCheckoutAvailable()) {
+            setSending(true);
+            var redirected = await window.wadiRumDepositPay.startCheckout(
+              {
+                fullName: saved.fullName,
+                phone: saved.phone,
+                email: "",
+                requestId: saved.id
+              },
+              statusEl,
+              submitBtn
+            );
+            setSending(false);
+            if (redirected) return;
+          }
         }
       }
       showSuccess();
@@ -604,9 +620,17 @@
     if (e.detail && e.detail.lang) setLang(e.detail.lang);
   });
 
+  window.wadiRumRegRefreshSubmit = function () {
+    if (sending) return;
+    submitBtn.textContent = t(submitBtn.getAttribute("data-t") || "submit");
+  };
+
   form.classList.add("is-stepped");
   progress.hidden = false;
   showStep(1, false);
   applyLang();
+  if (window.wadiRumDepositPay && typeof window.wadiRumDepositPay.loadPaymentOptions === "function") {
+    window.wadiRumDepositPay.loadPaymentOptions();
+  }
   track("form_view", Object.assign({ lang: currentLang }, utmParams()));
 })();
