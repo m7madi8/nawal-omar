@@ -134,6 +134,13 @@ export async function POST(request) {
     }
     return Response.json({ ok: true, count: rows.length });
   } catch (error) {
+    const network =
+      error.code === 'COMMERCE_DB_NETWORK' ||
+      error.message?.includes('Could not reach the database') ||
+      error.message?.includes('fetch failed');
+    if (network) {
+      return Response.json({ ok: true, count: 0, skipped: true, code: 'COMMERCE_DB_NETWORK' });
+    }
     return Response.json(
       { error: error.message || 'Could not save analytics', code: 'ANALYTICS_FAILED' },
       { status: 500 },

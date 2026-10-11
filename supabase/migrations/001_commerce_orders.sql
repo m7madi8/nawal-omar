@@ -8,6 +8,8 @@ create table if not exists public.commerce_orders (
   currency text,
   subtotal numeric,
   total numeric,
+  amount_paid numeric default 0,
+  booking_reference text,
   customer jsonb,
   metadata jsonb,
   created_at timestamptz default now(),

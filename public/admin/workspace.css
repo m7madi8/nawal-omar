@@ -1913,6 +1913,41 @@ svg { display: block; }
   .admin-people-grid { grid-template-columns: 1fr; }
 }
 
+.admin-filters--invoices {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.4fr) repeat(4, minmax(120px, 1fr)) auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.admin-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  color: var(--admin-muted);
+  font-size: 0.9rem;
+}
+
+.admin-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--admin-accent-dark);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .admin-filters--invoices {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }

@@ -574,8 +574,11 @@ export default function Page() {
       </ol>
       <div class="wr-register-actions" data-sticky-hide>
         <a href="/register/wadi-rum" class="wr-register-btn" data-track-cta="book" data-track-loc="steps">
-          <span data-i18n="retreat_wadi_open_form">Open registration form</span>
+          <span data-i18n="retreat_wadi_book_flow_start">Start booking — register &amp; pay deposit</span>
           <span class="wr-register-btn__arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/register/wadi-rum/pay" class="wr-register-btn wr-register-btn--outline" data-track-cta="deposit_pay" data-track-loc="steps">
+          <span data-i18n="retreat_wadi_checkout_pay_only">Already registered? Pay 400 ₪ deposit</span>
         </a>
       </div>
     </div>
@@ -640,7 +643,8 @@ export default function Page() {
         </blockquote>
         <p class="wr-cta-panel__closing" data-i18n="retreat_wadi_final_text3">If, as you read this, you felt: "I need this space"… maybe that is enough of a sign to ask about it.</p>
         <div class="ny-book-actions wr-cta-panel__actions">
-          <a href="/register/wadi-rum" class="dahab-includes-cta ny-book-btn-primary wr-cta-panel__btn" data-track-cta="book" data-track-loc="final"><span data-i18n="retreat_wadi_book_now">Submit registration request</span><span aria-hidden="true">→</span></a>
+          <a href="/register/wadi-rum" class="dahab-includes-cta ny-book-btn-primary wr-cta-panel__btn" data-track-cta="book" data-track-loc="final"><span data-i18n="retreat_wadi_book_flow_start">Start booking — register &amp; pay deposit</span><span aria-hidden="true">→</span></a>
+          <a href="/register/wadi-rum/pay" class="wr-cta-panel__btn-secondary" data-track-cta="deposit_pay" data-track-loc="final"><span data-i18n="retreat_wadi_checkout_pay_only">Already registered? Pay 400 ₪ deposit</span></a>
           <div class="ny-book-alt">
             <a href="https://wa.me/972522496366" target="_blank" rel="noopener noreferrer" class="ny-book-wa-link" data-i18n-attr="aria-label:booking_wa_aria" data-track-cta="whatsapp" data-track-loc="final">
               ${waIcon(16)}

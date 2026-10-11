@@ -469,6 +469,7 @@
       var errTxt = await res.text().catch(function () { return ""; });
       throw new Error(errTxt || "Supabase request failed");
     }
+    return payload;
   }
 
   /* ---------- Sending, success, failure ---------- */
@@ -546,12 +547,24 @@
     }
     setSending(true);
     try {
-      await sendToSupabase();
+      var saved = await sendToSupabase();
       setSending(false);
       track("form_step_complete", { step: TOTAL });
       track("form_submit_success");
       if (window.nawalAnalytics && typeof window.nawalAnalytics.markComplete === "function") {
         window.nawalAnalytics.markComplete("wadi-rum-registration");
+      }
+      if (window.wadiRumDepositPay && typeof window.wadiRumDepositPay.saveCustomer === "function" && saved) {
+        window.wadiRumDepositPay.saveCustomer({
+          fullName: saved.fullName,
+          phone: saved.phone,
+          email: "",
+          requestId: saved.id
+        });
+        if (typeof window.wadiRumDepositPay.goToCheckout === "function") {
+          window.wadiRumDepositPay.goToCheckout();
+          return;
+        }
       }
       showSuccess();
     } catch (err) {

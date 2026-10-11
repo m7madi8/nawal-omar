@@ -2,6 +2,8 @@
   var SUPABASE_URL = "https://xzxyskufrqansbhsbdkt.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph";
   var SUPABASE_TABLE = "retreat_requests";
+  var LESSON_ID = "haifa-yoga";
+  var WA = "972522496366";
 
   var packageLabelKeys = {
     trial: "haifa_pkg_trial",
@@ -10,13 +12,44 @@
     single: "haifa_pkg_single",
     private1: "haifa_pkg_private1",
     private2: "haifa_pkg_private2",
-    gift: "haifa_pkg_gift"
+    gift: "haifa_pkg_gift",
   };
 
+  var packageAmounts = {
+    trial: 65,
+    pack4: 260,
+    pack5: 300,
+    single: 75,
+    private1: 200,
+    private2: 300,
+    gift: 0,
+  };
+
+  var paymentOptions = { hyp: false, online: false };
+
   function t(key) {
-    var lang = (window.nawalI18n && window.nawalI18n.getLang && window.nawalI18n.getLang()) || "en";
-    if (window.nawalI18n && window.nawalI18n.t) return window.nawalI18n.t(lang, key);
+    if (window.nawalI18n && typeof window.nawalI18n.t === "function") {
+      var text = window.nawalI18n.t(key);
+      if (text) return text;
+    }
     return key;
+  }
+
+  function formatMoney(amount) {
+    return "₪" + (Number(amount) || 0);
+  }
+
+  function loadPaymentOptions() {
+    return fetch("/api/commerce/payment-options", { headers: { Accept: "application/json" } })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        paymentOptions = data || paymentOptions;
+      })
+      .catch(function () {
+        paymentOptions = { hyp: false, online: false, manual: true };
+      });
   }
 
   function init() {
@@ -29,10 +62,86 @@
     if (!modal || !closeBtn || !selectedEl || !form || !triggers.length) return;
 
     var selectedPackageKey = "trial";
+    var paymentSection = document.getElementById("haifa-payment-section");
+    if (!paymentSection) {
+      paymentSection = document.createElement("div");
+      paymentSection.id = "haifa-payment-section";
+      paymentSection.className = "haifa-payment-section";
+      var submitBtn = form.querySelector(".haifa-submit-btn");
+      if (submitBtn) form.insertBefore(paymentSection, submitBtn);
+    }
+
+    loadPaymentOptions().then(function () {
+      refreshPricingUi();
+    });
+
+    function refreshPricingUi() {
+      var payP = document.querySelector('[data-i18n="jiva_payment_methods"]');
+      if (payP) {
+        var key =
+          paymentOptions.hypLive ? "jiva_payment_methods_online" : paymentOptions.hyp ? "jiva_payment_methods_mixed" : "jiva_payment_methods";
+        payP.setAttribute("data-i18n", key);
+        payP.textContent = t(key);
+      }
+      document.querySelectorAll("[data-register-btn]").forEach(function (btn) {
+        var span = btn.querySelector("span");
+        var key = btn.getAttribute("data-package-key");
+        var amount = packageAmounts[key] || 0;
+        if (!span || amount <= 0) return;
+        if (paymentOptions.hyp) {
+          span.setAttribute("data-i18n", paymentOptions.hypLive ? "jiva_card_register_pay" : "jiva_card_register");
+          span.textContent = t(paymentOptions.hypLive ? "jiva_card_register_pay" : "jiva_card_register");
+        }
+      });
+      if (window.nawalI18n && typeof window.nawalI18n.apply === "function") {
+        window.nawalI18n.apply(document);
+      }
+    }
+
+    function updateSubmitLabel() {
+      var submitSpan = form.querySelector(".haifa-submit-btn span");
+      if (!submitSpan) return;
+      var payEl = form.querySelector('input[name="haifaPayment"]:checked');
+      var payMethod = payEl ? payEl.value : "manual";
+      var key =
+        payMethod === "hyp" && paymentOptions.hyp ? "haifa_pay_submit" : "haifa_register_confirm";
+      submitSpan.setAttribute("data-i18n", key);
+      submitSpan.textContent = t(key);
+    }
+
+    function renderPaymentChoices() {
+      var amount = packageAmounts[selectedPackageKey] || 0;
+      var cardDefault = amount > 0 && paymentOptions.hyp;
+      var html = '<p class="haifa-field-label">' + t("haifa_pay_title") + "</p>";
+      if (amount > 0) {
+        html += '<p class="haifa-pay-amount">' + t("haifa_pay_amount_label") + ": <strong dir=\"ltr\">" + formatMoney(amount) + "</strong></p>";
+      }
+      if (cardDefault) {
+        html +=
+          '<label class="haifa-pay-option"><input type="radio" name="haifaPayment" value="hyp"' +
+          (cardDefault ? " checked" : "") +
+          "> " +
+          t(paymentOptions.demo ? "haifa_pay_card_demo" : "haifa_pay_card") +
+          "</label>";
+      }
+      html +=
+        '<label class="haifa-pay-option"><input type="radio" name="haifaPayment" value="manual"' +
+        (cardDefault ? "" : " checked") +
+        "> " +
+        t("haifa_pay_manual") +
+        "</label>";
+      html += '<p class="haifa-pay-hint">' + t(paymentOptions.hypLive ? "haifa_pay_online_hint" : "haifa_pay_manual_hint") + "</p>";
+      paymentSection.innerHTML = html;
+      paymentSection.querySelectorAll('input[name="haifaPayment"]').forEach(function (input) {
+        input.addEventListener("change", updateSubmitLabel);
+      });
+      updateSubmitLabel();
+    }
 
     function openModal(pkgKey) {
       selectedPackageKey = pkgKey || "trial";
       selectedEl.textContent = t(packageLabelKeys[selectedPackageKey] || packageLabelKeys.trial);
+      renderPaymentChoices();
       modal.hidden = false;
       document.body.style.overflow = "hidden";
     }
@@ -42,7 +151,8 @@
       document.body.style.overflow = "";
     }
 
-    function showSuccess() {
+    function showSuccess(message) {
+      success.textContent = message || t("haifa_register_success");
       success.hidden = false;
       success.classList.remove("is-show");
       window.requestAnimationFrame(function () {
@@ -51,15 +161,31 @@
       window.setTimeout(function () {
         success.classList.remove("is-show");
         success.hidden = true;
-      }, 3500);
+      }, 4500);
     }
 
-    async function submitRegistration(fullName, phone) {
+    function whatsappManualUrl(fullName, phone, pkgLabel, amount) {
+      var lines = [
+        "Hello Nawal,",
+        "",
+        "I registered for Haifa Yoga:",
+        pkgLabel,
+        amount > 0 ? "Amount: " + formatMoney(amount) : "",
+        "Name: " + fullName,
+        "Phone: " + phone,
+        "",
+        "I will pay via Bit or bank transfer as discussed.",
+        "Thank you.",
+      ].filter(Boolean);
+      return "https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n"));
+    }
+
+    async function submitRegistrationOnly(fullName, phone, pkgLabel) {
       var now = new Date();
       var payload = {
         id: "req-haifa-" + now.getTime(),
         source: "yoga-class-registration",
-        retreatType: t(packageLabelKeys[selectedPackageKey] || packageLabelKeys.trial),
+        retreatType: pkgLabel,
         submittedAt: now.toISOString(),
         fullName: fullName,
         phone: phone,
@@ -68,28 +194,75 @@
         reason: "Haifa yoga class registration",
         expectation: "",
         yogaExperience: "",
-        healthStatus: "",
+        healthStatus: "manual",
         healthDetails: "",
         activities: [],
-        freeNote: "Registration from Haifa page",
+        freeNote: JSON.stringify({
+          packageId: selectedPackageKey,
+          paymentMethod: "manual",
+          bookingStatus: "new_request",
+        }),
         status: "pending",
-        createdAt: now.toISOString()
+        bookingStatus: "new_request",
+        createdAt: now.toISOString(),
       };
 
-      var url = SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE);
-      var res = await fetch(url, {
+      var res = await fetch("/api/retreat-request", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": "Bearer " + SUPABASE_ANON_KEY,
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify(payload)
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
       });
+      if (!res.ok) {
+        var url = SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE);
+        var direct = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: "Bearer " + SUPABASE_ANON_KEY,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!direct.ok) throw new Error("Registration submit failed");
+      }
+    }
 
-      if (!res.ok) throw new Error("Registration submit failed");
+    async function startOnlineCheckout(fullName, phone) {
+      var res = await fetch("/api/commerce/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          commerceType: "lesson",
+          itemId: LESSON_ID,
+          packageId: selectedPackageKey,
+          payment: "hyp",
+          customer: { fullName: fullName, phone: phone, city: "Haifa" },
+          notes: "Haifa yoga — " + t(packageLabelKeys[selectedPackageKey]),
+        }),
+      });
+      var data = await res.json().catch(function () {
+        return {};
+      });
+      if (!res.ok || !data.url) {
+        var err = new Error(data.error || "Checkout failed");
+        err.code = data.code;
+        throw err;
+      }
+      window.location.href = data.url;
+    }
+
+    function handleReturnQuery() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("payment") === "success" && params.get("order")) {
+        showSuccess(t("haifa_register_paid_success"));
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState({}, "", window.location.pathname);
+        }
+      } else if (params.get("payment") === "failed") {
+        showSuccess(t("haifa_register_payment_failed"));
+      }
     }
 
     triggers.forEach(function (btn) {
@@ -111,16 +284,43 @@
       var fullName = String(form.fullName.value || "").trim();
       var phone = String(form.phone.value || "").trim();
       if (!fullName || !phone) return;
+
+      var pkgLabel = t(packageLabelKeys[selectedPackageKey] || packageLabelKeys.trial);
+      var amount = packageAmounts[selectedPackageKey] || 0;
+      var payEl = form.querySelector('input[name="haifaPayment"]:checked');
+      var payMethod = payEl ? payEl.value : "manual";
+
+      var submitBtn = form.querySelector(".haifa-submit-btn");
+      if (submitBtn) submitBtn.disabled = true;
+
       try {
-        await submitRegistration(fullName, phone);
+        if (payMethod === "hyp" && amount > 0 && paymentOptions.hyp) {
+          await startOnlineCheckout(fullName, phone);
+          return;
+        }
+
+        await submitRegistrationOnly(fullName, phone, pkgLabel);
         form.reset();
         closeModal();
-        showSuccess();
-      } catch (_err) {
-        console.error(_err);
-        alert(t("haifa_register_error"));
+        showSuccess(t("haifa_register_success"));
+
+        var openWa = window.confirm(t("haifa_pay_open_whatsapp_confirm"));
+        if (openWa) {
+          window.open(whatsappManualUrl(fullName, phone, pkgLabel, amount), "_blank", "noopener,noreferrer");
+        }
+      } catch (err) {
+        console.error(err);
+        if (err.code === "HYP_DISABLED") {
+          alert(t("haifa_pay_card_unavailable"));
+        } else {
+          alert(t("haifa_register_error"));
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
+
+    handleReturnQuery();
   }
 
   if (document.readyState === "loading") {

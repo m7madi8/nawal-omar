@@ -44,6 +44,7 @@
     settings: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H4a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H10a1.7 1.7 0 0 0 1-1.6V4a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9V10a1.7 1.7 0 0 0 1.6 1H20a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg>',
     shop: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.2 11.2A2 2 0 0 1 16.8 21H7.2a2 2 0 0 1-2-1.8L4 8Z"/><path d="M8 8V6.5A4 4 0 0 1 12 2.5 4 4 0 0 1 16 6.5V8"/></svg>',
     orders: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h13l-1.4 9.2A2 2 0 0 1 16.6 18H8.5A2 2 0 0 1 6.5 16.3L5 4H3"/><circle cx="9" cy="20.5" r="1.3"/><circle cx="17" cy="20.5" r="1.3"/></svg>',
+    invoices: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l3 3v13H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/><path d="M15 4v4h4"/><path d="M8 12h8M8 16h5"/></svg>',
     sales: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 16V10"/><path d="M12 16V6"/><path d="M18 16v-4"/><path d="M4 8.5c3-3 6 3 9 0s6 3 9 0"/></svg>',
     staff: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="2.6"/><path d="M3.4 18.4c.6-2.8 2.8-4.4 5.1-4.4s4.5 1.6 5.1 4.4"/><circle cx="16.6" cy="8.4" r="2.1"/><path d="M15.4 14.3c2.3.3 3.9 1.8 4.5 4.1"/></svg>',
     refresh: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.2-5.5"/><path d="M20 4v5h-5"/></svg>',
@@ -62,6 +63,7 @@
     { id: 'analytics', path: '/admin/analytics', label: 'Analytics', group: 'Workspace' },
     { id: 'shop', path: '/admin/shop', label: 'Shop', group: 'Commerce' },
     { id: 'orders', path: '/admin/orders', label: 'Orders', group: 'Commerce' },
+    { id: 'invoices', path: '/admin/invoices', label: 'Invoices', group: 'Commerce' },
     { id: 'sales', path: '/admin/sales', label: 'Sales & profit', group: 'Commerce' },
     { id: 'staff', path: '/admin/staff', label: 'Team', group: 'Workspace' },
     { id: 'content', path: '/admin/content', label: 'Content', group: 'Workspace' },
@@ -80,6 +82,7 @@
     { id: 'analytics', label: 'Analytics', hint: 'Page views and form drop-offs' },
     { id: 'shop', label: 'Shop', hint: 'Catalog and products' },
     { id: 'orders', label: 'Orders', hint: 'Fulfill shop orders' },
+    { id: 'invoices', label: 'Invoices', hint: 'Payment receipts and collections' },
     { id: 'sales', label: 'Sales & profit', hint: 'Revenue and profit' },
     { id: 'content', label: 'Content', hint: 'Public pages and links' },
   ];
@@ -712,6 +715,49 @@
     return PRIVATE_SESSION_LABELS[key] || row.retreatType || 'Private Session';
   }
 
+  function parseBookingWorkflow(row) {
+    var commerce = parseCommerceOrder(row);
+    var bookingStatus = 'new_request';
+    var paymentStatus = 'unpaid';
+    var amountPaid = 0;
+    var remaining = 0;
+    var bookingReference = '';
+    var source = 'manual';
+    if (commerce) {
+      bookingStatus = commerce.bookingStatus || bookingStatus;
+      paymentStatus = commerce.paymentStatus || (commerce.paid ? 'paid' : paymentStatus);
+      amountPaid = Number(commerce.amountPaid) || 0;
+      remaining = Number(commerce.remainingBalance) || 0;
+      bookingReference = commerce.bookingReference || '';
+      source = commerce.bookingSource || 'online';
+    }
+    try {
+      var note = row && row.freeNote;
+      if (note && note !== '-') {
+        var parsed = JSON.parse(note);
+        if (parsed && parsed.bookingStatus) bookingStatus = parsed.bookingStatus;
+        if (parsed && parsed.paymentStatus) paymentStatus = parsed.paymentStatus;
+        if (parsed && parsed.amountPaid != null) amountPaid = Number(parsed.amountPaid) || amountPaid;
+        if (parsed && parsed.remainingBalance != null) remaining = Number(parsed.remainingBalance) || remaining;
+        if (parsed && parsed.bookingReference) bookingReference = parsed.bookingReference;
+        if (parsed && parsed.bookingSource) source = parsed.bookingSource;
+      }
+    } catch (err) {
+      /* ignore */
+    }
+    if (row && row.yogaExperience === 'paid') paymentStatus = 'paid';
+    if (row && row.yogaExperience === 'partial') paymentStatus = 'partially_paid';
+    return {
+      bookingStatus: bookingStatus,
+      paymentStatus: paymentStatus,
+      amountPaid: amountPaid,
+      remaining: remaining,
+      bookingReference: bookingReference,
+      source: source,
+      commerceOrderId: commerce ? commerce.commerceOrderId : '',
+    };
+  }
+
   function parseCommerceOrder(row) {
     var note = row && row.freeNote;
     if (!note || note === '-') return null;
@@ -730,6 +776,12 @@
         total: parsed.total || 0,
         payment: parsed.paymentMethod || (row && row.healthStatus) || '',
         paid: parsed.paymentStatus === 'paid' || !!(row && row.yogaExperience === 'paid'),
+        paymentStatus: parsed.paymentStatus || '',
+        amountPaid: parsed.amountPaid,
+        remainingBalance: parsed.remainingBalance,
+        bookingStatus: parsed.bookingStatus || '',
+        bookingReference: parsed.bookingReference || '',
+        bookingSource: parsed.bookingSource || '',
         metadata: firstItem.metadata || {},
         items: parsed.items || [],
       };
@@ -1622,6 +1674,29 @@
     html += modalField('Status', item.status, false, statusPill(item.status));
     html += '</div></div>';
 
+    var booking = parseBookingWorkflow(item);
+    if (booking.commerceOrderId && item.source !== 'shop-order') {
+      html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Booking &amp; payment</p><div class="admin-modal-grid">';
+      html += modalField('Booking ref.', booking.bookingReference || booking.commerceOrderId);
+      html += modalField('Booking status', booking.bookingStatus);
+      html += modalField('Payment status', booking.paymentStatus);
+      html += modalField('Amount paid', booking.amountPaid ? '₪' + booking.amountPaid : '-');
+      html += modalField('Remaining', booking.remaining ? '₪' + booking.remaining : '-');
+      html += modalField('Source', booking.source === 'online' ? 'Online' : 'Manual');
+      html += '</div>';
+      if (!isViewOnly()) {
+        html +=
+          '<div class="admin-modal-actions" data-booking-admin="' +
+          escapeHtml(booking.commerceOrderId) +
+          '">' +
+          '<button type="button" class="admin-btn" data-booking-action="confirm">Confirm booking</button>' +
+          '<button type="button" class="admin-btn" data-booking-action="awaiting_payment">Awaiting payment</button>' +
+          '<button type="button" class="admin-btn" data-booking-action="decline">Decline</button>' +
+          '<button type="button" class="admin-btn admin-btn--primary" data-booking-action="offline_payment">Record offline payment</button>' +
+          '</div>';
+      }
+    }
+
     if (item.source === 'shop-order') {
       var order = parseShopOrder(item);
       html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Shop order</p><div class="admin-modal-grid">';
@@ -1693,6 +1768,66 @@
 
     body.innerHTML = html;
     modal.hidden = false;
+
+    var bookingAdmin = body.querySelector('[data-booking-admin]');
+    if (bookingAdmin) {
+      var orderId = bookingAdmin.getAttribute('data-booking-admin');
+      bookingAdmin.querySelectorAll('[data-booking-action]').forEach(function (btn) {
+        btn.addEventListener('click', async function () {
+          var action = btn.getAttribute('data-booking-action');
+          var adminKey = getAdminApiKey({ prompt: true });
+          if (!adminKey) return;
+          var payload = { actor: sessionStorage.getItem('nawalAdminStaffName') || 'staff' };
+          if (action === 'offline_payment') {
+            var amount = window.prompt('Payment amount (ILS):');
+            if (!amount) return;
+            var method = window.prompt('Method: cash, bank_transfer, bit, manual, other', 'cash') || 'cash';
+            payload = {
+              action: 'record_offline_payment',
+              orderId: orderId,
+              amount: Number(amount),
+              method: method,
+              reference: window.prompt('Reference (optional):') || '',
+              note: window.prompt('Internal note (optional):') || '',
+              actor: payload.actor,
+            };
+          } else {
+            var statusMap = {
+              confirm: 'confirmed',
+              awaiting_payment: 'awaiting_payment',
+              decline: 'declined',
+            };
+            payload = {
+              action: 'set_booking_status',
+              orderId: orderId,
+              bookingStatus: statusMap[action] || 'confirmed',
+              actor: payload.actor,
+            };
+          }
+          try {
+            var res = await fetch('/api/admin/bookings', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-admin-key': adminKey,
+              },
+              body: JSON.stringify(payload),
+            });
+            var data = await res.json().catch(function () { return {}; });
+            if (!res.ok) {
+              window.alert(data.error || 'Action failed');
+              return;
+            }
+            invalidateCache();
+            closeModal();
+            window.alert('Saved.');
+            renderCurrentView(true);
+          } catch (err) {
+            window.alert('Network error');
+          }
+        });
+      });
+    }
 
     var toggle = body.querySelector('[data-modal-toggle]');
     if (toggle) {
@@ -2686,6 +2821,357 @@
     feedback: 'Feedback form',
   };
 
+  function getAdminApiKey(options) {
+    var opts = options || {};
+    var fromServer = String(CONFIG.adminApiKey || '').trim();
+    if (fromServer) return fromServer;
+    var key = sessionStorage.getItem('nawalAdminApiKey') || '';
+    if (key) return key;
+    if (opts.prompt) {
+      key = window.prompt('Enter admin API key (ADMIN_API_KEY from server env):') || '';
+      if (key) sessionStorage.setItem('nawalAdminApiKey', key);
+    }
+    return key || '';
+  }
+
+  function renderInvoicesSetup(root) {
+    root.innerHTML =
+      '<div class="admin-page-head"><div><h1>Invoices</h1><p>Payment receipts require a server API key.</p></div></div>' +
+      '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Setup</h2></div></div>' +
+      '<p class="admin-muted">Add <code>ADMIN_API_KEY</code> to your environment file (e.g. <code>.env.local</code>), set any long random value, then <strong>restart</strong> the dev server.</p>' +
+      '<p class="admin-muted" dir="rtl">أضيفي المتغير <code>ADMIN_API_KEY</code> في ملف البيئة (مثل <code>.env.local</code>) بقيمة سرية طويلة، ثم أعيدي تشغيل السيرفر.</p>' +
+      '<p class="admin-muted">Example: <code>ADMIN_API_KEY=nawal-local-…</code></p>' +
+      '<button type="button" class="admin-btn admin-btn--primary" id="invManualKey">I already set the key — enter manually</button></section>';
+    var btn = document.getElementById('invManualKey');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var k = getAdminApiKey({ prompt: true });
+        if (k) renderInvoices(root);
+      });
+    }
+  }
+
+  function getInvoiceFilters() {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      q: params.get('q') || '',
+      method: params.get('method') || 'all',
+      status: params.get('status') || 'all',
+      source: params.get('source') || 'all',
+      range: params.get('range') || '30d',
+      sort: params.get('sort') === 'oldest' ? 'asc' : 'desc',
+      page: Math.max(1, Number(params.get('page')) || 1),
+    };
+  }
+
+  function invoiceDateRange(range) {
+    if (!range || range === 'all') return { dateFrom: '', dateTo: '' };
+    var days = range === '7d' ? 7 : range === '90d' ? 90 : 30;
+    var end = new Date();
+    var start = new Date();
+    start.setDate(end.getDate() - (days - 1));
+    return {
+      dateFrom: start.toISOString(),
+      dateTo: end.toISOString(),
+    };
+  }
+
+  function formatInvoiceMoney(amount, currency) {
+    var value = Number(amount) || 0;
+    if (currency === 'USD') {
+      return '$' + value.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+    return '₪' + value.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+
+  function renderInvoiceSummaryCards(summary, rangeLabel) {
+    if (!summary) return '';
+    var html = '<div class="admin-stats">';
+    html +=
+      '<article class="admin-stat"><p class="admin-stat__label">Transactions</p><strong class="admin-stat__value">' +
+      (summary.transactionCount || 0) +
+      '</strong><p class="admin-stat__meta">' +
+      escapeHtml(rangeLabel) +
+      '</p></article>';
+    Object.keys(summary.totalsByCurrency || {}).forEach(function (currency) {
+      html +=
+        '<article class="admin-stat"><p class="admin-stat__label">Collected · ' +
+        currency +
+        '</p><strong class="admin-stat__value">' +
+        formatInvoiceMoney(summary.totalsByCurrency[currency], currency) +
+        '</strong><p class="admin-stat__meta">Amount received (not booking value)</p></article>';
+    });
+    Object.keys(summary.onlineByCurrency || {}).forEach(function (currency) {
+      if (!summary.onlineByCurrency[currency]) return;
+      html +=
+        '<article class="admin-stat"><p class="admin-stat__label">Online · ' +
+        currency +
+        '</p><strong class="admin-stat__value">' +
+        formatInvoiceMoney(summary.onlineByCurrency[currency], currency) +
+        '</strong></article>';
+    });
+    Object.keys(summary.offlineByCurrency || {}).forEach(function (currency) {
+      if (!summary.offlineByCurrency[currency]) return;
+      html +=
+        '<article class="admin-stat"><p class="admin-stat__label">Offline · ' +
+        currency +
+        '</p><strong class="admin-stat__value">' +
+        formatInvoiceMoney(summary.offlineByCurrency[currency], currency) +
+        '</strong></article>';
+    });
+    html += '</div>';
+    if (summary.capped) {
+      html += '<p class="admin-muted">Summary uses the latest 500 receipts in range. Use filters for precise totals on large datasets.</p>';
+    }
+    return html;
+  }
+
+  function openInvoiceModal(invoiceId) {
+    var key = getAdminApiKey();
+    if (!key) return;
+    var modal = document.getElementById('adminModal');
+    var body = document.getElementById('adminModalBody');
+    var title = document.getElementById('adminModalTitle');
+    if (!modal || !body) return;
+    if (title) title.textContent = 'Invoice details';
+    body.innerHTML = '<p class="admin-muted">Loading…</p>';
+    modal.hidden = false;
+
+    fetch('/api/admin/invoices/' + encodeURIComponent(invoiceId), {
+      headers: { Accept: 'application/json', 'x-admin-key': key },
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || 'Failed');
+          return data;
+        });
+      })
+      .then(function (data) {
+        var inv = data.invoice || {};
+        var html = '';
+        html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Payment</p><div class="admin-modal-grid">';
+        html += modalField('Invoice', inv.documentNumber);
+        html += modalField('Status', inv.documentStatus || 'paid', false, statusPill('completed'));
+        html += modalField('Payment date', formatDisplayDate(inv.paymentDate || inv.createdAt));
+        html += modalField('Method', inv.methodLabel || inv.method);
+        html += modalField('Reference', inv.paymentReference || '—');
+        html += modalField('Source', inv.source === 'online' ? 'Online' : 'Manual');
+        if (inv.recordedBy) html += modalField('Recorded by', inv.recordedBy);
+        html += '</div></div>';
+
+        html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Amounts</p><div class="admin-modal-grid">';
+        html += modalField('Booking total', formatInvoiceMoney(inv.totalBooking, inv.currency));
+        html += modalField('This transaction', formatInvoiceMoney(inv.transactionAmount, inv.currency));
+        html += modalField('Total paid to date', formatInvoiceMoney(inv.cumulativePaid, inv.currency));
+        html += modalField('Remaining balance', formatInvoiceMoney(inv.remainingAfter, inv.currency));
+        html += '</div></div>';
+
+        html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Customer &amp; booking</p><div class="admin-modal-grid">';
+        html += modalField('Customer', inv.customerName);
+        html += modalField('Phone', inv.customerPhone);
+        html += modalField('Booking ref.', inv.bookingReference);
+        html += modalField('Experience', inv.experienceName);
+        if (inv.orderId) {
+          html += modalField('Order', inv.orderId);
+        }
+        html += '</div></div>';
+
+        if (data.paymentHistory && data.paymentHistory.length > 1) {
+          html += '<div class="admin-modal-section"><p class="admin-modal-section__title">Payment history</p><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Invoice</th><th>Date</th><th>Amount</th><th>Method</th></tr></thead><tbody>';
+          data.paymentHistory.forEach(function (row) {
+            html +=
+              '<tr><td>' +
+              escapeHtml(row.documentNumber) +
+              '</td><td>' +
+              escapeHtml(formatDisplayDate(row.paymentDate || row.createdAt)) +
+              '</td><td>' +
+              escapeHtml(formatInvoiceMoney(row.transactionAmount, row.currency)) +
+              '</td><td>' +
+              escapeHtml(row.methodLabel || row.method) +
+              '</td></tr>';
+          });
+          html += '</tbody></table></div></div>';
+        }
+
+        html += '<div class="admin-modal-actions">';
+        html +=
+          '<a class="admin-btn admin-btn--primary" href="/api/admin/invoices/' +
+          encodeURIComponent(invoiceId) +
+          '/pdf" data-invoice-pdf="' +
+          escapeHtml(invoiceId) +
+          '">Download PDF</a>';
+        html += '</div>';
+        body.innerHTML = html;
+        var pdf = body.querySelector('[data-invoice-pdf]');
+        if (pdf) {
+          pdf.addEventListener('click', function (e) {
+            e.preventDefault();
+            fetch('/api/admin/invoices/' + encodeURIComponent(invoiceId) + '/pdf', {
+              headers: { 'x-admin-key': key },
+            })
+              .then(function (res) {
+                if (!res.ok) throw new Error('Download failed');
+                return res.blob();
+              })
+              .then(function (blob) {
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = (inv.documentNumber || 'receipt') + '.pdf';
+                a.click();
+                URL.revokeObjectURL(url);
+              })
+              .catch(function () {
+                window.alert('Could not download PDF. Check admin API key.');
+              });
+          });
+        }
+      })
+      .catch(function (err) {
+        body.innerHTML = '<p class="admin-muted">' + escapeHtml(err.message || 'Could not load invoice') + '</p>';
+      });
+  }
+
+  function renderInvoices(root) {
+    var filters = getInvoiceFilters();
+    var range = invoiceDateRange(filters.range);
+    var rangeLabel =
+      filters.range === 'all' ? 'All time' : filters.range === '7d' ? 'Last 7 days' : filters.range === '90d' ? 'Last 90 days' : 'Last 30 days';
+    root.innerHTML =
+      '<div class="admin-page-head"><div><h1>Invoices</h1><p>Verified payment receipts — online and offline. Booking value is shown separately from money received.</p></div><button type="button" class="admin-btn" id="invRefresh">' +
+      ICONS.refresh +
+      ' Refresh</button></div><div class="admin-skeleton"><div class="admin-skeleton-block is-row"></div></div>';
+
+    var key = getAdminApiKey();
+    if (!key) {
+      renderInvoicesSetup(root);
+      return;
+    }
+
+    var qs =
+      '?page=' +
+      filters.page +
+      '&limit=25&q=' +
+      encodeURIComponent(filters.q) +
+      '&method=' +
+      encodeURIComponent(filters.method) +
+      '&status=' +
+      encodeURIComponent(filters.status) +
+      '&source=' +
+      encodeURIComponent(filters.source) +
+      '&sort=' +
+      encodeURIComponent(filters.sort) +
+      '&dateFrom=' +
+      encodeURIComponent(range.dateFrom) +
+      '&dateTo=' +
+      encodeURIComponent(range.dateTo);
+
+    fetch('/api/admin/invoices' + qs, {
+      headers: { Accept: 'application/json', 'x-admin-key': key },
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || 'Failed to load invoices');
+          return data;
+        });
+      })
+      .then(function (data) {
+        if (data.code === 'TABLE_MISSING') {
+          root.innerHTML =
+            '<div class="admin-page-head"><div><h1>Invoices</h1></div></div>' +
+            '<section class="admin-panel"><h2>Database setup needed</h2>' +
+            '<p class="admin-muted">The <code>payment_receipts</code> table is not in Supabase yet.</p>' +
+            '<p class="admin-muted">Run <code>supabase/migrations/004_booking_payments.sql</code> in the Supabase SQL editor, then refresh.</p>' +
+            '<p class="admin-muted" dir="rtl">نفّذي ملف migration 004 في Supabase ثم حدّثي الصفحة.</p></section>';
+          return;
+        }
+        var html = '<div class="admin-page-head"><div><h1>Invoices</h1><p>Payment receipts for successful transactions only.</p></div><button type="button" class="admin-btn" id="invRefresh">' + ICONS.refresh + ' Refresh</button></div>';
+        html += renderInvoiceSummaryCards(data.summary, rangeLabel);
+
+        html += '<div class="admin-filters admin-filters--invoices">';
+        html += '<input type="search" class="admin-input" id="invSearch" placeholder="Invoice, customer, booking ref." value="' + escapeHtml(filters.q) + '">';
+        html += '<select class="admin-input" id="invMethod"><option value="all">All methods</option>';
+        ['hyp', 'stripe', 'cash', 'bank_transfer', 'bit', 'manual', 'other'].forEach(function (m) {
+          html += '<option value="' + m + '"' + (filters.method === m ? ' selected' : '') + '>' + m + '</option>';
+        });
+        html += '</select>';
+        html += '<select class="admin-input" id="invSource"><option value="all">All sources</option><option value="online"' + (filters.source === 'online' ? ' selected' : '') + '>Online</option><option value="manual"' + (filters.source === 'manual' ? ' selected' : '') + '>Manual</option></select>';
+        html += '<select class="admin-input" id="invRange"><option value="7d"' + (filters.range === '7d' ? ' selected' : '') + '>7 days</option><option value="30d"' + (filters.range === '30d' ? ' selected' : '') + '>30 days</option><option value="90d"' + (filters.range === '90d' ? ' selected' : '') + '>90 days</option><option value="all"' + (filters.range === 'all' ? ' selected' : '') + '>All time</option></select>';
+        html += '<select class="admin-input" id="invSort"><option value="newest"' + (filters.sort === 'desc' ? ' selected' : '') + '>Newest</option><option value="oldest"' + (filters.sort === 'asc' ? ' selected' : '') + '>Oldest</option></select>';
+        html += '<button type="button" class="admin-btn admin-btn--primary" id="invApply">Apply</button>';
+        html += '</div>';
+
+        html += '<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Invoice</th><th>Customer</th><th>Booking</th><th>Experience</th><th>Date</th><th>Amount</th><th>Method</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
+        if (!data.invoices || !data.invoices.length) {
+          html += '<tr><td colspan="9"><p class="admin-muted">No payment receipts match these filters.</p></td></tr>';
+        } else {
+          data.invoices.forEach(function (inv) {
+            html += '<tr>';
+            html += '<td><button type="button" class="admin-link-btn" data-invoice-open="' + escapeHtml(inv.id) + '">' + escapeHtml(inv.documentNumber) + '</button></td>';
+            html += '<td>' + escapeHtml(inv.customerName || '—') + '</td>';
+            html += '<td>' + escapeHtml(inv.bookingReference || '—') + '</td>';
+            html += '<td>' + escapeHtml(inv.experienceName || '—') + '</td>';
+            html += '<td>' + escapeHtml(formatDisplayDate(inv.paymentDate || inv.createdAt)) + '</td>';
+            html += '<td>' + escapeHtml(formatInvoiceMoney(inv.transactionAmount, inv.currency)) + '</td>';
+            html += '<td>' + escapeHtml(inv.methodLabel || inv.method || '—') + '</td>';
+            html += '<td>' + escapeHtml(inv.documentStatus || 'paid') + '</td>';
+            html += '<td><button type="button" class="admin-btn" data-invoice-open="' + escapeHtml(inv.id) + '">View</button></td>';
+            html += '</tr>';
+          });
+        }
+        html += '</tbody></table></div>';
+
+        var totalPages = Math.max(1, Math.ceil((data.total || 0) / (data.limit || 25)));
+        html += '<div class="admin-pagination"><span>Page ' + data.page + ' of ' + totalPages + ' · ' + (data.total || 0) + ' receipts</span>';
+        if (data.page > 1) {
+          html += '<button type="button" class="admin-btn" data-inv-page="' + (data.page - 1) + '">Previous</button>';
+        }
+        if (data.hasMore) {
+          html += '<button type="button" class="admin-btn" data-inv-page="' + (data.page + 1) + '">Next</button>';
+        }
+        html += '</div>';
+
+        root.innerHTML = html;
+
+        function applyInvoiceFilters(nextPage) {
+          var params = new URLSearchParams();
+          var q = (document.getElementById('invSearch') || {}).value || '';
+          var method = (document.getElementById('invMethod') || {}).value || 'all';
+          var source = (document.getElementById('invSource') || {}).value || 'all';
+          var rangeVal = (document.getElementById('invRange') || {}).value || '30d';
+          var sortVal = (document.getElementById('invSort') || {}).value || 'newest';
+          if (q) params.set('q', q);
+          if (method !== 'all') params.set('method', method);
+          if (source !== 'all') params.set('source', source);
+          if (rangeVal !== '30d') params.set('range', rangeVal);
+          if (sortVal !== 'newest') params.set('sort', sortVal);
+          if (nextPage && nextPage > 1) params.set('page', String(nextPage));
+          window.location.search = params.toString();
+        }
+
+        var applyBtn = document.getElementById('invApply');
+        if (applyBtn) applyBtn.addEventListener('click', function () { applyInvoiceFilters(1); });
+        var refresh = document.getElementById('invRefresh');
+        if (refresh) refresh.addEventListener('click', function () { renderInvoices(root); });
+        root.querySelectorAll('[data-inv-page]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            applyInvoiceFilters(Number(btn.getAttribute('data-inv-page')) || 1);
+          });
+        });
+        root.querySelectorAll('[data-invoice-open]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            openInvoiceModal(btn.getAttribute('data-invoice-open'));
+          });
+        });
+      })
+      .catch(function (err) {
+        root.innerHTML =
+          '<div class="admin-page-head"><div><h1>Invoices</h1></div></div><p class="admin-muted">' +
+          escapeHtml(err.message || 'Could not load invoices') +
+          '</p>';
+      });
+  }
+
   function analyticsFormLabel(formId) {
     return FORM_ANALYTICS_LABELS[formId] || formId || 'Form';
   }
@@ -2841,6 +3327,13 @@
     renderSkeleton(root);
 
     try {
+      if (view === 'invoices') {
+        var sidebarRows = await getCachedRequests(false).catch(function () { return []; });
+        renderSidebar(computeStats(sidebarRows || []));
+        renderInvoices(root);
+        return;
+      }
+
       var rows = await getCachedRequests(!!forceRefresh);
       var stats = computeStats(rows);
       var filters = getFilters();

@@ -1,5 +1,5 @@
 import LegacyPage from '@/components/LegacyPage';
-import { ADMIN_INLINE, ADMIN_SCRIPTS, ADMIN_STYLES } from '@/lib/adminWorkspace';
+import { ADMIN_SCRIPTS, ADMIN_STYLES, buildAdminInlineScript } from '@/lib/adminWorkspace';
 
 export const metadata = {
   title: 'Admin Login | Nawal Yoga',
@@ -13,7 +13,7 @@ export default function Page() {
       bodyClassName="login-body"
       styles={ADMIN_STYLES}
       scripts={ADMIN_SCRIPTS}
-      inlineScripts={[ADMIN_INLINE]}
+      inlineScripts={[buildAdminInlineScript()]}
       html={`
   <main class="login-shell">
     <section class="login-card">

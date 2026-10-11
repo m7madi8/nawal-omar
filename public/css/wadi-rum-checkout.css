@@ -1,0 +1,333 @@
+/* Wadi Rum — deposit checkout (single-page, global-style) */
+
+.wrc-page {
+  --wrc-ink: #1f1a17;
+  --wrc-muted: #6b6258;
+  --wrc-line: #e8dfd4;
+  --wrc-cream: #fffdf9;
+  --wrc-accent: #245a42;
+  --wrc-accent-hover: #1e4a36;
+  width: min(920px, 100%);
+  margin-inline: auto;
+  padding: 1.25rem 1rem 3rem;
+  color: var(--wrc-ink);
+}
+
+.wrc-top {
+  margin-bottom: 1.25rem;
+}
+
+.wrc-back {
+  color: #8b5e3c;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.wrc-back:hover {
+  color: var(--wrc-ink);
+}
+
+.wrc-banner {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #eef6f1;
+  border: 1px solid #c5e0d4;
+  font-size: 0.9rem;
+  color: #1e4a36;
+}
+
+.wrc-banner.is-error {
+  background: #fdf0ed;
+  border-color: #e8c4bc;
+  color: #8a3d32;
+}
+
+.wrc-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .wrc-grid {
+    grid-template-columns: 1fr 1.05fr;
+    align-items: start;
+  }
+}
+
+.wrc-card {
+  background: var(--wrc-cream);
+  border: 1px solid var(--wrc-line);
+  border-radius: 1rem;
+  padding: 1.35rem 1.25rem;
+  box-shadow: 0 12px 40px rgba(42, 24, 16, 0.06);
+}
+
+.wrc-card__title {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.wrc-product {
+  display: flex;
+  gap: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--wrc-line);
+  margin-bottom: 1rem;
+}
+
+.wrc-product__img {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 0.65rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.wrc-product__name {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.wrc-product__meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--wrc-muted);
+  line-height: 1.45;
+}
+
+.wrc-rows {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.wrc-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--wrc-muted);
+}
+
+.wrc-row strong {
+  color: var(--wrc-ink);
+  font-weight: 600;
+}
+
+.wrc-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 1rem;
+  border-top: 1px solid var(--wrc-line);
+}
+
+.wrc-total__label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.wrc-total__amount {
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.wrc-fine {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: var(--wrc-muted);
+  line-height: 1.5;
+}
+
+.wrc-pay-card__steps {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  font-size: 0.78rem;
+  color: var(--wrc-muted);
+}
+
+.wrc-pay-card__steps span.is-done {
+  color: var(--wrc-accent);
+  font-weight: 600;
+}
+
+.wrc-pay-card__steps span.is-current {
+  color: var(--wrc-ink);
+  font-weight: 700;
+}
+
+.wrc-field {
+  margin-bottom: 0.85rem;
+}
+
+.wrc-field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.wrc-field input {
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--wrc-line);
+  font-size: 1rem;
+  background: #fff;
+}
+
+.wrc-field input:focus-visible {
+  outline: 2px solid var(--wrc-accent);
+  outline-offset: 2px;
+}
+
+.wrc-customer-readonly {
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.65rem;
+  background: #f5efe6;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.wrc-customer-readonly p {
+  margin: 0.15rem 0;
+}
+
+.wrc-pay-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 3.15rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: var(--wrc-accent);
+  color: #f4fff8;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.wrc-pay-btn:hover:not(:disabled) {
+  background: var(--wrc-accent-hover);
+  transform: translateY(-1px);
+}
+
+.wrc-pay-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.wrc-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.65rem;
+  margin: 0.85rem 0 0;
+  font-size: 0.78rem;
+  color: var(--wrc-muted);
+  text-align: center;
+}
+
+.wrc-cards {
+  display: inline-flex;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #4a5568;
+}
+
+.wrc-status {
+  margin: 0.65rem 0 0;
+  font-size: 0.88rem;
+  text-align: center;
+  color: var(--wrc-muted);
+}
+
+.wrc-status.is-error {
+  color: #9a3b2e;
+}
+
+.wrc-alt {
+  margin-top: 1.25rem;
+  padding-top: 1.15rem;
+  border-top: 1px dashed var(--wrc-line);
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--wrc-muted);
+}
+
+.wrc-alt a {
+  color: #8b5e3c;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wrc-alt a:hover {
+  text-decoration: underline;
+}
+
+/* Thanks */
+.wrc-thanks {
+  text-align: center;
+  max-width: 32rem;
+  margin-inline: auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.wrc-thanks__icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: #eef6f1;
+  color: var(--wrc-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.wrc-thanks h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.wrc-thanks p {
+  margin: 0 0 1rem;
+  color: var(--wrc-muted);
+  line-height: 1.55;
+}
+
+.wrc-thanks .wrc-pay-btn,
+.wrc-thanks .wrc-back-btn {
+  display: inline-flex;
+  width: auto;
+  min-width: 12rem;
+  padding-inline: 1.5rem;
+  text-decoration: none;
+  margin: 0.35rem;
+}
+
+.wrc-back-btn {
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--wrc-line);
+  color: var(--wrc-ink);
+  font-weight: 600;
+  background: #fff;
+}

@@ -1,95 +1,27 @@
 /**
- * Sound Healing booking → unified commerce checkout → admin dashboard
+ * Sound Healing booking — commerce checkout + admin dashboard
  */
 (function () {
-  var EVENT_ID = "sound-healing";
-
-  function t(key) {
-    var lang = (window.nawalI18n && window.nawalI18n.getLang && window.nawalI18n.getLang()) || "ar";
-    if (window.nawalI18n && window.nawalI18n.t) return window.nawalI18n.t(lang, key);
-    return key;
-  }
-
   function init() {
-    var modal = document.getElementById("sh-register-modal");
-    var closeBtn = document.getElementById("sh-register-close");
-    var form = document.getElementById("sh-register-form");
-    var success = document.getElementById("sh-register-success");
-    var submitBtn = document.getElementById("sh-register-submit");
-    var triggers = document.querySelectorAll("[data-sh-register]");
-    if (!modal || !closeBtn || !form || !triggers.length) return;
-
-    function openModal() {
-      modal.hidden = false;
-      document.body.style.overflow = "hidden";
-      var nameInput = form.querySelector('[name="fullName"]');
-      if (nameInput) nameInput.focus();
-    }
-
-    function closeModal() {
-      modal.hidden = true;
-      document.body.style.overflow = "";
-    }
-
-    function showSuccess() {
-      if (window.nawalThankYou && typeof window.nawalThankYou.show === "function") {
-        window.nawalThankYou.show();
-        return;
-      }
-      if (!success) return;
-      success.hidden = false;
-      success.classList.remove("is-show");
-      window.requestAnimationFrame(function () {
-        success.classList.add("is-show");
-      });
-      window.setTimeout(function () {
-        success.classList.remove("is-show");
-        success.hidden = true;
-      }, 3800);
-    }
-
-    triggers.forEach(function (btn) {
-      btn.addEventListener("click", function (e) {
-        e.preventDefault();
-        openModal();
-      });
-    });
-
-    closeBtn.addEventListener("click", closeModal);
-    modal.addEventListener("click", function (e) {
-      if (e.target === modal) closeModal();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !modal.hidden) closeModal();
-    });
-
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      var fullName = String((form.fullName && form.fullName.value) || "").trim();
-      var phone = String((form.phone && form.phone.value) || "").trim();
-      var notes = String((form.notes && form.notes.value) || "").trim();
-      if (!fullName || !phone) return;
-
-      if (submitBtn) submitBtn.disabled = true;
-      try {
-        if (!window.nawalRetreatRequest) {
-          throw new Error("Registration unavailable");
-        }
-        await window.nawalRetreatRequest.submitEventRegistration({
-          eventId: EVENT_ID,
-          fullName: fullName,
-          phone: phone,
-          notes: notes
-        });
-        form.reset();
-        closeModal();
-        showSuccess();
-      } catch (_err) {
-        console.error(_err);
-        alert(t("events_sh_register_error"));
-      } finally {
-        if (submitBtn) submitBtn.disabled = false;
-      }
+    if (!window.nawalEventCheckout) return;
+    window.nawalEventCheckout.boot({
+      eventId: "sound-healing",
+      modalId: "sh-register-modal",
+      closeId: "sh-register-close",
+      formId: "sh-register-form",
+      successId: "sh-register-success",
+      submitBtnId: "sh-register-submit",
+      triggerSelector: "[data-sh-register]",
+      paymentSectionId: "sh-payment-section",
+      actionsSelector: ".event-sh-actions",
+      payButtonId: "sh-panel-pay-btn",
+      payButtonClass: "event-sh-btn event-sh-btn--primary ny-book-btn-primary event-pay-panel-btn",
+      returnPath: "/events/sound-healing",
+      retreatTypeKey: "events_sh_register_event",
+      city: "Haifa, Atlit",
+      errorKey: "events_sh_register_error",
+      successMessageKey: "events_sh_register_success",
+      submitLabelKey: "events_sh_register_confirm",
     });
   }
 

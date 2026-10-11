@@ -182,7 +182,8 @@ const html = `
       <div id="okMsg" class="ok reg-success" role="status" tabindex="-1" hidden>
         <p class="reg-success__title" id="okTitle" data-t="successTitle">Your request arrived, thank you</p>
         <p data-t="successText">We'll get in touch soon for a short getting-to-know-you call. After that, you secure your place with a first deposit of 400 ₪.</p>
-        <div class="reg-success__actions">
+        <div class="reg-success__actions reg-success__actions--stack">
+          <a class="reg-btn reg-btn--deposit" href="/register/wadi-rum/pay?registered=1" data-i18n="retreat_wadi_checkout_pay_btn">Pay 400 ₪ securely</a>
           <a class="reg-btn reg-btn--ghost" href="/retreats/wadi-rum" data-t="successBack">Back to the retreat page</a>
           <a class="reg-btn reg-btn--wa" id="regOkWa" href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener noreferrer" data-t="successWhatsapp">Questions? Message us on WhatsApp</a>
         </div>
@@ -204,7 +205,11 @@ export default function Page() {
       bodyClassName=""
       styles={["/css/wadi-rum-registration.css"]}
       currentNav="retreats"
-      scripts={[{ src: '/legacy/js/wadi-rum-registration.js' }]}
+      scripts={[
+        { src: '/legacy/js/i18n.js' },
+        { src: '/legacy/js/wadi-rum-deposit-pay.js' },
+        { src: '/legacy/js/wadi-rum-registration.js' },
+      ]}
       html={html}
     />
   );

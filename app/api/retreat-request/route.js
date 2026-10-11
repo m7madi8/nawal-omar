@@ -40,6 +40,19 @@ export async function POST(request) {
       status: String(body.status || 'pending'),
     };
 
+    if (body.bookingStatus) {
+      let note = {};
+      try {
+        note = row.freeNote ? JSON.parse(row.freeNote) : {};
+      } catch {
+        note = { message: row.freeNote };
+      }
+      note.bookingStatus = String(body.bookingStatus);
+      note.bookingSource = 'manual';
+      if (body.bookingReference) note.bookingReference = String(body.bookingReference);
+      row.freeNote = JSON.stringify(note);
+    }
+
     const inserted = await supabaseInsert(SUPABASE_TABLE_RETREAT_REQUESTS, row);
     return Response.json({ ok: true, id: inserted?.id || row.id });
   } catch (error) {

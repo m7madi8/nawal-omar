@@ -5,16 +5,18 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "node --use-system-ca ./node_modules/next/dist/bin/next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:commerce": "node scripts/test-commerce-booking.mjs",
     "build:css": "tailwindcss -i ./public/legacy/css/input.css -o ./public/legacy/css/style.css --minify"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "gsap": "^3.15.0",
     "next": "^15.2.4",
+    "pdf-lib": "^1.17.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

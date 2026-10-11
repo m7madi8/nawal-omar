@@ -995,6 +995,34 @@
   font-size: 0.9rem;
 }
 
+.haifa-payment-section {
+  margin: 1rem 0 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--haifa-line, #e5ddd3);
+}
+
+.haifa-pay-amount {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+  color: var(--haifa-muted, #6b635a);
+}
+
+.haifa-pay-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0.35rem 0;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.haifa-pay-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  color: var(--haifa-muted, #857c72);
+  line-height: 1.45;
+}
+
 .haifa-register-form {
   display: grid;
   gap: 0.45rem;
