@@ -11,7 +11,7 @@ export default function Page() {
       lang="en"
       dir="rtl"
       bodyClassName=""
-      styles={["/legacy/css/nature-chocolate.css","/legacy/css/booking-cta.css","/legacy/css/hyp-pay-methods.css"]}
+      styles={["/legacy/css/nature-chocolate.css","/legacy/css/booking-cta.css","/legacy/css/hyp-pay-methods.css","/legacy/css/register-modal-shell.css"]}
       scripts={[{"src":"/legacy/js/i18n.js","attrs":"  "},{"src":"/legacy/js/retreat-request-submit.js","attrs":"  "},{"src":"/legacy/js/hyp-pay-method-picker.js","attrs":"  "},{"src":"/legacy/js/jiva-reels.js","attrs":"  "},{"src":"https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js","attrs":"  "},{"src":"https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js","attrs":"  "},{"src":"/legacy/js/nature-chocolate-event.js","attrs":"  "},{"src":"/legacy/js/event-checkout-registration.js","attrs":"  "},{"src":"/legacy/js/nature-chocolate-registration.js","attrs":"  "}]}
       inlineScripts={[]}
       currentNav="experiences"

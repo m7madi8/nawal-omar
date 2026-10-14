@@ -11,7 +11,7 @@ export default function Page() {
       lang="en"
       dir="rtl"
       bodyClassName="haifa-page"
-      styles={["/legacy/css/jiva-page.css","/legacy/css/haifa-premium.css","/legacy/css/booking-cta.css","/legacy/css/hyp-pay-methods.css"]}
+      styles={["/legacy/css/jiva-page.css","/legacy/css/haifa-premium.css","/legacy/css/booking-cta.css","/legacy/css/hyp-pay-methods.css","/legacy/css/register-modal-shell.css"]}
       scripts={[{"src":"/legacy/js/i18n.js","attrs":"  "},{"src":"/legacy/js/retreat-request-submit.js","attrs":"  "},{"src":"/legacy/js/hyp-pay-method-picker.js","attrs":"  "},{"src":"/legacy/js/haifa-registration.js","attrs":"  "}]}
       inlineScripts={[]}
       currentNav="yoga"

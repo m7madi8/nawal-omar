@@ -639,9 +639,6 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
   background: rgba(24, 18, 13, 0.52);
   backdrop-filter: blur(3px);
 }

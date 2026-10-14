@@ -1372,9 +1372,6 @@ html[dir="rtl"] .ib-page {
   position: fixed;
   inset: 0;
   z-index: 90;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
   background: rgba(15, 30, 36, 0.55);
   backdrop-filter: blur(3px);
 }
