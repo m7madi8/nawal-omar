@@ -1,7 +1,9 @@
 import { confirmHypPayFromRedirect } from '@/lib/commerce/payment';
-import { extractRedirectQueryFromUrl } from '@/lib/commerce/payment/hyp-pay/redirect';
+import {
+  extractRedirectQueryFromUrl,
+  readRedirectOrderRef,
+} from '@/lib/commerce/payment/hyp-pay/redirect';
 import { getOrder, siteUrlFromRequest } from '@/lib/commerce/orders';
-import { bookingAccessToken } from '@/lib/commerce/booking-access';
 import { bookingBackPath, paymentThanksUrl } from '@/lib/commerce/thanks-path';
 import { logPaymentAttemptEvent } from '@/lib/commerce/payment/attempt-telemetry.js';
 
@@ -12,6 +14,9 @@ async function thanksPath(result) {
   const phone = order?.customer?.phone || '';
 
   if (!result.paid) {
+    if (result.orderId && result.pending) {
+      return paymentThanksUrl(result.orderId, phone, { pending: true });
+    }
     if (result.orderId) {
       return paymentThanksUrl(result.orderId, phone, { failed: true });
     }
@@ -39,9 +44,12 @@ export async function GET(request) {
     return Response.redirect(new URL('/?payment=invalid', request.url), 302);
   }
 
+  const returnRef = readRedirectOrderRef(rawQuery);
   logPaymentAttemptEvent('return_invoked', {
     method: 'GET',
     queryLength: rawQuery.length,
+    orderId: returnRef.orderId,
+    hasHypTransactionId: returnRef.hasHypTransactionId,
   });
 
   let result;
@@ -50,6 +58,7 @@ export async function GET(request) {
   } catch (error) {
     console.error('[hyp-pay] return handler error', error?.code || error?.message);
     logPaymentAttemptEvent('return_handler_error', {
+      orderId: returnRef.orderId,
       code: error?.code || 'ERROR',
       message: error?.message || 'handler_failed',
     });
@@ -59,7 +68,10 @@ export async function GET(request) {
   logPaymentAttemptEvent('return_processed', {
     orderId: result.orderId || null,
     paid: Boolean(result.paid),
+    pending: Boolean(result.pending),
+    finalizationIncomplete: Boolean(result.finalizationIncomplete),
     code: result.code || null,
+    ccode: result.ccode != null ? String(result.ccode) : null,
   });
 
   const origin = siteUrlFromRequest(request);
