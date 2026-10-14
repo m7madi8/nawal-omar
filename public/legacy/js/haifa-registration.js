@@ -4,8 +4,7 @@
 
   var packageLabelKeys = {
     trial: "haifa_pkg_trial",
-    paytest: "haifa_pkg_paytest",
-    pack4: "haifa_pkg_pack4",
+pack4: "haifa_pkg_pack4",
     pack5: "haifa_pkg_pack5",
     single: "haifa_pkg_single",
     private1: "haifa_pkg_private1",
@@ -15,8 +14,7 @@
 
   var packageAmounts = {
     trial: 65,
-    paytest: 3,
-    pack4: 260,
+pack4: 260,
     pack5: 300,
     single: 75,
     private1: 200,
