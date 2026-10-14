@@ -21,9 +21,16 @@ export async function POST(request) {
       code = 'COMMERCE_DB_NETWORK';
     }
     const status =
-      code === 'INVALID_CUSTOMER' || code === 'INVALID_TYPE' || code === 'UNKNOWN_ITEM'
+      code === 'INVALID_CUSTOMER' ||
+      code === 'INVALID_TYPE' ||
+      code === 'UNKNOWN_ITEM' ||
+      code === 'INVALID_CHARGE_AMOUNT' ||
+      code === 'PAYMENT_PLAN_NOT_SUPPORTED'
         ? 400
-        : code === 'BOOKING_CLOSED' || code === 'SOLD_OUT' || code === 'INSUFFICIENT_CAPACITY'
+        : code === 'BOOKING_CLOSED' ||
+            code === 'SOLD_OUT' ||
+            code === 'INSUFFICIENT_CAPACITY' ||
+            code === 'PAYMENT_SIGN_IN_PROGRESS'
           ? 409
           : code === 'STRIPE_MISSING' ||
               code === 'GROW_DISABLED' ||
