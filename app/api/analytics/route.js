@@ -1,3 +1,5 @@
+import { guardResponse, requireAdminAccess } from '@/lib/admin-auth';
+import { PERMISSION } from '@/lib/admin/permissions';
 import {
   supabaseInsert,
   supabaseSelect,
@@ -149,6 +151,9 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
+  const guard = await requireAdminAccess(request, { permission: PERMISSION.ANALYTICS_READ });
+  const denied = guardResponse(guard);
+  if (denied) return denied;
   const { searchParams } = new URL(request.url);
   const range = searchParams.get('range') || '7d';
   const since = rangeStart(range);

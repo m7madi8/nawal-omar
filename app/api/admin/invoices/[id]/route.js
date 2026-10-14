@@ -1,10 +1,11 @@
-import { authorizeAdminRequest, adminUnauthorizedResponse } from '@/lib/admin-auth';
+import { guardResponse, requireAdminAccess } from '@/lib/admin-auth';
+import { PERMISSION } from '@/lib/admin/permissions';
 import { getInvoiceById } from '@/lib/commerce/invoices';
 
 export async function GET(request, { params }) {
-  if (!authorizeAdminRequest(request)) {
-    return adminUnauthorizedResponse();
-  }
+  const guard = await requireAdminAccess(request, { permission: PERMISSION.INVOICES_READ });
+  const denied = guardResponse(guard);
+  if (denied) return denied;
 
   const id = String(params.id || '').trim();
   if (!id) {

@@ -3,6 +3,7 @@ import { extractRedirectQueryFromUrl } from '@/lib/commerce/payment/hyp-pay/redi
 import { getOrder, siteUrlFromRequest } from '@/lib/commerce/orders';
 import { bookingAccessToken } from '@/lib/commerce/booking-access';
 import { bookingBackPath, paymentThanksUrl } from '@/lib/commerce/thanks-path';
+import { logPaymentAttemptEvent } from '@/lib/commerce/payment/attempt-telemetry.js';
 
 async function thanksPath(result) {
   const order = result.orderId ? await getOrder(result.orderId) : null;
@@ -34,16 +35,32 @@ async function thanksPath(result) {
 export async function GET(request) {
   const rawQuery = extractRedirectQueryFromUrl(request.url);
   if (!rawQuery) {
+    logPaymentAttemptEvent('return_invalid', { reason: 'missing_query' });
     return Response.redirect(new URL('/?payment=invalid', request.url), 302);
   }
+
+  logPaymentAttemptEvent('return_invoked', {
+    method: 'GET',
+    queryLength: rawQuery.length,
+  });
 
   let result;
   try {
     result = await confirmHypPayFromRedirect(rawQuery);
   } catch (error) {
     console.error('[hyp-pay] return handler error', error?.code || error?.message);
+    logPaymentAttemptEvent('return_handler_error', {
+      code: error?.code || 'ERROR',
+      message: error?.message || 'handler_failed',
+    });
     return Response.redirect(new URL('/?payment=error', request.url), 302);
   }
+
+  logPaymentAttemptEvent('return_processed', {
+    orderId: result.orderId || null,
+    paid: Boolean(result.paid),
+    code: result.code || null,
+  });
 
   const origin = siteUrlFromRequest(request);
   const target = `${origin}${await thanksPath(result)}`;

@@ -154,6 +154,8 @@ const html = `
             </div>
           </div>
 
+          <div id="hypPayMethodsMount" class="hyp-pay-methods-mount"></div>
+
           <div class="reg-assure">
             <p><strong data-t="nextTitle">What happens next?</strong> <span data-t="nextText">After you pay the deposit, you'll be redirected to a confirmation page with your receipt. We'll call you shortly to welcome you to the retreat.</span></p>
             <p><a href="/retreats/wadi-rum#wr-faq-policy" data-t="policyLink">Payment &amp; cancellation terms</a></p>
@@ -195,10 +197,11 @@ export default function Page() {
       lang="en"
       dir="ltr"
       bodyClassName=""
-      styles={["/css/wadi-rum-registration.css"]}
+      styles={["/css/wadi-rum-registration.css", "/legacy/css/hyp-pay-methods.css"]}
       currentNav="retreats"
       scripts={[
         { src: '/legacy/js/i18n.js' },
+        { src: '/legacy/js/hyp-pay-method-picker.js' },
         { src: '/legacy/js/wadi-rum-deposit-pay.js' },
         { src: '/legacy/js/wadi-rum-registration.js' },
       ]}

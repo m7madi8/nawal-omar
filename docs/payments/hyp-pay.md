@@ -46,6 +46,27 @@ Also set `NEXT_PUBLIC_SITE_URL` (or deploy host) so return URLs resolve correctl
 6. `GET /api/payment/hyp/return` forwards the **raw** query string to Hyp `APISign` `VERIFY`, checks `CCode=0`, matches amount to `chargeAmount`, then marks the order paid (idempotent by `Id`).
 7. Event capacity counts gateway orders only when `payment_status` is `paid`.
 
+## Payment attempts & observability
+
+Each Hyp checkout creates a row in `payment_attempts` (migration `006_payment_attempts.sql`) with a `correlation_id`, linked to `commerce_orders.id`.
+
+| Attempt status | Meaning |
+|----------------|---------|
+| `created` | Attempt row inserted at checkout |
+| `awaiting_customer` | Hyp SIGN succeeded; customer on hosted page |
+| `sign_failed` | Hyp SIGN failed before redirect |
+| `return_received` | Browser hit `/api/payment/hyp/return` |
+| `gateway_declined` | Hyp redirect included non-zero `CCode` (authoritative decline) |
+| `verify_failed` | VERIFY failed or amount mismatch |
+| `paid_confirmed` | VERIFY succeeded and order marked paid |
+| `duplicate_return` | Idempotent repeat of an already-paid return |
+
+**On-page card declines** (customer stays on `pay.hyp.co.il` with no merchant redirect) remain `awaiting_customer` — the site does **not** mark those as failed without a gateway return.
+
+Structured logs: `[payment-attempt]` and `[hyp-pay]` (no secrets or card data).
+
+Admin: registration modal loads `/api/admin/commerce-orders?orderId=…` with an authenticated admin session cookie.
+
 ## Deposits
 
 Send `depositAmount` (or `chargeAmount`) less than line total. Metadata stores `paymentKind: "deposit"` and `amountDue` (full total). Booking is not capacity-secured until the deposit payment verifies.
@@ -58,7 +79,20 @@ Send `depositAmount` (or `chargeAmount`) less than line total. Metadata stores `
 | Events | `/events/sound-healing`, etc. | `commerceType: event`, `itemId` from catalog |
 | Wadi Rum retreat | `/register/wadi-rum` | `commerceType: retreat`, `itemId: wadi-rum`, `depositAmount: 400` |
 
-When `HYP_PAYMENTS_ENABLED=true` and terminal credentials are set, `GET /api/commerce/payment-options` returns `hypLive: true` and the UI defaults to **secure card payment** (Bit/bank remains secondary).
+When `HYP_PAYMENTS_ENABLED=true` and terminal credentials are set, `GET /api/commerce/payment-options` returns `hypLive: true` and `hypMethods` (card, Apple Pay, Google Pay, bit). Customers pay on Hyp’s hosted page; wallets appear when enabled on the terminal (see below). Installments are off by default (`HYP_ALLOW_INSTALLMENTS` unset / `false` → `Tash=1`, `FixTash=True` on every sign request).
+
+### Enable all payment methods (merchant Hyp portal)
+
+| Method | Where to enable |
+|--------|-----------------|
+| Credit card | On by default for every terminal |
+| [Google Pay](https://developers.hyp.co.il/pay/common-use-cases/digital-wallets) | Hyp portal → הגדרות → Google Pay → enable on checkout page |
+| [Apple Pay](https://developers.hyp.co.il/pay/common-use-cases/digital-wallets) | Hyp portal → הגדרות → Apple Pay → enable on checkout page (production flow; domain verification only if using iframe) |
+| [bit](https://developers.hyp.co.il/pay/common-use-cases/digital-wallets) | Hyp portal → הגדרות → Bit → join bit merchant (approval by email); max ₪5,000; NIS only |
+
+No extra API parameters are required for wallets on **full-page redirect** (this site). Do **not** set hide-wallet flags on the sign request.
+
+To allow installments site-wide, set `HYP_ALLOW_INSTALLMENTS=true` (not recommended for this project).
 
 **`.env.local` checklist**
 

@@ -116,20 +116,17 @@
       }
       if (amount > 0) {
         if (paymentOptions.hyp) {
-          html +=
-            '<input type="hidden" name="haifaPayment" value="hyp">' +
-            '<p class="haifa-pay-option haifa-pay-option--card">' +
-            t("haifa_pay_card") +
-            "</p>";
-          html += '<p class="haifa-pay-hint">' + t("haifa_pay_online_hint") + "</p>";
+          html += '<input type="hidden" name="haifaPayment" value="hyp">';
+          html += '<div id="haifaHypPayMethodsMount"></div>';
         } else {
           html += '<p class="haifa-pay-hint is-error">' + t("haifa_pay_card_unavailable") + "</p>";
         }
       }
       paymentSection.innerHTML = html;
-      paymentSection.querySelectorAll('input[name="haifaPayment"]').forEach(function (input) {
-        input.addEventListener("change", updateSubmitLabel);
-      });
+      if (amount > 0 && paymentOptions.hyp && window.nawalHypPayMethods) {
+        var mount = document.getElementById("haifaHypPayMethodsMount");
+        if (mount) window.nawalHypPayMethods.mount(mount);
+      }
       updateSubmitLabel();
     }
 
@@ -224,7 +221,7 @@
       }
     }
 
-    async function startOnlineCheckout(fullName, phone) {
+    async function startOnlineCheckout(fullName, phone, hypPayMethod) {
       var res = await fetch("/api/commerce/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -233,6 +230,7 @@
           itemId: LESSON_ID,
           packageId: selectedPackageKey,
           payment: "hyp",
+          hypPayMethod: hypPayMethod || "card",
           customer: { fullName: fullName, phone: phone, city: "Haifa" },
           notes: "Haifa yoga — " + t(packageLabelKeys[selectedPackageKey]),
         }),
@@ -290,7 +288,9 @@
             alert(t("haifa_pay_card_unavailable"));
             return;
           }
-          await startOnlineCheckout(fullName, phone);
+          var hypPayMethod =
+            window.nawalHypPayMethods && window.nawalHypPayMethods.getSelected(form);
+          await startOnlineCheckout(fullName, phone, hypPayMethod);
           return;
         }
 

@@ -1,0 +1,86 @@
+.hyp-pay-methods {
+  margin: 0.75rem 0 0.5rem;
+}
+
+.hyp-pay-methods__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.hyp-pay-methods__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+@media (max-width: 520px) {
+  .hyp-pay-methods__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hyp-pay-methods__chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.5rem;
+  border: 1.5px solid rgba(130, 90, 58, 0.28);
+  border-radius: 10px;
+  background: #fffdf9;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.hyp-pay-methods__chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hyp-pay-methods__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.hyp-pay-methods__chip--apple .hyp-pay-methods__label {
+  letter-spacing: -0.02em;
+}
+
+.hyp-pay-methods__chip--bit .hyp-pay-methods__label {
+  font-weight: 700;
+}
+
+.hyp-pay-methods__chip:has(input:checked) {
+  border-color: #8b5e3c;
+  background: #f5efe6;
+  box-shadow: 0 0 0 1px rgba(139, 94, 60, 0.15);
+}
+
+.hyp-pay-methods__chip:has(input:focus-visible) {
+  outline: 2px solid rgba(139, 94, 60, 0.45);
+  outline-offset: 2px;
+}
+
+.hyp-pay-methods__hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+.hyp-pay-methods__hint--dynamic {
+  font-weight: 600;
+  opacity: 1;
+}
+
+.hyp-pay-methods__hint--secondary {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  opacity: 0.75;
+}

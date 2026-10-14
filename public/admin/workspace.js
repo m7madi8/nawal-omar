@@ -2,18 +2,25 @@
 (function () {
   var AUTH_KEY = 'yogaAdminSession';
   var SESSION_REVISION = 2;
-  var STAFF_KEY = 'nawalAdminStaff';
   var COSTS_KEY = 'nawalShopCosts';
   var LEGACY_CLASS_KEY = 'yogaClassRequests';
   var CONFIG = window.YOGA_DASHBOARD_CONFIG || {};
   var SUPABASE_URL = String(CONFIG.supabaseUrl || '').trim().replace(/\/+$/, '');
   var SUPABASE_ANON_KEY = String(CONFIG.supabaseAnonKey || '').trim();
   var SUPABASE_TABLE = String(CONFIG.supabaseTable || 'retreat_requests').trim();
+
+  function adminFetch(url, options) {
+    var opts = options || {};
+    opts.credentials = 'include';
+    opts.headers = opts.headers || {};
+    if (!opts.headers['X-Requested-With']) {
+      opts.headers['X-Requested-With'] = 'XMLHttpRequest';
+    }
+    return fetch(url, opts);
+  }
   var USERNAME = 'nawal';
-  var PASSWORD = 'Areen12@n';
   var OWNER_NAME = 'Nawal Omar';
   var DEVELOPER_USERNAME = 'mohammad';
-  var DEVELOPER_PASSWORD = 'mohammadd';
   var DEVELOPER_NAME = 'Mohammad';
   var OWNER_AVATAR = '/media/home/nawal_aom.jpg';
   var DEVELOPER_AVATAR = '/media/me.webp';
@@ -23,7 +30,6 @@
       name: 'Shatha',
       username: 'shada',
       aliases: ['sahda', 'shatha'],
-      password: 'shadak12',
       permissions: ['medical'],
       viewOnly: false,
       locked: true,
@@ -496,19 +502,10 @@
       session.permissions = Array.isArray(builtin.permissions) ? builtin.permissions.slice() : [];
       return session;
     }
-    var member = loadStaff().find(function (item) {
-      return (session.staffId && item.id === session.staffId) ||
-        String(item.username || '').toLowerCase() === String(session.username || '').toLowerCase();
-    });
-    if (!member) {
+    if (!Array.isArray(session.permissions) || !session.permissions.length) {
       clearSession();
       return null;
     }
-    session.username = member.username;
-    session.name = member.name;
-    session.staffId = member.id;
-    session.viewOnly = !!member.viewOnly;
-    session.permissions = Array.isArray(member.permissions) ? member.permissions.slice() : [];
     return session;
   }
 
@@ -563,29 +560,6 @@
       avatar.src = isDeveloper ? DEVELOPER_AVATAR : OWNER_AVATAR;
       avatar.style.objectPosition = isDeveloper ? '50% 28%' : '50% 18%';
     }
-  }
-
-  function loadStaff() {
-    try {
-      var list = JSON.parse(localStorage.getItem(STAFF_KEY) || '[]');
-      return Array.isArray(list) ? list : [];
-    } catch (_) {
-      return [];
-    }
-  }
-
-  function saveStaff(list) {
-    localStorage.setItem(STAFF_KEY, JSON.stringify(list));
-  }
-
-  function findStaffAccount(username, password) {
-    var needle = String(username || '').trim().toLowerCase();
-    var pass = String(password || '');
-    var builtin = findBuiltinStaff(needle);
-    if (builtin && String(builtin.password || '') === pass) return builtin;
-    return loadStaff().find(function (item) {
-      return String(item.username || '').trim().toLowerCase() === needle && String(item.password || '') === pass;
-    }) || null;
   }
 
   function loadCosts() {
@@ -1281,18 +1255,14 @@
   }
 
   async function fetchAllRequestsFromSupabase() {
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !SUPABASE_TABLE) return [];
-    var url = SUPABASE_URL + '/rest/v1/' + encodeURIComponent(SUPABASE_TABLE) + '?select=*&order=submittedAt.desc.nullslast,createdAt.desc.nullslast';
-    var res = await fetch(url, {
+    var res = await adminFetch('/api/admin/registrations', {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
-      },
+      headers: { Accept: 'application/json' },
     });
-    if (!res.ok) throw new Error('Failed loading Supabase data');
-    var list = await res.json();
+    if (res.status === 401) throw new Error('Admin session expired. Sign in again.');
+    if (!res.ok) throw new Error('Failed loading registration data');
+    var payload = await res.json();
+    var list = payload && payload.rows ? payload.rows : [];
     return (Array.isArray(list) ? list : []).map(normalizeRequest);
   }
 
@@ -1327,33 +1297,18 @@
   }
 
   async function updateStatusInSupabase(item, nextStatus) {
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !SUPABASE_TABLE) return false;
-    var url = SUPABASE_URL + '/rest/v1/' + encodeURIComponent(SUPABASE_TABLE) + '?id=eq.' + encodeURIComponent(item.id);
-    var res = await fetch(url, {
+    var res = await adminFetch('/api/admin/registrations/' + encodeURIComponent(item.id), {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
-        Prefer: 'return=minimal',
-      },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ status: nextStatus }),
     });
     return res.ok;
   }
 
   async function deleteInSupabase(item) {
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !SUPABASE_TABLE) return false;
-    var url = SUPABASE_URL + '/rest/v1/' + encodeURIComponent(SUPABASE_TABLE) + '?id=eq.' + encodeURIComponent(item.id);
-    var res = await fetch(url, {
+    var res = await adminFetch('/api/admin/registrations/' + encodeURIComponent(item.id), {
       method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
-        Prefer: 'return=minimal',
-      },
+      headers: { Accept: 'application/json' },
     });
     return res.ok;
   }
@@ -1684,6 +1639,10 @@
       html += modalField('Remaining', booking.remaining ? '₪' + booking.remaining : '-');
       html += modalField('Source', booking.source === 'online' ? 'Online' : 'Manual');
       html += '</div>';
+      html +=
+        '<div data-commerce-payment-slot="' +
+        escapeHtml(booking.commerceOrderId) +
+        '"><p class="admin-muted">Loading gateway payment details…</p></div>';
       if (!isViewOnly()) {
         html +=
           '<div class="admin-modal-actions" data-booking-admin="' +
@@ -1769,14 +1728,16 @@
     body.innerHTML = html;
     modal.hidden = false;
 
+    if (booking.commerceOrderId) {
+      loadCommercePaymentDetail(booking.commerceOrderId, body);
+    }
+
     var bookingAdmin = body.querySelector('[data-booking-admin]');
     if (bookingAdmin) {
       var orderId = bookingAdmin.getAttribute('data-booking-admin');
       bookingAdmin.querySelectorAll('[data-booking-action]').forEach(function (btn) {
         btn.addEventListener('click', async function () {
           var action = btn.getAttribute('data-booking-action');
-          var adminKey = getAdminApiKey({ prompt: true });
-          if (!adminKey) return;
           var payload = { actor: sessionStorage.getItem('nawalAdminStaffName') || 'staff' };
           if (action === 'offline_payment') {
             var amount = window.prompt('Payment amount (ILS):');
@@ -1805,12 +1766,9 @@
             };
           }
           try {
-            var res = await fetch('/api/admin/bookings', {
+            var res = await adminFetch('/api/admin/bookings', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'x-admin-key': adminKey,
-              },
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload),
             });
             var data = await res.json().catch(function () { return {}; });
@@ -2489,219 +2447,32 @@
   function renderStaff(root) {
     var session = currentSession();
     if (!isOwner(session)) {
-      root.innerHTML = renderEmptyState('Only the owner or web developer can add and edit team permissions.');
+      root.innerHTML = renderEmptyState('Only the owner or web developer can view team access settings.');
       return;
     }
 
-    var staff = loadStaff().filter(function (member) {
-      return !member.locked && !isReservedUsername(member.username);
-    });
-    var html = '<div class="admin-page-head"><div><h1>Team</h1><p>Create staff logins and choose exactly which sections each person can open. Team settings stay on this device with Nawal’s account.</p></div></div>';
-    html += '<div class="admin-staff-layout">';
-
-    html += '<section class="admin-panel admin-staff-form-card">';
-    html += '<div class="admin-panel__head"><div><h2 id="staffFormTitle">Add team member</h2><p>Username, password, and the pages they may use.</p></div></div>';
-    html += '<form id="staffForm" class="admin-staff-form" novalidate>';
-    html += '<input type="hidden" name="staffId" value="">';
-    html += '<label>Full name<input name="name" type="text" placeholder="" required autocomplete="off"></label>';
-    html += '<label>Username<input name="username" type="text" placeholder="" required autocomplete="off"></label>';
-    html += '<label>Password<input name="password" type="text" placeholder="Choose a password" required autocomplete="off"></label>';
-    html += '<p class="admin-staff-form__hint" id="staffPasswordHint">They will use this username and password on the admin login page.</p>';
-    html += '<p class="admin-staff-form__section">Permissions</p>';
-    html += '<div class="admin-perm-grid">';
-    STAFF_PERMISSIONS.forEach(function (perm) {
-      html += '<label class="admin-perm"><input type="checkbox" name="perm" value="' + perm.id + '"><span><strong>' + escapeHtml(perm.label) + '</strong><em>' + escapeHtml(perm.hint) + '</em></span></label>';
-    });
-    html += '</div>';
-    html += '<p class="form-error" id="staffFormError" aria-live="polite"></p>';
-    html += '<div class="admin-staff-form__actions">';
-    html += '<button type="submit" class="admin-btn admin-btn--primary" id="staffSubmitBtn">Save team member</button>';
-    html += '<button type="button" class="admin-btn admin-btn--ghost" id="staffResetBtn" hidden>Cancel edit</button>';
-    html += '</div></form></section>';
-
-    html += '<section class="admin-staff-list">';
+    var html = '<div class="admin-page-head"><div><h1>Team</h1><p>Sign-in accounts are configured on the server — not in this browser.</p></div></div>';
+    html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Server configuration</h2></div></div>';
+    html += '<p class="admin-muted">Set <code>ADMIN_OWNER_PASSWORD</code>, optional <code>ADMIN_DEVELOPER_PASSWORD</code>, and team members in <code>ADMIN_TEAM_ACCOUNTS</code> (JSON: username, password, name, permissions as workspace view ids).</p>';
+    html += '<p class="admin-muted">Built-in staff (e.g. Shatha / <code>shada</code>) still need a password entry in <code>ADMIN_TEAM_ACCOUNTS</code>. Rotate any credentials that were ever shipped in client JavaScript, then bump <code>ADMIN_AUTH_EPOCH</code> to sign everyone out.</p>';
+    html += '<p class="admin-muted" dir="rtl">حسابات الفريق تُضبط في متغيرات البيئة على السيرفر فقط.</p></section>';
+    html += '<div class="admin-staff-layout"><section class="admin-staff-list">';
     html += '<article class="admin-staff-card is-owner">';
-    html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar admin-staff-card__avatar--photo admin-staff-card__avatar--owner"><img src="' + OWNER_AVATAR + '" alt="" width="40" height="40"></span><div><p class="admin-staff-card__name">' + escapeHtml(OWNER_NAME) + '</p><p class="admin-staff-card__meta">nawal · owner account</p></div><span class="admin-staff-card__badge">Full access</span></div>';
-    html += '<p class="admin-staff-card__note">This account can open every section, add staff, and change permissions.</p>';
-    html += '</article>';
-
+    html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar admin-staff-card__avatar--photo admin-staff-card__avatar--owner"><img src="' + OWNER_AVATAR + '" alt="" width="40" height="40"></span><div><p class="admin-staff-card__name">' + escapeHtml(OWNER_NAME) + '</p><p class="admin-staff-card__meta">nawal · owner</p></div><span class="admin-staff-card__badge">Full access</span></div></article>';
     html += '<article class="admin-staff-card is-owner is-locked">';
-    html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar admin-staff-card__avatar--photo"><img src="' + DEVELOPER_AVATAR + '" alt="" width="40" height="40"></span><div><p class="admin-staff-card__name">' + escapeHtml(DEVELOPER_NAME) + '</p><p class="admin-staff-card__meta">mohammad · web developer</p></div><span class="admin-staff-card__badge">Full access</span></div>';
-    html += '<p class="admin-staff-card__note">Built-in developer account with the same access as Nawal. It cannot be edited or removed.</p>';
-    html += '</article>';
-
+    html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar admin-staff-card__avatar--photo"><img src="' + DEVELOPER_AVATAR + '" alt="" width="40" height="40"></span><div><p class="admin-staff-card__name">' + escapeHtml(DEVELOPER_NAME) + '</p><p class="admin-staff-card__meta">mohammad · developer</p></div><span class="admin-staff-card__badge">Full access</span></div></article>';
     BUILTIN_STAFF.forEach(function (member) {
       var perms = Array.isArray(member.permissions) ? member.permissions : [];
       html += '<article class="admin-staff-card is-locked">';
-      html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar">' + escapeHtml(initials(member.name)) + '</span><div><p class="admin-staff-card__name">' + escapeHtml(member.name) + '</p><p class="admin-staff-card__meta">' + escapeHtml(member.username) + ' · built-in team login</p></div><span class="admin-staff-card__badge">' + (member.viewOnly ? 'View only' : 'Full in assigned sections') + '</span></div>';
+      html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar">' + escapeHtml(initials(member.name)) + '</span><div><p class="admin-staff-card__name">' + escapeHtml(member.name) + '</p><p class="admin-staff-card__meta">' + escapeHtml(member.username) + '</p></div></div>';
       html += '<div class="admin-staff-card__perms">';
-      if (!perms.length) {
-        html += '<span class="admin-place-chip">No sections</span>';
-      } else {
-        perms.forEach(function (perm) {
-          html += '<span class="admin-place-chip">' + escapeHtml(permissionLabel(perm)) + '</span>';
-        });
-      }
-      html += '</div>';
-      html += '<p class="admin-staff-card__note">Built-in account. Access is fixed in the system and cannot be edited or removed here.</p>';
-      html += '</article>';
-    });
-
-    if (!staff.length) {
-      html += '<div class="admin-empty admin-empty--soft"><p class="admin-empty__title">No team members yet</p><p class="admin-empty__hint">Add someone on the left and choose the pages they should see.</p></div>';
-    }
-
-    staff.forEach(function (member) {
-      var perms = Array.isArray(member.permissions) ? member.permissions : [];
-      html += '<article class="admin-staff-card" data-staff-id="' + escapeHtml(member.id) + '">';
-      html += '<div class="admin-staff-card__head"><span class="admin-staff-card__avatar">' + escapeHtml(initials(member.name)) + '</span><div><p class="admin-staff-card__name">' + escapeHtml(member.name) + '</p><p class="admin-staff-card__meta">' + escapeHtml(member.username) + ' · team login</p></div></div>';
-      html += '<div class="admin-staff-card__perms">';
-      if (!perms.length) {
-        html += '<span class="admin-perm-pill is-empty">No pages assigned</span>';
-      } else {
-        perms.forEach(function (id) {
-          html += '<span class="admin-perm-pill">' + escapeHtml(permissionLabel(id)) + '</span>';
-        });
-      }
-      html += '</div>';
-      html += '<div class="admin-staff-card__actions">';
-      html += '<button type="button" class="admin-btn admin-btn--ghost" data-staff-edit="' + escapeHtml(member.id) + '">Edit permissions</button>';
-      html += '<button type="button" class="admin-btn admin-btn--danger" data-staff-delete="' + escapeHtml(member.id) + '">Remove</button>';
+      perms.forEach(function (perm) {
+        html += '<span class="admin-place-chip">' + escapeHtml(permissionLabel(perm)) + '</span>';
+      });
       html += '</div></article>';
     });
-
     html += '</section></div>';
     root.innerHTML = html;
-    bindStaffForm(root);
-  }
-
-  function fillStaffForm(form, member) {
-    var title = document.getElementById('staffFormTitle');
-    var hint = document.getElementById('staffPasswordHint');
-    var submit = document.getElementById('staffSubmitBtn');
-    var reset = document.getElementById('staffResetBtn');
-    var error = document.getElementById('staffFormError');
-    if (error) error.textContent = '';
-    form.staffId.value = member ? member.id : '';
-    form.name.value = member ? member.name : '';
-    form.username.value = member ? member.username : '';
-    form.password.value = '';
-    form.password.required = !member;
-    form.password.placeholder = member ? 'Leave blank to keep current password' : 'Choose a password';
-    Array.prototype.forEach.call(form.querySelectorAll('input[name="perm"]'), function (input) {
-      input.checked = !!(member && (member.permissions || []).indexOf(input.value) !== -1);
-    });
-    if (title) title.textContent = member ? 'Edit permissions' : 'Add team member';
-    if (hint) hint.textContent = member ? 'Leave the password blank to keep the current one.' : 'They will use this username and password on the admin login page.';
-    if (submit) submit.textContent = member ? 'Update team member' : 'Save team member';
-    if (reset) reset.hidden = !member;
-  }
-
-  function bindStaffForm(root) {
-    var form = document.getElementById('staffForm');
-    if (!form) return;
-    var error = document.getElementById('staffFormError');
-    var reset = document.getElementById('staffResetBtn');
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (error) error.textContent = '';
-      var id = String(form.staffId.value || '').trim();
-      var name = String(form.name.value || '').trim();
-      var username = String(form.username.value || '').trim().toLowerCase();
-      var password = String(form.password.value || '');
-      var permissions = Array.prototype.map.call(form.querySelectorAll('input[name="perm"]:checked'), function (input) {
-        return input.value;
-      });
-
-      if (!name || !username) {
-        if (error) error.textContent = 'Name and username are required.';
-        return;
-      }
-      if (!/^[a-z0-9._-]{2,24}$/.test(username)) {
-        if (error) error.textContent = 'Username must be 2–24 letters, numbers, dots, dashes, or underscores.';
-        return;
-      }
-      if (isReservedUsername(username)) {
-        if (error) error.textContent = 'That username belongs to a built-in account.';
-        return;
-      }
-      if (!id && password.length < 4) {
-        if (error) error.textContent = 'Password must be at least 4 characters.';
-        return;
-      }
-      if (id && password && password.length < 4) {
-        if (error) error.textContent = 'New password must be at least 4 characters.';
-        return;
-      }
-      if (!permissions.length) {
-        if (error) error.textContent = 'Choose at least one permission so they can open the workspace.';
-        return;
-      }
-
-      var list = loadStaff();
-      var taken = list.some(function (item) {
-        return item.id !== id && String(item.username || '').toLowerCase() === username;
-      });
-      if (taken) {
-        if (error) error.textContent = 'That username is already in use.';
-        return;
-      }
-
-      if (id) {
-        var existing = list.find(function (item) { return item.id === id; });
-        if (!existing || existing.locked || isReservedUsername(existing.username)) {
-          if (error) error.textContent = existing && (existing.locked || isReservedUsername(existing.username))
-            ? 'This account cannot be edited.'
-            : 'Team member not found.';
-          return;
-        }
-        existing.name = name;
-        existing.username = username;
-        existing.permissions = permissions;
-        if (password) existing.password = password;
-        existing.updatedAt = new Date().toISOString();
-      } else {
-        list.push({
-          id: 'staff-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 6),
-          name: name,
-          username: username,
-          password: password,
-          permissions: permissions,
-          createdAt: new Date().toISOString(),
-        });
-      }
-
-      saveStaff(list);
-      renderStaff(root);
-    });
-
-    if (reset) {
-      reset.addEventListener('click', function () {
-        fillStaffForm(form, null);
-      });
-    }
-
-    root.querySelectorAll('[data-staff-edit]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var member = loadStaff().find(function (item) { return item.id === btn.getAttribute('data-staff-edit'); });
-        if (member) {
-          fillStaffForm(form, member);
-          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    root.querySelectorAll('[data-staff-delete]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var id = btn.getAttribute('data-staff-delete');
-        var member = loadStaff().find(function (item) { return item.id === id; });
-        if (!member || member.locked || isReservedUsername(member.username)) return;
-        if (!window.confirm('Remove ' + member.name + ' from the team? They will no longer be able to sign in.')) return;
-        saveStaff(loadStaff().filter(function (item) { return item.id !== id; }));
-        renderStaff(root);
-      });
-    });
   }
 
   function renderSales(root, rows, filters) {
@@ -2821,34 +2592,66 @@
     feedback: 'Feedback form',
   };
 
-  function getAdminApiKey(options) {
-    var opts = options || {};
-    var fromServer = String(CONFIG.adminApiKey || '').trim();
-    if (fromServer) return fromServer;
-    var key = sessionStorage.getItem('nawalAdminApiKey') || '';
-    if (key) return key;
-    if (opts.prompt) {
-      key = window.prompt('Enter admin API key (ADMIN_API_KEY from server env):') || '';
-      if (key) sessionStorage.setItem('nawalAdminApiKey', key);
-    }
-    return key || '';
+  function loadCommercePaymentDetail(orderId, body) {
+    var slot = body.querySelector('[data-commerce-payment-slot="' + orderId + '"]');
+    if (!slot) return;
+    adminFetch('/api/admin/commerce-orders?orderId=' + encodeURIComponent(orderId), {
+      headers: { Accept: 'application/json' },
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (result.ok === false && result.data && result.data.error === 'Unauthorized') {
+          slot.innerHTML = '<p class="admin-muted">Sign in again to view commerce payment details.</p>';
+          return;
+        }
+        if (!result.ok || !result.data || !result.data.order) {
+          slot.innerHTML = '<p class="admin-muted">Commerce order not found or unavailable.</p>';
+          return;
+        }
+        var o = result.data.order;
+        var att = result.data.attempt;
+        var html = '<p class="admin-modal-section__title">Commerce order (Hyp)</p><div class="admin-modal-grid">';
+        html += modalField('Order ID', o.id);
+        html += modalField('Order status', o.status);
+        html += modalField('Payment status', o.payment_status);
+        html += modalField('Charge amount', o.metadata && o.metadata.chargeAmount != null ? '₪' + o.metadata.chargeAmount : o.total ? '₪' + o.total : '—');
+        html += modalField('Currency', o.currency || '—');
+        html += modalField('Checkout created', formatDisplayDate(o.created_at));
+        html += modalField('Last payment update', o.metadata && o.metadata.lastPaymentUpdateAt ? formatDisplayDate(o.metadata.lastPaymentUpdateAt) : o.metadata && o.metadata.paymentAttemptUpdatedAt ? formatDisplayDate(o.metadata.paymentAttemptUpdatedAt) : '—');
+        if (att) {
+          html += modalField('Attempt status', att.status);
+          html += modalField('Correlation ID', att.correlation_id);
+          html += modalField('SIGN result', att.sign_result || '—');
+          html += modalField('Last event', att.last_event || '—');
+          html += modalField('Hyp transaction ID', att.hyp_transaction_id || '—');
+          html += modalField('Failure code', att.failure_code || o.metadata.paymentFailureCode || '—');
+          html += modalField('Failure reason', att.failure_reason || o.metadata.paymentFailureReason || '—', true);
+          html += modalField('Attempt updated', formatDisplayDate(att.updated_at));
+        } else {
+          html += modalField('Attempt status', o.metadata && o.metadata.paymentAttemptStatus ? o.metadata.paymentAttemptStatus : '— (no attempt row — run migration 006)');
+        }
+        html += '</div>';
+        if (att && att.status === 'awaiting_customer') {
+          html += '<p class="admin-muted">Customer may still be on Hyp or declined on-page without a return URL — not marked failed automatically.</p>';
+        }
+        slot.innerHTML = html;
+      })
+      .catch(function () {
+        slot.innerHTML = '<p class="admin-muted">Could not load commerce payment details.</p>';
+      });
   }
 
   function renderInvoicesSetup(root) {
     root.innerHTML =
-      '<div class="admin-page-head"><div><h1>Invoices</h1><p>Payment receipts require a server API key.</p></div></div>' +
-      '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Setup</h2></div></div>' +
-      '<p class="admin-muted">Add <code>ADMIN_API_KEY</code> to your environment file (e.g. <code>.env.local</code>), set any long random value, then <strong>restart</strong> the dev server.</p>' +
-      '<p class="admin-muted" dir="rtl">أضيفي المتغير <code>ADMIN_API_KEY</code> في ملف البيئة (مثل <code>.env.local</code>) بقيمة سرية طويلة، ثم أعيدي تشغيل السيرفر.</p>' +
-      '<p class="admin-muted">Example: <code>ADMIN_API_KEY=nawal-local-…</code></p>' +
-      '<button type="button" class="admin-btn admin-btn--primary" id="invManualKey">I already set the key — enter manually</button></section>';
-    var btn = document.getElementById('invManualKey');
-    if (btn) {
-      btn.addEventListener('click', function () {
-        var k = getAdminApiKey({ prompt: true });
-        if (k) renderInvoices(root);
-      });
-    }
+      '<div class="admin-page-head"><div><h1>Invoices</h1><p>Payment receipts require an authenticated admin session.</p></div></div>' +
+      '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Sign in required</h2></div></div>' +
+      '<p class="admin-muted">Sign out and sign in again at <a href="/admin">/admin</a>. The server must have <code>ADMIN_SESSION_SECRET</code> configured.</p>' +
+      '<p class="admin-muted" dir="rtl">سجّلي الخروج ثم الدخول من <a href="/admin">/admin</a>. يجب ضبط <code>ADMIN_SESSION_SECRET</code> على السيرفر.</p>' +
+      '</section>';
   }
 
   function getInvoiceFilters() {
@@ -2927,8 +2730,6 @@
   }
 
   function openInvoiceModal(invoiceId) {
-    var key = getAdminApiKey();
-    if (!key) return;
     var modal = document.getElementById('adminModal');
     var body = document.getElementById('adminModalBody');
     var title = document.getElementById('adminModalTitle');
@@ -2937,8 +2738,8 @@
     body.innerHTML = '<p class="admin-muted">Loading…</p>';
     modal.hidden = false;
 
-    fetch('/api/admin/invoices/' + encodeURIComponent(invoiceId), {
-      headers: { Accept: 'application/json', 'x-admin-key': key },
+    adminFetch('/api/admin/invoices/' + encodeURIComponent(invoiceId), {
+      headers: { Accept: 'application/json' },
     })
       .then(function (res) {
         return res.json().then(function (data) {
@@ -3006,9 +2807,7 @@
         if (pdf) {
           pdf.addEventListener('click', function (e) {
             e.preventDefault();
-            fetch('/api/admin/invoices/' + encodeURIComponent(invoiceId) + '/pdf', {
-              headers: { 'x-admin-key': key },
-            })
+            adminFetch('/api/admin/invoices/' + encodeURIComponent(invoiceId) + '/pdf', {})
               .then(function (res) {
                 if (!res.ok) throw new Error('Download failed');
                 return res.blob();
@@ -3022,7 +2821,7 @@
                 URL.revokeObjectURL(url);
               })
               .catch(function () {
-                window.alert('Could not download PDF. Check admin API key.');
+                window.alert('Could not download PDF. Sign in again if needed.');
               });
           });
         }
@@ -3042,12 +2841,6 @@
       ICONS.refresh +
       ' Refresh</button></div><div class="admin-skeleton"><div class="admin-skeleton-block is-row"></div></div>';
 
-    var key = getAdminApiKey();
-    if (!key) {
-      renderInvoicesSetup(root);
-      return;
-    }
-
     var qs =
       '?page=' +
       filters.page +
@@ -3066,16 +2859,21 @@
       '&dateTo=' +
       encodeURIComponent(range.dateTo);
 
-    fetch('/api/admin/invoices' + qs, {
-      headers: { Accept: 'application/json', 'x-admin-key': key },
+    adminFetch('/api/admin/invoices' + qs, {
+      headers: { Accept: 'application/json' },
     })
       .then(function (res) {
         return res.json().then(function (data) {
+          if (res.status === 401) {
+            renderInvoicesSetup(root);
+            return null;
+          }
           if (!res.ok) throw new Error(data.error || 'Failed to load invoices');
           return data;
         });
       })
       .then(function (data) {
+        if (!data) return;
         if (data.code === 'TABLE_MISSING') {
           root.innerHTML =
             '<div class="admin-page-head"><div><h1>Invoices</h1></div></div>' +
@@ -3191,7 +2989,7 @@
   }
 
   async function fetchAnalyticsSummary(range) {
-    var res = await fetch('/api/analytics?range=' + encodeURIComponent(range || '7d'), {
+    var res = await adminFetch('/api/analytics?range=' + encodeURIComponent(range || '7d'), {
       headers: { Accept: 'application/json' },
     });
     var data = await res.json().catch(function () { return {}; });
@@ -3375,41 +3173,50 @@
       var username = String(form.username.value || '').trim();
       var password = String(form.password.value || '').trim();
       var remember = !(form.rememberMe && !form.rememberMe.checked);
-      if (username.toLowerCase() === USERNAME && password === PASSWORD) {
-        setSession({
-          isLoggedIn: true,
-          username: USERNAME,
-          name: OWNER_NAME,
-          role: 'owner',
-        }, remember);
-        window.location.href = '/admin/overview';
-        return;
-      }
-      if (username.toLowerCase() === DEVELOPER_USERNAME && password === DEVELOPER_PASSWORD) {
-        setSession({
-          isLoggedIn: true,
-          username: DEVELOPER_USERNAME,
-          name: DEVELOPER_NAME,
-          role: 'developer',
-        }, remember);
-        window.location.href = '/admin/overview';
-        return;
-      }
-      var staff = findStaffAccount(username, password);
-      if (staff) {
-        setSession({
-          isLoggedIn: true,
-          username: staff.username,
-          name: staff.name,
-          role: 'staff',
-          staffId: staff.id,
-          viewOnly: !!staff.viewOnly,
-          permissions: staff.permissions || [],
-        }, remember);
-        window.location.href = firstAllowedPath(currentSession());
-        return;
-      }
-      if (error) error.textContent = 'Invalid username or password.';
+      if (error) error.textContent = '';
+      adminFetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username, password: password, remember: remember }),
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, status: res.status, data: data };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.data && result.data.user) {
+            var user = result.data.user;
+            setSession(
+              {
+                isLoggedIn: true,
+                username: user.username,
+                name: user.name,
+                role: user.role,
+                staffId: user.staffId || '',
+                viewOnly: !!user.viewOnly,
+                permissions: user.permissions || [],
+              },
+              remember,
+            );
+            window.location.href =
+              user.role === 'owner' || user.role === 'developer'
+                ? '/admin/overview'
+                : firstAllowedPath(currentSession());
+            return;
+          }
+          if (result.status === 503) {
+            if (error) {
+              error.textContent =
+                'Sign-in is not configured on the server (ADMIN_SESSION_SECRET). Contact your developer.';
+            }
+            return;
+          }
+          if (error) error.textContent = 'Invalid username or password.';
+        })
+        .catch(function () {
+          if (error) error.textContent = 'Could not reach the server. Try again.';
+        });
     });
   }
 
@@ -3470,8 +3277,10 @@
         return;
       }
       if (event.target.closest('#adminLogoutBtn')) {
-        clearSession();
-        window.location.href = '/admin';
+        adminFetch('/api/admin/logout', { method: 'POST' }).finally(function () {
+          clearSession();
+          window.location.href = '/admin';
+        });
         return;
       }
       if (event.target.closest('#adminModalClose')) {
@@ -3516,6 +3325,15 @@
       window.location.href = '/admin';
       return;
     }
+
+    adminFetch('/api/admin/session', { method: 'GET', headers: { Accept: 'application/json' } })
+      .then(function (res) {
+        if (!res.ok) {
+          clearSession();
+          window.location.href = '/admin';
+        }
+      })
+      .catch(function () {});
     if (!allowedViews(session).length) {
       clearSession();
       window.location.href = '/admin';

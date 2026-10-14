@@ -1,3 +1,5 @@
+import { guardResponse, requireAdminAccess } from '@/lib/admin-auth';
+import { PERMISSION } from '@/lib/admin/permissions';
 import {
   recordOfflinePayment,
   updateBookingStatus,
@@ -5,19 +7,15 @@ import {
 } from '@/lib/commerce/booking-admin';
 import { CUSTOMER_BOOKING_STATUS } from '@/lib/commerce/constants';
 
-function authorize(request) {
-  const expected = process.env.ADMIN_API_KEY || '';
-  if (!expected) return false;
-  const header = request.headers.get('x-admin-key') || '';
-  return header === expected;
-}
-
 const ALLOWED_BOOKING_STATUSES = new Set(Object.values(CUSTOMER_BOOKING_STATUS));
 
 export async function POST(request) {
-  if (!authorize(request)) {
-    return Response.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+  const guard = await requireAdminAccess(request, {
+    permission: PERMISSION.BOOKINGS_UPDATE,
+    mutation: true,
+  });
+  const denied = guardResponse(guard);
+  if (denied) return denied;
 
   let body;
   try {

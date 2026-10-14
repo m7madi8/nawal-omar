@@ -118,11 +118,18 @@
     return paymentState;
   }
 
+  function mountWadiPayMethodPicker() {
+    var mount = document.getElementById('hypPayMethodsMount');
+    if (!mount || !cardCheckoutAvailable() || !window.nawalHypPayMethods) return;
+    window.nawalHypPayMethods.mount(mount);
+  }
+
   function refreshRegistrationSubmitLabel() {
     var submitBtn = document.querySelector('#wadiRegForm [data-submit]');
     if (!submitBtn || submitBtn.getAttribute('data-t') === 'sending') return;
     submitBtn.setAttribute('data-t', cardCheckoutAvailable() ? 'submitWithPay' : 'submitClosed');
     submitBtn.disabled = !cardCheckoutAvailable();
+    mountWadiPayMethodPicker();
     if (typeof window.wadiRumRegRefreshSubmit === 'function') {
       window.wadiRumRegRefreshSubmit();
     }
@@ -161,6 +168,9 @@
           payment: 'hyp',
           depositAmount: DEPOSIT_ILS,
           retreatRequestId: customer.requestId || '',
+          hypPayMethod:
+            (window.nawalHypPayMethods && window.nawalHypPayMethods.getSelected(document)) ||
+            'card',
           notes: notes,
           customer: {
             fullName: customer.fullName,

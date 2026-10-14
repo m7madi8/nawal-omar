@@ -141,12 +141,8 @@
       if (amount > 0) {
         if (paymentOptions.hyp) {
           html += '<p class="event-pay-label">' + t("haifa_pay_title") + "</p>";
-          html +=
-            '<input type="hidden" name="eventPayment" value="hyp">' +
-            '<p class="event-pay-option event-pay-option--card">' +
-            t("haifa_pay_card") +
-            "</p>";
-          html += '<p class="event-pay-hint">' + t("haifa_pay_online_hint") + "</p>";
+          html += '<input type="hidden" name="eventPayment" value="hyp">';
+          html += '<div id="eventHypPayMethodsMount"></div>';
         } else {
           html +=
             '<p class="event-pay-hint is-error">' + t("haifa_pay_card_unavailable") + "</p>";
@@ -154,9 +150,10 @@
       }
       paymentSection.innerHTML = html;
 
-      paymentSection.querySelectorAll('input[name="eventPayment"]').forEach(function (input) {
-        input.addEventListener("change", updateSubmitLabel);
-      });
+      if (amount > 0 && paymentOptions.hyp && global.nawalHypPayMethods) {
+        var eventMount = document.getElementById("eventHypPayMethodsMount");
+        if (eventMount) global.nawalHypPayMethods.mount(eventMount);
+      }
       updateSubmitLabel();
 
       paymentSection.querySelectorAll('input[name="eventPriceTier"]').forEach(function (input) {
@@ -259,7 +256,7 @@
       });
     }
 
-    async function startOnlineCheckout(fullName, phone, notes) {
+    async function startOnlineCheckout(fullName, phone, notes, hypPayMethod) {
       var tierInput = form.querySelector('input[name="eventPriceTier"]:checked');
       var priceTier = tierInput ? tierInput.value : selectedTier;
       var res = await fetch("/api/commerce/checkout", {
@@ -270,6 +267,7 @@
           itemId: eventId,
           priceTier: priceTier,
           payment: "hyp",
+          hypPayMethod: hypPayMethod || "card",
           customer: { fullName: fullName, phone: phone, city: cfg.city || "" },
           notes: notes,
           cancelUrl: cfg.returnPath || global.location.pathname,
@@ -334,7 +332,9 @@
             alert(t("haifa_pay_card_unavailable"));
             return;
           }
-          await startOnlineCheckout(fullName, phone, notes);
+          var hypPayMethod =
+            global.nawalHypPayMethods && global.nawalHypPayMethods.getSelected(form);
+          await startOnlineCheckout(fullName, phone, notes, hypPayMethod);
           return;
         }
 

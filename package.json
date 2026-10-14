@@ -10,6 +10,11 @@
     "start": "next start",
     "lint": "next lint",
     "test:commerce": "node scripts/test-commerce-booking.mjs",
+    "test:hyp-lifecycle": "node scripts/test-hyp-payment-lifecycle.mjs",
+    "test:security-phase-a": "node scripts/test-security-phase-a.mjs",
+    "test:security-phase-a1": "node scripts/test-security-phase-a1.mjs",
+    "test:security-phase-a2": "node scripts/test-security-phase-a2.mjs",
+    "test:security-phase-a3": "node scripts/test-security-phase-a3.mjs",
     "build:css": "tailwindcss -i ./public/legacy/css/input.css -o ./public/legacy/css/style.css --minify"
   },
   "dependencies": {

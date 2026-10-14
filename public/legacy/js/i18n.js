@@ -835,7 +835,8 @@
       retreat_wadi_checkout_pay_title: 'Secure payment',
       retreat_wadi_checkout_pay_btn: 'Pay 400 ₪ securely',
       retreat_wadi_checkout_trust: 'Encrypted checkout',
-      retreat_wadi_checkout_trust2: 'Card details are handled by our payment partner',
+      retreat_wadi_checkout_trust2:
+        'Hyp Pay — card, Apple Pay, Google Pay, and bit. Single payment only.',
       retreat_wadi_checkout_alt: 'Prefer bank transfer or Bit?',
       retreat_wadi_checkout_alt_link: 'Message us to pay another way',
       retreat_wadi_checkout_registered_banner:
@@ -1508,13 +1509,31 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_private_btn_gift: 'Gift card',
       jiva_payment_title: 'Payment',
       jiva_payment_methods: '🎟️ Payment via Bit or העברה בנקאית',
-      jiva_payment_methods_online: '💳 Secure card payment online when you register — spot confirmed after payment.',
-      jiva_payment_methods_mixed: '💳 Card payment online, or Bit / bank transfer.',
+      jiva_payment_methods_online:
+        '💳 Pay online when you register — Visa, Mastercard, Apple Pay, Google Pay, or bit (via Hyp). No installments.',
+      jiva_payment_methods_mixed:
+        '💳 Pay online — card, Apple Pay, Google Pay, or bit. No installments.',
+      hyp_pay_methods: 'Visa · Mastercard · Apple Pay · Google Pay · bit',
+      hyp_pay_no_installments: 'Single payment only — installments are not available.',
+      hyp_pay_choose: 'How would you like to pay?',
+      hyp_pay_option_card: 'Credit / debit card',
+      hyp_pay_option_apple: 'Apple Pay',
+      hyp_pay_option_bit: 'bit',
+      hyp_pay_option_hyp_hint:
+        'Choosing here does not open bit or Apple Pay automatically. On Hyp’s next page, tap the bit or Apple Pay button if it appears above the card form. If you only see card fields, wallets are not enabled yet on the Hyp merchant account.',
+      hyp_pay_hint_card:
+        'On the next page, enter your card details or use another button if Hyp shows one.',
+      hyp_pay_hint_apple:
+        'On Hyp’s next page, tap the Apple Pay button (usually Safari on iPhone/Mac). If it is missing, use card or ask Nawal to enable Apple Pay in Hyp.',
+      hyp_pay_hint_bit:
+        'On Hyp’s next page, tap the bit button (not the card form), then pay with QR in the bit app. If there is no bit button, wallets are not enabled on Hyp yet — use card or contact Nawal.',
       jiva_card_register_pay: 'Register & pay',
       haifa_pay_submit: 'Continue to secure payment',
-      haifa_pay_online_hint: 'Card payment confirms your registration immediately. Bit/bank transfer is also available.',
+      haifa_pay_online_hint:
+        'On the secure Hyp page you can pay by card, Apple Pay, Google Pay, or bit. Single charge only.',
       event_pay_submit: 'Continue to secure payment',
-      events_sh_booking_notice_card: 'Pay securely by card to confirm your spot, or register with Bit/bank transfer.',
+      events_sh_booking_notice_card:
+        'Pay online to confirm your spot — card, Apple Pay, Google Pay, or bit on the Hyp page. No installments.',
       jiva_policy_title: 'Cancellation policy',
       jiva_cancel_rule: 'No refund for cancellations made less than 8 hours before class.',
       jiva_classes_kicker: 'Our classes',
@@ -1579,7 +1598,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       haifa_register_error: 'Sorry, registration failed. Please try again.',
       haifa_pay_title: 'Payment',
       haifa_pay_amount_label: 'Amount due',
-      haifa_pay_card: 'Pay securely by card',
+      haifa_pay_card: 'Continue to secure payment (card & wallets)',
       haifa_pay_card_demo: 'Pay by card (demo — no real charge)',
       payment_demo_title: 'Trial payment (demo)',
       payment_demo_body: 'No real card charge. For local testing only.',
@@ -2452,7 +2471,8 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       retreat_wadi_checkout_pay_title: 'دفع آمن',
       retreat_wadi_checkout_pay_btn: 'ادفعي 400 ₪ بأمان',
       retreat_wadi_checkout_trust: 'دفع مشفّر',
-      retreat_wadi_checkout_trust2: 'بيانات البطاقة عند شريك الدفع فقط',
+      retreat_wadi_checkout_trust2:
+        'Hyp Pay — بطاقة، Apple Pay، Google Pay وbit. دفعة واحدة فقط.',
       retreat_wadi_checkout_alt: 'تفضّلين حوالة أو Bit؟',
       retreat_wadi_checkout_alt_link: 'راسلينا للدفع بطريقة أخرى',
       retreat_wadi_checkout_registered_banner: 'وصل طلب التسجيل — أكملي الدفع أدناه لتثبيت مكانك.',
@@ -3123,13 +3143,31 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       jiva_private_btn_gift: 'بطاقة هدية',
       jiva_payment_title: 'الدفع',
       jiva_payment_methods: '🎟️ الدفع عن طريق Bit أو העברה בنקאית',
-      jiva_payment_methods_online: '💳 الدفع الآمن بالبطاقة عند التسجيل — يتم تأكيد المكان بعد الدفع.',
-      jiva_payment_methods_mixed: '💳 الدفع بالبطاقة أونلاين، أو Bit / حوالة بنكية.',
+      jiva_payment_methods_online:
+        '💳 ادفعي أونلاين عند التسجيل — Visa، Mastercard، Apple Pay، Google Pay أو bit (عبر Hyp). بدون تقسيط.',
+      jiva_payment_methods_mixed:
+        '💳 الدفع أونلاين — بطاقة، Apple Pay، Google Pay أو bit. بدون تقسيط.',
+      hyp_pay_methods: 'Visa · Mastercard · Apple Pay · Google Pay · bit',
+      hyp_pay_no_installments: 'دفعة واحدة فقط — التقسيط غير متاح.',
+      hyp_pay_choose: 'كيف تفضّلين الدفع؟',
+      hyp_pay_option_card: 'بطاقة ائتمان / חיוב',
+      hyp_pay_option_apple: 'Apple Pay',
+      hyp_pay_option_bit: 'bit',
+      hyp_pay_option_hyp_hint:
+        'الاختيار هنا لا يفتح bit أو Apple Pay مباشرة. في صفحة Hyp التالية اضغطي زر bit أو Apple Pay إن ظهر فوق حقول البطاقة. إن ظهرت البطاقة فقط، المحافظ غير مفعّلة بعد على حساب Hyp.',
+      hyp_pay_hint_card:
+        'في الصفحة التالية أدخلي بيانات البطاقة، أو استخدمي زراً آخر إن ظهر على Hyp.',
+      hyp_pay_hint_apple:
+        'في صفحة Hyp التالية اضغطي زر Apple Pay (غالباً Safari على آيفون/ماك). إن لم يظهر الزر، ادفعي بالبطاقة أو اطلبي تفعيل Apple Pay في Hyp.',
+      hyp_pay_hint_bit:
+        'في صفحة Hyp التالية اضغطي زر bit (وليس حقول البطاقة)، ثم ادفعي بـ QR من تطبيق bit. إن لم يظهر زر bit، الحساب لم يُفعّل bit بعد — ادفعي بالبطاقة أو تواصلي مع نوال.',
       jiva_card_register_pay: 'سجّلي وادفعي',
       haifa_pay_submit: 'متابعة للدفع الآمن',
-      haifa_pay_online_hint: 'الدفع بالبطاقة يؤكّد تسجيلك فوراً. Bit والحوالة البنكية متاحان أيضاً.',
+      haifa_pay_online_hint:
+        'في صفحة Hyp الآمنة يمكن الدفع بالبطاقة أو Apple Pay أو Google Pay أو bit. دفعة واحدة فقط.',
       event_pay_submit: 'متابعة للدفع الآمن',
-      events_sh_booking_notice_card: 'ادفعي بالبطاقة لتثبيت مكانك، أو سجّلي عبر Bit / حوالة بنكية.',
+      events_sh_booking_notice_card:
+        'ادفعي أونلاين لتثبيت مكانك — بطاقة، Apple Pay، Google Pay أو bit في صفحة Hyp. بدون تقسيط.',
       jiva_policy_title: 'سياسة الإلغاء',
       jiva_cancel_rule: 'لا يُسترد المبلغ عند الإلغاء قبل أقل من 8 ساعات من موعد الدرس.',
       jiva_classes_kicker: 'حصصنا',
@@ -3194,7 +3232,7 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
       haifa_register_error: 'تعذر إرسال التسجيل، حاولي مرة أخرى.',
       haifa_pay_title: 'الدفع',
       haifa_pay_amount_label: 'المبلغ',
-      haifa_pay_card: 'الدفع الآمن بالبطاقة',
+      haifa_pay_card: 'متابعة للدفع الآمن (بطاقة ومحافظ)',
       haifa_pay_card_demo: 'الدفع بالبطاقة (تجريبي — بدون خصم حقيقي)',
       payment_demo_title: 'دفع تجريبي',
       payment_demo_body: 'لا يتم خصم مبلغ حقيقي. للاختبار المحلي فقط.',
@@ -3256,6 +3294,11 @@ This retreat is not only a trip to a beautiful place; it is a real invitation to
   }
 
   function getText(lang, key) {
+    if (key === undefined) {
+      key = lang;
+      lang = getStoredLang() || 'ar';
+    }
+    if (lang !== 'en' && lang !== 'ar') lang = 'en';
     var t = translations[lang] || translations.en;
     return t[key] != null ? t[key] : (translations.en[key] || key);
   }
