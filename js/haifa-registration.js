@@ -129,10 +129,17 @@
       updateSubmitLabel();
     }
 
+    function portalModal(el) {
+      if (el && el.parentElement && el.parentElement !== document.body) {
+        document.body.appendChild(el);
+      }
+    }
+
     function openModal(pkgKey) {
       selectedPackageKey = pkgKey || "trial";
       selectedEl.textContent = t(packageLabelKeys[selectedPackageKey] || packageLabelKeys.trial);
       renderPaymentChoices();
+      portalModal(modal);
       modal.hidden = false;
       document.body.style.overflow = "hidden";
     }

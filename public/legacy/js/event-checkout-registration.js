@@ -198,7 +198,14 @@
       });
     }
 
+    function portalModal(el) {
+      if (el && el.parentElement && el.parentElement !== document.body) {
+        document.body.appendChild(el);
+      }
+    }
+
     function openModal() {
+      portalModal(modal);
       modal.hidden = false;
       document.body.style.overflow = "hidden";
       var nameInput = form.querySelector('[name="fullName"]');

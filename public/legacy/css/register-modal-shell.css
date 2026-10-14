@@ -1,10 +1,19 @@
 /**
  * Scrollable, safe-area-aware registration / payment modals (Haifa, events).
  */
+.haifa-register-modal:not([hidden]),
+.sh-register-modal:not([hidden]),
+.nc-register-modal:not([hidden]),
+.ib-register-modal:not([hidden]) {
+  z-index: 300;
+}
+
 .haifa-register-modal,
 .sh-register-modal,
 .nc-register-modal,
 .ib-register-modal {
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,6 +53,10 @@
   word-break: break-word;
 }
 
+.hyp-pay-methods {
+  margin: 0.5rem 0 0;
+}
+
 @media (max-width: 640px) {
   .hyp-pay-methods__grid {
     grid-template-columns: 1fr;
@@ -52,11 +65,39 @@
   .hyp-pay-methods__chip {
     min-height: 2.5rem;
   }
+}
+
+@media (max-width: 540px) {
+  .haifa-register-modal,
+  .sh-register-modal,
+  .nc-register-modal,
+  .ib-register-modal {
+    padding: 0;
+    align-items: stretch;
+  }
 
   .haifa-register-card,
   .sh-register-card,
   .nc-register-card,
   .ib-register-card {
-    padding: 0.9rem 0.85rem 1rem;
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    min-height: 100svh;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: max(0.75rem, env(safe-area-inset-top, 0px))
+      max(0.85rem, env(safe-area-inset-right, 0px))
+      max(1rem, env(safe-area-inset-bottom, 0px))
+      max(0.85rem, env(safe-area-inset-left, 0px));
+  }
+
+  .haifa-submit-btn,
+  .sh-register-form .haifa-btn,
+  .nc-register-form button[type="submit"],
+  .ib-register-form button[type="submit"] {
+    width: 100%;
   }
 }
