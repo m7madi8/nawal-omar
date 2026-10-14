@@ -3,8 +3,9 @@ import { PERMISSION } from '@/lib/admin/permissions';
 import { getOrder, getOrderItems } from '@/lib/commerce/orders';
 import { getLatestPaymentAttemptForOrder } from '@/lib/commerce/payment/attempts';
 import { supabaseSelect, SUPABASE_TABLE_ORDERS } from '@/lib/commerce/supabase';
+import { deriveAdminPaymentOutcome } from '@/lib/commerce/admin-payment-outcome';
 
-function sanitizeOrderForAdmin(order) {
+function sanitizeOrderForAdmin(order, attempt = null) {
   if (!order) return null;
   const customer = order.customer || {};
   return {
@@ -36,6 +37,10 @@ function sanitizeOrderForAdmin(order) {
       paymentAttemptUpdatedAt: order.metadata?.paymentAttemptUpdatedAt,
       lastPaymentUpdateAt: order.metadata?.lastPaymentUpdateAt,
       hypTransactionId: order.metadata?.hypTransactionId,
+      paymentOutcomeUnknown: Boolean(order.metadata?.paymentOutcomeUnknown),
+      paymentFinalizationState: order.metadata?.paymentFinalizationState || null,
+      paymentFinalizationError: order.metadata?.paymentFinalizationError || null,
+      adminPaymentOutcome: deriveAdminPaymentOutcome(order, attempt),
     },
   };
 }
@@ -77,7 +82,7 @@ export async function GET(request) {
     const attempt = await getLatestPaymentAttemptForOrder(orderId);
     return Response.json({
       ok: true,
-      order: sanitizeOrderForAdmin(order),
+      order: sanitizeOrderForAdmin(order, attempt),
       items: (items || []).map((item) => ({
         id: item.id,
         commerce_type: item.commerce_type,
@@ -99,6 +104,6 @@ export async function GET(request) {
 
   return Response.json({
     ok: true,
-    orders: rows.map(sanitizeOrderForAdmin),
+    orders: rows.map((row) => sanitizeOrderForAdmin(row)),
   });
 }

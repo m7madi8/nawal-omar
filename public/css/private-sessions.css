@@ -718,6 +718,27 @@
   justify-content: center;
 }
 
+html[dir="rtl"] .ps-hero__title,
+html[dir="rtl"] .ps-hero__title.display-xl {
+  line-height: 1.38;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  font-size: clamp(1.85rem, 7.2vw, 3.1rem);
+}
+
+html[dir="rtl"] .ps-hero__title-line {
+  line-height: 1.38;
+}
+
+html[dir="rtl"] .ps-hero__lead {
+  max-width: 100%;
+  line-height: 1.7;
+}
+
+html[dir="rtl"] .ps-hero__title .italic {
+  font-style: normal;
+}
+
 /* ---------- Reduced motion (local safety net; primary handling
    is global via .reveal / GSAP setup) ---------- */
 @media (prefers-reduced-motion: reduce) {

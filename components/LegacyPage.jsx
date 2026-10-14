@@ -102,7 +102,12 @@ export default function LegacyPage({
       <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
       {(isAdmin
         ? filteredScripts
-        : [{ src: '/js/thank-you-modal.js' }, { src: '/js/site-analytics.js' }, ...filteredScripts]
+        : [
+            { src: '/api/public/site-config' },
+            { src: '/js/thank-you-modal.js' },
+            { src: '/js/site-analytics.js' },
+            ...filteredScripts,
+          ]
       ).map((script, index) => (
           <Script key={script.src + index} src={script.src} strategy="afterInteractive" />
       ))}

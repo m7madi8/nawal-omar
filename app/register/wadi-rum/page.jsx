@@ -59,7 +59,7 @@ const html = `
         </ol>
       </div>
 
-      <form id="wadiRegForm" data-supabase-url="https://xzxyskufrqansbhsbdkt.supabase.co" data-supabase-anon-key="sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph" data-supabase-table="retreat_requests" data-ny-thanks="off" novalidate>
+      <form id="wadiRegForm" data-ny-thanks="off" novalidate>
         <p class="reg-required-note" data-t="requiredNote">All fields are required unless marked optional.</p>
 
         <div class="reg-hp" aria-hidden="true">

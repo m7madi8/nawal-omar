@@ -56,7 +56,8 @@ Each Hyp checkout creates a row in `payment_attempts` (migration `006_payment_at
 | `awaiting_customer` | Hyp SIGN succeeded; customer on hosted page |
 | `sign_failed` | Hyp SIGN failed before redirect |
 | `return_received` | Browser hit `/api/payment/hyp/return` |
-| `gateway_declined` | Hyp redirect included non-zero `CCode` (authoritative decline) |
+| `gateway_declined` | Legacy label; declines are recorded after **APISign VERIFY** (`verify_failed` / order failed) |
+| `outcome_unknown` | VERIFY unreachable; order stays `processing` for manual review |
 | `verify_failed` | VERIFY failed or amount mismatch |
 | `paid_confirmed` | VERIFY succeeded and order marked paid |
 | `duplicate_return` | Idempotent repeat of an already-paid return |

@@ -719,5 +719,44 @@ html[dir="rtl"] .ny-site .retreats-subheading {
   font-family: var(--font-arabic-display) !important;
   font-weight: 400 !important;
   letter-spacing: 0;
-  line-height: 1.16;
+  line-height: 1.38;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+html[dir="rtl"] .ny-page-hero__title,
+html[dir="rtl"] .ny-world-hero__title,
+html[dir="rtl"] .ny-door__title,
+html[dir="rtl"] .ny-section__title,
+html[dir="rtl"] .ny-empty__title {
+  max-width: min(100%, 12em);
+  overflow-wrap: break-word;
+}
+
+html[dir="rtl"] .ny-page-hero__lead,
+html[dir="rtl"] .ny-world-hero__lead,
+html[dir="rtl"] .ny-door__text,
+html[dir="rtl"] .ny-empty__text {
+  max-width: min(100%, 36em);
+  overflow-wrap: break-word;
+}
+
+html[dir="rtl"] .ny-page-hero__title,
+html[dir="rtl"] .ny-world-hero__title,
+html[dir="rtl"] .ny-door__title,
+html[dir="rtl"] .ny-empty__title {
+  line-height: 1.38;
+}
+
+html[dir="rtl"] .ny-door__title {
+  font-size: clamp(1.6rem, 3.4vw, 2.55rem);
+}
+
+html[dir="rtl"] .ny-world-hero__title {
+  font-size: clamp(1.9rem, 4.6vw, 3.2rem);
+}
+
+html[dir="rtl"] .italic,
+html[dir="rtl"] .ny-empty__title .italic {
+  font-style: normal;
 }

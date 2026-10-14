@@ -4,10 +4,6 @@
 (function (global) {
   if (global.nawalRetreatRequest) return;
 
-  var SUPABASE_URL = "https://xzxyskufrqansbhsbdkt.supabase.co";
-  var SUPABASE_ANON_KEY = "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph";
-  var SUPABASE_TABLE = "retreat_requests";
-
   var EVENTS = {
     "ice-bath": {
       source: "ice-bath-registration",
@@ -65,32 +61,6 @@
     };
   }
 
-  async function submitDirect(payload) {
-    var res = await fetch(SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: "Bearer " + SUPABASE_ANON_KEY,
-        Prefer: "return=minimal"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (!res.ok) {
-      var detail = await res.text().catch(function () {
-        return "";
-      });
-      var err = new Error(detail || "Registration submit failed");
-      err.code = "SUBMIT_FAILED";
-      err.status = res.status;
-      throw err;
-    }
-
-    return { ok: true, id: payload.id };
-  }
-
   async function submitViaApi(payload) {
     var res = await fetch("/api/retreat-request", {
       method: "POST",
@@ -115,17 +85,12 @@
     return data;
   }
 
-  async function submit(payload) {
-    try {
-      var result = await submitViaApi(payload);
+  async function submit(payload, options) {
+    var result = await submitViaApi(payload);
+    if (!(options && options.skipThankYou)) {
       notifySuccess(payload);
-      return result;
-    } catch (apiErr) {
-      console.warn("[nawalRetreatRequest] API submit failed, trying direct Supabase", apiErr);
-      var fallback = await submitDirect(payload);
-      notifySuccess(payload);
-      return fallback;
     }
+    return result;
   }
 
   function notifySuccess(payload) {

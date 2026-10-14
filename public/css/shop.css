@@ -729,6 +729,9 @@ html[dir="rtl"] .shop-hero__ghost,
 html[dir="rtl"] .shop-cta__title {
   font-family: var(--font-arabic-display);
   letter-spacing: 0;
+  line-height: 1.38;
+  max-width: min(100%, 9em);
+  overflow-wrap: break-word;
 }
 
 html[dir="rtl"] .shop-hero__crumb,
@@ -742,6 +745,8 @@ html[dir="rtl"] .shop-material__label {
 html[dir="rtl"] .shop-hero__ghost {
   right: auto;
   left: -6%;
+  line-height: 0.8;
+  max-width: none;
 }
 
 html[dir="rtl"] .shop-hero__media {

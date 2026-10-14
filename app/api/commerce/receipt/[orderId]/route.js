@@ -1,4 +1,4 @@
-import { verifyBookingAccess, verifyBookingAccessLoose } from '@/lib/commerce/booking-access';
+import { isBookingAccessGranted } from '@/lib/commerce/booking-access';
 import { getOrder, getOrderItems } from '@/lib/commerce/orders';
 import { findReceiptByTransaction, listReceiptsForOrder } from '@/lib/commerce/receipts';
 import { generateReceiptPdf } from '@/lib/commerce/pdf/generate-receipt';
@@ -18,9 +18,7 @@ export async function GET(request, { params }) {
   }
 
   const phone = order.customer?.phone || '';
-  const allowed =
-    verifyBookingAccess(orderId, phone, token) || verifyBookingAccessLoose(orderId, token);
-  if (!allowed) {
+  if (!isBookingAccessGranted(request, orderId, phone, token)) {
     return Response.json({ error: 'Unauthorized' }, { status: 403 });
   }
 

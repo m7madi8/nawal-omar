@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import FeedbackFormPage from '@/components/FeedbackFormPage';
 import {
   FEEDBACK_PAGES,
+  buildFeedbackSupabaseInline,
   getFeedbackPage,
   renderStandardFeedbackForm,
 } from '@/lib/feedbackConfig';
@@ -26,6 +27,8 @@ export default async function Page({ params }) {
   const config = getFeedbackPage(slug);
   if (!config) notFound();
 
+  const feedbackSupabaseInline = buildFeedbackSupabaseInline();
+
   if (config.type === 'legacy') {
     const legacy = loadLegacyFeedbackHtml(config.legacyFile);
     return (
@@ -33,6 +36,7 @@ export default async function Page({ params }) {
         config={null}
         html={legacy.html}
         inlineScripts={legacy.scripts}
+        feedbackSupabaseInline={feedbackSupabaseInline}
       />
     );
   }
@@ -41,6 +45,7 @@ export default async function Page({ params }) {
     <FeedbackFormPage
       config={config}
       html={renderStandardFeedbackForm(config)}
+      feedbackSupabaseInline={feedbackSupabaseInline}
     />
   );
 }

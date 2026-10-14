@@ -1,6 +1,7 @@
   <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+  <!-- Supabase direct writes removed: use Next.js routes (see next.config.mjs redirects). -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Nawal Omar</title>
@@ -591,8 +592,8 @@
       }
 
       async function submitBooking(fullName, phone) {
-        var supabaseUrl = 'https://xzxyskufrqansbhsbdkt.supabase.co';
-        var supabaseKey = 'sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph';
+        var supabaseUrl = '';
+        var supabaseKey = '';
         var table = 'retreat_requests';
         var now = new Date();
         var payload = {

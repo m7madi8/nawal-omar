@@ -135,7 +135,7 @@
       }
       closeDrawer();
       form.reset();
-      if (result.via === 'stripe' && result.url) {
+      if ((result.via === 'stripe' || result.via === 'hyp') && result.url) {
         window.location.href = result.url;
         return;
       }

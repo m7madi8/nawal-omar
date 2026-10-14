@@ -1,7 +1,6 @@
 /* Nawal Yoga — shared feedback form engine */
 (function () {
   var CONFIG = window.FEEDBACK_PAGE_CONFIG;
-  var SUPABASE = window.FEEDBACK_SUPABASE || {};
   if (!CONFIG) return;
 
   var TOTAL_STEPS = 4;
@@ -15,6 +14,16 @@
 
   function qs(id) {
     return document.getElementById(id);
+  }
+
+  function showSubmitError(message) {
+    var errEl = qs('fbSubmitError');
+    if (errEl) {
+      errEl.hidden = false;
+      errEl.textContent = message;
+      return;
+    }
+    alert(message);
   }
 
   function setupStarBox(box, onSelect) {
@@ -106,6 +115,12 @@
 
   async function submitFeedback() {
     var submitBtn = qs('fbSubmitBtn');
+    var errEl = qs('fbSubmitError');
+    if (errEl) {
+      errEl.hidden = true;
+      errEl.textContent = '';
+    }
+
     var name = (qs('participantName') && qs('participantName').value.trim()) || CONFIG.defaultName;
     var phone = (qs('participantPhone') && qs('participantPhone').value.trim()) || '-';
     var feelings = Array.prototype.slice
@@ -131,6 +146,7 @@
         finalNotes: finalNotes,
       }),
       submittedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
       status: 'pending',
     };
 
@@ -140,38 +156,42 @@
     }
 
     try {
-      if (SUPABASE.url && SUPABASE.key && SUPABASE.table) {
-        await fetch(SUPABASE.url + '/rest/v1/' + encodeURIComponent(SUPABASE.table), {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            apikey: SUPABASE.key,
-            Authorization: 'Bearer ' + SUPABASE.key,
-            Prefer: 'return=minimal',
-          },
-          body: JSON.stringify(payload),
-        });
+      var res = await fetch('/api/retreat-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      var data = await res.json().catch(function () {
+        return {};
+      });
+      if (!res.ok) {
+        throw new Error(data.error || 'تعذّر إرسال التقييم. حاولي مرة أخرى.');
       }
+
+      try {
+        var saved = JSON.parse(localStorage.getItem('yogaFeedbackResponses') || '[]');
+        saved.unshift(payload);
+        localStorage.setItem('yogaFeedbackResponses', JSON.stringify(saved));
+      } catch (_) {}
+
+      var progress = qs('fbProgress');
+      var shell = qs('fbFormShell');
+      var success = qs('fbSuccessBox');
+      if (progress) progress.hidden = true;
+      if (shell) shell.hidden = true;
+      if (success) success.hidden = false;
+      if (window.nawalThankYou && typeof window.nawalThankYou.show === 'function') {
+        window.nawalThankYou.show({ name: name });
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      console.error(err);
+      showSubmitError(err.message || 'تعذّر إرسال التقييم. حاولي مرة أخرى.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'إرسال';
+      }
     }
-
-    try {
-      var saved = JSON.parse(localStorage.getItem('yogaFeedbackResponses') || '[]');
-      saved.unshift(payload);
-      localStorage.setItem('yogaFeedbackResponses', JSON.stringify(saved));
-    } catch (_) {}
-
-    var progress = qs('fbProgress');
-    var shell = qs('fbFormShell');
-    var success = qs('fbSuccessBox');
-    if (progress) progress.hidden = true;
-    if (shell) shell.hidden = true;
-    if (success) success.hidden = false;
-    if (window.nawalThankYou && typeof window.nawalThankYou.show === 'function') {
-      window.nawalThankYou.show({ name: name });
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   var prevBtn = qs('fbPrevBtn');

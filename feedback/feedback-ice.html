@@ -1854,18 +1854,7 @@
         status: "pending"
       };
 
-      try {
-        fetch("https://xzxyskufrqansbhsbdkt.supabase.co/rest/v1/retreat_requests", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph",
-            "Authorization": "Bearer sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph",
-            "Prefer": "return=minimal"
-          },
-          body: JSON.stringify(payload)
-        });
-      } catch(e) {}
+      /* Direct Supabase REST removed — use Next.js /feedback/ice-bath (server-configured submission). */
 
       try {
         const saved = JSON.parse(localStorage.getItem('yogaFeedbackResponses') || '[]');

@@ -1,6 +1,8 @@
 import { confirmHypPayFromRedirect, confirmPayment } from '@/lib/commerce/payment';
+import { verifyBookingAccessLoose } from '@/lib/commerce/booking-access';
 import { getOrder, markOrderPaid } from '@/lib/commerce/orders';
 import { updateLegacyMirrorPaid } from '@/lib/commerce/legacy-update';
+import { parseRedirectParamsPreservingOrder } from '@/lib/commerce/payment/hyp-pay/redirect';
 
 export async function POST(request) {
   let body;
@@ -17,11 +19,20 @@ export async function POST(request) {
     if (!redirectQuery) {
       return Response.json({ error: 'Missing redirect parameters' }, { status: 400 });
     }
+
+    const { map } = parseRedirectParamsPreservingOrder(redirectQuery);
+    const orderId = String(map.Order || map.Fild1 || '').trim();
+    const accessToken = String(body.accessToken || body.bookingAccess || '').trim();
+    if (!orderId || !accessToken || !verifyBookingAccessLoose(orderId, accessToken)) {
+      return Response.json({ error: 'Forbidden', code: 'CONFIRM_FORBIDDEN' }, { status: 403 });
+    }
+
     const result = await confirmHypPayFromRedirect(redirectQuery);
     if (!result.paid || !result.orderId) {
       return Response.json({
         ok: false,
         paid: false,
+        pending: Boolean(result.pending),
         orderId: result.orderId || null,
         code: result.code || 'HYP_NOT_PAID',
       });

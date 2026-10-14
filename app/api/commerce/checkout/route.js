@@ -35,6 +35,12 @@ export async function POST(request) {
           : code === 'STRIPE_MISSING' ||
               code === 'GROW_DISABLED' ||
               code === 'HYP_DISABLED' ||
+              code === 'HYP_NOT_CONFIGURED' ||
+              code === 'HYP_LIVE_TERMINAL_FORBIDDEN' ||
+              code === 'HYP_TEST_TERMINAL_IN_PRODUCTION' ||
+              code === 'DEPLOYMENT_MODE_REQUIRED' ||
+              code === 'DEPLOYMENT_MODE_INVALID' ||
+              code === 'DEPLOYMENT_MODE_CONFLICT' ||
               code === 'PAYMENT_NOT_CONFIGURED' ||
               code === 'COMMERCE_DB_NOT_READY' ||
               code === 'COMMERCE_DB_SCHEMA' ||

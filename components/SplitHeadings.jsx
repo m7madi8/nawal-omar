@@ -99,9 +99,11 @@ export default function SplitHeadings() {
         if (!el.textContent.trim()) return;
         if (el.closest('.wr-hero, .rp-hero, .haifa-hero, .event-sh-hero, .ib-hero, .baqa-hero, .ny-world-hero, .hero')) return;
         el.classList.add('is-split');
+        /* Arabic line masks clip El Messiri: GSAP detects wraps as LTR,
+           then .split-line { overflow:hidden } slices the leftover glyphs. */
         const split = new SplitText(el, {
-          type: isAr ? 'lines,words' : 'lines,chars',
-          smartWrap: true,
+          type: isAr ? 'words' : 'lines,chars',
+          smartWrap: !isAr,
           autoSplit: true,
           linesClass: 'split-line',
           wordsClass: 'split-word',
@@ -129,6 +131,19 @@ export default function SplitHeadings() {
         .filter((el) => !headingSet.has(el) && !el.closest('h1, h2.display-xl, h2.display-l, h3.display-xl') && !el.closest('[hidden]'))
         .forEach((el) => {
           if (!el.textContent.trim()) return;
+          if (isAr) {
+            el.classList.add('is-copy-in');
+            gsap.set(el, { opacity: 0, y: 18 });
+            play(el, {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease: 'power2.out',
+              force3D: true,
+              scrollTrigger: { trigger: el, start: 'top 90%', once: true, fastScrollEnd: true },
+            });
+            return;
+          }
           el.classList.add('is-split');
           const split = new SplitText(el, {
             type: 'lines',

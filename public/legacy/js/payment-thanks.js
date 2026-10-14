@@ -136,22 +136,25 @@
       showFailed();
       return;
     }
-    if (!orderId || !token) {
+    if (!orderId) {
       if (pending) pending.hidden = false;
       return;
     }
 
     if (pending) pending.hidden = false;
     try {
-      var res = await fetch(
+      var bookingUrl =
         '/api/commerce/booking/' +
-          encodeURIComponent(orderId) +
-          '?token=' +
-          encodeURIComponent(token) +
-          '&lang=' +
-          encodeURIComponent(lang()),
-        { headers: { Accept: 'application/json' } },
-      );
+        encodeURIComponent(orderId) +
+        '?lang=' +
+        encodeURIComponent(lang());
+      if (token) {
+        bookingUrl += '&token=' + encodeURIComponent(token);
+      }
+      var res = await fetch(bookingUrl, {
+        headers: { Accept: 'application/json' },
+        credentials: 'same-origin',
+      });
       var data = await res.json();
       if (!res.ok || !data.paymentVerified) {
         if (pending) pending.hidden = false;

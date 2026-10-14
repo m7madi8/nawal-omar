@@ -15,6 +15,11 @@
     "test:security-phase-a1": "node scripts/test-security-phase-a1.mjs",
     "test:security-phase-a2": "node scripts/test-security-phase-a2.mjs",
     "test:security-phase-a3": "node scripts/test-security-phase-a3.mjs",
+    "test:security-phase-b": "node scripts/test-security-phase-b.mjs",
+    "test:security-phase-b1": "node scripts/test-security-phase-b1.mjs",
+    "test:security-phase-c": "node scripts/test-security-phase-c.mjs",
+    "test:security-phase-c2": "node scripts/test-security-phase-c2.mjs",
+    "test:security-phase-d": "node scripts/test-security-phase-d.mjs",
     "build:css": "tailwindcss -i ./public/legacy/css/input.css -o ./public/legacy/css/style.css --minify"
   },
   "dependencies": {

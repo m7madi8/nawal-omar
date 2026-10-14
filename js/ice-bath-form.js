@@ -82,12 +82,7 @@
     return lines;
   }
 
-  async function submitToSupabase() {
-    var supabaseUrl = (form.getAttribute("data-supabase-url") || "").trim().replace(/\/+$/, "");
-    var supabaseKey = (form.getAttribute("data-supabase-anon-key") || "").trim();
-    var table = (form.getAttribute("data-supabase-table") || "retreat_requests").trim();
-    if (!supabaseUrl || !supabaseKey || !table) return false;
-
+  async function submitViaApi() {
     var now = new Date();
     var yesFlags = SCREENING_QUESTIONS.map(function (_label, index) {
       return yesNo("sq" + (index + 1));
@@ -126,16 +121,13 @@
       createdAt: now.toISOString()
     };
 
-    var response = await fetch(supabaseUrl + "/rest/v1/" + encodeURIComponent(table), {
+    var response = await fetch("/api/retreat-request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        apikey: supabaseKey,
-        Authorization: "Bearer " + supabaseKey,
-        Prefer: "return=representation"
+        Accept: "application/json"
       },
-      body: JSON.stringify([payload])
+      body: JSON.stringify(payload)
     });
 
     return response.ok;
@@ -388,7 +380,7 @@
     if (!validateStep(currentStep, true)) return;
     if (submitBtn) submitBtn.disabled = true;
     try {
-      var sent = await submitToSupabase();
+      var sent = await submitViaApi();
       if (!sent) {
         alert(getLang() === "ar" ? "تعذّر إرسال الاستمارة. حاولي مرة أخرى." : "Failed to send form. Please try again.");
         return;

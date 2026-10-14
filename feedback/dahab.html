@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <!-- Supabase direct writes removed: use Next.js routes (see next.config.mjs redirects). -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#faf8f5">
@@ -637,12 +638,12 @@
 
       // Submit to Supabase REST
       try {
-        await fetch("https://xzxyskufrqansbhsbdkt.supabase.co/rest/v1/retreat_requests", {
+        await fetch("/rest/v1/retreat_requests", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "apikey": "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph",
-            "Authorization": "Bearer sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph",
+            "apikey": "",
+            "Authorization": "Bearer ",
             "Prefer": "return=minimal"
           },
           body: JSON.stringify(payload)

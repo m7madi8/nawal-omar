@@ -430,12 +430,7 @@
     return phone;
   }
 
-  async function sendToSupabase() {
-    var supabaseUrl = (form.getAttribute("data-supabase-url") || "").trim().replace(/\/+$/, "");
-    var supabaseKey = (form.getAttribute("data-supabase-anon-key") || "").trim();
-    var table = (form.getAttribute("data-supabase-table") || "retreat_requests").trim();
-    if (!supabaseUrl || !supabaseKey || !table) throw new Error("Missing Supabase config");
-
+  async function sendRegistration() {
     var now = new Date();
     var payload = {
       id: "req-" + now.getTime(),
@@ -459,21 +454,18 @@
 
     var controller = typeof AbortController === "function" ? new AbortController() : null;
     var timer = controller ? setTimeout(function () { controller.abort(); }, 20000) : 0;
-    var res = await fetch(supabaseUrl + "/rest/v1/" + encodeURIComponent(table), {
+    var res = await fetch("/api/retreat-request", {
       method: "POST",
       signal: controller ? controller.signal : undefined,
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "apikey": supabaseKey,
-        "Authorization": "Bearer " + supabaseKey,
-        "Prefer": "return=representation"
+        Accept: "application/json"
       },
-      body: JSON.stringify([payload])
+      body: JSON.stringify(payload)
     }).finally(function () { clearTimeout(timer); });
     if (!res.ok) {
-      var errTxt = await res.text().catch(function () { return ""; });
-      throw new Error(errTxt || "Supabase request failed");
+      var errBody = await res.json().catch(function () { return {}; });
+      throw new Error(errBody.error || "Registration submit failed");
     }
     return payload;
   }
@@ -570,7 +562,7 @@
           return;
         }
       }
-      var saved = await sendToSupabase();
+      var saved = await sendRegistration();
       setSending(false);
       track("form_step_complete", { step: TOTAL });
       track("form_submit_success");

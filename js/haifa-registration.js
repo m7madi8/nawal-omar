@@ -1,12 +1,10 @@
 (function () {
-  var SUPABASE_URL = "https://xzxyskufrqansbhsbdkt.supabase.co";
-  var SUPABASE_ANON_KEY = "sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph";
-  var SUPABASE_TABLE = "retreat_requests";
   var LESSON_ID = "haifa-yoga";
   var WA = "972522496366";
 
   var packageLabelKeys = {
     trial: "haifa_pkg_trial",
+    paytest: "haifa_pkg_paytest",
     pack4: "haifa_pkg_pack4",
     pack5: "haifa_pkg_pack5",
     single: "haifa_pkg_single",
@@ -17,6 +15,7 @@
 
   var packageAmounts = {
     trial: 65,
+    paytest: 3,
     pack4: 260,
     pack5: 300,
     single: 75,
@@ -205,19 +204,10 @@
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        var url = SUPABASE_URL + "/rest/v1/" + encodeURIComponent(SUPABASE_TABLE);
-        var direct = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: "Bearer " + SUPABASE_ANON_KEY,
-            Prefer: "return=minimal",
-          },
-          body: JSON.stringify(payload),
+        var errBody = await res.json().catch(function () {
+          return {};
         });
-        if (!direct.ok) throw new Error("Registration submit failed");
+        throw new Error(errBody.error || "Registration submit failed");
       }
     }
 
@@ -300,7 +290,14 @@
         showSuccess(t("haifa_register_success"));
       } catch (err) {
         console.error(err);
-        if (err.code === "HYP_DISABLED") {
+        if (
+          err.code === "HYP_DISABLED" ||
+          err.code === "HYP_NOT_CONFIGURED" ||
+          err.code === "HYP_LIVE_TERMINAL_FORBIDDEN" ||
+          err.code === "HYP_TEST_TERMINAL_IN_PRODUCTION" ||
+          err.code === "DEPLOYMENT_MODE_REQUIRED" ||
+          err.code === "DEPLOYMENT_MODE_INVALID"
+        ) {
           alert(t("haifa_pay_card_unavailable"));
         } else {
           alert(t("haifa_register_error"));

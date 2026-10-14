@@ -20,14 +20,6 @@ export const metadata = {
   },
 };
 
-// IMPORTANT — wire this to your Supabase project before shipping:
-// replace SUPABASE_URL / SUPABASE_ANON_KEY below (or better, read them from
-// env at build time the same way the rest of the legacy forms do — see
-// supabase-setup.md / FEEDBACK_SUPABASE_INLINE for the existing convention).
-const SUPABASE_URL = 'https://xzxyskufrqansbhsbdkt.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_V9_4QWGDFv6Vm-4DQifYGA_1xdoKkph';
-const SUPABASE_TABLE = 'retreat_requests';
-
 export default function PrivateSessionsPage() {
   return (
     <LegacyPage
@@ -213,9 +205,6 @@ export default function PrivateSessionsPage() {
         id="psRequestForm"
         class="ps-form reveal reveal-delay-1"
         novalidate
-        data-supabase-url="${SUPABASE_URL}"
-        data-supabase-anon-key="${SUPABASE_ANON_KEY}"
-        data-supabase-table="${SUPABASE_TABLE}"
       >
         <fieldset class="ps-form__field ps-form__field--sessions">
           <legend data-en="What do you want?" data-ar="شو بدك؟">What do you want?</legend>

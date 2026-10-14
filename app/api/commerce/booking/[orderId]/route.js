@@ -1,4 +1,4 @@
-import { bookingAccessToken, verifyBookingAccess, verifyBookingAccessLoose } from '@/lib/commerce/booking-access';
+import { isBookingAccessGranted } from '@/lib/commerce/booking-access';
 import { getOrder, getOrderItems } from '@/lib/commerce/orders';
 import { paymentSummary } from '@/lib/commerce/financials';
 import { whatsappFromOrder } from '@/lib/commerce/whatsapp-messages';
@@ -21,9 +21,7 @@ export async function GET(request, { params }) {
   }
 
   const phone = order.customer?.phone || '';
-  const allowed =
-    verifyBookingAccess(orderId, phone, token) || verifyBookingAccessLoose(orderId, token);
-  if (!allowed) {
+  if (!isBookingAccessGranted(request, orderId, phone, token)) {
     return Response.json({ error: 'Unauthorized' }, { status: 403 });
   }
 
@@ -36,11 +34,7 @@ export async function GET(request, { params }) {
 
   const commerceType = order.metadata?.commerceType || items[0]?.commerce_type || '';
   const itemId = order.metadata?.itemId || items[0]?.item_id || '';
-  const accessToken = bookingAccessToken(orderId, phone);
-  const pdfUrl =
-    paid && accessToken
-      ? `/api/commerce/receipt/${encodeURIComponent(orderId)}?token=${encodeURIComponent(accessToken)}`
-      : null;
+  const pdfUrl = paid ? `/api/commerce/receipt/${encodeURIComponent(orderId)}` : null;
 
   return Response.json({
     ok: true,
@@ -67,6 +61,5 @@ export async function GET(request, { params }) {
     })),
     pdfUrl,
     whatsappUrl: paid ? whatsappFromOrder(order, items, lang) : null,
-    accessToken,
   });
 }

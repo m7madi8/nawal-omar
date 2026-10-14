@@ -199,30 +199,38 @@
     }
   }
 
-  function shouldSkipShopRedirect(res) {
+  /** Checkout succeeded but user must pay on Hyp/Stripe — thanks belong on /payment/thanks. */
+  function shouldDeferThanksUntilPaymentComplete(res) {
     return res
       .clone()
       .json()
       .then(function (data) {
-        return Boolean(data && data.via === "stripe" && data.url);
+        if (!data || typeof data !== "object") return false;
+        if (data.url && String(data.url).length > 0) return true;
+        var via = data.via;
+        return via === "hyp" || via === "stripe";
       })
       .catch(function () {
         return false;
       });
   }
 
+  function thanksGloballyDisabled() {
+    return Boolean(document.querySelector('[data-ny-thanks="off"]'));
+  }
+
   function hookFetch() {
     if (!global.fetch || global.fetch.__nyThankYou) return;
     var nativeFetch = global.fetch.bind(global);
     function wrappedFetch(input, init) {
-      var tracked = isTrackedSubmit(input, init) && !document.querySelector('[data-ny-thanks="off"]');
+      var tracked = isTrackedSubmit(input, init) && !thanksGloballyDisabled();
       var name = tracked ? readName(input, init) : "";
       return nativeFetch(input, init).then(function (res) {
         if (!tracked || !res.ok) return res;
         var url = requestUrl(input);
         if (/\/api\/shop\/order/.test(url) || /\/api\/commerce\/checkout/.test(url)) {
-          return shouldSkipShopRedirect(res).then(function (skip) {
-            if (!skip) show({ name: name });
+          return shouldDeferThanksUntilPaymentComplete(res).then(function (defer) {
+            if (!defer) show({ name: name });
             return res;
           });
         }
