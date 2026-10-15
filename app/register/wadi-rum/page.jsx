@@ -197,7 +197,11 @@ export default function Page() {
       lang="en"
       dir="ltr"
       bodyClassName=""
-      styles={["/css/wadi-rum-registration.css", "/legacy/css/hyp-pay-methods.css"]}
+      styles={[
+        "/css/wadi-rum-registration.css",
+        "/legacy/css/hyp-pay-methods.css",
+        "/legacy/css/register-modal-shell.css",
+      ]}
       currentNav="retreats"
       scripts={[
         { src: '/legacy/js/i18n.js' },

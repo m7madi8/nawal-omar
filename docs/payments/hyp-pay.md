@@ -36,6 +36,20 @@ Aliases supported for compatibility: `HYP_PASSWORD`, `HYP_PASSP`, `HYP_TERMINAL_
 
 Also set `NEXT_PUBLIC_SITE_URL` (or deploy host) so return URLs resolve correctly.
 
+On **Vercel (Production)** set `HYP_TERMINAL_ID`, `HYP_API_KEY`, `HYP_API_PASSP`, `HYP_PAYMENTS_ENABLED=true`, `HYP_RETURN_URL=https://<your-domain>/api/payment/hyp/return`, and `NAWAL_DEPLOYMENT_MODE=production` for live terminals (non-`00100` Masof). Redeploy after rotating credentials.
+
+## Surfaces using Hyp checkout
+
+| Surface | Route | Client |
+|---------|-------|--------|
+| Haifa Yoga | `/workshops/haifa` | `haifa-registration.js` + `hyp-pay-method-picker.js` |
+| Sound Healing | `/events/sound-healing` | `event-checkout-registration.js` |
+| Nature & Chocolate | `/events/nature-chocolate` | `event-checkout-registration.js` |
+| Wadi Rum deposit | `/register/wadi-rum` | `wadi-rum-deposit-pay.js` |
+| Shop (if enabled) | shop checkout | `shop-order.js` → `/api/shop/order` |
+
+All call `POST /api/commerce/checkout` with `payment: "hyp"`. Prices come from server catalog, not the browser.
+
 ## Payment flow
 
 1. Client calls `POST /api/commerce/checkout` with `payment: "hyp"` and optional `depositAmount` / `chargeAmount`.
