@@ -56,6 +56,8 @@ process.env.ADMIN_TEAM_ACCOUNTS = JSON.stringify([
   { username: 'shada', password: 'staff-pass', name: 'Shatha', permissions: ['medical'] },
 ]);
 assert.equal(verifyAdminCredentials('shada', 'staff-pass')?.role, 'staff');
+assert.equal(verifyAdminCredentials('shatha', 'staff-pass')?.username, 'shada');
+assert.equal(verifyAdminCredentials('sahda', 'staff-pass')?.username, 'shada');
 
 const staffPerms = resolveApiPermissionsForAccount({
   role: 'staff',

@@ -3202,6 +3202,17 @@
     var form = document.getElementById('loginForm');
     if (!form || form.dataset.adminBound === '1') return;
     form.dataset.adminBound = '1';
+    var passwordInput = document.getElementById('password');
+    var togglePassword = document.getElementById('togglePassword');
+    if (passwordInput && togglePassword) {
+      togglePassword.addEventListener('click', function () {
+        var show = passwordInput.type === 'password';
+        passwordInput.type = show ? 'text' : 'password';
+        togglePassword.textContent = show ? 'Hide' : 'Show';
+        togglePassword.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+        togglePassword.setAttribute('aria-pressed', show ? 'true' : 'false');
+      });
+    }
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       var error = document.getElementById('loginError');

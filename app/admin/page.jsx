@@ -29,7 +29,10 @@ export default function Page() {
         <input id="username" name="username" type="text" autocomplete="off" placeholder="Enter username" required>
 
         <label for="password">Password</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required>
+        <div class="login-password">
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter password" required>
+          <button type="button" class="login-password-toggle" id="togglePassword" aria-label="Show password" aria-pressed="false">Show</button>
+        </div>
 
         <label class="login-remember">
           <input id="rememberMe" name="rememberMe" type="checkbox" checked>
