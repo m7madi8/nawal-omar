@@ -828,6 +828,39 @@
     return !!(order.paid || (row && row.yogaExperience === 'paid'));
   }
 
+  var GATEWAY_PAY_METHODS = {
+    hyp: 'Gateway',
+    grow: 'Gateway',
+    stripe: 'Visa',
+    visa: 'Visa',
+    mastercard: 'Visa',
+    card: 'Visa',
+  };
+
+  function rowPaymentMethod(row) {
+    var commerce = parseCommerceOrder(row);
+    var fromNote = commerce && commerce.payment ? String(commerce.payment).toLowerCase() : '';
+    if (GATEWAY_PAY_METHODS[fromNote]) return fromNote;
+    var fromHealth = String((row && row.healthStatus) || '').toLowerCase();
+    if (GATEWAY_PAY_METHODS[fromHealth]) return fromHealth;
+    var fromShop = String(shopPayment(row) || '').toLowerCase();
+    return fromShop;
+  }
+
+  function rowWasPaid(row) {
+    var workflow = parseBookingWorkflow(row);
+    if (workflow.paymentStatus === 'paid' || workflow.paymentStatus === 'partially_paid') return true;
+    if (row && (row.yogaExperience === 'paid' || row.yogaExperience === 'partial')) return true;
+    return shopIsPaid(row);
+  }
+
+  function gatewayPayMark(row) {
+    if (!rowWasPaid(row)) return '';
+    var label = GATEWAY_PAY_METHODS[rowPaymentMethod(row)];
+    if (!label) return '';
+    return '<span class="admin-pay-mark" title="Paid via Visa or the payment gateway">' + label + '</span>';
+  }
+
   function shopCost(row, costs) {
     var order = parseShopOrder(row);
     var unit = Number(costs[order.productId]) || 0;
@@ -1913,7 +1946,7 @@
     rows.forEach(function (row) {
       html += '<tr data-id="' + escapeHtml(row.id) + '">';
       html += '<td><div class="admin-table__primary">' + escapeHtml(relativeTime(row.date)) + '</div><div class="admin-table__sub">' + escapeHtml(formatDisplayDate(row.date)) + '</div></td>';
-      html += '<td>' + statusPill(row.status) + '</td>';
+      html += '<td><span class="admin-status-cell">' + statusPill(row.status) + gatewayPayMark(row) + '</span></td>';
       html += '<td><div class="admin-table__type">';
       var placeId = placeIdForSource(row.source);
       var privateType = privateSessionType(row);
@@ -2355,7 +2388,7 @@
       html += '<td><div class="admin-table__type">';
       html += '<img class="admin-table__thumb" src="' + placeMeta('shop').image + '" alt="">';
       html += '<div><div class="admin-table__primary">' + escapeHtml(order.productName || row.retreatType) + '</div><div class="admin-table__sub">' + escapeHtml([order.color, order.qty ? '×' + order.qty : '', order.amountUsd ? '$' + order.amountUsd : ''].filter(Boolean).join(' · ')) + '</div></div></div></td>';
-      html += '<td><div class="admin-table__primary">' + escapeHtml(PAYMENT_LABELS[order.payment] || order.payment || '—') + '</div><div class="admin-table__sub">' + (paid ? 'Paid' : 'Unpaid') + '</div></td>';
+      html += '<td><div class="admin-table__primary">' + escapeHtml(PAYMENT_LABELS[order.payment] || order.payment || '—') + '</div><div class="admin-table__sub admin-status-cell">' + (paid ? 'Paid' : 'Unpaid') + gatewayPayMark(row) + '</div></td>';
       html += '<td><div class="admin-table__person"><span class="admin-table__avatar">' + escapeHtml(initials(row.fullName)) + '</span><div><div class="admin-table__primary">' + escapeHtml(row.fullName) + '</div><div class="admin-table__sub">' + escapeHtml(row.phone) + '</div></div></div></td>';
       html += '<td><div class="admin-row-actions">';
       html += '<button type="button" class="admin-row-btn" data-action="view">View</button>';
@@ -2911,7 +2944,9 @@
             html += '<td>' + escapeHtml(inv.experienceName || '—') + '</td>';
             html += '<td>' + escapeHtml(formatDisplayDate(inv.paymentDate || inv.createdAt)) + '</td>';
             html += '<td>' + escapeHtml(formatInvoiceMoney(inv.transactionAmount, inv.currency)) + '</td>';
-            html += '<td>' + escapeHtml(inv.methodLabel || inv.method || '—') + '</td>';
+            var invMethod = String(inv.method || '').toLowerCase();
+            var invGateway = invMethod === 'hyp' || invMethod === 'grow' ? 'Gateway' : (invMethod === 'stripe' || invMethod === 'visa' || invMethod === 'card' ? 'Visa' : '');
+            html += '<td><span class="admin-status-cell">' + escapeHtml(inv.methodLabel || inv.method || '—') + (invGateway ? '<span class="admin-pay-mark" title="Paid via Visa or the payment gateway">' + invGateway + '</span>' : '') + '</span></td>';
             html += '<td>' + escapeHtml(inv.documentStatus || 'paid') + '</td>';
             html += '<td><button type="button" class="admin-btn" data-invoice-open="' + escapeHtml(inv.id) + '">View</button></td>';
             html += '</tr>';

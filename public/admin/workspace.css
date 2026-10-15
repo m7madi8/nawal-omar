@@ -1184,6 +1184,36 @@ svg { display: block; }
 .status-draft { background: var(--admin-bg-alt); color: var(--admin-muted); }
 .status-past { background: var(--admin-bg-alt); color: var(--admin-muted); }
 
+.admin-status-cell {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-pay-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--admin-radius-pill);
+  padding: 4px 10px 4px 8px;
+  background: #e5f6ea;
+  color: #1b7a3d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.admin-pay-mark::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1f9d55;
+  flex: 0 0 auto;
+}
+
 /* ============ Empty / loading ============ */
 .admin-empty,
 .admin-loading {
