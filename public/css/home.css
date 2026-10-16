@@ -2382,7 +2382,6 @@ body.nav-open {
 
   max-width: min(100%, 780px);
   margin-inline: auto;
-  margin-top: clamp(2.5rem, 6vw, 4rem);
 }
 
 .pv__text {
@@ -2438,7 +2437,7 @@ body.nav-open {
    stacked editorial chapters. Mobile keeps the long-form rhythm.
    ============================================================ */
 
-@media (min-width: 981px) {
+@media (min-width: 1200px) {
   .section--worlds {
     padding-block: clamp(1.75rem, 3vw, 2.75rem);
   }
@@ -2478,15 +2477,20 @@ body.nav-open {
   }
 
   .worlds-stage {
+    container-type: inline-size;
+    --worlds-cell-h: clamp(218px, 20.5vh, 278px);
+    --worlds-poster-w: clamp(280px, 34cqw, 400px);
     display: grid;
     grid-template-columns: 1.12fr 0.88fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: var(--worlds-cell-h) var(--worlds-cell-h) auto;
     grid-template-areas:
       "xp yg"
-      "rt hl";
+      "rt hl"
+      "pv pv";
     gap: 0.72rem;
-    height: min(78vh, 820px);
-    min-height: 560px;
+    height: auto;
+    min-height: 0;
+    max-width: 100%;
     align-items: stretch;
   }
 
@@ -2494,6 +2498,7 @@ body.nav-open {
   .worlds-stage .yg { grid-area: yg; }
   .worlds-stage .rt { grid-area: rt; }
   .worlds-stage .hl { grid-area: hl; }
+  .worlds-stage .pv { grid-area: pv; }
 
   .worlds-stage .world-block {
     --world-r: 22px;
@@ -2522,7 +2527,7 @@ body.nav-open {
   }
 
   .worlds-stage .display-xl,
-  .section--worlds > .world-block.pv .display-xl {
+  .worlds-stage .pv .display-xl {
     font-size: clamp(1.7rem, 2.2vw, 2.55rem);
     line-height: 1.05;
     color: var(--white);
@@ -2530,8 +2535,8 @@ body.nav-open {
 
   .worlds-stage .world-cta,
   .worlds-stage .rt__cta,
-  .section--worlds > .world-block.pv .world-cta,
-  .section--worlds > .world-block.pv .pv__cta {
+  .worlds-stage .pv .world-cta,
+  .worlds-stage .pv .pv__cta {
     min-height: 36px;
     padding: 0.42rem 0.95rem;
     margin-top: 0.55rem;
@@ -2548,8 +2553,8 @@ body.nav-open {
 
   .worlds-stage .world-cta:hover,
   .worlds-stage .rt__cta:hover,
-  .section--worlds > .world-block.pv .world-cta:hover,
-  .section--worlds > .world-block.pv .pv__cta:hover {
+  .worlds-stage .pv .world-cta:hover,
+  .worlds-stage .pv .pv__cta:hover {
     background: rgba(255, 255, 255, 0.14);
     border-color: #fff;
     color: #fff;
@@ -2557,7 +2562,7 @@ body.nav-open {
   }
 
   .worlds-stage [class$="__num"],
-  .section--worlds > .world-block.pv [class$="__num"] {
+  .worlds-stage .pv [class$="__num"] {
     position: absolute;
     top: 0.85rem;
     right: 0.95rem;
@@ -2576,7 +2581,7 @@ body.nav-open {
   .worlds-stage .xp__col,
   .worlds-stage .yg__text,
   .worlds-stage .hl__text,
-  .section--worlds > .world-block.pv .pv__text {
+  .worlds-stage .pv .pv__text {
     grid-area: 1 / 1;
     z-index: 2;
     align-self: end;
@@ -2591,7 +2596,7 @@ body.nav-open {
   .worlds-stage .xp__col,
   .worlds-stage .yg__text,
   .worlds-stage .hl__text,
-  .section--worlds > .world-block.pv .pv__text {
+  .worlds-stage .pv .pv__text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -2604,8 +2609,8 @@ body.nav-open {
   .worlds-stage .rt .eyebrow,
   .worlds-stage .hl .eyebrow,
   .worlds-stage .hl__lead,
-  .section--worlds > .world-block.pv .eyebrow,
-  .section--worlds > .world-block.pv .pv__lead {
+  .worlds-stage .pv .eyebrow,
+  .worlds-stage .pv .pv__lead {
     display: none;
   }
 
@@ -2802,41 +2807,41 @@ body.nav-open {
     );
   }
 
-  /* 05 Private Sessions — full-width doorway under the mosaic */
-  .section--worlds {
-    --pv-band-h: calc((min(78vh, 820px) - 0.72rem) / 2);
+  /* 05 Private Sessions — centered poster (4:5), not full-bleed band */
+  .worlds-stage .world-block.pv {
+    justify-self: center;
+    width: var(--worlds-poster-w);
+    max-width: min(100%, 400px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    margin: clamp(0.25rem, 1vw, 0.85rem) 0 0;
+    box-shadow: 0 22px 58px rgba(37, 34, 31, 0.11);
   }
 
-  .section--worlds > .world-block.pv {
-    --world-r: 22px;
-    --world-scrim: linear-gradient(
-      180deg,
-      rgba(37, 34, 31, 0) 42%,
-      rgba(37, 34, 31, 0.28) 68%,
-      rgba(37, 34, 31, 0.72) 100%
-    );
-
+  .worlds-stage .pv {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    width: 100%;
-    max-width: none;
-    margin-inline: 0;
-    margin-top: 0.72rem;
-    height: var(--pv-band-h);
-    min-height: var(--pv-band-h);
     column-gap: 0;
     align-items: stretch;
     border-radius: var(--world-r);
-    overflow: hidden;
-    position: relative;
-    isolation: isolate;
   }
 
-  .section--worlds > .world-block.pv .pv__media {
+  .worlds-stage .pv {
+    --world-scrim: linear-gradient(
+      180deg,
+      rgba(37, 34, 31, 0) 28%,
+      rgba(37, 34, 31, 0.42) 62%,
+      rgba(37, 34, 31, 0.82) 100%
+    );
+  }
+
+  .worlds-stage .pv .pv__media {
     grid-area: 1 / 1;
     grid-column: 1;
     grid-row: 1;
+    z-index: 0;
     width: 100%;
     max-width: none;
     height: 100%;
@@ -2846,18 +2851,23 @@ body.nav-open {
     border-radius: 0;
   }
 
-  .section--worlds > .world-block.pv .pv__media img {
+  .worlds-stage .pv .pv__text {
+    z-index: 2;
+    padding-top: 0;
+  }
+
+  .worlds-stage .pv .pv__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 28%;
+    object-position: center 30%;
   }
 
-  .section--worlds > .world-block.pv .pv__title {
+  .worlds-stage .pv .pv__title {
     max-width: 14ch;
   }
 
-  .section--worlds > .world-block.pv .pv__cta {
+  .worlds-stage .pv .pv__cta {
     margin-top: 0.55rem;
     align-self: flex-start;
   }
@@ -2875,30 +2885,280 @@ body.nav-open {
   html[dir="rtl"] .worlds-stage .xp,
   html[dir="rtl"] .worlds-stage .yg,
   html[dir="rtl"] .worlds-stage .rt,
-  html[dir="rtl"] .worlds-stage .hl {
+  html[dir="rtl"] .worlds-stage .hl,
+  html[dir="rtl"] .worlds-stage .pv {
     border-radius: var(--world-r);
   }
 }
 
 @media (min-width: 1280px) {
   .worlds-stage {
-    height: min(88vh, 980px);
-    min-height: 640px;
-  }
-
-  .section--worlds {
-    --pv-band-h: calc((min(88vh, 980px) - 0.72rem) / 2);
+    --worlds-cell-h: clamp(226px, 21.5vh, 292px);
+    --worlds-poster-w: clamp(300px, 32cqw, 420px);
   }
 }
 
 @media (min-width: 1536px) {
   .worlds-stage {
-    height: min(92vh, 1080px);
-    min-height: 720px;
+    --worlds-cell-h: clamp(234px, 22vh, 304px);
+    --worlds-poster-w: clamp(312px, 30cqw, 440px);
+  }
+}
+
+
+/* ============================================================
+   19d. FIVE WORLDS — iPad & small laptop (981–1199px)
+   Editorial chapter layout: same rhythm as phone, wider measure.
+   ============================================================ */
+
+@media (min-width: 981px) and (max-width: 1199px) {
+  .section--worlds {
+    padding-block: clamp(3rem, 6vw, 5rem);
   }
 
-  .section--worlds {
-    --pv-band-h: calc((min(92vh, 1080px) - 0.72rem) / 2);
+  .worlds-intro-block {
+    margin-bottom: clamp(2.75rem, 5vw, 4rem);
+  }
+
+  .worlds-stage {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3.25rem, 5.5vw, 4.75rem);
+    max-width: min(100%, 720px);
+    margin-inline: auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .worlds-stage .world-block {
+    width: 100%;
+    max-width: min(100%, 640px);
+    margin-inline: auto;
+  }
+
+  .worlds-stage .world-block + .world-block {
+    margin-top: 0;
+  }
+
+  .xp {
+    grid-template-columns: 1fr;
+    row-gap: 1.35rem;
+    max-width: min(100%, 640px);
+  }
+
+  .xp__media {
+    grid-column: 1;
+    grid-row: 1;
+    margin-left: 0;
+    margin-top: 0;
+    aspect-ratio: 16 / 11;
+    border-radius: var(--world-r) var(--world-r) 24px var(--world-r);
+    box-shadow: 0 20px 60px rgba(37, 34, 31, 0.06);
+  }
+
+  .xp__col {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
+  }
+
+  .xp__enter {
+    display: none;
+  }
+
+  .yg {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 1.35rem;
+    max-width: min(100%, 640px);
+  }
+
+  .yg__media-wrap {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+  }
+
+  .yg__text {
+    grid-column: 1;
+    grid-row: 2;
+    margin-right: 0;
+    padding-top: 0;
+  }
+
+  .yg__media {
+    margin-top: 0;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--world-r) var(--world-r) 24px var(--world-r);
+    box-shadow: 0 20px 60px rgba(37, 34, 31, 0.06);
+  }
+
+  .rt {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-height: 0;
+    color: var(--text-primary);
+    overflow: visible;
+    box-shadow: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .rt__media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    border-radius: var(--world-r) var(--world-r) 24px var(--world-r);
+    box-shadow: 0 20px 60px rgba(37, 34, 31, 0.06);
+  }
+
+  .rt__scrim {
+    display: none;
+  }
+
+  .rt__content {
+    padding: 1.35rem 0 0;
+  }
+
+  .rt__num {
+    position: static;
+    color: var(--accent);
+  }
+
+  .rt__title,
+  .rt__lead {
+    color: inherit;
+    max-width: none;
+  }
+
+  .rt__lead {
+    display: block;
+    margin-top: 0.65rem;
+  }
+
+  .rt .eyebrow--dark {
+    color: var(--accent);
+  }
+
+  .rt__cta {
+    display: inline-flex;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    margin-top: 1.25rem;
+    border-color: rgba(139, 107, 82, 0.38);
+    color: var(--text-primary);
+    background: #fff;
+  }
+
+  .hl {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 1.35rem;
+    max-width: min(100%, 640px);
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    column-gap: 0;
+  }
+
+  .hl__media {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    aspect-ratio: 4 / 5;
+    min-height: 0;
+    border-radius: var(--world-r) var(--world-r) 24px var(--world-r);
+    box-shadow: 0 20px 60px rgba(37, 34, 31, 0.06);
+  }
+
+  .hl__text {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
+    min-width: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .hl__title,
+  .hl__lead {
+    max-width: none;
+  }
+
+  .pv {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 1.35rem;
+    max-width: min(100%, 640px);
+  }
+
+  .pv__media {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--world-r) var(--world-r) 24px var(--world-r);
+    box-shadow: 0 20px 60px rgba(37, 34, 31, 0.06);
+  }
+
+  .pv__text {
+    grid-column: 1;
+    grid-row: 2;
+    padding-top: 0;
+    min-width: 0;
+  }
+
+  .pv__num {
+    color: var(--accent);
+  }
+
+  .pv__title,
+  .pv__lead {
+    color: inherit;
+    max-width: none;
+  }
+
+  .pv__lead {
+    margin-top: 0.65rem;
+  }
+
+  .hl__cta,
+  .pv__cta,
+  .world-block.pv .world-cta,
+  .yg__cta,
+  .xp__cta {
+    display: inline-flex;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    margin-top: 1.25rem;
+    border-color: rgba(139, 107, 82, 0.38);
+    color: var(--text-primary);
+    background: #fff;
+  }
+
+  .hl__cta:hover,
+  .pv__cta:hover,
+  .world-block.pv .world-cta:hover,
+  .yg__cta:hover,
+  .xp__cta:hover,
+  .rt__cta:hover {
+    border-color: rgba(139, 107, 82, 0.6);
+    background: rgba(139, 107, 82, 0.1);
+    color: var(--text-primary);
   }
 }
 
@@ -4881,12 +5141,12 @@ html[dir="rtl"] .sp__ghost-num {
     border-radius: var(--world-r) var(--world-r) var(--world-r) 16px;
   }
 
-  html[dir="rtl"] .section--worlds > .world-block.pv .pv__num {
+  html[dir="rtl"] .worlds-stage .pv .pv__num {
     right: auto;
     left: 0.95rem;
   }
 
-  html[dir="rtl"] .section--worlds > .world-block.pv .pv__media {
+  html[dir="rtl"] .worlds-stage .pv .pv__media {
     border-radius: 0;
   }
 }
@@ -5204,7 +5464,7 @@ html[dir="rtl"] .hero__sub {
   }
 
   html[dir="rtl"] .worlds-stage .display-xl,
-  html[dir="rtl"] .section--worlds > .world-block.pv .display-xl,
+  html[dir="rtl"] .worlds-stage .pv .display-xl,
   html[dir="rtl"] .worlds-stage .hl__title {
     max-width: 100%;
     line-height: 1.32;
