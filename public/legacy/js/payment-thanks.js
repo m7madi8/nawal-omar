@@ -114,7 +114,14 @@
         t('payment_thanks_paid') +
         '</span><strong dir="ltr">' +
         formatMoney(data.amountPaid, data.currency) +
-        '</strong></div>';
+        '</strong></div>' +
+        (Number(data.remaining) > 0
+          ? '<div class="wrc-row"><span>' +
+            t('retreat_wadi_thanks_remaining') +
+            '</span><strong dir="ltr">' +
+            formatMoney(data.remaining, data.currency) +
+            '</strong></div>'
+          : '');
     }
     if (back && data.backPath) back.href = data.backPath;
 

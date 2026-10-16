@@ -30,6 +30,7 @@ const cases = [
     body: {
       commerceType: 'retreat',
       itemId: 'wadi-rum',
+      roomId: 'panorama',
       payment: 'hyp',
       depositAmount: 400,
       customer: { fullName: 'Audit Test', phone: '+972521234567', email: '' },

@@ -80,7 +80,7 @@ export default function SplitHeadings() {
     }
 
     function play(targets, vars) {
-      if (!targets?.length) return;
+      if (!targets || (typeof targets.length === 'number' && targets.length === 0)) return;
       const tween = gsap.to(targets, vars);
       if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     }

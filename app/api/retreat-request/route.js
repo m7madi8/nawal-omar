@@ -1,4 +1,5 @@
 import { supabaseInsert, SUPABASE_TABLE_RETREAT_REQUESTS } from '@/lib/commerce/supabase';
+import { assertRetreatRequestSourceOpen } from '@/lib/commerce/retreat-request-guard';
 
 function requiredString(value, field) {
   const text = String(value || '').trim();
@@ -19,6 +20,8 @@ export async function POST(request) {
   }
 
   try {
+    assertRetreatRequestSourceOpen(body?.source);
+
     const now = new Date().toISOString();
     const row = {
       id: requiredString(body.id, 'id'),
@@ -56,7 +59,8 @@ export async function POST(request) {
     const inserted = await supabaseInsert(SUPABASE_TABLE_RETREAT_REQUESTS, row);
     return Response.json({ ok: true, id: inserted?.id || row.id });
   } catch (error) {
-    const status = error.code === 'INVALID_REQUEST' ? 400 : 500;
+    const status =
+      error.code === 'INVALID_REQUEST' ? 400 : error.code === 'BOOKING_CLOSED' ? 409 : 500;
     return Response.json(
       { error: error.message || 'Could not save registration', code: error.code || 'SUBMIT_FAILED' },
       { status },

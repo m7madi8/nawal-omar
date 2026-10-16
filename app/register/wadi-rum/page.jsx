@@ -82,6 +82,15 @@ const html = `
               ${err('phone')}
             </div>
           </div>
+          <fieldset class="choice-group reg-gap-top" id="grp-room" aria-describedby="hint-room err-room">
+            <legend data-t="roomLegend">Choose your room</legend>
+            <p class="field-hint" id="hint-room" data-t="roomHint">Per person, double room. The deposit is 400 ₪ for either room.</p>
+            <div class="radio-grid">
+              ${choice('radio', 'roomId', 'panorama', 'pricePanorama', 'Panorama Room — 3,650 ₪', true)}
+              ${choice('radio', 'roomId', 'bubbles', 'priceBubbles', 'Bubbles Room — 3,850 ₪', true)}
+            </div>
+            ${err('room')}
+          </fieldset>
         </fieldset>
 
         <fieldset class="form-section reg-step" data-step="2" aria-labelledby="stepTitle2">

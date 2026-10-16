@@ -105,7 +105,9 @@ export default function LegacyPage({
         : [
             { src: '/api/public/site-config' },
             { src: '/js/thank-you-modal.js' },
-            { src: '/js/site-analytics.js' },
+            // Consent gate. site-analytics.js is no longer loaded here: consent.js loads it only
+            // after an explicit analytics consent.
+            { src: '/js/consent.js' },
             ...filteredScripts,
           ]
       ).map((script, index) => (

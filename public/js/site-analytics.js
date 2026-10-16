@@ -2,6 +2,12 @@
  * First-party page + form funnel analytics (no external provider).
  * Events: page_view, form_view, form_start, form_complete, form_abandon
  * Sent to /api/analytics → Supabase site_analytics.
+ *
+ * CONSENT: this script is loaded by public/js/consent.js only after an explicit "analytics" consent.
+ * It is still self-protecting: nothing is read-for-tracking, written to storage or sent unless
+ * start() was called AND window.nawalConsent.has('analytics') is true at that very moment.
+ * Without window.nawalConsent it never runs (fail closed). stop() halts every future event and clears
+ * the analytics ids; it touches no other storage (language, form drafts, booking data are untouched).
  */
 (function (global) {
   if (global.nawalAnalytics) return;
@@ -10,6 +16,20 @@
   var SESSION_KEY = 'nawal-an-sid';
   var VIEWED_KEY = 'nawal-an-views';
   var FORM_STATE_KEY = 'nawal-an-forms';
+
+  var running = false;
+
+  function consentGranted() {
+    try {
+      return !!(global.nawalConsent && typeof global.nawalConsent.has === 'function' && global.nawalConsent.has('analytics'));
+    } catch (_e) {
+      return false;
+    }
+  }
+
+  function allowed() {
+    return running && consentGranted();
+  }
 
   var FORM_ALIASES = {
     wadiRegForm: 'wadi-rum-registration',
@@ -28,6 +48,7 @@
   }
 
   function sessionId() {
+    if (!allowed()) return 's-anon';
     try {
       var id = sessionStorage.getItem(SESSION_KEY);
       if (id) return id;
@@ -48,6 +69,7 @@
   }
 
   function writeMap(key, value) {
+    if (!allowed()) return;
     try {
       sessionStorage.setItem(key, JSON.stringify(value));
     } catch (_e) {}
@@ -58,6 +80,7 @@
   }
 
   function shouldSkip() {
+    if (!allowed()) return true;
     var path = currentPath();
     return path.indexOf('/admin') === 0 || path.indexOf('/api') === 0;
   }
@@ -90,6 +113,7 @@
   }
 
   function queueSend(payload) {
+    if (!allowed()) return;
     var body = JSON.stringify(payload);
     try {
       if (navigator.sendBeacon) {
@@ -171,17 +195,25 @@
     track('page_view');
   }
 
-  function bindForm(form) {
-    if (!form || form.getAttribute('data-an-bound') === '1') return;
-    form.setAttribute('data-an-bound', '1');
-    var formId = formIdFromEl(form);
-    if (!formId) return;
-
+  function announceForm(formId) {
     var state = getFormState(formId);
     if (!state || !state.viewed) {
       markFormState(formId, { viewed: true });
       track('form_view', { formId: formId });
     }
+  }
+
+  function bindForm(form) {
+    if (!form) return;
+    // Listeners are attached once per form; the view is (re)announced on every start() so that a
+    // visitor who grants consent on a page that already has forms still gets one form_view.
+    var alreadyBound = form.getAttribute('data-an-bound') === '1';
+    form.setAttribute('data-an-bound', '1');
+    var formId = formIdFromEl(form);
+    if (!formId) return;
+
+    announceForm(formId);
+    if (alreadyBound) return;
 
     function onStart() {
       var current = getFormState(formId) || {};
@@ -225,7 +257,14 @@
     eligibleForms().forEach(bindForm);
   }
 
+  var thankYouObserved = false;
+
   function observeThankYou() {
+    // Installed once per page load, however many times start() runs. Every handler below ends in
+    // markComplete()/track(), which are no-ops whenever consent is not currently granted.
+    if (thankYouObserved) return;
+    thankYouObserved = true;
+
     document.addEventListener('nawal:analytics', function (event) {
       var detail = event.detail || {};
       if (detail.event === 'form_complete' && detail.formId) markComplete(detail.formId);
@@ -251,7 +290,7 @@
       }
     };
     global.wrEvents = global.wrEvents || [];
-    global.wrEvents.forEach(push);
+    // Events buffered before consent are deliberately NOT replayed.
     var nativePush = global.wrEvents.push.bind(global.wrEvents);
     global.wrEvents.push = function () {
       for (var i = 0; i < arguments.length; i += 1) push(arguments[i]);
@@ -264,19 +303,59 @@
     trackPageView();
     bindAllForms();
     observeThankYou();
-    window.addEventListener('pagehide', flushAbandons);
-    window.addEventListener('beforeunload', flushAbandons);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
-  } else {
-    boot();
+  var domReady = document.readyState !== 'loading';
+  var startRequested = false;
+
+  /** Begins tracking once. Safe to call repeatedly; does nothing without current consent. */
+  function start() {
+    if (running || !consentGranted()) return;
+    running = true;
+    window.addEventListener('pagehide', flushAbandons);
+    window.addEventListener('beforeunload', flushAbandons);
+    if (domReady) boot();
+    else startRequested = true;
   }
+
+  /** Halts all future events and clears the analytics ids. Leaves every other storage key alone. */
+  function stop() {
+    running = false;
+    startRequested = false;
+    window.removeEventListener('pagehide', flushAbandons);
+    window.removeEventListener('beforeunload', flushAbandons);
+    [SESSION_KEY, VIEWED_KEY, FORM_STATE_KEY].forEach(function (key) {
+      try {
+        sessionStorage.removeItem(key);
+      } catch (_e) {}
+    });
+  }
+
+  if (!domReady) {
+    document.addEventListener('DOMContentLoaded', function () {
+      domReady = true;
+      if (startRequested && running) {
+        startRequested = false;
+        boot();
+      }
+    });
+  }
+
+  document.addEventListener('nawal:consentchange', function () {
+    if (consentGranted()) start();
+    else stop();
+  });
 
   global.nawalAnalytics = {
     track: track,
     markComplete: markComplete,
     formIdFromEl: formIdFromEl,
+    start: start,
+    stop: stop,
+    isRunning: function () {
+      return allowed();
+    },
   };
+
+  start();
 })(window);

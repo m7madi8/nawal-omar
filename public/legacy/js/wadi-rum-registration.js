@@ -3,14 +3,16 @@
   if (!form || form.getAttribute("data-bound") === "1") return;
   form.setAttribute("data-bound", "1");
 
-  // TODO(analytics): no provider is installed yet. Events are forwarded to
-  // GTM (dataLayer), gtag, Microsoft Clarity or Meta Pixel as soon as one is
-  // added, and are always buffered in window.wrEvents.
+  // TODO(analytics): no provider is installed yet. Once one is added, events are forwarded to
+  // GTM (dataLayer), gtag, Microsoft Clarity or Meta Pixel ONLY while the visitor has granted the
+  // "analytics" consent (window.nawalConsent). They are always buffered in memory in window.wrEvents
+  // (no storage, no network).
   // Never put personal data (name, phone, answers) in event params.
   window.wrEvents = window.wrEvents || [];
   function track(name, params) {
     var payload = Object.assign({ form: "wadi-rum-registration" }, params || {});
     window.wrEvents.push({ event: name, params: payload, at: Date.now() });
+    if (!(window.nawalConsent && typeof window.nawalConsent.has === "function" && window.nawalConsent.has("analytics"))) return;
     try {
       if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: name }, payload));
       if (typeof window.gtag === "function") window.gtag("event", name, payload);
@@ -120,6 +122,9 @@
       errYoga: "Please pick one of the options.",
       errHealth: "Please choose No or Yes.",
       errActivities: "Please choose at least one activity.",
+      roomLegend: "Choose your room",
+      roomHint: "Per person, double room. The deposit is 400 ₪ for either room.",
+      errRoom: "Please choose a room.",
       errSummaryOne: "One field needs your attention.",
       errSummaryMany: "{n} fields need your attention.",
       docTitle: "Initial Registration | Wadi Rum Desert Retreat"
@@ -200,6 +205,9 @@
       errYoga: "اختاري وحدة من الخيارات.",
       errHealth: "اختاري لا أو آه.",
       errActivities: "اختاري نشاط واحد على الأقل.",
+      roomLegend: "اختاري غرفتك",
+      roomHint: "السعر للشخص الواحد، غرفة مزدوجة. العربون 400 ₪ لأي غرفة.",
+      errRoom: "اختاري غرفة لو سمحتي.",
       errSummaryOne: "في حقل محتاج تكمّليه.",
       errSummaryMany: "في {n} حقول محتاجة تكمّليها.",
       docTitle: "التسجيل الأوّلي | ريتريت وادي رم"
@@ -307,6 +315,7 @@
         return /^\+?\d{9,15}$/.test(normalizePhone(value("phone"))) ? "" : "errPhoneFormat";
       }
     },
+    room: { step: 1, group: "roomId", check: function () { return groupChecked("roomId") ? "" : "errRoom"; } },
     age: {
       step: 2,
       check: function () {
@@ -430,6 +439,12 @@
     return phone;
   }
 
+  /* Room is sent only to /api/commerce/checkout (the server prices it); never a price. */
+  function selectedRoomId() {
+    var checked = form.querySelector('input[name="roomId"]:checked');
+    return checked ? checked.value : "";
+  }
+
   async function sendRegistration() {
     var now = new Date();
     var payload = {
@@ -502,8 +517,16 @@
     submitBtn.textContent = t(submitBtn.getAttribute("data-t"));
   }
 
-  function showPaymentRetry(saved) {
-    window.__wadiRumPayRetry = saved;
+  function showPaymentRetry(saved, roomId) {
+    // Freeze the room chosen for the saved registration so a retry cannot silently change it.
+    window.__wadiRumPayRetry = Object.freeze({
+      fullName: saved.fullName,
+      phone: saved.phone,
+      email: "",
+      requestId: saved.id,
+      roomId: roomId
+    });
+    groupInputs("roomId").forEach(function (input) { input.disabled = true; });
     form.setAttribute("data-pay-retry", "1");
     setStatus("paymentRetry");
     submitBtn.hidden = false;
@@ -553,6 +576,7 @@
       return;
     }
     setSending(true);
+    var roomId = selectedRoomId();
     try {
       if (window.wadiRumDepositPay && typeof window.wadiRumDepositPay.loadPaymentOptions === "function") {
         await window.wadiRumDepositPay.loadPaymentOptions();
@@ -574,7 +598,8 @@
           fullName: saved.fullName,
           phone: saved.phone,
           email: "",
-          requestId: saved.id
+          requestId: saved.id,
+          roomId: roomId
         });
         if (typeof window.wadiRumDepositPay.startCheckout === "function") {
           setSending(true);
@@ -583,14 +608,15 @@
               fullName: saved.fullName,
               phone: saved.phone,
               email: "",
-              requestId: saved.id
+              requestId: saved.id,
+              roomId: roomId
             },
             statusEl,
             submitBtn
           );
           setSending(false);
           if (redirected) return;
-          showPaymentRetry(saved);
+          showPaymentRetry(saved, roomId);
           return;
         }
       }

@@ -87,6 +87,9 @@
     if (code === 'COMMERCE_DB_NOT_READY' || code === 'COMMERCE_DB_SCHEMA') {
       return t('retreat_wadi_checkout_db_setup');
     }
+    if (code === 'INVALID_ROOM') {
+      return t('retreat_wadi_checkout_room_invalid');
+    }
     if (code === 'COMMERCE_DB_NETWORK') {
       return t('retreat_wadi_checkout_network_error');
     }
@@ -145,6 +148,11 @@
       return false;
     }
 
+    if (customer.roomId !== 'panorama' && customer.roomId !== 'bubbles') {
+      setStatus(statusEl, t('retreat_wadi_checkout_room_invalid'), true);
+      return false;
+    }
+
     await loadPaymentOptions();
     if (!cardCheckoutAvailable()) {
       setStatus(statusEl, t('retreat_wadi_checkout_hyp_off'), true);
@@ -165,6 +173,7 @@
         body: JSON.stringify({
           commerceType: 'retreat',
           itemId: ITEM_ID,
+          roomId: customer.roomId,
           payment: 'hyp',
           depositAmount: DEPOSIT_ILS,
           retreatRequestId: customer.requestId || '',

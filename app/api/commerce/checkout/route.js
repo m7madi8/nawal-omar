@@ -24,6 +24,7 @@ export async function POST(request) {
       code === 'INVALID_CUSTOMER' ||
       code === 'INVALID_TYPE' ||
       code === 'UNKNOWN_ITEM' ||
+      code === 'INVALID_ROOM' ||
       code === 'INVALID_CHARGE_AMOUNT' ||
       code === 'PAYMENT_PLAN_NOT_SUPPORTED'
         ? 400

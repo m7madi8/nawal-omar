@@ -1,0 +1,337 @@
+/* In-site campaigns (components/CampaignHost.jsx): a small card ("strip") or a dialog ("modal").
+   Loaded only when a campaign is about to be shown. Independent from consent.css.
+   Uses the site tokens when present, with the same values as fallbacks. Flat: no gradients, no glow.
+
+   Layers (z-index): strip 104 and modal 108 sit above page content and the header (100), and BELOW the
+   consent banner (110), the open mobile menu (120), registration modals (300), the consent dialog (410)
+   and the thank-you dialog (420). The script also stays away while any of those is open. */
+
+.ny-campaign {
+  --nyk-ink: var(--text-primary, #3f3027);
+  --nyk-muted: var(--text-secondary, #6b5a4e);
+  --nyk-accent: var(--accent, #6f523e);
+  --nyk-paper: #fbf7f2;
+  --nyk-line: rgba(111, 82, 62, 0.2);
+  --nyk-ease: var(--ease-editorial, cubic-bezier(0.22, 1, 0.36, 1));
+  box-sizing: border-box;
+  font-family: var(--font-sans, "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  color: var(--nyk-ink);
+  text-align: start;
+  line-height: 1.6;
+}
+
+html[dir="rtl"] .ny-campaign {
+  font-family: var(--font-arabic, "Tajawal", sans-serif);
+}
+
+.ny-campaign *,
+.ny-campaign *::before,
+.ny-campaign *::after {
+  box-sizing: inherit;
+}
+
+.ny-campaign[hidden] {
+  display: none !important;
+}
+
+/* ---- shared parts */
+
+.ny-campaign__title {
+  margin: 0;
+  font-family: var(--font-serif, "Instrument Serif", Georgia, serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--nyk-ink);
+}
+
+html[dir="rtl"] .ny-campaign__title {
+  font-family: var(--font-arabic-display, "El Messiri", "Tajawal", sans-serif);
+  font-weight: 600;
+}
+
+.ny-campaign__body {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--nyk-muted);
+}
+
+.ny-campaign__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 1.35rem;
+  border: 1px solid var(--nyk-ink);
+  border-radius: 999px;
+  background: var(--nyk-ink);
+  color: #fff;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition:
+    background 260ms var(--nyk-ease),
+    color 260ms var(--nyk-ease);
+}
+
+.ny-campaign__cta:hover {
+  background: transparent;
+  color: var(--nyk-ink);
+}
+
+.ny-campaign__later {
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: var(--nyk-muted);
+  font: inherit;
+  font-size: 0.84rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.ny-campaign__later:hover {
+  color: var(--nyk-ink);
+}
+
+.ny-campaign__close {
+  position: absolute;
+  top: 0.35rem;
+  inset-inline-end: 0.35rem;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--nyk-ink);
+  font: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ny-campaign__close:hover {
+  background: rgba(111, 82, 62, 0.08);
+}
+
+.ny-campaign a:focus-visible,
+.ny-campaign button:focus-visible {
+  outline: 2px solid var(--nyk-accent);
+  outline-offset: 2px;
+}
+
+/* ---- strip: a small non-blocking card at the inline-END bottom corner (right in English, left in
+   Arabic). Hero copy and its primary buttons sit on the inline-START side of every page, so this keeps
+   them uncovered (same placement and same extra offset as the consent banner, which keeps the decorative
+   scroll rail on that edge visible). The consent banner and a campaign are never on screen together. */
+
+.ny-campaign--strip {
+  position: fixed;
+  inset-inline-end: calc(clamp(12px, 2vw, 28px) + 28px);
+  bottom: clamp(12px, 2vw, 28px);
+  z-index: 104;
+  width: min(26rem, calc(100vw - 24px));
+  padding: 1rem;
+  padding-inline: 1.15rem 3rem;
+  border: 1px solid var(--nyk-line);
+  border-radius: 18px;
+  background: var(--nyk-paper);
+  box-shadow: 0 6px 22px rgba(47, 36, 28, 0.1);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 360ms var(--nyk-ease),
+    transform 360ms var(--nyk-ease);
+}
+
+.ny-campaign--strip.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.ny-campaign--strip .ny-campaign__title {
+  font-size: 1.2rem;
+}
+
+.ny-campaign--strip .ny-campaign__actions {
+  margin-top: 0.7rem;
+}
+
+/* ---- modal */
+
+.ny-campaign--modal {
+  position: fixed;
+  inset: 0;
+  z-index: 108;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 4vw, 2rem);
+}
+
+.ny-campaign__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(47, 36, 28, 0.4);
+  opacity: 0;
+  transition: opacity 280ms var(--nyk-ease);
+}
+
+.ny-campaign__dialog {
+  position: relative;
+  width: min(100%, 27rem);
+  max-height: min(88vh, 88svh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.4rem, 4vw, 1.9rem) clamp(1.15rem, 4vw, 1.6rem) 1.2rem;
+  border: 1px solid var(--nyk-line);
+  border-radius: 22px;
+  background: var(--nyk-paper);
+  box-shadow: 0 10px 30px rgba(47, 36, 28, 0.14);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 360ms var(--nyk-ease),
+    transform 360ms var(--nyk-ease);
+}
+
+.ny-campaign__dialog:focus {
+  outline: none;
+}
+
+.ny-campaign--modal.is-visible .ny-campaign__backdrop {
+  opacity: 1;
+}
+
+.ny-campaign--modal.is-visible .ny-campaign__dialog {
+  opacity: 1;
+  transform: none;
+}
+
+/* The picture keeps its own proportions (width/height attributes reserve the space); it is only
+   capped in height so a tall image cannot take over the dialog. Nothing important is inside it. */
+.ny-campaign__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 11rem;
+  margin: 0 0 1rem;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+/* The close button may sit over the picture: it keeps its own paper-coloured chip so the cross is
+   always readable, whatever the image is. */
+.ny-campaign--modal .ny-campaign__close {
+  top: 0.6rem;
+  inset-inline-end: 0.6rem;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--nyk-line);
+  background: var(--nyk-paper);
+}
+
+.ny-campaign--modal .ny-campaign__close:hover {
+  background: #f3ece3;
+}
+
+.ny-campaign--modal .ny-campaign__title {
+  padding-inline-end: 2.25rem;
+  font-size: clamp(1.6rem, 4.5vw, 1.95rem);
+}
+
+.ny-campaign--modal .ny-campaign__body {
+  margin-top: 0.55rem;
+  font-size: 0.95rem;
+}
+
+.ny-campaign--modal .ny-campaign__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* ---- small screens */
+
+@media (max-width: 600px) {
+  .ny-campaign--strip {
+    inset-inline: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+  }
+
+  /* One compact row: text on the start side, the button next to it, the close button in the corner. */
+  .ny-campaign--strip {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 0.7rem;
+  }
+
+  .ny-campaign--strip .ny-campaign__copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .ny-campaign--strip .ny-campaign__actions {
+    flex: none;
+    margin-top: 0;
+  }
+
+  .ny-campaign--strip .ny-campaign__cta {
+    padding-inline: 1rem;
+  }
+
+  .ny-campaign--strip .ny-campaign__body {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Bottom sheet, kept compact: a dialog never fills the phone. */
+  .ny-campaign--modal {
+    place-items: end center;
+    padding: 0;
+  }
+
+  .ny-campaign__dialog {
+    width: 100%;
+    max-height: 70vh;
+    max-height: 70svh;
+    padding-bottom: max(1.2rem, env(safe-area-inset-bottom));
+    border-radius: 22px 22px 0 0;
+    border-bottom: 0;
+  }
+
+  .ny-campaign__image {
+    max-height: 7.5rem;
+  }
+
+  .ny-campaign--modal .ny-campaign__cta {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-campaign--strip,
+  .ny-campaign__backdrop,
+  .ny-campaign__dialog,
+  .ny-campaign__cta {
+    transition: none;
+  }
+
+  .ny-campaign--strip,
+  .ny-campaign__dialog {
+    transform: none;
+  }
+}
+
+@media print {
+  .ny-campaign {
+    display: none !important;
+  }
+}

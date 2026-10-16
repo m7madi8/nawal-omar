@@ -4,6 +4,7 @@ import { getOrder, getOrderItems } from '@/lib/commerce/orders';
 import { getLatestPaymentAttemptForOrder } from '@/lib/commerce/payment/attempts';
 import { supabaseSelect, SUPABASE_TABLE_ORDERS } from '@/lib/commerce/supabase';
 import { deriveAdminPaymentOutcome } from '@/lib/commerce/admin-payment-outcome';
+import { remainingBalance } from '@/lib/commerce/financials';
 
 function sanitizeOrderForAdmin(order, attempt = null) {
   if (!order) return null;
@@ -17,6 +18,7 @@ function sanitizeOrderForAdmin(order, attempt = null) {
     subtotal: order.subtotal,
     total: order.total,
     amount_paid: order.amount_paid,
+    remaining: remainingBalance(order),
     booking_reference: order.booking_reference,
     created_at: order.created_at,
     updated_at: order.updated_at,
@@ -27,6 +29,7 @@ function sanitizeOrderForAdmin(order, attempt = null) {
     metadata: {
       commerceType: order.metadata?.commerceType,
       itemId: order.metadata?.itemId,
+      roomId: typeof order.metadata?.roomId === 'string' ? order.metadata.roomId.slice(0, 32) : undefined,
       chargeAmount: order.metadata?.chargeAmount,
       paymentKind: order.metadata?.paymentKind,
       paymentAttemptId: order.metadata?.paymentAttemptId,
@@ -42,6 +45,22 @@ function sanitizeOrderForAdmin(order, attempt = null) {
       paymentFinalizationError: order.metadata?.paymentFinalizationError || null,
       adminPaymentOutcome: deriveAdminPaymentOutcome(order, attempt),
     },
+  };
+}
+
+/** Item metadata is never returned wholesale; only the room id and label are exposed. */
+function sanitizeOrderItemForAdmin(item) {
+  const meta = item?.metadata || {};
+  return {
+    id: item.id,
+    commerce_type: item.commerce_type,
+    item_id: item.item_id,
+    title: item.title,
+    quantity: item.quantity,
+    unit_price: item.unit_price,
+    currency: item.currency,
+    room_id: typeof meta.roomId === 'string' ? meta.roomId.slice(0, 32) : undefined,
+    room_label: typeof meta.roomLabel === 'string' ? meta.roomLabel.slice(0, 80) : undefined,
   };
 }
 
@@ -83,15 +102,7 @@ export async function GET(request) {
     return Response.json({
       ok: true,
       order: sanitizeOrderForAdmin(order, attempt),
-      items: (items || []).map((item) => ({
-        id: item.id,
-        commerce_type: item.commerce_type,
-        item_id: item.item_id,
-        title: item.title,
-        quantity: item.quantity,
-        unit_price: item.unit_price,
-        currency: item.currency,
-      })),
+      items: (items || []).map(sanitizeOrderItemForAdmin),
       attempt: sanitizeAttempt(attempt),
     });
   }

@@ -1,0 +1,381 @@
+/* Consent banner + privacy settings dialog (public/js/consent.js).
+   Self-contained: uses the site tokens when present, with the same values as fallbacks. */
+
+.ny-consent,
+.ny-consent-panel {
+  --nyc-ink: var(--text-primary, #3f3027);
+  --nyc-muted: var(--text-secondary, #6b5a4e);
+  --nyc-accent: var(--accent, #6f523e);
+  --nyc-paper: #fbf7f2;
+  --nyc-line: rgba(111, 82, 62, 0.2);
+  --nyc-ease: var(--ease-editorial, cubic-bezier(0.22, 1, 0.36, 1));
+  font-family: var(--font-sans, "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  color: var(--nyc-ink);
+  text-align: start;
+  line-height: 1.6;
+}
+
+html[dir="rtl"] .ny-consent,
+html[dir="rtl"] .ny-consent-panel {
+  font-family: var(--font-arabic, "Tajawal", sans-serif);
+}
+
+.ny-consent[hidden],
+.ny-consent-panel[hidden] {
+  display: none !important;
+}
+
+/* ---- Banner: small card at the inline-END bottom corner (right in English, left in Arabic).
+   Hero copy and its primary buttons sit on the inline-START side on every page, so this keeps them
+   uncovered; the extra offset keeps the decorative scroll rail (on the same edge) visible.
+   z-index 110: above the header (100) and page content, but BELOW the open mobile menu (120) and the
+   registration / thank-you modals, so it never sits on top of a modal surface. */
+
+.ny-consent {
+  position: fixed;
+  inset-inline-end: calc(clamp(12px, 2vw, 28px) + 28px);
+  bottom: clamp(12px, 2vw, 28px);
+  z-index: 110;
+  box-sizing: border-box;
+  width: min(25rem, calc(100vw - 24px));
+  padding: 1.15rem 1.25rem 1.2rem;
+  border: 1px solid var(--nyc-line);
+  border-radius: 20px;
+  background: var(--nyc-paper);
+  box-shadow: 0 6px 22px rgba(47, 36, 28, 0.1);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 360ms var(--nyc-ease),
+    transform 360ms var(--nyc-ease);
+}
+
+.ny-consent.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.ny-consent__title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-serif, "Instrument Serif", Georgia, serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--nyc-ink);
+}
+
+html[dir="rtl"] .ny-consent__title,
+html[dir="rtl"] .ny-consent-panel__title {
+  font-family: var(--font-arabic-display, "El Messiri", "Tajawal", sans-serif);
+  font-weight: 600;
+}
+
+.ny-consent__text {
+  margin: 0 0 0.9rem;
+  font-size: 0.9rem;
+  color: var(--nyc-muted);
+}
+
+.ny-consent__link {
+  color: var(--nyc-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  white-space: nowrap;
+}
+
+.ny-consent__link:hover {
+  color: var(--nyc-ink);
+}
+
+.ny-consent__note {
+  margin: 0 0 0.8rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--nyc-line);
+  border-radius: 12px;
+  font-size: 0.82rem;
+  color: var(--nyc-ink);
+}
+
+.ny-consent__note[hidden] {
+  display: none;
+}
+
+/* Three actions with identical weight: same size, same style, no pre-selected "primary". */
+.ny-consent__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ny-consent__btn {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--nyc-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--nyc-ink);
+  font: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    background 280ms var(--nyc-ease),
+    color 280ms var(--nyc-ease);
+}
+
+.ny-consent__btn:hover {
+  background: var(--nyc-ink);
+  color: #fff;
+}
+
+.ny-consent a:focus-visible,
+.ny-consent-panel a:focus-visible,
+.ny-consent__btn:focus-visible,
+.ny-consent-panel__close:focus-visible,
+.ny-consent-switch__input:focus-visible + .ny-consent-switch__track {
+  outline: 2px solid var(--nyc-accent);
+  outline-offset: 2px;
+}
+
+/* ---- Settings dialog */
+
+.ny-consent-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 410;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 4vw, 2rem);
+}
+
+.ny-consent-panel__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(47, 36, 28, 0.46);
+  opacity: 0;
+  transition: opacity 280ms var(--nyc-ease);
+}
+
+.ny-consent-panel__dialog {
+  position: relative;
+  box-sizing: border-box;
+  width: min(100%, 31rem);
+  max-height: min(92vh, 92svh);
+  overflow-y: auto;
+  padding: clamp(1.4rem, 4vw, 2rem) clamp(1.15rem, 4vw, 1.75rem) 1.35rem;
+  border: 1px solid var(--nyc-line);
+  border-radius: 24px;
+  background: var(--nyc-paper);
+  box-shadow: 0 10px 30px rgba(47, 36, 28, 0.14);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 360ms var(--nyc-ease),
+    transform 360ms var(--nyc-ease);
+}
+
+.ny-consent-panel__dialog:focus {
+  outline: none;
+}
+
+.ny-consent-panel.is-visible .ny-consent-panel__backdrop {
+  opacity: 1;
+}
+
+.ny-consent-panel.is-visible .ny-consent-panel__dialog {
+  opacity: 1;
+  transform: none;
+}
+
+.ny-consent-panel__close {
+  position: absolute;
+  top: 0.55rem;
+  inset-inline-end: 0.55rem;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--nyc-ink);
+  font: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ny-consent-panel__close:hover {
+  background: rgba(111, 82, 62, 0.08);
+}
+
+.ny-consent-panel__title {
+  margin: 0 0 0.4rem;
+  padding-inline-end: 2.5rem;
+  font-family: var(--font-serif, "Instrument Serif", Georgia, serif);
+  font-size: clamp(1.7rem, 4.5vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.ny-consent-panel__intro {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: var(--nyc-muted);
+}
+
+.ny-consent-cat {
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--nyc-line);
+}
+
+.ny-consent-cat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.ny-consent-cat__title {
+  margin: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ny-consent-cat__badge {
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--nyc-accent);
+}
+
+.ny-consent-cat__text {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--nyc-muted);
+}
+
+/* Native checkbox (role="switch") with a drawn track: keyboard + screen-reader behaviour is built in. */
+.ny-consent-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.ny-consent-switch__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ny-consent-switch__track {
+  position: relative;
+  flex: none;
+  width: 2.75rem;
+  height: 1.6rem;
+  border: 1px solid var(--nyc-ink);
+  border-radius: 999px;
+  background: transparent;
+  transition: background 240ms var(--nyc-ease);
+}
+
+.ny-consent-switch__track::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  background: var(--nyc-ink);
+  transform: translateY(-50%);
+  transition:
+    transform 240ms var(--nyc-ease),
+    background 240ms var(--nyc-ease);
+}
+
+.ny-consent-switch__input:checked + .ny-consent-switch__track {
+  background: var(--nyc-ink);
+}
+
+.ny-consent-switch__input:checked + .ny-consent-switch__track::after {
+  background: #fff;
+  transform: translate(1.15rem, -50%);
+}
+
+html[dir="rtl"] .ny-consent-switch__input:checked + .ny-consent-switch__track::after {
+  transform: translate(-1.15rem, -50%);
+}
+
+.ny-consent-switch__state {
+  min-width: 3.4em;
+  font-size: 0.82rem;
+  color: var(--nyc-muted);
+}
+
+.ny-consent-panel__dialog .ny-consent__actions {
+  margin-top: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nyc-line);
+}
+
+.ny-consent-panel__foot {
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  color: var(--nyc-muted);
+}
+
+/* ---- Small screens: bottom sheet */
+
+@media (max-width: 600px) {
+  .ny-consent {
+    inset-inline: 0;
+    bottom: 0;
+    width: auto;
+    max-height: 85vh;
+    max-height: 85svh;
+    overflow-y: auto;
+    padding-bottom: max(1.15rem, env(safe-area-inset-bottom));
+    border-radius: 20px 20px 0 0;
+    border-bottom: 0;
+  }
+
+  .ny-consent__actions {
+    flex-direction: column;
+  }
+
+  .ny-consent__btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-consent,
+  .ny-consent-panel__backdrop,
+  .ny-consent-panel__dialog,
+  .ny-consent__btn,
+  .ny-consent-switch__track,
+  .ny-consent-switch__track::after {
+    transition: none;
+  }
+
+  /* No slide-in: the cards only appear (opacity). The switch thumb keeps its position. */
+  .ny-consent,
+  .ny-consent-panel__dialog {
+    transform: none;
+  }
+}
+
+@media print {
+  .ny-consent,
+  .ny-consent-panel {
+    display: none !important;
+  }
+}

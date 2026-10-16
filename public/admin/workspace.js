@@ -634,6 +634,8 @@
       healthDetails: item.healthDetails || item['تفاصيل صحية'] || '-',
       activities: normalizeArray(item.activities || item['اهتمامات الأنشطة']),
       freeNote: item.freeNote || item['ملاحظات إضافية'] || '-',
+      // Order note of the checkout mirror that the API collapsed into this request (if any).
+      commerceNote: item.commerceNote || '',
       date: item.submittedAt || item.date || item['submittedAt'] || item['date'] || '-',
       status: item.status || item['status'] || 'pending',
       retreatType: item.retreatType || item['retreatType'] || '-',
@@ -697,7 +699,11 @@
     var remaining = 0;
     var bookingReference = '';
     var source = 'manual';
+    var roomLabel = '';
+    var total = 0;
     if (commerce) {
+      roomLabel = (commerce.metadata && commerce.metadata.roomLabel) || '';
+      total = Number(commerce.total) || 0;
       bookingStatus = commerce.bookingStatus || bookingStatus;
       paymentStatus = commerce.paymentStatus || (commerce.paid ? 'paid' : paymentStatus);
       amountPaid = Number(commerce.amountPaid) || 0;
@@ -706,7 +712,7 @@
       source = commerce.bookingSource || 'online';
     }
     try {
-      var note = row && row.freeNote;
+      var note = row && (row.commerceNote || row.freeNote);
       if (note && note !== '-') {
         var parsed = JSON.parse(note);
         if (parsed && parsed.bookingStatus) bookingStatus = parsed.bookingStatus;
@@ -728,12 +734,14 @@
       remaining: remaining,
       bookingReference: bookingReference,
       source: source,
+      roomLabel: roomLabel,
+      total: total,
       commerceOrderId: commerce ? commerce.commerceOrderId : '',
     };
   }
 
   function parseCommerceOrder(row) {
-    var note = row && row.freeNote;
+    var note = row && (row.commerceNote || row.freeNote);
     if (!note || note === '-') return null;
     try {
       var parsed = JSON.parse(note);
@@ -1668,6 +1676,8 @@
       html += modalField('Booking ref.', booking.bookingReference || booking.commerceOrderId);
       html += modalField('Booking status', booking.bookingStatus);
       html += modalField('Payment status', booking.paymentStatus);
+      if (booking.roomLabel) html += modalField('Room', booking.roomLabel);
+      if (booking.total) html += modalField('Total price', '₪' + booking.total);
       html += modalField('Amount paid', booking.amountPaid ? '₪' + booking.amountPaid : '-');
       html += modalField('Remaining', booking.remaining ? '₪' + booking.remaining : '-');
       html += modalField('Source', booking.source === 'online' ? 'Online' : 'Manual');
@@ -2651,6 +2661,9 @@
         html += modalField('Order ID', o.id);
         html += modalField('Order status', o.status);
         html += modalField('Payment status', o.payment_status);
+        html += modalField('Total price', o.total ? '₪' + o.total : '—');
+        html += modalField('Amount paid', o.amount_paid ? '₪' + o.amount_paid : '—');
+        html += modalField('Remaining', o.remaining != null ? '₪' + o.remaining : '—');
         html += modalField('Charge amount', o.metadata && o.metadata.chargeAmount != null ? '₪' + o.metadata.chargeAmount : o.total ? '₪' + o.total : '—');
         html += modalField('Currency', o.currency || '—');
         html += modalField('Checkout created', formatDisplayDate(o.created_at));

@@ -2,6 +2,8 @@ import './globals.css';
 import Script from 'next/script';
 import PageTransit from '@/components/PageTransit';
 import ScrollRail from '@/components/ScrollRail';
+import CampaignLoader from '@/components/CampaignLoader';
+import { getClientCampaigns } from '@/lib/campaigns/resolve';
 
 const SITE_URL = 'https://nawalyoga.com';
 const SITE_DESCRIPTION =
@@ -46,6 +48,8 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+  // Only campaigns with status "active" are ever passed on. With none, nothing campaign-related is rendered.
+  const campaigns = getClientCampaigns();
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body>
@@ -61,6 +65,7 @@ export default function RootLayout({ children }) {
         {children}
         <ScrollRail />
         <PageTransit />
+        {campaigns.length > 0 ? <CampaignLoader campaigns={campaigns} /> : null}
       </body>
     </html>
   );

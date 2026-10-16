@@ -280,6 +280,17 @@
 }
 
 /* Thanks */
+/* The thanks page is not wrapped in .wrc-page, so it needs the colour tokens itself
+   (without them the PDF / WhatsApp buttons have no background and near-white text). */
+.wrc-thanks {
+  --wrc-ink: #1f1a17;
+  --wrc-muted: #6b6258;
+  --wrc-line: #e8dfd4;
+  --wrc-cream: #fffdf9;
+  --wrc-accent: #245a42;
+  --wrc-accent-hover: #1e4a36;
+}
+
 .wrc-thanks {
   text-align: center;
   max-width: 32rem;

@@ -759,7 +759,6 @@
       retreat_wadi_accommodation_sub: 'Choose your room — the price covers the whole programme',
       retreat_wadi_risk_line: 'Sending a request is free and non-binding — your place is confirmed after a short call with a 400 ₪ deposit.',
       retreat_wadi_policy_link: 'Payment & cancellation terms',
-      retreat_wadi_spots_left: 'About 10 spots left',
       retreat_wadi_voices_title: 'In their words',
       retreat_wadi_voices_sub: 'From messages participants sent after the previous retreat',
       retreat_wadi_voice_read_more: 'Read the full message',
@@ -850,6 +849,7 @@
       retreat_wadi_checkout_db_error: 'Could not save your booking. Try again or contact us on WhatsApp.',
       retreat_wadi_checkout_network_error:
         'Connection error. Check your internet and try again, or message us on WhatsApp.',
+      retreat_wadi_checkout_room_invalid: 'Please choose a room (Panorama or Bubbles) before paying.',
       retreat_wadi_checkout_gateway_error:
         'Payment gateway is temporarily unavailable. Try again shortly or pay via WhatsApp.',
       retreat_wadi_thanks_title: "You're booked!",
@@ -2396,7 +2396,6 @@ haifa_pkg_pack4: '4-class package (260 ILS)',
       retreat_wadi_accommodation_sub: 'اختاري غرفتك — السعر شامل البرنامج كامل',
       retreat_wadi_risk_line: 'إرسال الطلب مجاني وبدون التزام — المكان بيتثبّت بعد مكالمة قصيرة بدفعة 400 ₪.',
       retreat_wadi_policy_link: 'شروط الدفع والإلغاء',
-      retreat_wadi_spots_left: 'باقي حوالي 10 أماكن',
       retreat_wadi_voices_title: 'شو حكوا المشاركات',
       retreat_wadi_voices_sub: 'من رسائل المشاركات بعد الريتريت السابق',
       retreat_wadi_voice_read_more: 'اقرأي الرسالة كاملة',
@@ -2484,6 +2483,7 @@ haifa_pkg_pack4: '4-class package (260 ILS)',
       retreat_wadi_checkout_db_error: 'تعذّر حفظ الحجز. حاولي مرة أخرى أو راسلينا على واتساب.',
       retreat_wadi_checkout_network_error:
         'مشكلة في الاتصال. تأكدي من الإنترنت وحاولي مرة أخرى، أو راسلينا على واتساب.',
+      retreat_wadi_checkout_room_invalid: 'اختاري غرفة (بانوراما أو بابلز) قبل الدفع.',
       retreat_wadi_checkout_gateway_error:
         'بوابة الدفع غير متاحة حالياً. حاولي لاحقاً أو ادفعي عبر واتساب.',
       retreat_wadi_thanks_title: 'تم تثبيت حجزك!',

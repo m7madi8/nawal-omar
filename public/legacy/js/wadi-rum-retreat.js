@@ -1,11 +1,13 @@
 (function () {
-  // TODO(analytics): no provider is installed yet. Events are forwarded to
-  // GTM (dataLayer), gtag, Microsoft Clarity or Meta Pixel as soon as one is
-  // added to the site, and are always buffered in window.wrEvents.
+  // TODO(analytics): no provider is installed yet. Once one is added, events are forwarded to
+  // GTM (dataLayer), gtag, Microsoft Clarity or Meta Pixel ONLY while the visitor has granted the
+  // "analytics" consent (window.nawalConsent). They are always buffered in memory in window.wrEvents
+  // (no storage, no network).
   window.wrEvents = window.wrEvents || [];
   function track(name, params) {
     var payload = params || {};
     window.wrEvents.push({ event: name, params: payload, at: Date.now() });
+    if (!(window.nawalConsent && typeof window.nawalConsent.has === "function" && window.nawalConsent.has("analytics"))) return;
     try {
       if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: name }, payload));
       if (typeof window.gtag === "function") window.gtag("event", name, payload);

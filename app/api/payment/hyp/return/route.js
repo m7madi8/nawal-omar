@@ -4,7 +4,7 @@ import {
   readRedirectOrderRef,
 } from '@/lib/commerce/payment/hyp-pay/redirect';
 import { getOrder, siteUrlFromRequest } from '@/lib/commerce/orders';
-import { bookingBackPath, paymentThanksUrl } from '@/lib/commerce/thanks-path';
+import { bookingBackPath, paymentThanksTarget } from '@/lib/commerce/thanks-path';
 import { logPaymentAttemptEvent } from '@/lib/commerce/payment/attempt-telemetry.js';
 
 async function thanksPath(result) {
@@ -15,22 +15,22 @@ async function thanksPath(result) {
 
   if (!result.paid) {
     if (result.orderId && result.pending) {
-      return paymentThanksUrl(result.orderId, phone, { pending: true });
+      return paymentThanksTarget(result.orderId, phone, { pending: true });
     }
     if (result.orderId) {
-      return paymentThanksUrl(result.orderId, phone, { failed: true });
+      return paymentThanksTarget(result.orderId, phone, { failed: true });
     }
     if (commerceType === 'lesson' || commerceType === 'event') {
-      return `${bookingBackPath(commerceType, itemId)}?payment=failed`;
+      return { path: `${bookingBackPath(commerceType, itemId)}?payment=failed`, setCookie: null };
     }
-    return '/register/wadi-rum?payment=failed';
+    return { path: '/register/wadi-rum?payment=failed', setCookie: null };
   }
 
   if (!result.orderId) {
-    return '/payment/thanks?payment=pending';
+    return { path: '/payment/thanks?payment=pending', setCookie: null };
   }
 
-  return paymentThanksUrl(result.orderId, phone);
+  return paymentThanksTarget(result.orderId, phone);
 }
 
 /**
@@ -75,6 +75,9 @@ export async function GET(request) {
   });
 
   const origin = siteUrlFromRequest(request);
-  const target = `${origin}${await thanksPath(result)}`;
-  return Response.redirect(target, 302);
+  const { path, setCookie } = await thanksPath(result);
+  // Response.redirect() headers are immutable, so build the 302 by hand to attach Set-Cookie.
+  const headers = new Headers({ Location: `${origin}${path}`, 'Cache-Control': 'no-store' });
+  if (setCookie) headers.append('Set-Cookie', setCookie);
+  return new Response(null, { status: 302, headers });
 }

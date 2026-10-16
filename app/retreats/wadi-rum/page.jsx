@@ -244,7 +244,7 @@ export default function Page() {
               <span data-i18n="retreat_wadi_ask_wa">Ask on WhatsApp</span>
             </a>
           </div>
-          <p class="wr-hero__urgency"><span data-i18n="retreat_wadi_hero_urgency">Small women’s group · limited spots</span><span class="wr-hero__sep" aria-hidden="true"> · </span><strong class="wr-spots" data-i18n="retreat_wadi_spots_left">About 10 spots left</strong></p>
+          <p class="wr-hero__urgency"><span data-i18n="retreat_wadi_hero_urgency">Small women’s group · limited spots</span></p>
         </div>
       </div>
     </div>
@@ -616,7 +616,6 @@ export default function Page() {
         <div class="wr-cta-panel__head">
           <p class="wr-cta-panel__dates" dir="ltr" data-i18n="retreat_wadi_price_dates">22–26.10.2026</p>
           <p class="wr-cta-panel__place" data-i18n="retreat_wadi_price_place">Wadi Rum, Jordan</p>
-          <p class="wr-cta-panel__spots"><span class="wr-cta-panel__spots-dot" aria-hidden="true"></span><span data-i18n="retreat_wadi_spots_left">About 10 spots left</span></p>
         </div>
         <div class="wr-cta-panel__rooms" data-i18n-attr="aria-label:retreat_wadi_rooms_aria" aria-label="Room options">
           <article class="wr-cta-price-card wr-cta-price-card--premium">
