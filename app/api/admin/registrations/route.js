@@ -1,7 +1,8 @@
 import { guardResponse, requireAdminAccess } from '@/lib/admin-auth';
+import { collapseLinkedBookingRows } from '@/lib/commerce/admin-booking-rows';
+import { filterRegistrationRowsForSession } from '@/lib/admin/source-scope';
 import { PERMISSION } from '@/lib/admin/permissions';
 import { SUPABASE_TABLE_RETREAT_REQUESTS, supabaseSelect } from '@/lib/commerce/supabase';
-import { collapseLinkedBookingRows } from '@/lib/commerce/admin-booking-rows';
 
 export async function GET(request) {
   const guard = await requireAdminAccess(request, { permission: PERMISSION.REGISTRATIONS_READ });
@@ -15,6 +16,7 @@ export async function GET(request) {
       `select=*&order=submittedAt.desc.nullslast,createdAt.desc.nullslast&limit=${limit}`,
     )) || [];
 
-  // One logical booking = one row (request + its checkout mirror are collapsed; nothing is deleted).
-  return Response.json({ ok: true, rows: collapseLinkedBookingRows(rows) });
+  const collapsed = collapseLinkedBookingRows(rows);
+  const scoped = filterRegistrationRowsForSession(collapsed, guard.session);
+  return Response.json({ ok: true, rows: scoped });
 }

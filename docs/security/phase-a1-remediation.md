@@ -14,9 +14,18 @@
     "password": "<new-secret>",
     "name": "Shatha",
     "permissions": ["medical"]
+  },
+  {
+    "username": "salma",
+    "password": "<new-secret>",
+    "name": "Salma",
+    "permissions": ["overview", "retreats"],
+    "sourceScope": "wadi-rum"
   }
 ]
 ```
+
+`sourceScope: "wadi-rum"` limits registrations and Hyp orders to Wadi Rum only (built-in account `salma`).
 
 5. Set **`ADMIN_SESSION_SECRET`**, **`ADMIN_AUTH_EPOCH`** (e.g. `1`; bump to invalidate all sessions after rotation).
 6. Optional: apply **`008_admin_session_revocations.sql`** for per-logout server revocation (requires service role).

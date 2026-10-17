@@ -1,4 +1,5 @@
 import { guardResponse, requireAdminAccess } from '@/lib/admin-auth';
+import { commerceOrderInStaffScope, sessionStaffSourceScope } from '@/lib/admin/source-scope';
 import { PERMISSION } from '@/lib/admin/permissions';
 import { getOrder, getOrderItems } from '@/lib/commerce/orders';
 import { getLatestPaymentAttemptForOrder } from '@/lib/commerce/payment/attempts';
@@ -92,10 +93,15 @@ export async function GET(request) {
   const orderId = String(request.nextUrl.searchParams.get('orderId') || '').trim();
   const limit = Math.min(50, Math.max(1, Number(request.nextUrl.searchParams.get('limit')) || 25));
 
+  const scopeKey = sessionStaffSourceScope(guard.session);
+
   if (orderId) {
     const order = await getOrder(orderId);
     if (!order) {
       return Response.json({ ok: false, error: 'Order not found' }, { status: 404 });
+    }
+    if (scopeKey && !commerceOrderInStaffScope(order, scopeKey)) {
+      return Response.json({ ok: false, error: 'Forbidden' }, { status: 403 });
     }
     const items = await getOrderItems(orderId);
     const attempt = await getLatestPaymentAttemptForOrder(orderId);
@@ -113,8 +119,12 @@ export async function GET(request) {
       `payment_method=eq.hyp&select=id,status,payment_status,payment_method,currency,total,amount_paid,booking_reference,created_at,updated_at,customer,metadata&order=created_at.desc&limit=${limit}`,
     )) || [];
 
+  const orders = rows
+    .map((row) => sanitizeOrderForAdmin(row))
+    .filter((order) => !scopeKey || commerceOrderInStaffScope(order, scopeKey));
+
   return Response.json({
     ok: true,
-    orders: rows.map((row) => sanitizeOrderForAdmin(row)),
+    orders,
   });
 }

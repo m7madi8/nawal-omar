@@ -6,7 +6,11 @@ import { fileURLToPath } from 'node:url';
 import { verifyAdminCredentials, credentialsConfiguredForLogin } from '../lib/admin/builtin-accounts.js';
 import { assertAdminMutationOrigin } from '../lib/admin/csrf.js';
 import { resolveApiPermissionsForAccount, sessionHasApiPermission, PERMISSION } from '../lib/admin/permissions.js';
-import { enrichSessionFromDirectory } from '../lib/admin/directory.js';
+import { enrichSessionFromDirectory, resolveAccountByUsername } from '../lib/admin/directory.js';
+import {
+  filterRegistrationRowsForSession,
+  registrationRowInStaffScope,
+} from '../lib/admin/source-scope.js';
 import { ADMIN_ROUTE_PERMISSIONS } from '../lib/admin/routes.js';
 import {
   createAdminSessionToken,
@@ -81,6 +85,31 @@ assert.ok(payload);
 const session = enrichSessionFromDirectory(payload);
 assert.ok(session);
 assert.ok(!sessionHasApiPermission(session, PERMISSION.COMMERCE_READ));
+
+const salmaAccount = resolveAccountByUsername('salma');
+assert.equal(salmaAccount?.sourceScope, 'wadi-rum');
+const salmaPerms = resolveApiPermissionsForAccount(salmaAccount);
+assert.ok(sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.REGISTRATIONS_READ));
+assert.ok(sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.REGISTRATIONS_UPDATE));
+assert.ok(!sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.COMMERCE_READ));
+assert.ok(!sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.INVOICES_READ));
+assert.ok(!sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.ANALYTICS_READ));
+assert.equal(registrationRowInStaffScope({ source: 'wadi-rum-registration' }, 'wadi-rum'), true);
+assert.equal(registrationRowInStaffScope({ source: 'zanzibar-retreat-reserve' }, 'wadi-rum'), false);
+const salmaToken = createAdminSessionToken({
+  username: 'salma',
+  name: 'Salma',
+  role: 'staff',
+  staffId: 'builtin-salma',
+  sid: 'test-sid-salma',
+});
+const salmaSession = enrichSessionFromDirectory(verifyAdminSessionToken(salmaToken));
+assert.equal(salmaSession?.sourceScope, 'wadi-rum');
+const mixedRows = [
+  { id: '1', source: 'wadi-rum-registration' },
+  { id: '2', source: 'dahab-retreat-reserve' },
+];
+assert.equal(filterRegistrationRowsForSession(mixedRows, salmaSession).length, 1);
 
 const tampered = token.replace(/.$/, token.endsWith('a') ? 'b' : 'a');
 assert.equal(verifyAdminSessionToken(tampered), null);

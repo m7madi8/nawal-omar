@@ -86,6 +86,7 @@ export async function POST(request) {
         staffId: profile.staffId || '',
         viewOnly: !!profile.viewOnly,
         permissions: viewPermissions,
+        sourceScope: profile.sourceScope || null,
         locked: !!profile.locked,
       },
     }),

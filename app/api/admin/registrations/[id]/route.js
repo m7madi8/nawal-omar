@@ -1,4 +1,5 @@
 import { guardResponse, requireAdminAccess } from '@/lib/admin-auth';
+import { registrationRowInStaffScope, sessionStaffSourceScope } from '@/lib/admin/source-scope';
 import { PERMISSION } from '@/lib/admin/permissions';
 import {
   SUPABASE_TABLE_RETREAT_REQUESTS,
@@ -37,6 +38,10 @@ export async function PATCH(request, context) {
   if (!existing) {
     return Response.json({ error: 'Not found' }, { status: 404 });
   }
+  const scopeKey = sessionStaffSourceScope(guard.session);
+  if (scopeKey && !registrationRowInStaffScope(existing, scopeKey)) {
+    return Response.json({ error: 'Forbidden' }, { status: 403 });
+  }
 
   const updated = await supabaseUpdate(SUPABASE_TABLE_RETREAT_REQUESTS, id, { status });
   return Response.json({ ok: true, row: updated });
@@ -54,6 +59,15 @@ export async function DELETE(request, context) {
   const id = String(params?.id || '').trim();
   if (!id) {
     return Response.json({ error: 'Missing id' }, { status: 400 });
+  }
+
+  const existing = await supabaseGetById(SUPABASE_TABLE_RETREAT_REQUESTS, id);
+  if (!existing) {
+    return Response.json({ error: 'Not found' }, { status: 404 });
+  }
+  const scopeKey = sessionStaffSourceScope(guard.session);
+  if (scopeKey && !registrationRowInStaffScope(existing, scopeKey)) {
+    return Response.json({ error: 'Forbidden' }, { status: 403 });
   }
 
   const ok = await supabaseDelete(SUPABASE_TABLE_RETREAT_REQUESTS, id);

@@ -34,6 +34,16 @@
       viewOnly: false,
       locked: true,
     },
+    {
+      id: 'builtin-salma',
+      name: 'Salma',
+      username: 'salma',
+      aliases: [],
+      permissions: ['overview', 'retreats'],
+      sourceScope: 'wadi-rum',
+      viewOnly: false,
+      locked: true,
+    },
   ];
 
   /* Icon set — 18px line icons, inherit currentColor */
@@ -465,6 +475,7 @@
         locked: true,
         viewOnly: !!builtin.viewOnly,
         permissions: Array.isArray(builtin.permissions) ? builtin.permissions.slice() : [],
+        sourceScope: builtin.sourceScope || session.sourceScope || '',
       };
     }
     return {
@@ -475,6 +486,7 @@
       staffId: session.staffId || '',
       viewOnly: !!session.viewOnly,
       permissions: Array.isArray(session.permissions) ? session.permissions.slice() : [],
+      sourceScope: session.sourceScope || '',
     };
   }
 
@@ -500,6 +512,7 @@
       session.locked = true;
       session.viewOnly = !!builtin.viewOnly;
       session.permissions = Array.isArray(builtin.permissions) ? builtin.permissions.slice() : [];
+      session.sourceScope = builtin.sourceScope || session.sourceScope || '';
       return session;
     }
     if (!Array.isArray(session.permissions) || !session.permissions.length) {
@@ -517,6 +530,38 @@
   function isViewOnly(session) {
     session = session || currentSession();
     return !!(session && session.viewOnly);
+  }
+
+  function staffSourceScopeKey(session) {
+    session = session || currentSession();
+    if (!session || isOwner(session)) return '';
+    var key = String(session.sourceScope || '').trim();
+    if (key) return key;
+    var builtin = findBuiltinStaff(session.username, session.staffId);
+    return builtin && builtin.sourceScope ? String(builtin.sourceScope) : '';
+  }
+
+  function rowMatchesStaffScope(row) {
+    var key = staffSourceScopeKey();
+    if (!key) return true;
+    if (key === 'wadi-rum') {
+      if (row.source === 'wadi-rum-registration' || row.source === 'feedback-wadi-rum') return true;
+      var commerce = parseCommerceOrder(row);
+      if (commerce && String(commerce.itemId || '') === 'wadi-rum') return true;
+      return false;
+    }
+    return true;
+  }
+
+  function catalogForStaffScope(catalog) {
+    var key = staffSourceScopeKey();
+    if (!key) return catalog;
+    if (key === 'wadi-rum') {
+      return catalog.filter(function (item) {
+        return item.id === 'wadi-rum' || item.source === 'wadi-rum-registration' || item.source === 'feedback-wadi-rum';
+      });
+    }
+    return catalog;
   }
 
   function isReservedUsername(username) {
@@ -1260,6 +1305,7 @@
   function filterRows(rows, filters, view) {
     var q = String(filters.q || '').trim().toLowerCase();
     return rows.filter(function (row) {
+      if (!rowMatchesStaffScope(row)) return false;
       if (view === 'medical' && MEDICAL_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'feedback' && FEEDBACK_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'retreats' && RETREAT_SOURCES.indexOf(row.source) === -1) return false;
@@ -2123,7 +2169,7 @@
     var html = '<div class="admin-page-head"><div><h1>Retreats</h1><p>Featured journeys, occupancy, and every retreat reservation in one place.</p></div><div class="admin-page-actions"><button type="button" class="admin-btn admin-btn--primary" data-action="export-all">Export filtered</button></div></div>';
 
     html += '<div class="admin-retreat-cards">';
-    sortedExperienceCatalog(RETREAT_CATALOG).forEach(function (retreat) {
+    sortedExperienceCatalog(catalogForStaffScope(RETREAT_CATALOG)).forEach(function (retreat) {
       var count = rows.filter(function (row) { return row.source === retreat.source; }).length;
       var pending = rows.filter(function (row) { return row.source === retreat.source && row.status !== 'completed'; }).length;
       html += '<article class="admin-retreat-card"><div class="admin-retreat-card__media"><img src="' + retreat.image + '" alt="' + escapeHtml(retreat.name) + '">' + renderExperienceCardStatus(retreat.liveStatus, retreat.liveStatusLabel) + '</div><div class="admin-retreat-card__body"><h3>' + escapeHtml(retreat.name) + '</h3><p>' + escapeHtml(retreat.dates) + ' · ' + escapeHtml(retreat.location) + '</p><div class="admin-retreat-card__stats"><span>' + count + ' bookings</span><span>' + pending + ' pending</span></div></div></article>';
@@ -2135,7 +2181,7 @@
     html += '<article class="admin-stat"><p class="admin-stat__label">Reviewed</p><strong class="admin-stat__value">' + (stats.retreats - stats.retreatsPending) + '</strong></article></div>';
 
     html += '<div class="admin-progress-list">';
-    sortExperienceCatalog(RETREAT_CATALOG).forEach(function (retreat) {
+    sortExperienceCatalog(catalogForStaffScope(RETREAT_CATALOG)).forEach(function (retreat) {
       var count = rows.filter(function (row) { return row.source === retreat.source; }).length;
       var pct = stats.retreats ? Math.round((count / stats.retreats) * 100) : 0;
       html += '<div class="admin-progress-row"><span>' + escapeHtml(retreat.name) + '</span><div class="admin-progress-track"><div class="admin-progress-fill" style="width:' + pct + '%"></div></div><span>' + count + '</span></div>';
@@ -2347,7 +2393,7 @@
     html += '<article class="admin-stat"><p class="admin-stat__label">Avg. overall rating</p><strong class="admin-stat__value">' + avgLabel + '</strong></article>';
     html += '</div>';
     html += '<div class="admin-retreat-cards is-feedback">';
-    FEEDBACK_CATALOG.forEach(function (item) {
+    catalogForStaffScope(FEEDBACK_CATALOG).forEach(function (item) {
       var count = feedbackRows.filter(function (row) { return row.source === item.source; }).length;
       var pending = feedbackRows.filter(function (row) { return row.source === item.source && row.status !== 'completed'; }).length;
       var avg = feedbackAverageRating(feedbackRows.filter(function (row) { return row.source === item.source; }));
@@ -2496,8 +2542,8 @@
 
     var html = '<div class="admin-page-head"><div><h1>Team</h1><p>Sign-in accounts are configured on the server — not in this browser.</p></div></div>';
     html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Server configuration</h2></div></div>';
-    html += '<p class="admin-muted">Set <code>ADMIN_OWNER_PASSWORD</code>, optional <code>ADMIN_DEVELOPER_PASSWORD</code>, and team members in <code>ADMIN_TEAM_ACCOUNTS</code> (JSON: username, password, name, permissions as workspace view ids).</p>';
-    html += '<p class="admin-muted">Built-in staff (e.g. Shatha / <code>shada</code>) still need a password entry in <code>ADMIN_TEAM_ACCOUNTS</code>. Rotate any credentials that were ever shipped in client JavaScript, then bump <code>ADMIN_AUTH_EPOCH</code> to sign everyone out.</p>';
+    html += '<p class="admin-muted">Set <code>ADMIN_OWNER_PASSWORD</code>, optional <code>ADMIN_DEVELOPER_PASSWORD</code>, and team members in <code>ADMIN_TEAM_ACCOUNTS</code> (JSON: <code>username</code>, <code>password</code>, <code>name</code>, <code>permissions</code> as workspace view ids, optional <code>sourceScope</code> e.g. <code>wadi-rum</code>).</p>';
+    html += '<p class="admin-muted">Built-in staff (e.g. Shatha / <code>shada</code>, Salma / <code>salma</code> for Wadi Rum) still need a password entry in <code>ADMIN_TEAM_ACCOUNTS</code>. Rotate any credentials that were ever shipped in client JavaScript, then bump <code>ADMIN_AUTH_EPOCH</code> to sign everyone out.</p>';
     html += '<p class="admin-muted" dir="rtl">حسابات الفريق تُضبط في متغيرات البيئة على السيرفر فقط.</p></section>';
     html += '<div class="admin-staff-layout"><section class="admin-staff-list">';
     html += '<article class="admin-staff-card is-owner">';
@@ -3255,6 +3301,7 @@
                 staffId: user.staffId || '',
                 viewOnly: !!user.viewOnly,
                 permissions: user.permissions || [],
+                sourceScope: user.sourceScope || '',
               },
               remember,
             );

@@ -24,6 +24,7 @@ export async function GET(request) {
       staffId: session.staffId,
       viewOnly: session.viewOnly,
       permissions: apiPermissionsToViewIds(session.apiPermissions),
+      sourceScope: session.sourceScope || null,
       locked: session.locked,
     },
   });
