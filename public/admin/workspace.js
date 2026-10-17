@@ -587,23 +587,69 @@
     return views.length ? views[0].path : '/admin';
   }
 
+  function applySidebarAvatar(container, imgEl, session, photoSrc, objectPosition) {
+    if (!container || !imgEl) return;
+    var isStaff = !!(session && session.role === 'staff');
+    if (isStaff) {
+      imgEl.hidden = true;
+      container.classList.add('is-initials');
+      container.setAttribute('data-initials', initials(session.name || session.username));
+      return;
+    }
+    imgEl.hidden = false;
+    container.classList.remove('is-initials');
+    container.removeAttribute('data-initials');
+    imgEl.src = photoSrc;
+    imgEl.style.objectPosition = objectPosition || '50% 18%';
+  }
+
   function applySessionChrome(session) {
     session = session || currentSession();
     var label = document.getElementById('adminSessionLabel');
     var role = document.getElementById('adminSidebarRole');
     var avatar = document.getElementById('adminSessionAvatar');
+    var brandMark = document.querySelector('.admin-sidebar__mark');
+    var brandImg = brandMark ? brandMark.querySelector('img') : null;
+    var brandName = document.querySelector('.admin-sidebar__name');
     var isDeveloper = !!(session && session.role === 'developer');
-    if (label) label.textContent = session ? (session.username || USERNAME) : USERNAME;
+    var isStaff = !!(session && session.role === 'staff');
+
+    if (label) {
+      label.textContent = session
+        ? (isStaff ? session.name || session.username : session.username || USERNAME)
+        : USERNAME;
+    }
     if (role) {
       role.textContent = isDeveloper
         ? 'Web developer'
-        : session && session.role === 'staff'
+        : isStaff
           ? (session.viewOnly ? 'View only' : 'Team member')
           : 'Owner';
     }
-    if (avatar) {
-      avatar.src = isDeveloper ? DEVELOPER_AVATAR : OWNER_AVATAR;
-      avatar.style.objectPosition = isDeveloper ? '50% 28%' : '50% 18%';
+    if (brandName) {
+      brandName.textContent = isStaff
+        ? (session.name || session.username)
+        : isDeveloper
+          ? DEVELOPER_NAME
+          : OWNER_NAME;
+    }
+    if (avatar && avatar.parentElement) {
+      applySidebarAvatar(
+        avatar.parentElement,
+        avatar,
+        session,
+        isDeveloper ? DEVELOPER_AVATAR : OWNER_AVATAR,
+        isDeveloper ? '50% 28%' : '50% 18%',
+      );
+    }
+    if (brandMark && brandImg) {
+      applySidebarAvatar(
+        brandMark,
+        brandImg,
+        session,
+        isDeveloper ? DEVELOPER_AVATAR : OWNER_AVATAR,
+        isDeveloper ? '50% 28%' : '50% 18%',
+      );
     }
   }
 

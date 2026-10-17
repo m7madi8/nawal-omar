@@ -491,6 +491,36 @@ svg { display: block; }
   display: block;
 }
 
+.admin-sidebar__avatar.is-initials,
+.admin-sidebar__mark.is-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--admin-rust);
+  background: var(--admin-sage-tint);
+}
+
+.admin-sidebar__avatar.is-initials {
+  font-size: 0.62rem;
+}
+
+.admin-sidebar__mark.is-initials {
+  font-size: 0.82rem;
+}
+
+.admin-sidebar__avatar.is-initials::before,
+.admin-sidebar__mark.is-initials::before {
+  content: attr(data-initials);
+  line-height: 1;
+}
+
+.admin-sidebar__avatar.is-initials img,
+.admin-sidebar__mark.is-initials img {
+  display: none;
+}
+
 .admin-sidebar__logout {
   border: 0;
   background: transparent;
