@@ -24,13 +24,16 @@
   var DEVELOPER_NAME = 'Mohammad';
   var OWNER_AVATAR = '/media/home/nawal_aom.jpg';
   var DEVELOPER_AVATAR = '/media/me.webp';
+  var WADI_RUM_STAFF_PERMISSIONS = ['overview', 'retreats'];
+  var WADI_RUM_STAFF_SOURCE_SCOPE = 'wadi-rum';
   var BUILTIN_STAFF = [
     {
       id: 'builtin-shatha',
       name: 'Shatha',
       username: 'shada',
       aliases: ['sahda', 'shatha'],
-      permissions: ['medical'],
+      permissions: WADI_RUM_STAFF_PERMISSIONS.slice(),
+      sourceScope: WADI_RUM_STAFF_SOURCE_SCOPE,
       viewOnly: false,
       locked: true,
     },
@@ -39,8 +42,8 @@
       name: 'Salma',
       username: 'salma',
       aliases: [],
-      permissions: ['overview', 'retreats'],
-      sourceScope: 'wadi-rum',
+      permissions: WADI_RUM_STAFF_PERMISSIONS.slice(),
+      sourceScope: WADI_RUM_STAFF_SOURCE_SCOPE,
       viewOnly: false,
       locked: true,
     },

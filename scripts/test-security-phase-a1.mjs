@@ -57,7 +57,13 @@ assert.equal(verifyAdminCredentials('nawal', 'owner-test-pass')?.role, 'owner');
 assert.equal(verifyAdminCredentials('nawal', 'wrong'), null);
 
 process.env.ADMIN_TEAM_ACCOUNTS = JSON.stringify([
-  { username: 'shada', password: 'staff-pass', name: 'Shatha', permissions: ['medical'] },
+  {
+    username: 'shada',
+    password: 'staff-pass',
+    name: 'Shatha',
+    permissions: ['overview', 'retreats'],
+    sourceScope: 'wadi-rum',
+  },
 ]);
 assert.equal(verifyAdminCredentials('shada', 'staff-pass')?.role, 'staff');
 assert.equal(verifyAdminCredentials('shatha', 'staff-pass')?.username, 'shada');
@@ -65,9 +71,10 @@ assert.equal(verifyAdminCredentials('sahda', 'staff-pass')?.username, 'shada');
 
 const staffPerms = resolveApiPermissionsForAccount({
   role: 'staff',
-  permissions: ['medical'],
+  permissions: ['overview', 'retreats'],
 });
 assert.ok(sessionHasApiPermission({ apiPermissions: staffPerms }, PERMISSION.REGISTRATIONS_READ));
+assert.ok(sessionHasApiPermission({ apiPermissions: staffPerms }, PERMISSION.REGISTRATIONS_UPDATE));
 assert.ok(!sessionHasApiPermission({ apiPermissions: staffPerms }, PERMISSION.INVOICES_READ));
 
 const ownerPerms = resolveApiPermissionsForAccount({ role: 'owner', permissions: null });
@@ -86,7 +93,10 @@ const session = enrichSessionFromDirectory(payload);
 assert.ok(session);
 assert.ok(!sessionHasApiPermission(session, PERMISSION.COMMERCE_READ));
 
+const shadaBuiltin = resolveAccountByUsername('shada');
 const salmaAccount = resolveAccountByUsername('salma');
+assert.equal(shadaBuiltin?.sourceScope, 'wadi-rum');
+assert.deepEqual(shadaBuiltin?.permissions, salmaAccount?.permissions);
 assert.equal(salmaAccount?.sourceScope, 'wadi-rum');
 const salmaPerms = resolveApiPermissionsForAccount(salmaAccount);
 assert.ok(sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.REGISTRATIONS_READ));

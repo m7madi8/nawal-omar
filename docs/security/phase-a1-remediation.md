@@ -5,7 +5,7 @@
 1. **Rotate** owner, developer, and all team passwords that may have been exposed in older client bundles or git history.
 2. Set **`ADMIN_OWNER_PASSWORD`** (required for login).
 3. Set **`ADMIN_DEVELOPER_PASSWORD`** if the developer account is used.
-4. Set **`ADMIN_TEAM_ACCOUNTS`** JSON for staff (including built-in `shada`):
+4. Set **`ADMIN_TEAM_ACCOUNTS`** JSON for staff (including built-in `shada` / `salma`):
 
 ```json
 [
@@ -13,7 +13,8 @@
     "username": "shada",
     "password": "<new-secret>",
     "name": "Shatha",
-    "permissions": ["medical"]
+    "permissions": ["overview", "retreats"],
+    "sourceScope": "wadi-rum"
   },
   {
     "username": "salma",
@@ -25,7 +26,7 @@
 ]
 ```
 
-`sourceScope: "wadi-rum"` limits registrations and Hyp orders to Wadi Rum only (built-in account `salma`).
+`sourceScope: "wadi-rum"` limits registrations and Hyp orders to Wadi Rum only for scoped staff.
 
 5. Set **`ADMIN_SESSION_SECRET`**, **`ADMIN_AUTH_EPOCH`** (e.g. `1`; bump to invalidate all sessions after rotation).
 6. Optional: apply **`008_admin_session_revocations.sql`** for per-logout server revocation (requires service role).
