@@ -121,11 +121,19 @@ const mixedRows = [
 ];
 assert.equal(filterRegistrationRowsForSession(mixedRows, salmaSession).length, 1);
 
+process.env.ADMIN_TEAM_ACCOUNTS = JSON.stringify([
+  { username: 'shada', password: 'json-wrong', name: 'Shatha', permissions: ['overview', 'retreats'] },
+]);
+process.env.ADMIN_STAFF_SHADA_PASSWORD = 'env-wins';
+assert.equal(verifyAdminCredentials('shada', 'env-wins')?.username, 'shada');
+assert.equal(verifyAdminCredentials('shada', 'json-wrong'), null);
+
 delete process.env.ADMIN_TEAM_ACCOUNTS;
 process.env.ADMIN_STAFF_SALMA_PASSWORD = 'env-only-pass';
 assert.equal(verifyAdminCredentials('salma', 'env-only-pass')?.username, 'salma');
 assert.equal(verifyAdminCredentials('salma', 'wrong'), null);
 delete process.env.ADMIN_STAFF_SALMA_PASSWORD;
+delete process.env.ADMIN_STAFF_SHADA_PASSWORD;
 
 const tampered = token.replace(/.$/, token.endsWith('a') ? 'b' : 'a');
 assert.equal(verifyAdminSessionToken(tampered), null);
