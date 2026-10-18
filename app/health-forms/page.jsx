@@ -51,7 +51,7 @@ const html = `
           </div>
         </a>
 
-        <a href="/register/wadi-rum" class="ny-door reveal reveal-delay-2">
+        <a href="/register/wadi-rum-health" class="ny-door reveal reveal-delay-2">
           <div class="ny-door__media" aria-hidden="true">
             <img src="/media/wadi-rum/desert.jpg" alt="" width="1600" height="1067" loading="lazy" decoding="async">
           </div>
@@ -59,8 +59,8 @@ const html = `
           <span class="ny-door__num" aria-hidden="true">03</span>
           <div class="ny-door__copy">
             <span class="eyebrow" data-en="Wadi Rum Retreat" data-ar="ريتريت وادي رم">Wadi Rum Retreat</span>
-            <h2 class="ny-door__title" data-en="Registration" data-ar="استمارة التسجيل">Registration</h2>
-            <p class="ny-door__text" data-en="Initial registration for the desert retreat — free and non-binding." data-ar="تسجيل أوّلي لريتريت الصحراء — مجاني وبدون التزام.">Initial registration for the desert retreat — free and non-binding.</p>
+            <h2 class="ny-door__title" data-en="Health form" data-ar="الاستمارة الصحية">Health form</h2>
+            <p class="ny-door__text" data-en="Wellbeing questions for the desert retreat — complete after you register and pay your deposit." data-ar="أسئلة العناية لريتريت الصحراء — كمّليها بعد التسجيل ودفع العربون.">Wellbeing questions for the desert retreat — complete after you register and pay your deposit.</p>
             <span class="ny-door__cta" data-en="Open form" data-ar="افتحي الاستمارة">Open form</span>
           </div>
         </a>

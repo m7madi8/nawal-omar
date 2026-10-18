@@ -105,6 +105,7 @@ assert.ok(!sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.CO
 assert.ok(!sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.INVOICES_READ));
 assert.ok(!sessionHasApiPermission({ apiPermissions: salmaPerms }, PERMISSION.ANALYTICS_READ));
 assert.equal(registrationRowInStaffScope({ source: 'wadi-rum-registration' }, 'wadi-rum'), true);
+assert.equal(registrationRowInStaffScope({ source: 'wadi-rum-health' }, 'wadi-rum'), true);
 assert.equal(registrationRowInStaffScope({ source: 'zanzibar-retreat-reserve' }, 'wadi-rum'), false);
 const salmaToken = createAdminSessionToken({
   username: 'salma',

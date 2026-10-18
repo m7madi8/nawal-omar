@@ -1,42 +1,32 @@
 import LegacyPage from '@/components/LegacyPage';
 
 export const metadata = {
-  "title": "Initial Registration | Wadi Rum Desert Retreat",
-  "description": "Initial registration form for Wadi Rum desert retreat."
+  title: 'Registration | Wadi Rum Desert Retreat',
+  description: 'Initial registration form for Wadi Rum desert retreat.',
 };
 
 const WA_NUMBER = '972522496366';
 
 const err = (key) => `<p class="field-error" id="err-${key}" aria-live="polite"></p>`;
-const optional = '<span class="field-optional" data-t="optional">(optional)</span>';
 
 const choice = (kind, name, value, key, text, required) =>
   `<label class="${kind}-item"><span class="choice-text" data-t="${key}">${text}</span><input class="choice-control" type="${kind === 'radio' ? 'radio' : 'checkbox'}" name="${name}" value="${value}"${required ? ' required' : ''}></label>`;
 
-const ACTIVITIES = [
-  ['yoga-breath', 'a1', 'Yoga &amp; breathwork'],
-  ['reflective-writing', 'a2', 'Reflective writing'],
-  ['sound-healing', 'a3', 'Sound Healing'],
-  ['desert-fire-rituals', 'a4', 'Desert &amp; fire rituals'],
-  ['meditative-walk', 'a5', 'Meditative walk'],
-  ['sharing-circles', 'a6', 'Sharing circles'],
-  ['star-nights', 'a7', 'Nights under stars'],
-];
-
-const STEPS = [
-  ['1', 'stepName1', 'Contact'],
-  ['2', 'stepName2', 'About you'],
-  ['3', 'stepName3', 'Your experience'],
-];
+const STEPS = [['1', 'stepName1', 'Booking']];
 
 const html = `
   <main class="wadi-reg ny-inner">
     <div class="wadi-reg-top">
       <a class="back-link" href="/retreats/wadi-rum" data-t="backLink">Back to retreat</a>
+      <p class="wadi-reg-top__meta">
+        <a href="/register/wadi-rum-health" data-t="healthFormLink">Wadi Rum health form</a>
+        <span aria-hidden="true"> · </span>
+        <a href="/health-forms" data-t="wellbeingLink">Wellbeing hub</a>
+      </p>
     </div>
     <section class="card">
-      <h1 data-t="title">Initial Registration | Wadi Rum Desert Retreat</h1>
-      <p class="lead" data-t="lead1">Complete your details and pay the 400 ₪ deposit in one step to secure your place. Limited to 20 participants.</p>
+      <h1 data-t="title">Registration | Wadi Rum Desert Retreat</h1>
+      <p class="lead" data-t="lead1">Enter your details, choose your room, and pay the 400 ₪ deposit to secure your place. Limited to 20 participants.</p>
       <div class="reg-summary">
         <p class="reg-summary__row">
           <bdi dir="ltr">22–26.10.2026</bdi>
@@ -60,7 +50,7 @@ const html = `
       </div>
 
       <form id="wadiRegForm" data-ny-thanks="off" novalidate>
-        <p class="reg-required-note" data-t="requiredNote">All fields are required unless marked optional.</p>
+        <p class="reg-required-note" data-t="requiredNote">All fields are required.</p>
 
         <div class="reg-hp" aria-hidden="true">
           <label for="regWebsite">Website</label>
@@ -68,7 +58,7 @@ const html = `
         </div>
 
         <fieldset class="form-section reg-step" data-step="1" aria-labelledby="stepTitle1">
-          <h2 class="section-title" id="stepTitle1" tabindex="-1" data-t="secBasic">Basic Information</h2>
+          <h2 class="section-title" id="stepTitle1" tabindex="-1" data-t="secBasic">Your booking</h2>
           <div class="grid">
             <div class="field">
               <label for="fullName" data-t="fullName">Full Name</label>
@@ -81,6 +71,11 @@ const html = `
               <input id="phone" name="رقم الهاتف" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" enterkeyhint="next" required aria-describedby="hint-phone err-phone">
               ${err('phone')}
             </div>
+            <div class="field">
+              <label for="city" data-t="city">City / place of residence</label>
+              <input id="city" name="مكان السكن" type="text" autocomplete="address-level2" enterkeyhint="next" required aria-describedby="err-city">
+              ${err('city')}
+            </div>
           </div>
           <fieldset class="choice-group reg-gap-top" id="grp-room" aria-describedby="hint-room err-room">
             <legend data-t="roomLegend">Choose your room</legend>
@@ -91,77 +86,8 @@ const html = `
             </div>
             ${err('room')}
           </fieldset>
-        </fieldset>
 
-        <fieldset class="form-section reg-step" data-step="2" aria-labelledby="stepTitle2">
-          <h2 class="section-title" id="stepTitle2" tabindex="-1" data-t="secAbout">A little about you</h2>
-          <div class="grid two">
-            <div class="field">
-              <label for="age" data-t="age">Age</label>
-              <input id="age" name="العمر" type="text" inputmode="numeric" autocomplete="off" dir="ltr" data-min="16" maxlength="3" enterkeyhint="next" required aria-describedby="err-age">
-              ${err('age')}
-            </div>
-            <div class="field">
-              <label for="city"><span data-t="city">City</span> ${optional}</label>
-              <input id="city" name="مكان السكن" type="text" autocomplete="address-level2" enterkeyhint="next">
-            </div>
-          </div>
-          <h3 class="section-subtitle" data-t="secIntent">Your Intention</h3>
-          <p class="section-sub" data-t="secIntentSub">Write freely. There is no right or wrong answer.</p>
-          <div class="grid">
-            <div class="field">
-              <label for="reason"><span data-t="reason">What made you interested in this retreat?</span> ${optional}</label>
-              <textarea id="reason" name="دافع الاهتمام بالريتريت"></textarea>
-            </div>
-            <div class="field">
-              <label for="expectation"><span data-t="expectation">What do you hope to receive from this experience?</span> ${optional}</label>
-              <textarea id="expectation" name="التوقع من التجربة"></textarea>
-            </div>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-section reg-step" data-step="3" aria-labelledby="stepTitle3">
-          <h2 class="section-title" id="stepTitle3" tabindex="-1" data-t="secHealth">Physical &amp; Mental Background</h2>
-          <div class="grid">
-            <fieldset class="choice-group" id="grp-yoga" aria-describedby="err-yoga">
-              <legend data-t="yogaExp">Do you have previous experience with yoga or meditation?</legend>
-              <div class="radio-grid">
-                ${choice('radio', 'خبرة يوغا/تأمل', 'no-first-time', 'y1', 'No, this is my first time', true)}
-                ${choice('radio', 'خبرة يوغا/تأمل', 'yes-basic', 'y2', 'Yes, basic experience', true)}
-                ${choice('radio', 'خبرة يوغا/تأمل', 'yes-regular', 'y3', 'Yes, I practice regularly', true)}
-              </div>
-              ${err('yoga')}
-            </fieldset>
-            <fieldset class="choice-group" id="grp-health" aria-describedby="err-health">
-              <legend data-t="healthQ">Do you currently have a physical condition we should know about?</legend>
-              <div class="radio-grid radio-grid--inline">
-                ${choice('radio', 'حالة صحية حالية', 'no', 'no', 'No', true)}
-                ${choice('radio', 'حالة صحية حالية', 'yes', 'yes', 'Yes', true)}
-              </div>
-              ${err('health')}
-            </fieldset>
-            <div class="field">
-              <label for="healthDetails"><span data-t="healthDetails">Additional details</span> ${optional}</label>
-              <textarea id="healthDetails" name="تفاصيل صحية إضافية"></textarea>
-            </div>
-          </div>
-
-          <h3 class="section-subtitle" data-t="secActivities">Activities &amp; Experience</h3>
-          <fieldset class="choice-group" id="grp-activities" aria-describedby="hint-activities err-activities">
-            <legend data-t="activitiesLabel">Which activities interest you most?</legend>
-            <p class="field-hint" id="hint-activities" data-t="activitiesHint">You can choose more than one.</p>
-            <div class="check-grid">
-              ${ACTIVITIES.map(([value, key, text]) => choice('check', 'اهتمامات الأنشطة', value, key, text, false)).join('')}
-            </div>
-            ${err('activities')}
-          </fieldset>
-
-          <div class="grid reg-gap-top">
-            <div class="field">
-              <label for="freeNote"><span data-t="freeNote">Anything else you would like to share?</span> ${optional}</label>
-              <textarea id="freeNote" name="ملاحظات إضافية"></textarea>
-            </div>
-          </div>
+          <p class="field-hint reg-gap-top"><span data-t="healthReminder">After booking, please complete the Wadi Rum health form in Wellbeing.</span> <a href="/register/wadi-rum-health" data-t="healthFormCta">Open health form</a></p>
 
           <div id="hypPayMethodsMount" class="hyp-pay-methods-mount"></div>
 
@@ -185,7 +111,7 @@ const html = `
 
         <div class="actions reg-nav">
           <button type="button" class="reg-btn reg-btn--ghost" data-step-prev hidden data-t="prev">Back</button>
-          <button type="button" class="reg-btn" data-step-next data-t="next">Next</button>
+          <button type="button" class="reg-btn" data-step-next hidden data-t="next">Next</button>
           <button type="submit" class="reg-btn" data-submit data-t="submitWithPay">Register &amp; pay 400 ₪ deposit securely</button>
         </div>
       </form>
@@ -207,9 +133,9 @@ export default function Page() {
       dir="ltr"
       bodyClassName=""
       styles={[
-        "/css/wadi-rum-registration.css",
-        "/legacy/css/hyp-pay-methods.css",
-        "/legacy/css/register-modal-shell.css",
+        '/css/wadi-rum-registration.css',
+        '/legacy/css/hyp-pay-methods.css',
+        '/legacy/css/register-modal-shell.css',
       ]}
       currentNav="retreats"
       scripts={[

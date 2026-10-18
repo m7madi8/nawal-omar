@@ -48,24 +48,27 @@
   var translations = {
     en: {
       backLink: "Back to retreat",
-      title: "Initial Registration | Wadi Rum Desert Retreat",
+      title: "Registration | Wadi Rum Desert Retreat",
       lead1: "Complete your details and pay the 400 ₪ deposit in one step to secure your place. Limited to 20 participants.",
       noteDuration: "5 days - 4 nights",
       pricePanorama: "Panorama Room — 3,650 ₪",
       priceBubbles: "Bubbles Room — 3,850 ₪",
-      stepName1: "Contact",
-      stepName2: "About you",
-      stepName3: "Your experience",
+      stepName1: "Booking",
+      healthFormLink: "Wadi Rum health form",
+      wellbeingLink: "Wellbeing hub",
+      healthReminder: "Please also complete the Wadi Rum health form in Wellbeing.",
+      healthFormCta: "Open health form",
       stepOf: "Step {n} of {total} · {name}",
-      requiredNote: "All fields are required unless marked optional.",
+      requiredNote: "All fields are required.",
       optional: "(optional)",
-      secBasic: "Basic Information",
+      secBasic: "Your booking",
       fullName: "Full Name",
       phone: "Phone Number (WhatsApp)",
       phoneHint: "With country code, e.g. +972 or +970",
       secAbout: "A little about you",
       age: "Age",
-      city: "City",
+      city: "City / place of residence",
+      errCity: "Please write where you live.",
       secIntent: "Your Intention",
       secIntentSub: "Write freely. There is no right or wrong answer.",
       reason: "What made you interested in this retreat?",
@@ -127,28 +130,31 @@
       errRoom: "Please choose a room.",
       errSummaryOne: "One field needs your attention.",
       errSummaryMany: "{n} fields need your attention.",
-      docTitle: "Initial Registration | Wadi Rum Desert Retreat"
+      docTitle: "Registration | Wadi Rum Desert Retreat"
     },
     ar: {
       backLink: "الرجوع للريتريت",
-      title: "التسجيل الأوّلي | ريتريت الصحراء – وادي رم",
+      title: "التسجيل | ريتريت الصحراء – وادي رم",
       lead1: "عبّي التفاصيل وادفعي عربون 400 ₪ بخطوة واحدة لتثبيت مكانك. العدد محدود (20 مشاركة).",
       noteDuration: "5 أيام - 4 ليالي",
       pricePanorama: "غرفة بانوراما — 3,650 ₪",
       priceBubbles: "غرفة بابلز — 3,850 ₪",
-      stepName1: "التواصل",
-      stepName2: "عنكِ",
-      stepName3: "تجربتك",
+      stepName1: "الحجز",
+      healthFormLink: "الاستمارة الصحية – وادي رم",
+      wellbeingLink: "قسم العناية",
+      healthReminder: "بعد الحجز، كمّلي الاستمارة الصحية لريتريت وادي رم في قسم العناية.",
+      healthFormCta: "افتحي الاستمارة الصحية",
       stepOf: "خطوة {n} من {total} · {name}",
-      requiredNote: "كل الحقول مطلوبة إلا اللي مكتوب جنبها اختياري.",
+      requiredNote: "كل الحقول مطلوبة.",
       optional: "(اختياري)",
-      secBasic: "البيانات الأساسية",
+      secBasic: "حجزك",
       fullName: "الاسم الكامل",
       phone: "رقم التلفون (واتساب)",
       phoneHint: "مع رمز الدولة، مثلاً \u2066+972\u2069 أو \u2066+970\u2069",
       secAbout: "شوي عنكِ",
       age: "العمر",
       city: "مكان السكن",
+      errCity: "اكتبي مكان سكنك لو سمحتي.",
       secIntent: "الهدف من المشاركة",
       secIntentSub: "اكتبي على راحتك، ما في جواب صح أو غلط.",
       reason: "شو اللي شدّك لهاد الريتريت؟",
@@ -210,7 +216,7 @@
       errRoom: "اختاري غرفة لو سمحتي.",
       errSummaryOne: "في حقل محتاج تكمّليه.",
       errSummaryMany: "في {n} حقول محتاجة تكمّليها.",
-      docTitle: "التسجيل الأوّلي | ريتريت وادي رم"
+      docTitle: "التسجيل | ريتريت وادي رم"
     }
   };
 
@@ -316,19 +322,7 @@
       }
     },
     room: { step: 1, group: "roomId", check: function () { return groupChecked("roomId") ? "" : "errRoom"; } },
-    age: {
-      step: 2,
-      check: function () {
-        var raw = toLatinDigits(value("age"));
-        if (!raw) return "errAge";
-        var age = Number(raw);
-        var min = Number(form.querySelector("#age").getAttribute("data-min")) || 0;
-        return /^\d{1,3}$/.test(raw) && age >= min && age <= 120 ? "" : "errAgeFormat";
-      }
-    },
-    yoga: { step: 3, group: "خبرة يوغا/تأمل", check: function () { return groupChecked("خبرة يوغا/تأمل") ? "" : "errYoga"; } },
-    health: { step: 3, group: "حالة صحية حالية", check: function () { return groupChecked("حالة صحية حالية") ? "" : "errHealth"; } },
-    activities: { step: 3, group: "اهتمامات الأنشطة", check: function () { return groupChecked("اهتمامات الأنشطة") ? "" : "errActivities"; } }
+    city: { step: 1, check: function () { return value("city") ? "" : "errCity"; } }
   };
 
   function focusTarget(key) {
@@ -450,19 +444,19 @@
     var payload = {
       id: "req-" + now.getTime(),
       source: "wadi-rum-registration",
-      retreatType: "Initial Registration | Wadi Rum Desert Retreat",
+      retreatType: "Registration | Wadi Rum Desert Retreat",
       submittedAt: now.toISOString(),
       fullName: (form.querySelector("#fullName").value || "").trim(),
       phone: normalizePhone(form.querySelector("#phone").value),
-      age: toLatinDigits(form.querySelector("#age").value).trim(),
+      age: "",
       city: (form.querySelector("#city").value || "").trim(),
-      reason: (form.querySelector("#reason").value || "").trim(),
-      expectation: (form.querySelector("#expectation").value || "").trim(),
-      yogaExperience: (form.querySelector('input[name="خبرة يوغا/تأمل"]:checked') || {}).value || "",
-      healthStatus: (form.querySelector('input[name="حالة صحية حالية"]:checked') || {}).value || "",
-      healthDetails: (form.querySelector("#healthDetails").value || "").trim(),
-      activities: Array.prototype.map.call(form.querySelectorAll('input[name="اهتمامات الأنشطة"]:checked'), function (x) { return x.value; }),
-      freeNote: (form.querySelector("#freeNote").value || "").trim(),
+      reason: "",
+      expectation: "",
+      yogaExperience: "",
+      healthStatus: "",
+      healthDetails: "",
+      activities: [],
+      freeNote: "",
       status: "pending",
       createdAt: now.toISOString()
     };

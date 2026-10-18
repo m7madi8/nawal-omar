@@ -110,7 +110,8 @@
     'mountain-voice-registration': "Nawal's Care",
     'ice-bath-health': 'Ice Bath Health Form',
     'ice-bath-registration': 'Ice Bath Day Retreat',
-    'wadi-rum-registration': 'Initial Registration | Wadi Rum Desert Retreat',
+    'wadi-rum-registration': 'Registration | Wadi Rum Desert Retreat',
+    'wadi-rum-health': 'Wadi Rum Health Form',
     'zanzibar-retreat-reserve': 'Zanzibar Retreat',
     'dahab-retreat-reserve': 'Dahab Retreat',
     'yoga-class-registration': 'Haifa Yoga',
@@ -153,6 +154,7 @@
 
   var PLACE_BY_SOURCE = {
     'wadi-rum-registration': 'wadi-rum',
+    'wadi-rum-health': 'wadi-rum',
     'zanzibar-retreat-reserve': 'zanzibar',
     'dahab-retreat-reserve': 'dahab',
     'mountain-voice-registration': 'mountain-voice',
@@ -172,7 +174,7 @@
   };
 
   var PLACE_CATALOG = {
-    'wadi-rum': { id: 'wadi-rum', name: 'Initial Registration | Wadi Rum Desert Retreat', image: '/media/wadi-rum/cover.jpg' },
+    'wadi-rum': { id: 'wadi-rum', name: 'Registration | Wadi Rum Desert Retreat', image: '/media/wadi-rum/cover.jpg' },
     'zanzibar': { id: 'zanzibar', name: 'Zanzibar Retreat', image: '/media/zanzibar/NUR-Beach-Hotel---Jambiani.jpg' },
     'dahab': { id: 'dahab', name: 'Dahab Retreat', image: '/media/dahab/cover.jpeg' },
     'mountain-voice': { id: 'mountain-voice', name: "Nawal's Care", image: '/media/nawal.png', imagePosition: '50% 8%' },
@@ -186,7 +188,7 @@
   var RETREAT_CATALOG = [
     {
       id: 'wadi-rum',
-      name: 'Initial Registration | Wadi Rum Desert Retreat',
+      name: 'Registration | Wadi Rum Desert Retreat',
       source: 'wadi-rum-registration',
       image: '/media/wadi-rum/cover.jpg',
       dates: '22–26 Oct 2026',
@@ -261,7 +263,7 @@
     },
   ];
 
-  var MEDICAL_SOURCES = ['mountain-voice-registration', 'ice-bath-health'];
+  var MEDICAL_SOURCES = ['mountain-voice-registration', 'ice-bath-health', 'wadi-rum-health'];
   var MEDICAL_CATALOG = [
     {
       id: 'mountain-voice',
@@ -280,6 +282,16 @@
       image: '/media/events/ice-bath/health-form.jpg',
       dates: 'Required before the day retreat',
       location: 'Hofit',
+      schedule: 'ongoing',
+    },
+    {
+      id: 'wadi-rum-health',
+      name: 'Wadi Rum Health Form',
+      source: 'wadi-rum-health',
+      image: '/media/wadi-rum/desert.jpg',
+      dates: 'Required after registration',
+      location: 'Wadi Rum Retreat',
+      formPath: '/register/wadi-rum-health',
       schedule: 'ongoing',
     },
   ];
@@ -548,7 +560,7 @@
     var key = staffSourceScopeKey();
     if (!key) return true;
     if (key === 'wadi-rum') {
-      if (row.source === 'wadi-rum-registration' || row.source === 'feedback-wadi-rum') return true;
+      if (row.source === 'wadi-rum-registration' || row.source === 'wadi-rum-health' || row.source === 'feedback-wadi-rum') return true;
       var commerce = parseCommerceOrder(row);
       if (commerce && String(commerce.itemId || '') === 'wadi-rum') return true;
       return false;
@@ -561,7 +573,7 @@
     if (!key) return catalog;
     if (key === 'wadi-rum') {
       return catalog.filter(function (item) {
-        return item.id === 'wadi-rum' || item.source === 'wadi-rum-registration' || item.source === 'feedback-wadi-rum';
+        return item.id === 'wadi-rum' || item.id === 'wadi-rum-health' || item.source === 'wadi-rum-registration' || item.source === 'wadi-rum-health' || item.source === 'feedback-wadi-rum';
       });
     }
     return catalog;
@@ -2413,7 +2425,7 @@
       ? 'View-only access — you can open medical forms, but not change or delete them.'
       : 'Health intake forms — review status, complete them, and open each answer in order.') + '</p></div></div>';
     html += '<div class="admin-retreat-cards is-medical">';
-    MEDICAL_CATALOG.forEach(function (item) {
+    catalogForStaffScope(MEDICAL_CATALOG).forEach(function (item) {
       var count = rows.filter(function (row) { return matchesCatalog(row, item); }).length;
       var pending = rows.filter(function (row) { return matchesCatalog(row, item) && row.status !== 'completed'; }).length;
       html += renderCatalogCard(item, count, pending, 'forms');
@@ -2720,6 +2732,7 @@
 
   var FORM_ANALYTICS_LABELS = {
     'wadi-rum-registration': 'Wadi Rum registration',
+    'wadi-rum-health': 'Wadi Rum health form',
     'sound-healing-registration': 'Sound Healing booking',
     'ice-bath-registration': 'Ice Bath day retreat booking',
     'ice-bath-health': 'Ice Bath health form',

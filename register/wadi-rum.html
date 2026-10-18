@@ -4,7 +4,7 @@
   <!-- Supabase direct writes removed: use Next.js routes (see next.config.mjs redirects). -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Initial Registration | Wadi Rum Retreat</title>
+  <title>Registration | Wadi Rum Retreat</title>
   <meta name="description" content="Initial registration form for Wadi Rum desert retreat.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -215,7 +215,7 @@
   <main class="wrap">
     <section class="card">
       <span class="hero-badge" data-t="badge">🌙 Wadi Rum Retreat</span>
-      <h1 data-t="title">Initial Registration | Wadi Rum Desert Retreat</h1>
+      <h1 data-t="title">Registration | Wadi Rum Desert Retreat</h1>
       <p class="lead" data-t="lead1">This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.</p>
       <p class="lead" data-t="lead2">Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.</p>
       <div class="small-note" data-t="note">Wadi Rum Retreat – SHARAZAD CAMP | 17.6 - 21.6 | 5 days - 4 nights</div>
@@ -303,7 +303,7 @@
         </div>
 
         <div class="actions">
-          <button type="submit" data-t="submit">Submit Initial Registration</button>
+          <button type="submit" data-t="submit">Submit registration</button>
         </div>
         <div id="okMsg" class="ok" data-t="successMsg">Form submitted successfully. We will contact you soon.</div>
       </form>
@@ -322,7 +322,7 @@
       const translations = {
         en: {
           badge: "🌙 Wadi Rum Retreat",
-          title: "Initial Registration | Wadi Rum Desert Retreat",
+          title: "Registration | Wadi Rum Desert Retreat",
           lead1: "This form is for initial registration. Seats are limited (up to 20 participants), and we will contact you after submission to confirm details.",
           lead2: "Wadi Rum retreat is a return path: to your body, your breath, and your inner calm. Full details are in the retreat page.",
           note: "Wadi Rum Retreat – SHARAZAD CAMP | 17.6 - 21.6 | 5 days - 4 nights",
@@ -355,7 +355,7 @@
           a6: "Sharing circles",
           a7: "Nights under stars",
           freeNote: "15) Anything else you would like to share?",
-          submit: "Submit Initial Registration",
+          submit: "Submit registration",
           successMsg: "Form submitted successfully. We will contact you soon.",
           contact: "For questions:\n📞 052-249-6366",
           checkError: "Please select at least one activity.",
@@ -363,7 +363,7 @@
         },
         ar: {
           badge: "🌙 ريتريت وادي رم",
-          title: "التسجيل الأوّلي | ريتريت الصحراء – وادي رم",
+          title: "التسجيل | ريتريت الصحراء – وادي رم",
           lead1: "هذا النموذج مخصّص للتسجيل الأوّلي. العدد محدود (حتى 20 مشاركة)، وسيتم التواصل معكِ بعد تعبئة النموذج لتأكيد التفاصيل.",
           lead2: "ريتريت وادي رم هو مسار رجوع: لجسمك، لنَفَسك، وللمساحة الهادئة داخلك. التفاصيل الكاملة موجودة في صفحة الريتريت.",
           note: "ريتريت وادي رم – SHARAZAD CAMP | 17.6 - 21.6 | 5 أيام - 4 ليالي",
@@ -396,7 +396,7 @@
           a6: "دوائر مشاركة",
           a7: "السهرات تحت النجوم",
           freeNote: "15) أي شيء إضافي تحبين مشاركته معنا؟",
-          submit: "إرسال التسجيل الأوّلي",
+          submit: "إرسال التسجيل",
           successMsg: "تم إرسال النموذج بنجاح. سنتواصل معكِ قريبًا.",
           contact: "لأي سؤال أو استفسار:\n📞 052-249-6366",
           checkError: "يرجى اختيار نشاط واحد على الأقل.",
@@ -409,7 +409,7 @@
       function applyLang() {
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-        document.title = currentLang === "ar" ? "تسجيل أوّلي | ريتريت وادي رم" : "Initial Registration | Wadi Rum Retreat";
+        document.title = currentLang === "ar" ? "التسجيل | ريتريت وادي رم" : "Registration | Wadi Rum Retreat";
         document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t(el.getAttribute("data-t")); });
         const contactBox = document.getElementById("contactBox");
         if (contactBox) contactBox.innerHTML = t("contact").replace(/\n/g, "<br>");

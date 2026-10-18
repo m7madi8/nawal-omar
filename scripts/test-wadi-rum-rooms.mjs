@@ -183,7 +183,7 @@ const ROOMS = [
   { id: 'panorama', amount: 3650, remaining: 3250, label: 'Panorama Room', labelAr: 'غرفة بانوراما' },
   { id: 'bubbles', amount: 3850, remaining: 3450, label: 'Bubbles Room', labelAr: 'غرفة بابلز' },
 ];
-const RETREAT_TITLE = 'Initial Registration | Wadi Rum Desert Retreat';
+const RETREAT_TITLE = 'Registration | Wadi Rum Desert Retreat';
 const CUSTOMER = { fullName: 'Test Person', phone: '+972521234567', email: '', city: '' };
 const REQUEST = new Request('http://localhost/api/commerce/checkout');
 
