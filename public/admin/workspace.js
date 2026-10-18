@@ -193,6 +193,7 @@
       image: '/media/wadi-rum/cover.jpg',
       dates: '22–26 Oct 2026',
       location: 'Jordan',
+      formPath: '/register/wadi-rum',
       startDate: '2026-10-22',
       endDate: '2026-10-26',
     },
@@ -273,6 +274,7 @@
       imagePosition: '50% 8%',
       dates: 'General health declaration',
       location: 'Nawal Yoga',
+      formPath: '/register/mountain-voice',
       schedule: 'ongoing',
     },
     {
@@ -282,6 +284,7 @@
       image: '/media/events/ice-bath/health-form.jpg',
       dates: 'Required before the day retreat',
       location: 'Hofit',
+      formPath: '/register/ice-bath',
       schedule: 'ongoing',
     },
     {
@@ -378,7 +381,7 @@
   });
   var CLASS_SOURCES = ['yoga-class-registration', 'yoga-class-request'];
   var SHOP_SOURCES = ['shop-order'];
-  var OVERVIEW_SOURCES = BOOKING_SOURCES.concat(FEEDBACK_SOURCES).concat(SHOP_SOURCES);
+  var OVERVIEW_SOURCES = BOOKING_SOURCES.concat(FEEDBACK_SOURCES).concat(SHOP_SOURCES).concat([PRIVATE_SESSION_SOURCE]);
   var SHOP_CATALOG = [
     {
       id: 'mat',
@@ -1267,7 +1270,10 @@
   function renderCatalogCard(item, count, pending, countLabel) {
     countLabel = countLabel || 'bookings';
     var enriched = withExperienceStatus(item);
-    return '<article class="admin-retreat-card' + (item.cardClass ? ' ' + escapeHtml(item.cardClass) : '') + '"><div class="admin-retreat-card__media">' + catalogCardImage(item) + renderExperienceCardStatus(enriched.liveStatus, enriched.liveStatusLabel) + '</div><div class="admin-retreat-card__body"><h3>' + escapeHtml(item.name) + '</h3><p>' + escapeHtml(item.dates) + ' · ' + escapeHtml(item.location) + '</p><div class="admin-retreat-card__stats"><span>' + count + ' ' + countLabel + '</span><span>' + pending + ' pending</span></div></div></article>';
+    var formLink = item.formPath
+      ? '<p class="admin-retreat-card__meta"><a href="' + escapeHtml(item.formPath) + '" target="_blank" rel="noopener">Open form</a></p>'
+      : '';
+    return '<article class="admin-retreat-card' + (item.cardClass ? ' ' + escapeHtml(item.cardClass) : '') + '"><div class="admin-retreat-card__media">' + catalogCardImage(item) + renderExperienceCardStatus(enriched.liveStatus, enriched.liveStatusLabel) + '</div><div class="admin-retreat-card__body"><h3>' + escapeHtml(item.name) + '</h3><p>' + escapeHtml(item.dates) + ' · ' + escapeHtml(item.location) + '</p><div class="admin-retreat-card__stats"><span>' + count + ' ' + countLabel + '</span><span>' + pending + ' pending</span></div>' + formLink + '</div></article>';
   }
 
   function findCatalogItemBySource(source) {
@@ -2739,7 +2745,17 @@
     'dahab-retreat-reserve': 'Dahab retreat booking',
     'zanzibar-retreat-reserve': 'Zanzibar retreat booking',
     'mountain-voice-registration': "Nawal's Care form",
+    'yoga-class-registration': 'Haifa Yoga booking',
+    'yoga-class-request': 'Haifa Yoga request',
+    'nature-chocolate-registration': 'Nature & Chocolate booking',
+    'private-sessions-page': 'Private sessions request',
     'private-sessions': 'Private sessions request',
+    'feedback-dahab': 'Feedback · Dahab',
+    'feedback-wadi-rum': 'Feedback · Wadi Rum',
+    'feedback-zanzibar': 'Feedback · Zanzibar',
+    'feedback-sound-healing': 'Feedback · Sound Healing',
+    'feedback-nature-chocolate': 'Feedback · Nature & Chocolate',
+    'feedback-ice': 'Feedback · Ice Bath',
     feedback: 'Feedback form',
   };
 
