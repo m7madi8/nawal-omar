@@ -25,6 +25,7 @@
   var OWNER_AVATAR = '/media/home/nawal_aom.jpg';
   var DEVELOPER_AVATAR = '/media/me.webp';
   var WADI_RUM_STAFF_PERMISSIONS = ['overview', 'retreats'];
+  var SALMA_STAFF_PERMISSIONS = ['retreats', 'medical'];
   var WADI_RUM_STAFF_SOURCE_SCOPE = 'wadi-rum';
   var BUILTIN_STAFF = [
     {
@@ -42,7 +43,7 @@
       name: 'Salma',
       username: 'salma',
       aliases: [],
-      permissions: WADI_RUM_STAFF_PERMISSIONS.slice(),
+      permissions: SALMA_STAFF_PERMISSIONS.slice(),
       sourceScope: WADI_RUM_STAFF_SOURCE_SCOPE,
       viewOnly: false,
       locked: true,
