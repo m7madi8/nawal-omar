@@ -197,6 +197,7 @@
       formPath: '/register/wadi-rum',
       startDate: '2026-10-22',
       endDate: '2026-10-26',
+      schedule: 'past',
     },
     {
       id: 'zanzibar',

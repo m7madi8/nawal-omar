@@ -17,6 +17,7 @@ import {
   retreatHasRooms,
   retreatRoomLineTitle,
 } from '../lib/commerce/retreat-rooms.js';
+import { assertAvailability } from '../lib/commerce/capacity.js';
 import { processCheckout } from '../lib/commerce/checkout.js';
 import { confirmHypPayFromRedirect } from '../lib/commerce/payment/confirmation.js';
 import { paymentSummary, remainingBalance } from '../lib/commerce/financials.js';
@@ -206,7 +207,11 @@ for (const room of ROOMS) {
 }
 assert.equal(wadi.pricing.amount, 3650, 'retreat-level pricing.amount is preserved');
 assert.equal(wadi.pricing.currency, 'ILS');
-assert.equal(wadi.bookingStatus, BOOKING_STATUS.OPEN);
+assert.equal(wadi.bookingStatus, BOOKING_STATUS.CLOSED, 'public booking closed after retreat ended');
+await assert.rejects(
+  () => assertAvailability({ commerceType: 'retreat', itemId: 'wadi-rum', quantity: 1 }),
+  (e) => e.code === 'BOOKING_CLOSED',
+);
 assert.equal(wadi.capacity, 20, 'capacity policy unchanged');
 assert.equal(retreatHasRooms(wadi), true);
 assert.equal(retreatHasRooms(RETREAT_CATALOG.dahab), false);
@@ -277,7 +282,10 @@ const postJson = (path, body) =>
 
 await withEnv(ENV, async () => {
   resetDb();
+  const savedBookingStatus = wadi.bookingStatus;
+  wadi.bookingStatus = BOOKING_STATUS.OPEN;
 
+  try {
   for (const [name, value] of INVALID_ROOMS) {
     await assert.rejects(
       () => processCheckout(checkoutBody({ roomId: value }), REQUEST),
@@ -643,6 +651,9 @@ await withEnv(ENV, async () => {
   assert.equal(mismatchRow.amount_paid, 0);
   assert.notEqual(mismatchRow.payment_status, PAYMENT_STATUS.PAID);
   assert.equal(mismatchRow.status, 'pending');
+  } finally {
+    wadi.bookingStatus = savedBookingStatus;
+  }
 });
 
 // =====================================================================================

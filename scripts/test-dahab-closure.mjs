@@ -64,22 +64,26 @@ assert.equal(dahab.id, 'dahab');
 assert.equal(dahab.source, 'dahab-retreat-reserve');
 assert.equal(dahab.endDate, '2026-08-23');
 assert.equal(dahab.bookingStatus, BOOKING_STATUS.CLOSED, 'Dahab must be CLOSED');
-assert.equal(RETREAT_CATALOG['wadi-rum'].bookingStatus, BOOKING_STATUS.OPEN, 'Wadi Rum stays OPEN');
+assert.equal(RETREAT_CATALOG['wadi-rum'].bookingStatus, BOOKING_STATUS.CLOSED, 'Wadi Rum closed after retreat ended');
 assert.equal(RETREAT_CATALOG.zanzibar.bookingStatus, BOOKING_STATUS.CLOSED, 'Zanzibar unchanged');
 
 // ---- Helper: pure behaviour ----------------------------------------------------------
-assert.deepEqual([...GUARDED_RETREAT_IDS], ['dahab'], 'Guard scope is Dahab only');
+assert.deepEqual([...GUARDED_RETREAT_IDS], ['dahab', 'wadi-rum'], 'Guard scope includes Dahab and Wadi Rum');
 
 assert.equal(findClosedRetreatForRequestSource('dahab-retreat-reserve')?.id, 'dahab');
+assert.equal(findClosedRetreatForRequestSource('wadi-rum-registration')?.id, 'wadi-rum');
 assert.equal(findClosedRetreatForRequestSource('  dahab-retreat-reserve  ')?.id, 'dahab');
 assert.throws(
   () => assertRetreatRequestSourceOpen('dahab-retreat-reserve'),
   (e) => e.code === 'BOOKING_CLOSED',
 );
+assert.throws(
+  () => assertRetreatRequestSourceOpen('wadi-rum-registration'),
+  (e) => e.code === 'BOOKING_CLOSED',
+);
 
-// Allowed: Wadi Rum, feedback, events, Haifa, private sessions, unknown, malformed.
+// Allowed: feedback, events, Haifa, private sessions, unknown, malformed.
 const allowedSources = [
-  'wadi-rum-registration',
   'feedback-dahab',
   'feedback-wadi-rum',
   'feedback-zanzibar',
@@ -132,7 +136,11 @@ await assert.rejects(
   () => assertAvailability({ commerceType: 'retreat', itemId: 'dahab', quantity: 1 }),
   (e) => e.code === 'BOOKING_CLOSED',
 );
-assert.equal(fetchCalls.length, 0, 'assertAvailability(dahab) must not touch the network');
+await assert.rejects(
+  () => assertAvailability({ commerceType: 'retreat', itemId: 'wadi-rum', quantity: 1 }),
+  (e) => e.code === 'BOOKING_CLOSED',
+);
+assert.equal(fetchCalls.length, 0, 'assertAvailability(closed retreats) must not touch the network');
 
 // ---- Route-level tests (real route handlers, stubbed fetch) --------------------------
 // The routes import via the "@/" alias, which plain Node cannot resolve. Register a tiny
@@ -194,9 +202,18 @@ await withEnv(FAKE_ENV, async () => {
   assert.equal((await blocked.json()).code, 'BOOKING_CLOSED');
   assert.equal(fetchCalls.length, 0, 'blocked Dahab request must not reach the database layer');
 
+  fetchCalls.length = 0;
+  fakeInsertAllowed = false;
+  const blockedWadi = await retreatRequestRoute.POST(
+    jsonPost('/api/retreat-request', retreatBody('wadi-rum-registration')),
+  );
+  assert.equal(blockedWadi.status, 409);
+  assert.equal((await blockedWadi.json()).code, 'BOOKING_CLOSED');
+  assert.equal(fetchCalls.length, 0, 'blocked Wadi Rum request must not reach the database layer');
+
   // Allowed sources reach exactly one (stubbed) insert and succeed, unchanged.
   fakeInsertAllowed = true;
-  for (const source of ['wadi-rum-registration', 'feedback-dahab', 'sound-healing-registration']) {
+  for (const source of ['feedback-dahab', 'sound-healing-registration']) {
     fetchCalls.length = 0;
     const res = await retreatRequestRoute.POST(
       jsonPost('/api/retreat-request', retreatBody(source)),
@@ -208,12 +225,21 @@ await withEnv(FAKE_ENV, async () => {
     assert.match(fetchCalls[0].url, /\/rest\/v1\/retreat_requests$/);
   }
 
-  // Existing validation behaviour is unchanged (400 for a missing required field).
+  // Existing validation behaviour is unchanged (400 for a missing required field on an open source).
   fetchCalls.length = 0;
   const invalid = await retreatRequestRoute.POST(
-    jsonPost('/api/retreat-request', { id: 'x', source: 'wadi-rum-registration', phone: '1' }),
+    jsonPost('/api/retreat-request', { id: 'x', source: 'sound-healing-registration', phone: '1' }),
   );
   assert.equal(invalid.status, 400);
+  assert.equal(fetchCalls.length, 0);
+
+  // Closed Wadi Rum: guard wins before field validation.
+  fetchCalls.length = 0;
+  const invalidWadi = await retreatRequestRoute.POST(
+    jsonPost('/api/retreat-request', { id: 'x', source: 'wadi-rum-registration', phone: '1' }),
+  );
+  assert.equal(invalidWadi.status, 409);
+  assert.equal((await invalidWadi.json()).code, 'BOOKING_CLOSED');
   assert.equal(fetchCalls.length, 0);
 
   // Dahab via the commerce checkout route: rejected with 409 before any database write.
@@ -230,6 +256,21 @@ await withEnv(FAKE_ENV, async () => {
   assert.equal(checkout.status, 409);
   assert.equal((await checkout.json()).code, 'BOOKING_CLOSED');
   assert.equal(fetchCalls.length, 0, 'closed Dahab checkout must not touch the database layer');
+
+  fetchCalls.length = 0;
+  fakeInsertAllowed = false;
+  const checkoutWadi = await checkoutRoute.POST(
+    jsonPost('/api/commerce/checkout', {
+      commerceType: 'retreat',
+      itemId: 'wadi-rum',
+      payment: 'manual',
+      roomId: 'panorama',
+      customer: { fullName: 'Test Person', phone: '0500000000' },
+    }),
+  );
+  assert.equal(checkoutWadi.status, 409);
+  assert.equal((await checkoutWadi.json()).code, 'BOOKING_CLOSED');
+  assert.equal(fetchCalls.length, 0, 'closed Wadi Rum checkout must not touch the database layer');
 });
 
 console.log(
