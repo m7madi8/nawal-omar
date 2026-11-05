@@ -2480,8 +2480,8 @@ body.nav-open {
 
   .worlds-stage {
     container-type: inline-size;
-    --worlds-cell-h: clamp(218px, 20.5vh, 278px);
-    --worlds-poster-w: clamp(280px, 34cqw, 400px);
+    --worlds-cell-h: clamp(336px, 33vh, 420px);
+    --worlds-poster-w: clamp(360px, 40cqw, 500px);
     display: grid;
     grid-template-columns: 1.12fr 0.88fr;
     grid-template-rows: var(--worlds-cell-h) var(--worlds-cell-h) auto;
@@ -2489,7 +2489,7 @@ body.nav-open {
       "xp yg"
       "rt hl"
       "pv pv";
-    gap: 0.72rem;
+    gap: 0.82rem;
     height: auto;
     min-height: 0;
     max-width: 100%;
@@ -2813,7 +2813,7 @@ body.nav-open {
   .worlds-stage .world-block.pv {
     justify-self: center;
     width: var(--worlds-poster-w);
-    max-width: min(100%, 400px);
+    max-width: min(100%, var(--worlds-poster-w, 420px));
     height: auto;
     min-height: 0;
     aspect-ratio: 4 / 5;
@@ -2895,15 +2895,15 @@ body.nav-open {
 
 @media (min-width: 1280px) {
   .worlds-stage {
-    --worlds-cell-h: clamp(226px, 21.5vh, 292px);
-    --worlds-poster-w: clamp(300px, 32cqw, 420px);
+    --worlds-cell-h: clamp(364px, 35.5vh, 456px);
+    --worlds-poster-w: clamp(388px, 38cqw, 532px);
   }
 }
 
 @media (min-width: 1536px) {
   .worlds-stage {
-    --worlds-cell-h: clamp(234px, 22vh, 304px);
-    --worlds-poster-w: clamp(312px, 30cqw, 440px);
+    --worlds-cell-h: clamp(392px, 38vh, 492px);
+    --worlds-poster-w: clamp(412px, 36cqw, 568px);
   }
 }
 
