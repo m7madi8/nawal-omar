@@ -112,20 +112,17 @@
       {
         "name": "غرفة زوجية | شخصان بالغرفة",
         "originalPrice": "₪2,350",
-        "discountedPrice": "₪2,115",
-        "note": "بعد الخصم"
+        "discountedPrice": "₪2,115"
       },
       {
         "name": "غرفة ثلاثية | 3 مشاركات بالغرفة",
         "originalPrice": "₪2,250",
-        "discountedPrice": "₪2,025",
-        "note": "بعد الخصم"
+        "discountedPrice": "₪2,025"
       },
       {
         "name": "سويت لأربع | 4 مشاركات بالسويت",
         "originalPrice": "₪2,100",
-        "discountedPrice": "₪1,890",
-        "note": "بعد الخصم"
+        "discountedPrice": "₪1,890"
       }
     ]
   },

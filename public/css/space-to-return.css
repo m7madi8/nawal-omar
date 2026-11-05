@@ -729,22 +729,16 @@
   color: var(--str-ink);
 }
 
-.str-price-card__was {
-  margin: 0.35rem 0 0;
-  font-size: 0.88rem;
-  color: var(--str-muted);
-}
-
-.str-price-card__amount--old {
-  text-decoration: line-through;
-  opacity: 0.75;
-}
-
-.str-price-card__note {
-  margin: 0.75rem 0 0;
-  font-size: 0.88rem;
+.str-price-card__offer {
+  margin: 0.5rem 0 0;
+  font-size: 0.92rem;
   line-height: 1.55;
   color: var(--str-muted);
+}
+
+.str-price-card__offer .str-price-card__amount--promo {
+  font-weight: 600;
+  color: var(--color-accent, #6f523e);
 }
 
 .str-policies__grid {
