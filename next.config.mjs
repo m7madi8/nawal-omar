@@ -1,12 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  /** CMS JSON read at runtime (dynamic STR page + admin API). */
+  outputFileTracingIncludes: {
+    '/local-retreats/a-space-to-return': ['./content/local-retreats/space-to-return/**'],
+    '/local-retreats': ['./content/local-retreats/space-to-return/**'],
+    '/api/admin/content/local-retreats/space-to-return': [
+      './content/local-retreats/space-to-return/**',
+    ],
+  },
   async rewrites() {
     return [
       { source: '/public/:path*', destination: '/:path*' },
     ];
   },
   async redirects() { return [
+  {
+    "source": "/favicon.ico",
+    "destination": "/icon.png",
+    "permanent": false
+  },
   {
     "source": "/admin/dashboard.html",
     "destination": "/admin/dashboard",
