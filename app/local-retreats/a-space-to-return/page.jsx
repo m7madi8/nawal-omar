@@ -3,19 +3,23 @@ import { loadSpaceToReturnContent, isSpaceToReturnContentReady } from '@/lib/loc
 import { renderSpaceToReturnHtml } from '@/lib/localRetreats/renderSpaceToReturnHtml.js';
 import { STR_IMAGES, STR_TITLE } from '@/lib/localRetreats/spaceToReturnImages.js';
 
-const content = loadSpaceToReturnContent();
-const ready = isSpaceToReturnContentReady(content);
+/** Read JSON at request time so copy updates (cancellation, pricing) ship without stale static HTML. */
+export const revalidate = 0;
 
-export const metadata = {
-  title: `${STR_TITLE.en} | Local Retreats | Nawal Yoga`,
-  description: ready
-    ? content.en.intro.paragraphs[0]?.slice(0, 160)
-    : 'Local retreat with Nawal Yoga — A Space to Return.',
-  openGraph: {
-    title: `${STR_TITLE.en} | Nawal Yoga`,
-    images: [{ url: STR_IMAGES.hero.replace(/^\//, ''), width: 1600, height: 1200 }],
-  },
-};
+export function generateMetadata() {
+  const content = loadSpaceToReturnContent();
+  const ready = isSpaceToReturnContentReady(content);
+  return {
+    title: `${STR_TITLE.en} | Local Retreats | Nawal Yoga`,
+    description: ready
+      ? content.en.intro.paragraphs[0]?.slice(0, 160)
+      : 'Local retreat with Nawal Yoga — A Space to Return.',
+    openGraph: {
+      title: `${STR_TITLE.en} | Nawal Yoga`,
+      images: [{ url: STR_IMAGES.hero.replace(/^\//, ''), width: 1600, height: 1200 }],
+    },
+  };
+}
 
 const pendingHtml = `
 <main class="ny-inner str-page str-page--pending">
@@ -29,6 +33,9 @@ const pendingHtml = `
 </main>`;
 
 export default function SpaceToReturnPage() {
+  const content = loadSpaceToReturnContent();
+  const ready = isSpaceToReturnContentReady(content);
+
   return (
     <LegacyPage
       lang="en"
