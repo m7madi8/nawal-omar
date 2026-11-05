@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dir = path.join(root, 'content', 'local-retreats', 'space-to-return');
+const STR_ROOM_COUNT = 2;
 
 function load(name) {
   return JSON.parse(fs.readFileSync(path.join(dir, name), 'utf8'));
@@ -50,6 +51,9 @@ function checkLang(lang, file) {
   assertNonEmpty(c.pricing?.discountNote, `${lang}.pricing.discountNote`);
   if (!Array.isArray(c.pricing?.rooms) || c.pricing.rooms.length < 1) {
     throw new Error(`${lang}.pricing.rooms required`);
+  }
+  if (c.pricing.rooms.length !== STR_ROOM_COUNT) {
+    throw new Error(`${lang}.pricing.rooms must have exactly ${STR_ROOM_COUNT} entries`);
   }
   assertNonEmpty(c.registration?.heading, `${lang}.registration.heading`);
   assertNonEmpty(c.cancellation?.heading, `${lang}.cancellation.heading`);
