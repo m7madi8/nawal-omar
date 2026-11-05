@@ -24,6 +24,7 @@ export default function LegacyPage({
   scripts = [],
   inlineScripts = [],
   html,
+  prebuiltHtml,
   siteShell,
   currentNav = '',
   splitHeadings = true,
@@ -35,10 +36,13 @@ export default function LegacyPage({
   const useShell = siteShell !== false && !isAdmin && !embeddedChrome;
   const nav = currentNav || navKeyFromPath(pathname || '');
   const pageHtml = useShell ? extractMainHtml(mediaHtml) : mediaHtml;
-  const renderedHtml = replaceMobileNav(
-    useShell ? wrapWithSiteShell(pageHtml, nav) : mediaHtml,
-    nav,
-  );
+  const renderedHtml =
+    typeof prebuiltHtml === 'string'
+      ? prebuiltHtml
+      : replaceMobileNav(
+          useShell ? wrapWithSiteShell(pageHtml, nav) : mediaHtml,
+          nav,
+        );
 
   const { styles: filteredStyles, scripts: filteredScripts } = useShell
     ? filterLegacyAssets(styles, scripts)
@@ -99,7 +103,7 @@ export default function LegacyPage({
       {renderedStyles.map((href) => (
         <link key={href} rel="stylesheet" href={href} />
       ))}
-      <div dangerouslySetInnerHTML={{ __html: renderedHtml }} />
+      <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: renderedHtml }} />
       {(isAdmin
         ? filteredScripts
         : [

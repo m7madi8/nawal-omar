@@ -2,6 +2,7 @@ import LegacyPage from '@/components/LegacyPage';
 import { loadSpaceToReturnContent, isSpaceToReturnContentReady } from '@/lib/localRetreats/loadSpaceToReturnContent.js';
 import { renderSpaceToReturnHtml } from '@/lib/localRetreats/renderSpaceToReturnHtml.js';
 import { STR_IMAGES, STR_TITLE } from '@/lib/localRetreats/spaceToReturnImages.js';
+import { buildLegacyRenderedHtml, PUBLIC_PAGE_DEFAULTS } from '@/lib/publicPage.js';
 
 /** Read JSON at request time so copy updates (cancellation, pricing) ship without stale static HTML. */
 export const revalidate = 0;
@@ -35,11 +36,13 @@ const pendingHtml = `
 export default function SpaceToReturnPage() {
   const content = loadSpaceToReturnContent();
   const ready = isSpaceToReturnContentReady(content);
+  const pageHtml = ready ? renderSpaceToReturnHtml(content) : pendingHtml;
+  const prebuiltHtml = buildLegacyRenderedHtml(pageHtml, { currentNav: 'local-retreats' });
 
   return (
     <LegacyPage
-      lang="en"
-      dir="rtl"
+      lang={PUBLIC_PAGE_DEFAULTS.lang}
+      dir={PUBLIC_PAGE_DEFAULTS.dir}
       bodyClassName=""
       styles={
         ready
@@ -56,7 +59,8 @@ export default function SpaceToReturnPage() {
             ]
           : []
       }
-      html={ready ? renderSpaceToReturnHtml(content) : pendingHtml}
+      html={pageHtml}
+      prebuiltHtml={prebuiltHtml}
       currentNav="local-retreats"
     />
   );

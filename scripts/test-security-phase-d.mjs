@@ -3,7 +3,10 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { WADI_RUM_DEPOSIT_ILS } from '../lib/commerce/constants.js';
+import {
+  SPACE_TO_RETURN_DEPOSIT_ILS,
+  WADI_RUM_DEPOSIT_ILS,
+} from '../lib/commerce/constants.js';
 import { resolveCheckoutCharge } from '../lib/commerce/resolve-checkout-charge.js';
 import { RETREAT_CATALOG } from '../lib/commerce/catalog/retreats.js';
 
@@ -114,6 +117,26 @@ assert.throws(
     }),
   (e) => e.code === 'INVALID_CHARGE_AMOUNT',
 );
+
+{
+  const strCatalog = RETREAT_CATALOG['space-to-return'];
+  const strLine = {
+    unitPrice: strCatalog.pricing.amount,
+    quantity: 1,
+    currency: strCatalog.pricing.currency,
+    metadata: { roomId: 'double' },
+  };
+  const { chargeAmount, paymentKind } = resolveCheckoutCharge({
+    commerceType: 'retreat',
+    itemId: 'space-to-return',
+    catalogItem: strCatalog,
+    line: strLine,
+    body: { roomId: 'double' },
+    paymentMethod: 'hyp',
+  });
+  assert.equal(chargeAmount, SPACE_TO_RETURN_DEPOSIT_ILS);
+  assert.equal(paymentKind, 'deposit');
+}
 
 // --- P1: active payment attempt gate (mirrors migration 010 semantics) ---
 const ACTIVE = new Set(['created', 'awaiting_customer']);
