@@ -7,10 +7,10 @@ export const metadata = {
 };
 
 const html = `
-<main class="ny-inner ny-world">
-  <section class="ny-world-hero" aria-labelledby="yoga-title">
+<main class="ny-inner ny-world yoga-hub">
+  <section class="ny-world-hero yoga-hub-hero" aria-labelledby="yoga-title">
     <div class="ny-world-hero__media" aria-hidden="true">
-      <img src="/media/home/1w.jpeg" alt="" width="1600" height="2000" decoding="async">
+      <img class="yoga-hub-hero__img" src="/media/yoga/hero.jpg" alt="" width="1600" height="900" decoding="async" fetchpriority="high" data-en-alt="Yoga practice with Nawal Yoga" data-ar-alt="ممارسة يوغا مع نوال يوغا">
     </div>
     <div class="ny-world-hero__scrim" aria-hidden="true"></div>
     <div class="ny-world-hero__inner container">

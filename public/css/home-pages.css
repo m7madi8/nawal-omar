@@ -392,6 +392,22 @@
   object-fit: cover;
 }
 
+/* Yoga hub — landscape hero: keep mat & floor visible */
+.yoga-hub .yoga-hub-hero {
+  min-height: min(82vh, 820px);
+}
+
+.yoga-hub .yoga-hub-hero__img {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+@media (min-width: 768px) {
+  .yoga-hub .yoga-hub-hero {
+    min-height: min(88vh, 900px);
+  }
+}
+
 .ny-world-hero__scrim {
   z-index: 1;
   background:

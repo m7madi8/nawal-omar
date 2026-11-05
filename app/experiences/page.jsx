@@ -1,11 +1,10 @@
-import LegacyPage from '@/components/LegacyPage';
-import EventsPage, { metadata as eventsMetadata } from '../events/page';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
-  ...eventsMetadata,
-  title: 'Experiences',
+  title: 'Local Retreats',
+  robots: { index: false, follow: false },
 };
 
 export default function ExperiencesPage() {
-  return <EventsPage />;
+  redirect('/local-retreats');
 }

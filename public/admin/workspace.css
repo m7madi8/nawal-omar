@@ -1003,6 +1003,28 @@ svg { display: block; }
   font-size: 0.82rem;
 }
 
+.admin-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--admin-text-soft);
+}
+
+.admin-textarea {
+  width: 100%;
+  min-height: 280px;
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius-md);
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  background: #fff;
+  color: var(--admin-text);
+  resize: vertical;
+}
+
 .admin-filters .admin-btn { margin-inline-start: auto; }
 
 /* Retreat hero cards */

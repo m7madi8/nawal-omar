@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  redirect('/events');
+  redirect('/local-retreats');
 }

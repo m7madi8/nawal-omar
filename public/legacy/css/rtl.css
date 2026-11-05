@@ -102,6 +102,23 @@
   font-weight: 600;
 }
 
+/* Arabic must not use negative tracking from Latin display styles */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .display-xl,
+[dir="rtl"] .display-l,
+[dir="rtl"] .display-m,
+[dir="rtl"] .display-s,
+[dir="rtl"] .hero-headline,
+[dir="rtl"] .hero__headline,
+[dir="rtl"] .ps-hero__title,
+[dir="rtl"] .br-hero__title,
+[dir="rtl"] p,
+[dir="rtl"] li {
+  letter-spacing: normal;
+}
+
 [dir="rtl"] .page-loader__tagline {
   font-family: 'Tajawal', sans-serif;
   font-weight: 500;

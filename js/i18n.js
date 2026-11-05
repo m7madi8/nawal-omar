@@ -148,7 +148,6 @@
       events_sh_price_guest_label: 'Non-members',
       events_sh_greeting: 'Good morning, dear ones 🤍❤️',
       events_sh_invite: '✨ Invitation to a deep Sound Healing session ✨',
-      events_sh_date: 'Friday, 30 October 2026',
       events_sh_time: '17:00',
       events_sh_location: 'Haifa – Atlit beach',
       events_sh_waze_btn: 'Open in Waze',
@@ -849,6 +848,7 @@
       retreat_wadi_checkout_db_error: 'Could not save your booking. Try again or contact us on WhatsApp.',
       retreat_wadi_checkout_network_error:
         'Connection error. Check your internet and try again, or message us on WhatsApp.',
+      retreat_wadi_checkout_room_invalid: 'Please choose a room (Panorama or Bubbles) before paying.',
       retreat_wadi_checkout_gateway_error:
         'Payment gateway is temporarily unavailable. Try again shortly or pay via WhatsApp.',
       retreat_wadi_thanks_title: "You're booked!",
@@ -1784,7 +1784,6 @@ haifa_pkg_pack4: '4-class package (260 ILS)',
       events_sh_price_guest_label: 'غير الأعضاء',
       events_sh_greeting: 'يسعد صباحكو حبيبات قلبي 🤍❤️',
       events_sh_invite: '✨ دعوة لجلسة Sound Healing عميقة ✨',
-      events_sh_date: 'الجمعة 30.10.2026',
       events_sh_time: 'الساعة 17:00',
       events_sh_location: 'حيفا – شط عتليت',
       events_sh_waze_btn: 'افتحي في Waze',
@@ -2482,6 +2481,7 @@ haifa_pkg_pack4: '4-class package (260 ILS)',
       retreat_wadi_checkout_db_error: 'تعذّر حفظ الحجز. حاولي مرة أخرى أو راسلينا على واتساب.',
       retreat_wadi_checkout_network_error:
         'مشكلة في الاتصال. تأكدي من الإنترنت وحاولي مرة أخرى، أو راسلينا على واتساب.',
+      retreat_wadi_checkout_room_invalid: 'اختاري غرفة (بانوراما أو بابلز) قبل الدفع.',
       retreat_wadi_checkout_gateway_error:
         'بوابة الدفع غير متاحة حالياً. حاولي لاحقاً أو ادفعي عبر واتساب.',
       retreat_wadi_thanks_title: 'تم تثبيت حجزك!',
@@ -3140,7 +3140,7 @@ jiva_price_pack4: '260 شيكل',
       jiva_private_btn_2: 'سجلي — صبيتين (300)',
       jiva_private_btn_gift: 'بطاقة هدية',
       jiva_payment_title: 'الدفع',
-      jiva_payment_methods: '🎟️ الدفع عن طريق Bit أو העברה בנקאית',
+      jiva_payment_methods: '🎟️ الدفع عن طريق Bit أو העברה בنקאית',
       jiva_payment_methods_online:
         '💳 ادفعي أونلاين عند التسجيل — Visa، Mastercard، Apple Pay، Google Pay أو bit (عبر Hyp). بدون تقسيط.',
       jiva_payment_methods_mixed:
@@ -3345,6 +3345,7 @@ haifa_pkg_pack4: 'باقة 4 دروس (260 شيكل)',
     }
 
     window.dispatchEvent(new CustomEvent('nawal-lang-change', { detail: { lang: lang } }));
+    document.dispatchEvent(new CustomEvent('nawal:langchange', { detail: { lang: lang } }));
   }
 
   function initI18n() {

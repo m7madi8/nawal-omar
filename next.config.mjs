@@ -49,7 +49,32 @@ const nextConfig = {
   },
   {
     "source": "/events.html",
-    "destination": "/events",
+    "destination": "/local-retreats",
+    "permanent": true
+  },
+  {
+    "source": "/events",
+    "destination": "/local-retreats",
+    "permanent": true
+  },
+  {
+    "source": "/events/:path*",
+    "destination": "/local-retreats",
+    "permanent": true
+  },
+  {
+    "source": "/experiences",
+    "destination": "/local-retreats",
+    "permanent": false
+  },
+  {
+    "source": "/inner-retreats",
+    "destination": "/local-retreats",
+    "permanent": true
+  },
+  {
+    "source": "/inner-retreats/:path*",
+    "destination": "/local-retreats",
     "permanent": true
   },
   {

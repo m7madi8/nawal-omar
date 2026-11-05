@@ -54,6 +54,7 @@
   var ICONS = {
     overview: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></svg>',
     retreats: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h18"/><path d="m6 19 5.2-11L14 14l1.6-2.6L21 19"/><path d="M9.5 19 12 14.5"/></svg>',
+    'local-retreats': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z"/><circle cx="12" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>',
     events: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="2.2"/><path d="M3.5 9.5h17"/><path d="M8 3v3M16 3v3"/><circle cx="8.2" cy="13.5" r="1"/><circle cx="12" cy="13.5" r="1"/><circle cx="15.8" cy="13.5" r="1"/></svg>',
     'private-sessions': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c.8-3 3.2-4.8 6.5-4.8s5.7 1.8 6.5 4.8"/><path d="M17.2 11.2 19 9.4"/><path d="M19 9.4v2.8"/></svg>',
     community: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3"/><path d="M2.8 19c.7-3 3-4.8 6.2-4.8s5.5 1.8 6.2 4.8"/><circle cx="17" cy="8" r="2.2"/><path d="M15.6 14.4c2.6.3 4.4 2 5 4.6"/></svg>',
@@ -74,7 +75,8 @@
 
   var VIEWS = [
     { id: 'overview', path: '/admin/overview', label: 'Overview', group: null },
-    { id: 'retreats', path: '/admin/retreats', label: 'Retreats', group: 'Bookings' },
+    { id: 'local-retreats', path: '/admin/local-retreats', label: 'Local Retreats', group: 'Bookings' },
+    { id: 'retreats', path: '/admin/retreats', label: 'Trips', group: 'Bookings' },
     { id: 'events', path: '/admin/events', label: 'Events', group: 'Bookings' },
     { id: 'private-sessions', path: '/admin/private-sessions', label: 'Private Sessions', group: 'Bookings' },
     { id: 'community', path: '/admin/community', label: 'Community', group: 'People' },
@@ -93,7 +95,8 @@
   var OWNER_ONLY_VIEWS = ['staff', 'settings'];
   var STAFF_PERMISSIONS = [
     { id: 'overview', label: 'Overview', hint: 'Dashboard snapshot' },
-    { id: 'retreats', label: 'Retreats', hint: 'Retreat reservations' },
+    { id: 'local-retreats', label: 'Local Retreats', hint: 'Local programs close to home (e.g. Space to Return)' },
+    { id: 'retreats', label: 'Trips', hint: 'International retreat reservations' },
     { id: 'events', label: 'Events', hint: 'Events and classes' },
     { id: 'private-sessions', label: 'Private Sessions', hint: 'Private yoga, sound healing, ice bath' },
     { id: 'community', label: 'Community', hint: 'Returning guests' },
@@ -112,6 +115,7 @@
     'ice-bath-health': 'Ice Bath Health Form',
     'ice-bath-registration': 'Ice Bath Day Retreat',
     'wadi-rum-registration': 'Registration | Wadi Rum Desert Retreat',
+    'space-to-return-registration': 'A Space to Return | مساحة للعودة',
     'wadi-rum-health': 'Wadi Rum Health Form',
     'zanzibar-retreat-reserve': 'Zanzibar Retreat',
     'dahab-retreat-reserve': 'Dahab Retreat',
@@ -134,6 +138,7 @@
     yoga: 'Private Yoga',
     sound: 'Sound Healing',
     ice: 'Ice Bath',
+    bride: 'A Space for the Bride',
   };
   var PRIVATE_SESSION_CATALOG = [
     {
@@ -144,12 +149,17 @@
     {
       id: 'sound',
       name: 'Sound Healing',
-      image: '/media/private-sessions/sound-healing.jpg',
+      image: '/media/events/sound-healing-01.jpg',
     },
     {
       id: 'ice',
       name: 'Ice Bath',
       image: '/media/private-sessions/ice-bath.jpg',
+    },
+    {
+      id: 'bride',
+      name: 'A Space for the Bride',
+      image: '/media/private-sessions/bride.jpg',
     },
   ];
 
@@ -187,6 +197,17 @@
   };
 
   var RETREAT_CATALOG = [
+    {
+      id: 'space-to-return',
+      name: 'A Space to Return | مساحة للعودة',
+      source: 'space-to-return-registration',
+      image: '/media/local-retreats/a-space-to-return-card-cover.jpg',
+      dates: '28–29 Nov 2026',
+      location: 'Slowness — Kibbutz Moran',
+      formPath: '/local-retreats/a-space-to-return#str-register',
+      schedule: 'upcoming',
+      hub: 'local-retreats',
+    },
     {
       id: 'wadi-rum',
       name: 'Registration | Wadi Rum Desert Retreat',
@@ -300,7 +321,30 @@
       schedule: 'ongoing',
     },
   ];
-  var RETREAT_SOURCES = ['wadi-rum-registration', 'zanzibar-retreat-reserve', 'dahab-retreat-reserve'];
+  var LOCAL_RETREAT_SOURCES = ['space-to-return-registration'];
+  var RETREAT_SOURCES = [
+    'wadi-rum-registration',
+    'space-to-return-registration',
+    'zanzibar-retreat-reserve',
+    'dahab-retreat-reserve',
+  ];
+  var TRIPS_RETREAT_SOURCES = RETREAT_SOURCES.filter(function (source) {
+    return LOCAL_RETREAT_SOURCES.indexOf(source) === -1;
+  });
+
+  function isLocalRetreatCatalogItem(item) {
+    return !!(item && (item.hub === 'local-retreats' || LOCAL_RETREAT_SOURCES.indexOf(item.source) !== -1));
+  }
+
+  function localRetreatCatalog() {
+    return RETREAT_CATALOG.filter(isLocalRetreatCatalogItem);
+  }
+
+  function tripsRetreatCatalog() {
+    return RETREAT_CATALOG.filter(function (item) {
+      return !isLocalRetreatCatalogItem(item);
+    });
+  }
   var EVENT_SOURCES = [
     'ice-bath-registration',
     'sound-healing-registration',
@@ -595,7 +639,11 @@
     if (!session) return false;
     if (isOwner(session)) return true;
     if (OWNER_ONLY_VIEWS.indexOf(viewId) !== -1) return false;
-    return (session.permissions || []).indexOf(viewId) !== -1;
+    var perms = session.permissions || [];
+    if (perms.indexOf(viewId) !== -1) return true;
+    if (viewId === 'local-retreats' && perms.indexOf('retreats') !== -1) return true;
+    if (viewId === 'retreats' && perms.indexOf('local-retreats') !== -1) return true;
+    return false;
   }
 
   function allowedViews(session) {
@@ -791,6 +839,7 @@
     var key = String(row.yogaExperience || '').trim();
     if (PRIVATE_SESSION_LABELS[key]) return key;
     var label = String(row.retreatType || '').trim().toLowerCase();
+    if (label.indexOf('bridal') !== -1 || label.indexOf('bride') !== -1) return 'bride';
     if (label.indexOf('yoga') !== -1) return 'yoga';
     if (label.indexOf('sound') !== -1) return 'sound';
     if (label.indexOf('ice') !== -1) return 'ice';
@@ -1377,7 +1426,8 @@
       if (!rowMatchesStaffScope(row)) return false;
       if (view === 'medical' && MEDICAL_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'feedback' && FEEDBACK_SOURCES.indexOf(row.source) === -1) return false;
-      if (view === 'retreats' && RETREAT_SOURCES.indexOf(row.source) === -1) return false;
+      if (view === 'local-retreats' && LOCAL_RETREAT_SOURCES.indexOf(row.source) === -1) return false;
+      if (view === 'retreats' && TRIPS_RETREAT_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'events' && EVENT_SOURCES.indexOf(row.source) === -1) return false;
       if (view === 'private-sessions' && !isPrivateSessionRow(row)) return false;
       if ((view === 'shop' || view === 'orders' || view === 'sales') && SHOP_SOURCES.indexOf(row.source) === -1) return false;
@@ -1474,7 +1524,8 @@
     var completed = rows.filter(function (r) { return r.status === 'completed'; }).length;
     var weekRows = rows.filter(function (r) { return inRange(r.date, '7d'); });
     var medical = rows.filter(function (r) { return MEDICAL_SOURCES.indexOf(r.source) !== -1; });
-    var retreats = rows.filter(function (r) { return RETREAT_SOURCES.indexOf(r.source) !== -1; });
+    var localRetreats = rows.filter(function (r) { return LOCAL_RETREAT_SOURCES.indexOf(r.source) !== -1; });
+    var retreats = rows.filter(function (r) { return TRIPS_RETREAT_SOURCES.indexOf(r.source) !== -1; });
     var events = rows.filter(function (r) { return EVENT_SOURCES.indexOf(r.source) !== -1; });
     var privateSessions = rows.filter(function (r) { return isPrivateSessionRow(r); });
     var shop = rows.filter(function (r) { return SHOP_SOURCES.indexOf(r.source) !== -1; });
@@ -1509,6 +1560,8 @@
       week: weekRows.length,
       medical: medical.length,
       medicalPending: medical.filter(function (r) { return r.status !== 'completed'; }).length,
+      localRetreats: localRetreats.length,
+      localRetreatsPending: localRetreats.filter(function (r) { return r.status !== 'completed'; }).length,
       retreats: retreats.length,
       retreatsPending: retreats.filter(function (r) { return r.status !== 'completed'; }).length,
       events: events.length,
@@ -1989,6 +2042,8 @@
           badge = '<span class="admin-nav-badge">' + stats.medicalPending + '</span>';
         } else if (item.id === 'feedback' && stats.feedbackPending > 0) {
           badge = '<span class="admin-nav-badge">' + stats.feedbackPending + '</span>';
+        } else if (item.id === 'local-retreats' && stats.localRetreatsPending > 0) {
+          badge = '<span class="admin-nav-badge">' + stats.localRetreatsPending + '</span>';
         } else if (item.id === 'retreats' && stats.retreatsPending > 0) {
           badge = '<span class="admin-nav-badge">' + stats.retreatsPending + '</span>';
         } else if (item.id === 'events' && stats.eventsPending > 0) {
@@ -2186,7 +2241,8 @@
       ['Community', stats.community, 'Returning guests across places', ICONS.community, ''],
       ['Medical forms', stats.medical, 'Health questionnaires', ICONS.medical, 'is-rust'],
       ['Events & classes', stats.events, 'Events and Haifa yoga', ICONS.events, 'is-sand'],
-      ['Retreats', stats.retreats, 'Retreat reservations', ICONS.retreats, ''],
+      ['Local retreats', stats.localRetreats, 'Programs close to home', ICONS['local-retreats'], ''],
+      ['Trips', stats.retreats, 'International retreat reservations', ICONS.retreats, ''],
     ].forEach(function (item) {
       html += '<article class="admin-stat"><div class="admin-stat__top"><p class="admin-stat__label">' + item[0] + '</p><span class="admin-stat__icon ' + item[4] + '">' + item[3] + '</span></div><strong class="admin-stat__value">' + item[1] + '</strong><p class="admin-stat__meta">' + item[2] + '</p></article>';
     });
@@ -2216,7 +2272,8 @@
 
     html += '<section class="admin-panel"><div class="admin-panel__head"><div><h2>Needs attention</h2></div></div><div class="admin-attention">';
     html += '<div class="admin-attention-item"><span>Medical forms awaiting review</span><strong>' + stats.medicalPending + '</strong></div>';
-    html += '<div class="admin-attention-item"><span>Retreat reservations pending</span><strong>' + stats.retreatsPending + '</strong></div>';
+    html += '<div class="admin-attention-item"><span>Local retreat bookings pending</span><strong>' + stats.localRetreatsPending + '</strong></div>';
+    html += '<div class="admin-attention-item"><span>Trip reservations pending</span><strong>' + stats.retreatsPending + '</strong></div>';
     html += '<div class="admin-attention-item"><span>Events & Haifa yoga pending</span><strong>' + stats.eventsPending + '</strong></div>';
     html += '<div class="admin-attention-item"><span>Shop orders pending</span><strong>' + stats.shopPending + '</strong></div>';
     html += '<div class="admin-attention-item"><span>Feedback awaiting review</span><strong>' + stats.feedbackPending + '</strong></div>';
@@ -2233,47 +2290,97 @@
     bindTableActions(root, rows);
   }
 
-  function renderRetreats(root, rows, stats, filters) {
-    var filtered = filterRows(rows, filters, 'retreats');
-    var html = '<div class="admin-page-head"><div><h1>Retreats</h1><p>Featured journeys, occupancy, and every retreat reservation in one place.</p></div><div class="admin-page-actions"><button type="button" class="admin-btn admin-btn--primary" data-action="export-all">Export filtered</button></div></div>';
+  function renderExperienceBookingsPage(root, rows, stats, filters, options) {
+    var filtered = filterRows(rows, filters, options.view);
+    var catalog = options.catalog || [];
+    var total = options.totalStat || 0;
+    var pendingStat = options.pendingStat || 0;
+    var html =
+      '<div class="admin-page-head"><div><h1>' +
+      escapeHtml(options.title) +
+      '</h1><p>' +
+      options.description +
+      '</p></div><div class="admin-page-actions">' +
+      (options.extraActions || '') +
+      '<button type="button" class="admin-btn admin-btn--primary" data-action="export-all">Export filtered</button></div></div>';
 
     html += '<div class="admin-retreat-cards">';
-    sortedExperienceCatalog(catalogForStaffScope(RETREAT_CATALOG)).forEach(function (retreat) {
+    sortedExperienceCatalog(catalogForStaffScope(catalog)).forEach(function (retreat) {
       var count = rows.filter(function (row) { return row.source === retreat.source; }).length;
       var pending = rows.filter(function (row) { return row.source === retreat.source && row.status !== 'completed'; }).length;
       html += '<article class="admin-retreat-card"><div class="admin-retreat-card__media"><img src="' + retreat.image + '" alt="' + escapeHtml(retreat.name) + '">' + renderExperienceCardStatus(retreat.liveStatus, retreat.liveStatusLabel) + '</div><div class="admin-retreat-card__body"><h3>' + escapeHtml(retreat.name) + '</h3><p>' + escapeHtml(retreat.dates) + ' · ' + escapeHtml(retreat.location) + '</p><div class="admin-retreat-card__stats"><span>' + count + ' bookings</span><span>' + pending + ' pending</span></div></div></article>';
     });
     html += '</div>';
 
-    html += '<div class="admin-stats"><article class="admin-stat"><p class="admin-stat__label">Total bookings</p><strong class="admin-stat__value">' + stats.retreats + '</strong></article>';
-    html += '<article class="admin-stat"><p class="admin-stat__label">Pending review</p><strong class="admin-stat__value">' + stats.retreatsPending + '</strong></article>';
-    html += '<article class="admin-stat"><p class="admin-stat__label">Reviewed</p><strong class="admin-stat__value">' + (stats.retreats - stats.retreatsPending) + '</strong></article></div>';
+    html += '<div class="admin-stats"><article class="admin-stat"><p class="admin-stat__label">Total bookings</p><strong class="admin-stat__value">' + total + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Pending review</p><strong class="admin-stat__value">' + pendingStat + '</strong></article>';
+    html += '<article class="admin-stat"><p class="admin-stat__label">Reviewed</p><strong class="admin-stat__value">' + (total - pendingStat) + '</strong></article></div>';
 
     html += '<div class="admin-progress-list">';
-    sortExperienceCatalog(catalogForStaffScope(RETREAT_CATALOG)).forEach(function (retreat) {
+    sortExperienceCatalog(catalogForStaffScope(catalog)).forEach(function (retreat) {
       var count = rows.filter(function (row) { return row.source === retreat.source; }).length;
-      var pct = stats.retreats ? Math.round((count / stats.retreats) * 100) : 0;
+      var pct = total ? Math.round((count / total) * 100) : 0;
       html += '<div class="admin-progress-row"><span>' + escapeHtml(retreat.name) + '</span><div class="admin-progress-track"><div class="admin-progress-fill" style="width:' + pct + '%"></div></div><span>' + count + '</span></div>';
     });
     html += '</div>';
 
     html += renderFilterBar(filters, {
       status: ['all', 'pending', 'completed'],
-      sources: RETREAT_SOURCES,
-      tabs: [
-        { value: 'all', label: 'All retreats' },
-        { value: 'upcoming', label: 'Upcoming' },
-        { value: 'pending', label: 'Pending' },
-        { value: 'completed', label: 'Reviewed' },
-        { value: 'archive', label: 'Archive' },
-      ],
+      sources: options.sources,
+      tabs: options.tabs,
     });
-    html += renderTable(filtered, 'No retreat reservations match these filters.');
+    html += renderTable(filtered, options.emptyMessage);
     root.innerHTML = html;
     bindFilters(root, rows);
     bindTableActions(root, rows);
     var exportAll = root.querySelector('[data-action="export-all"]');
     if (exportAll) exportAll.addEventListener('click', function () { exportCsv(filtered); });
+  }
+
+  function renderLocalRetreats(root, rows, stats, filters) {
+    renderExperienceBookingsPage(root, rows, stats, filters, {
+      view: 'local-retreats',
+      title: 'Local Retreats',
+      description:
+        'الخلوات المحلية — programs close to home. Manage registrations for local retreats separately from international trips.',
+      catalog: localRetreatCatalog(),
+      sources: LOCAL_RETREAT_SOURCES,
+      totalStat: stats.localRetreats,
+      pendingStat: stats.localRetreatsPending,
+      extraActions:
+        '<a href="/local-retreats" class="admin-btn admin-btn--ghost" target="_blank" rel="noopener">Public hub</a><a href="/admin/content" class="admin-btn admin-btn--ghost">Edit page copy</a>',
+      tabs: [
+        { value: 'all', label: 'All local programs' },
+        { value: 'upcoming', label: 'Upcoming' },
+        { value: 'pending', label: 'Pending' },
+        { value: 'completed', label: 'Reviewed' },
+        { value: 'archive', label: 'Archive' },
+      ],
+      emptyMessage: 'No local retreat registrations match these filters.',
+    });
+  }
+
+  function renderRetreats(root, rows, stats, filters) {
+    renderExperienceBookingsPage(root, rows, stats, filters, {
+      view: 'retreats',
+      title: 'Trips',
+      description:
+        'الرحلات — international journeys (Wadi Rum, Zanzibar, Dahab, and future trips). Local programs are under Local Retreats.',
+      catalog: tripsRetreatCatalog(),
+      sources: TRIPS_RETREAT_SOURCES,
+      totalStat: stats.retreats,
+      pendingStat: stats.retreatsPending,
+      extraActions:
+        '<a href="/retreats" class="admin-btn admin-btn--ghost" target="_blank" rel="noopener">Public hub</a><a href="/admin/local-retreats" class="admin-btn admin-btn--ghost">Local retreats</a>',
+      tabs: [
+        { value: 'all', label: 'All trips' },
+        { value: 'upcoming', label: 'Upcoming' },
+        { value: 'pending', label: 'Pending' },
+        { value: 'completed', label: 'Reviewed' },
+        { value: 'archive', label: 'Archive' },
+      ],
+      emptyMessage: 'No trip reservations match these filters.',
+    });
   }
 
   function renderEvents(root, rows, stats, filters) {
@@ -2594,7 +2701,221 @@
   }
 
   function renderContent(root) {
-    root.innerHTML = '<div class="admin-page-head"><div><h1>Content</h1><p>Public links and future editorial tools.</p></div><div class="admin-page-actions"><a href="/feedback" class="admin-btn admin-btn--primary" target="_blank" rel="noopener">Feedback hub</a><a href="/admin/feedback" class="admin-btn admin-btn--ghost">View responses</a></div></div><div class="admin-settings-grid"><article class="admin-settings-card"><h3>' + ICONS.content + ' Feedback pages</h3><p>Share post-experience evaluation links for retreats and events. Participant answers appear in <a href="/admin/feedback">Feedback</a> in the sidebar.</p><p style="margin-top:10px"><a href="/feedback">/feedback</a></p></article><article class="admin-settings-card"><h3>Coming soon</h3><p>Manage homepage highlights, journal posts, and featured experiences from this section.</p></article></div>';
+    var session = currentSession();
+    var canWrite = isOwner(session) && !isViewOnly(session);
+    root.innerHTML =
+      '<div class="admin-page-head"><div><h1>Content</h1><p>Program inventory, booking visibility, and editable retreat copy.</p></div><div class="admin-page-actions"><a href="/local-retreats" class="admin-btn admin-btn--ghost" target="_blank" rel="noopener">Local retreats</a><a href="/retreats" class="admin-btn admin-btn--ghost" target="_blank" rel="noopener">Trips hub</a><a href="/feedback" class="admin-btn admin-btn--primary" target="_blank" rel="noopener">Feedback hub</a></div></div>' +
+      '<p class="admin-muted" id="contentLoadStatus">Loading program registry…</p>' +
+      '<section class="admin-panel" id="contentProgramsPanel" hidden><div class="admin-panel__head"><h2>Public programs</h2></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Section</th><th>Program</th><th>Public</th><th>Bookings</th><th>Status</th></tr></thead><tbody id="contentProgramsBody"></tbody></table></div></section>' +
+      '<section class="admin-panel" id="contentCatalogPanel" hidden><div class="admin-panel__head"><h2>Registration open / closed</h2><p class="admin-muted">Overrides save to <code>content/admin/catalog-overrides.json</code>. Code defaults stay in the commerce catalog.</p></div><div id="contentCatalogRows"></div></section>' +
+      '<section class="admin-panel" id="contentStrPanel" hidden><div class="admin-panel__head"><h2>A Space to Return — page copy</h2><p class="admin-muted">Bilingual JSON served from <code>content/local-retreats/space-to-return/</code>. Prices and deposit flow remain in the commerce catalog.</p></div>' +
+      (canWrite
+        ? '<div class="admin-page-actions" style="margin-bottom:12px"><button type="button" class="admin-btn admin-btn--primary" id="contentStrSave">Save copy</button><span class="admin-muted" id="contentStrSaveStatus"></span></div>'
+        : '<p class="admin-muted">View only — owner or developer account required to save.</p>') +
+      '<div class="admin-settings-grid"><div><label class="admin-label" for="contentStrEn">English (content.en.json)</label><textarea id="contentStrEn" class="admin-textarea" rows="14" spellcheck="false"' +
+      (canWrite ? '' : ' readonly') +
+      '></textarea></div><div><label class="admin-label" for="contentStrAr">Arabic (content.ar.json)</label><textarea id="contentStrAr" class="admin-textarea" rows="14" spellcheck="false" dir="rtl"' +
+      (canWrite ? '' : ' readonly') +
+      '></textarea></div></div></section>' +
+      '<div class="admin-settings-grid" style="margin-top:16px"><article class="admin-settings-card"><h3>' +
+      ICONS.content +
+      ' Feedback pages</h3><p>Post-experience links — responses in <a href="/admin/feedback">Feedback</a>.</p><p style="margin-top:10px"><a href="/feedback">/feedback</a></p></article><article class="admin-settings-card"><h3>Still code-managed</h3><p>Retreats hub teasers (2027), yoga pages, private session cards, homepage, and media paths are edited in the repo — not in this UI yet.</p></article></div>';
+
+    var statusEl = root.querySelector('#contentLoadStatus');
+    var programsPanel = root.querySelector('#contentProgramsPanel');
+    var programsBody = root.querySelector('#contentProgramsBody');
+    var catalogPanel = root.querySelector('#contentCatalogPanel');
+    var catalogRows = root.querySelector('#contentCatalogRows');
+    var strPanel = root.querySelector('#contentStrPanel');
+
+    function integrationLabel(integration) {
+      if (integration === 'full') return 'Fully integrated';
+      if (integration === 'partial') return 'Partially integrated';
+      if (integration === 'broken') return 'Broken / not functional';
+      return integration || '—';
+    }
+
+    adminFetch('/api/admin/content/programs')
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.data || !result.data.programs) {
+          if (statusEl) statusEl.textContent = 'Could not load program registry.';
+          return;
+        }
+        if (statusEl) statusEl.textContent = '';
+        if (programsPanel) programsPanel.hidden = false;
+        result.data.programs.forEach(function (program) {
+          var tr = document.createElement('tr');
+          var section = program.sectionLabel ? program.sectionLabel.en : program.section;
+          var title = program.title ? program.title.en : program.id;
+          var bookings = program.capabilities && program.capabilities.bookings
+            ? program.admin && program.admin.bookingsView
+              ? '<a href="' + program.admin.bookingsView + '">' + program.admin.bookingsView + '</a>'
+              : 'Yes'
+            : '—';
+          tr.innerHTML =
+            '<td>' +
+            escapeHtml(section) +
+            '</td><td><strong>' +
+            escapeHtml(title) +
+            '</strong><br><span class="admin-muted">' +
+            escapeHtml(program.id) +
+            '</span></td><td><a href="' +
+            escapeHtml(program.publicPath) +
+            '" target="_blank" rel="noopener">' +
+            escapeHtml(program.publicPath) +
+            '</a></td><td>' +
+            bookings +
+            '</td><td>' +
+            escapeHtml(integrationLabel(program.integration)) +
+            (program.bookingStatus ? ' · booking: ' + escapeHtml(program.bookingStatus) : '') +
+            '</td>';
+          programsBody.appendChild(tr);
+        });
+      })
+      .catch(function () {
+        if (statusEl) statusEl.textContent = 'Could not load program registry.';
+      });
+
+    adminFetch('/api/admin/content/catalog-overrides')
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.data) return;
+        if (catalogPanel) catalogPanel.hidden = false;
+        var allowed = result.data.allowedBookingStatuses || ['open', 'closed', 'sold_out'];
+        function renderGroup(label, type, items) {
+          if (!items || !items.length) return;
+          var block = document.createElement('div');
+          block.innerHTML = '<h3 style="margin:12px 0 8px">' + escapeHtml(label) + '</h3>';
+          items.forEach(function (item) {
+            var row = document.createElement('div');
+            row.className = 'admin-progress-row';
+            row.style.marginBottom = '8px';
+            var title = item.title && item.title.en ? item.title.en : item.id;
+            var select = document.createElement('select');
+            select.className = 'admin-select';
+            select.dataset.commerceType = type;
+            select.dataset.catalogId = item.id;
+            allowed.forEach(function (status) {
+              var opt = document.createElement('option');
+              opt.value = status;
+              opt.textContent = status + (item.codeDefault === status && !item.override ? ' (code default)' : '');
+              if (item.bookingStatus === status) opt.selected = true;
+              select.appendChild(opt);
+            });
+            if (!canWrite) select.disabled = true;
+            row.innerHTML = '<span style="min-width:220px">' + escapeHtml(title) + '</span>';
+            row.appendChild(select);
+            if (item.override) {
+              var note = document.createElement('span');
+              note.className = 'admin-muted';
+              note.textContent = ' override active';
+              row.appendChild(note);
+            }
+            block.appendChild(row);
+          });
+          catalogRows.appendChild(block);
+        }
+        var tripRetreats = (result.data.retreats || []).filter(function (item) {
+          return item.id !== 'space-to-return';
+        });
+        var localRetreatItems = (result.data.retreats || []).filter(function (item) {
+          return item.id === 'space-to-return';
+        });
+        renderGroup('Local retreats', 'retreat', localRetreatItems);
+        renderGroup('Trips (international)', 'retreat', tripRetreats);
+        renderGroup('Events (legacy)', 'event', result.data.events);
+
+        catalogRows.querySelectorAll('select[data-catalog-id]').forEach(function (select) {
+          select.addEventListener('change', function () {
+            if (!canWrite) return;
+            adminFetch('/api/admin/content/catalog-overrides', {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                commerceType: select.dataset.commerceType,
+                id: select.dataset.catalogId,
+                bookingStatus: select.value,
+              }),
+            })
+              .then(function (res) {
+                return res.json();
+              })
+              .then(function (data) {
+                if (!data.ok) alert(data.error || 'Could not update booking status.');
+              })
+              .catch(function () {
+                alert('Could not update booking status.');
+              });
+          });
+        });
+      })
+      .catch(function () {});
+
+    adminFetch('/api/admin/content/local-retreats/space-to-return')
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.data || !result.data.content) return;
+        if (strPanel) strPanel.hidden = false;
+        var enEl = root.querySelector('#contentStrEn');
+        var arEl = root.querySelector('#contentStrAr');
+        if (enEl) enEl.value = JSON.stringify(result.data.content.en, null, 2);
+        if (arEl) arEl.value = JSON.stringify(result.data.content.ar, null, 2);
+        var saveBtn = root.querySelector('#contentStrSave');
+        if (saveBtn) {
+          saveBtn.addEventListener('click', function () {
+            var saveStatus = root.querySelector('#contentStrSaveStatus');
+            var enJson;
+            var arJson;
+            try {
+              enJson = JSON.parse(enEl.value);
+              arJson = JSON.parse(arEl.value);
+            } catch (e) {
+              alert('Invalid JSON: ' + (e.message || e));
+              return;
+            }
+            saveBtn.disabled = true;
+            if (saveStatus) saveStatus.textContent = 'Saving…';
+            adminFetch('/api/admin/content/local-retreats/space-to-return', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ en: enJson, ar: arJson }),
+            })
+              .then(function (res) {
+                return res.json().then(function (data) {
+                  return { ok: res.ok, data: data };
+                });
+              })
+              .then(function (payload) {
+                saveBtn.disabled = false;
+                if (!payload.ok) {
+                  if (saveStatus) saveStatus.textContent = '';
+                  alert((payload.data && payload.data.error) || 'Save failed.');
+                  return;
+                }
+                if (saveStatus) saveStatus.textContent = payload.data.ready ? 'Saved — page ready.' : 'Saved — validation warning.';
+              })
+              .catch(function () {
+                saveBtn.disabled = false;
+                if (saveStatus) saveStatus.textContent = '';
+                alert('Save failed.');
+              });
+          });
+        }
+      })
+      .catch(function () {});
   }
 
   function permissionLabel(id) {
@@ -3312,6 +3633,7 @@
       renderSidebar(stats);
 
       if (view === 'overview') renderOverview(root, rows, stats, filters);
+      else if (view === 'local-retreats') renderLocalRetreats(root, rows, stats, filters);
       else if (view === 'retreats') renderRetreats(root, rows, stats, filters);
       else if (view === 'events') renderEvents(root, rows, stats, filters);
       else if (view === 'private-sessions') renderPrivateSessions(root, rows, stats, filters);
