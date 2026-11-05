@@ -1,7 +1,19 @@
 (function () {
   var DEPOSIT_ILS = 500;
   var ITEM_ID = 'space-to-return';
-  var VALID_ROOMS = ['double', 'triple', 'suite-four'];
+  var DEFAULT_VALID_ROOMS = ['double', 'triple'];
+
+  function validRooms() {
+    var form = document.getElementById('strRegisterForm');
+    var raw = form && form.getAttribute('data-str-open-rooms');
+    if (!raw) return DEFAULT_VALID_ROOMS.slice();
+    return raw
+      .split(',')
+      .map(function (s) {
+        return s.trim();
+      })
+      .filter(Boolean);
+  }
   var STORAGE_KEY = 'nawal.spaceToReturn.depositCustomer';
 
   var paymentState = { hypLive: false, loaded: false };
@@ -21,8 +33,12 @@
         ar: 'الدفع بالبطاقة غير مفعّل حالياً. ادفعي عربون 500 ₪ بحوالة أو Bit وأرسلي إثبات، أو تواصلي مع نوال على واتساب.',
       },
       room_invalid: {
-        en: 'Please choose one of the three room options before continuing.',
-        ar: 'اختاري أحد أنواع الغرف الثلاثة قبل المتابعة.',
+        en: 'Please choose an available room option before continuing.',
+        ar: 'اختاري نوع غرفة متاح قبل المتابعة.',
+      },
+      room_sold_out: {
+        en: 'This room option is sold out. Please choose the double room.',
+        ar: 'هذا الخيار مكتمل. اختاري الغرفة الزوجية.',
       },
       gateway_error: {
         en: 'Payment could not be started. Try again or contact us on WhatsApp.',
@@ -73,7 +89,7 @@
   function validateCustomer(customer) {
     if (!customer.fullName || customer.fullName.length < 2) return t('name');
     if (!customer.phone || customer.phone.replace(/\D/g, '').length < 8) return t('phone');
-    if (VALID_ROOMS.indexOf(customer.roomId) === -1) return t('room_invalid');
+    if (validRooms().indexOf(customer.roomId) === -1) return t('room_invalid');
     return '';
   }
 
@@ -82,6 +98,7 @@
     if (code === 'HYP_DISABLED' || code === 'PAYMENT_NOT_CONFIGURED') return t('hyp_off');
     if (code === 'COMMERCE_DB_NOT_READY' || code === 'COMMERCE_DB_SCHEMA') return t('db_setup');
     if (code === 'INVALID_ROOM') return t('room_invalid');
+    if (code === 'ROOM_SOLD_OUT') return t('room_sold_out');
     if (code === 'BOOKING_CLOSED') {
       return lang() === 'ar' ? 'التسجيل مغلق حالياً.' : 'Registration is currently closed.';
     }
@@ -251,7 +268,7 @@
 
   window.strSpaceToReturnDepositPay = {
     DEPOSIT_ILS: DEPOSIT_ILS,
-    VALID_ROOMS: VALID_ROOMS,
+    validRooms: validRooms,
     loadPaymentOptions: loadPaymentOptions,
     isCardCheckoutAvailable: cardCheckoutAvailable,
     startCheckout: startCheckout,

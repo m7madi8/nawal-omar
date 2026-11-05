@@ -22,8 +22,12 @@
         required: { en: 'This field is required.', ar: 'لازم تعبّي هالحقل.' },
         phone: { en: 'Enter a valid phone number.', ar: 'اكتبي رقم موبايل/واتساب صح.' },
         room: {
-          en: 'Please choose one of the three room options.',
-          ar: 'اختاري أحد أنواع الغرف الثلاثة.',
+          en: 'Please choose an available room option.',
+          ar: 'اختاري نوع غرفة متاح.',
+        },
+        room_sold_out: {
+          en: 'This room option is sold out.',
+          ar: 'هذا الخيار مكتمل.',
         },
         sending: { en: 'Saving & opening payment…', ar: 'عم نحفظ ونفتح الدفع…' },
         payment_retry: {
@@ -77,8 +81,19 @@
       return phone;
     }
 
+    function openRoomIds() {
+      var raw = form.getAttribute('data-str-open-rooms');
+      if (!raw) return ['double', 'triple'];
+      return raw
+        .split(',')
+        .map(function (s) {
+          return s.trim();
+        })
+        .filter(Boolean);
+    }
+
     function selectedRoomId() {
-      var checked = form.querySelector('input[name="roomId"]:checked');
+      var checked = form.querySelector('input[name="roomId"]:checked:not(:disabled)');
       return checked ? checked.value : '';
     }
 
@@ -153,6 +168,9 @@
       }
       if (!roomId) {
         setError('roomId', msg('room'));
+        ok = false;
+      } else if (openRoomIds().indexOf(roomId) === -1) {
+        setError('roomId', msg('room_sold_out'));
         ok = false;
       }
       if (!ok) return;

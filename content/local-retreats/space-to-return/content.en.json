@@ -107,7 +107,7 @@
   },
   "pricing": {
     "heading": "Invest in yourself",
-    "discountNote": "Prices in Israeli shekels, per person, according to room type.\n\n10% discount for the first five registrations only, in order of confirmed booking.",
+    "discountNote": "Prices in Israeli shekels, per person, according to room type.\n\nOnly the double room is still available. The triple room option is sold out.",
     "rooms": [
       {
         "name": "Double room | 2 people per room",
@@ -118,11 +118,6 @@
         "name": "Triple room | 3 sharers per room",
         "originalPrice": "₪2,250",
         "discountedPrice": "₪2,025"
-      },
-      {
-        "name": "Suite for four | 4 sharers in the suite",
-        "originalPrice": "₪2,100",
-        "discountedPrice": "₪1,890"
       }
     ]
   },

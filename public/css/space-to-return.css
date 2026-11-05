@@ -707,11 +707,53 @@
 }
 
 .str-price-card {
+  position: relative;
   padding: 1.25rem 1.35rem;
   border: 1px solid var(--str-line);
   background: var(--str-surface);
   border-radius: 0.35rem;
   box-shadow: var(--str-card-shadow);
+}
+
+.str-price-card--sold-out {
+  opacity: 0.72;
+}
+
+.str-sold-badge {
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid rgba(154, 59, 50, 0.35);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9a3b32;
+  background: rgba(154, 59, 50, 0.06);
+}
+
+.str-sold-badge--open {
+  border-color: rgba(111, 82, 62, 0.35);
+  color: var(--color-accent, #6f523e);
+  background: rgba(111, 82, 62, 0.06);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.str-pricing__early-bird {
+  margin: 0.85rem 0 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(154, 59, 50, 0.28);
+  border-radius: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9a3b32;
+  background: rgba(154, 59, 50, 0.05);
+}
+
+.str-pricing__early-bird--sold-out {
+  max-width: 36rem;
 }
 
 .str-price-card__name {
@@ -830,6 +872,26 @@
   border-color: var(--color-accent, #6f523e);
   background: rgba(111, 82, 62, 0.04);
   box-shadow: 0 0 0 1px rgba(111, 82, 62, 0.12);
+}
+
+.str-room-option--sold-out {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.str-room-option--sold-out .str-room-option__label {
+  text-decoration: line-through;
+  text-decoration-color: rgba(154, 59, 50, 0.45);
+}
+
+.str-room-option__note--sold {
+  font-weight: 600;
+  color: #9a3b32;
+}
+
+.str-room-option__note--only {
+  font-weight: 600;
+  color: var(--color-accent, #6f523e);
 }
 
 .str-form__field--invalid .str-room-options {
