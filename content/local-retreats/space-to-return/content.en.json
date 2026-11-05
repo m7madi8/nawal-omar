@@ -1,0 +1,146 @@
+{
+  "hero": {
+    "dateDuration": "28–29 November 2026 | One night, an experience that stays with you"
+  },
+  "intro": {
+    "paragraphs": [
+      "We don't always need to travel far to come back to ourselves. Sometimes all we need is a quiet place, time when no one is asking anything of us, and space to hear our own voice again.",
+      "At the «A Space to Return» retreat, we leave behind the noise of daily life, responsibilities, and the roles we're used to living in — and give ourselves a chance to simply be present, without rush or expectation.",
+      "Among the Galilee landscape, warm water, yoga, breath, sound, and stillness, we live an experience that brings together physical ease and connection with self.",
+      "This isn't just a night in a beautiful hotel — it's a space for the woman who wants to pause, breathe, and choose herself again."
+    ]
+  },
+  "destination": {
+    "heading": "The venue | Slowness — Kibbutz Moran",
+    "paragraphs": [
+      "A place whose philosophy is built on conscious slowness, simplicity, and returning to the small things we forget in the rush of life.",
+      "Rooms surrounded by trees, spaces open to nature, warm pools, sauna, and quiet corners for reading and rest.",
+      "Even the food is part of the experience, with Slow Dining led by Chef Netai Yahalom, serving dishes inspired by the seasons and local ingredients.",
+      "Here luxury isn't excess — luxury is feeling at ease, without noise and without hurry."
+    ]
+  },
+  "journey": {
+    "days": [
+      {
+        "dayLabel": "Day one — Arrival & connection",
+        "dateLabel": "Saturday 28 November",
+        "items": [
+          {
+            "time": "12:00",
+            "title": "Arrival",
+            "description": "A gentle welcome, coffee, and time to settle into the atmosphere of the place."
+          },
+          {
+            "time": "13:00–15:00",
+            "title": "Opening circle",
+            "description": "What do I want to leave behind, and what do I want to take with me?\n\nIntroductions, setting a personal intention, and writing and self-reflection exercises that open space to connect with yourself and with other women."
+          },
+          {
+            "time": "15:00–18:00",
+            "title": "Time for you",
+            "description": "The Art of Slowing Down\n\nRoom check-in, warm pools, jacuzzi, relaxation and coffee in nature. Three hours with no mandatory program — you choose what your body and heart need."
+          },
+          {
+            "time": "18:00",
+            "title": "Chef's dinner",
+            "description": "Dinner at the hotel restaurant, with time for conversation and connection."
+          },
+          {
+            "time": "20:00",
+            "title": "Sound Healing journey",
+            "description": "Return inward\n\nA relaxation and meditation session with sound-healing instruments, allowing the body to settle and the mind to soften its noise."
+          },
+          {
+            "time": "After the session",
+            "title": "Time to rest",
+            "description": "Open space for quiet, sleep, and enjoying your time."
+          }
+        ]
+      },
+      {
+        "dayLabel": "Day two — Renewal & return",
+        "dateLabel": "Sunday 29 November",
+        "items": [
+          {
+            "time": "07:30",
+            "title": "Morning yoga & conscious breath",
+            "description": "Gentle movement, breath work, and body connection — without competition or pressure."
+          },
+          {
+            "time": "08:30",
+            "title": "Breakfast",
+            "description": "Breakfast from the hotel kitchen, with coffee and a calm start to the day."
+          },
+          {
+            "time": "09:30–12:00",
+            "title": "Between heat and cold",
+            "description": "Ice & Fire\n\nIce bath and sauna experience, with guidance, breath techniques, and appropriate preparation. Ice bath participation is optional, after confirming it is suitable for your health."
+          },
+          {
+            "time": "12:00–13:00",
+            "title": "Closing circle",
+            "description": "What will I take back into daily life?\n\nWe return to the intention we began with, share what we wish to share, and close the experience with a moment of gratitude."
+          },
+          {
+            "time": "13:00",
+            "title": "Check-out & departure",
+            "description": "We return to everyday life — perhaps the same responsibilities, but with more space for ourselves."
+          }
+        ]
+      }
+    ]
+  },
+  "included": {
+    "heading": "What's included?",
+    "items": [
+      "One night at a boutique hotel in nature.",
+      "Chef's dinner and breakfast.",
+      "Coffee according to the agreed package.",
+      "Use of warm pools, jacuzzi, and sauna.",
+      "Opening circle, conscious writing exercises, and intention setting.",
+      "Sound Healing session.",
+      "Morning yoga and breath techniques.",
+      "Guided ice bath and sauna experience.",
+      "Facilitation and coordination of the experience from start to finish.",
+      "Free time to enjoy the place and rest."
+    ]
+  },
+  "pricing": {
+    "heading": "Invest in yourself",
+    "discountNote": "Prices in Israeli shekels, per person, according to room type.\n\n10% discount for the first five registrations only, in order of confirmed booking.",
+    "rooms": [
+      {
+        "name": "Double room | 2 people per room",
+        "originalPrice": "₪2,350",
+        "discountedPrice": "₪2,115",
+        "note": "After discount"
+      },
+      {
+        "name": "Triple room | 3 sharers per room",
+        "originalPrice": "₪2,250",
+        "discountedPrice": "₪2,025",
+        "note": "After discount"
+      },
+      {
+        "name": "Suite for four | 4 sharers in the suite",
+        "originalPrice": "₪2,100",
+        "discountedPrice": "₪1,890",
+        "note": "After discount"
+      }
+    ]
+  },
+  "registration": {
+    "heading": "Registration",
+    "paragraphs": [
+      "To secure your place, a non-refundable deposit of ₪500 is required, with the remaining balance due by 18 November 2026 — ten days before the retreat."
+    ]
+  },
+  "cancellation": {
+    "heading": "Cancellation policy",
+    "paragraphs": [
+      "Cancellation three or more days before the retreat: 70% refund of amounts paid, excluding the deposit.",
+      "Cancellation less than three days before, or no-show: no refund.",
+      "If the retreat is cancelled by the organiser: full refund of all amounts paid."
+    ]
+  }
+}

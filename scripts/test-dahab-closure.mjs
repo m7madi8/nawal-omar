@@ -68,7 +68,11 @@ assert.equal(RETREAT_CATALOG['wadi-rum'].bookingStatus, BOOKING_STATUS.CLOSED, '
 assert.equal(RETREAT_CATALOG.zanzibar.bookingStatus, BOOKING_STATUS.CLOSED, 'Zanzibar unchanged');
 
 // ---- Helper: pure behaviour ----------------------------------------------------------
-assert.deepEqual([...GUARDED_RETREAT_IDS], ['dahab', 'wadi-rum'], 'Guard scope includes Dahab and Wadi Rum');
+assert.deepEqual(
+  [...GUARDED_RETREAT_IDS],
+  ['dahab', 'wadi-rum', 'space-to-return'],
+  'Guard scope includes Dahab, Wadi Rum, and Space to Return',
+);
 
 assert.equal(findClosedRetreatForRequestSource('dahab-retreat-reserve')?.id, 'dahab');
 assert.equal(findClosedRetreatForRequestSource('wadi-rum-registration')?.id, 'wadi-rum');

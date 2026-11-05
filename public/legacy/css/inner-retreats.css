@@ -1,0 +1,89 @@
+.inner-retreats-hub .ny-world-hero__media picture,
+.inner-retreats-hub .ny-world-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inner-retreats-hub .inner-retreats-hub__hero-img {
+  object-position: center bottom;
+}
+
+/* Mobile — show more of the left side of the photo (fire & group) */
+@media (max-width: 767px) {
+  .inner-retreats-hub .inner-retreats-hub__hero-img {
+    object-position: 22% bottom;
+  }
+}
+
+@media (min-width: 768px) {
+  .inner-retreats-hub .inner-retreats-hub__hero-img {
+    object-position: center 58%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .inner-retreats-hub .inner-retreats-hub__hero-img {
+    object-position: center 48%;
+  }
+}
+
+/* A Space to Return — hub card cover (emphasize right: pool & deck) */
+.str-hub-card .str-hub-card__img {
+  object-position: 50% 40%;
+}
+
+@media (max-width: 767px) {
+  .str-hub-card .str-hub-card__img {
+    object-position: 50% 35%;
+  }
+}
+
+.inner-retreats-hub .retreats-hub-section-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-serif, inherit);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 400;
+}
+
+.inner-retreats-soon {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.inner-retreats-soon__panel {
+  max-width: 36rem;
+  margin-inline: auto;
+  text-align: center;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 1rem;
+  border: 1px solid rgba(38, 28, 22, 0.08);
+  background: rgba(255, 252, 248, 0.92);
+  box-shadow: 0 24px 48px -32px rgba(38, 28, 22, 0.35);
+}
+
+.inner-retreats-soon__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-accent, #a67c52);
+}
+
+.inner-retreats-soon__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-serif, inherit);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 400;
+  color: var(--color-text, #2a211c);
+}
+
+.inner-retreats-soon__text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-soft, rgba(42, 33, 28, 0.78));
+}
+
+[dir='rtl'] .inner-retreats-soon__panel {
+  text-align: center;
+}

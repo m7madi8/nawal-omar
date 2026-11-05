@@ -8,13 +8,39 @@
     { id: "bit", key: "hyp_pay_option_bit", mod: "bit" },
   ];
 
+  var FALLBACK = {
+    en: {
+      hyp_pay_choose: "How would you like to pay?",
+      hyp_pay_option_card: "Credit / debit card",
+      hyp_pay_option_apple: "Apple Pay",
+      hyp_pay_option_bit: "bit",
+    },
+    ar: {
+      hyp_pay_choose: "كيف تفضّلين الدفع؟",
+      hyp_pay_option_card: "بطاقة ائتمان / חיוב",
+      hyp_pay_option_apple: "Apple Pay",
+      hyp_pay_option_bit: "bit",
+    },
+  };
+
+  function pageLang() {
+    var lang = document.documentElement.getAttribute("lang");
+    if (lang === "en" || lang === "ar") return lang;
+    if (global.nawalI18n && global.nawalI18n.getLang) {
+      lang = global.nawalI18n.getLang();
+      if (lang === "en" || lang === "ar") return lang;
+    }
+    return "ar";
+  }
+
   function t(key) {
     if (global.nawalI18n && typeof global.nawalI18n.t === "function") {
-      var lang =
-        (global.nawalI18n.getLang && global.nawalI18n.getLang()) || "ar";
-      return global.nawalI18n.t(lang, key) || key;
+      var lang = pageLang();
+      var text = global.nawalI18n.t(lang, key);
+      if (text && text !== key) return text;
     }
-    return key;
+    var fb = FALLBACK[pageLang()] || FALLBACK.en;
+    return fb[key] || FALLBACK.en[key] || key;
   }
 
   function mount(container, options) {

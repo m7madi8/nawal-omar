@@ -1,0 +1,10 @@
+{
+  "hero": ["dateDuration"],
+  "intro": ["paragraphs"],
+  "destination": ["heading", "paragraphs"],
+  "journey": ["days"],
+  "included": ["heading", "items"],
+  "pricing": ["heading", "discountNote", "rooms"],
+  "registration": ["heading", "paragraphs"],
+  "cancellation": ["heading", "paragraphs"]
+}

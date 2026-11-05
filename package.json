@@ -28,7 +28,9 @@
     "test:security-phase-c": "node scripts/test-security-phase-c.mjs",
     "test:security-phase-c2": "node scripts/test-security-phase-c2.mjs",
     "test:security-phase-d": "node scripts/test-security-phase-d.mjs",
-    "build:css": "tailwindcss -i ./public/legacy/css/input.css -o ./public/legacy/css/style.css --minify"
+    "build:css": "tailwindcss -i ./public/legacy/css/input.css -o ./public/legacy/css/style.css --minify",
+    "test:bilingual": "node scripts/audit-bilingual.mjs",
+    "test:space-to-return-content": "node scripts/verify-space-to-return-content.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
